@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35303.130
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SysExpenseControl", "SysExpenseControl\SysExpenseControl.csproj", "{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {599D4A72-72A4-4B5F-9FAA-5512B03148F6}
+	EndGlobalSection
+EndGlobal
