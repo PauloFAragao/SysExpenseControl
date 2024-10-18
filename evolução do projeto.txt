@@ -1,0 +1,35 @@
+-Projeto criado
+-Criada a classe DataConsultant, essa classe vai conter métodos para fazer consultas no banco de dados
+-Criada a classe DatabaseManager, essa classe ser usada para criar e deletar tabelas e inserir 
+dados iniciais 
+-Criados diversos métodos.
+
+-Novas tabelas no banco de dados: referencia as tabelas para reserva de dinheiro e tabelas dinamicas
+para reserva de dinheiro
+-Os métodos para carregar a form dentro de um panel e para trocar a cor dos botões quando estão 
+selecionados foram implementados
+-A ideia geral do design foi definida
+-O programa já está com algums botões no menu lateral e tem uma form para ser a tela inicial
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

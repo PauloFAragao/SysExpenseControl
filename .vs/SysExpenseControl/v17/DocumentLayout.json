@@ -1,71 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Sistemas\\SysExpenseControl\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|c:\\sistemas\\sysexpensecontrol\\sysexpensecontrol\\data\\databasemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|solutionrelative:sysexpensecontrol\\data\\databasemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|c:\\sistemas\\sysexpensecontrol\\sysexpensecontrol\\data\\dataconsultant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|solutionrelative:sysexpensecontrol\\data\\dataconsultant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|c:\\sistemas\\sysexpensecontrol\\sysexpensecontrol\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|solutionrelative:sysexpensecontrol\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 1,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "DataConsultant.cs",
-              "DocumentMoniker": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Data\\DataConsultant.cs",
-              "RelativeDocumentMoniker": "SysExpenseControl\\Data\\DataConsultant.cs",
-              "ToolTip": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Data\\DataConsultant.cs",
-              "RelativeToolTip": "SysExpenseControl\\Data\\DataConsultant.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAA2AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-17T04:03:56.501Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "DatabaseManager.cs",
-              "DocumentMoniker": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Data\\DatabaseManager.cs",
-              "RelativeDocumentMoniker": "SysExpenseControl\\Data\\DatabaseManager.cs",
-              "ToolTip": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Data\\DatabaseManager.cs",
-              "RelativeToolTip": "SysExpenseControl\\Data\\DatabaseManager.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAcwPsAAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-17T04:01:44.729Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Program.cs",
-              "RelativeDocumentMoniker": "SysExpenseControl\\Program.cs",
-              "ToolTip": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Program.cs",
-              "RelativeToolTip": "SysExpenseControl\\Program.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-17T03:58:50.271Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
+      "DocumentGroups": []
     }
   ]
 }

@@ -19,8 +19,10 @@ namespace SysExpenseControl.Data
                     // Abre a conexão
                     connection.Open();
 
-                    // Consulta
-                    string query = "SELECT EXISTS(SELECT 1 FROM references_to_tables WHERE year = @year AND month = @month)";
+                    // Consulta 
+                    string query = 
+                        "Select Exists(Select 1 From references_to_tables "
+                        + "Where year = @year And month = @month)";
 
                     // Executando a Query
                     using (SQLiteCommand command = new SQLiteCommand(query, connection))
@@ -51,7 +53,7 @@ namespace SysExpenseControl.Data
             return ViewQuery(viewQuery);
         }
 
-        // Insere uma categoria
+        // Método para inserir uma categoria
         public static string InsertCategory(string name, string description)
         {
             string insertQuery = $"Insert Into categories Values ('{name}', '{description}')";
@@ -59,6 +61,7 @@ namespace SysExpenseControl.Data
             return SimpleQuery(insertQuery);
         }
 
+        // Método para editar uma categoria
         public static string EditCategory(int id, string name, string description)
         {
             string editQuery = $"Update categories Set name = '{name}', description = '{description}' Where id = {id} ";
@@ -91,6 +94,19 @@ namespace SysExpenseControl.Data
             return SimpleQuery(insertQuery);
         }
 
+        // Método para editar uma fonte de lucro fixa
+        public static string EditFixedProfit(int id, string name, decimal value, string description)
+        {
+            string editQuery =
+                "Update fixed_profits "
+                + $"Set name = '{name}', "
+                + $"value = '{value}', "
+                + $"description = '{description}' "
+                + $"Where id = {id})";
+
+            return SimpleQuery(editQuery);
+        }
+
         // Método que vai deletar um lucro fixo
         public static string DeleteFixedProfit(int id)
         {
@@ -117,6 +133,21 @@ namespace SysExpenseControl.Data
                 + $"Values ('{name}', '{value}', '{dueDay}', '{category}', '{description}')";
 
             return SimpleQuery(insertQuery);
+        }
+
+        // Método para Editar um gasto fixo
+        public static string EditFixedExpense(int id, string name, decimal value, int dueDay, int category, string description)
+        {
+            string editQuery =
+                "Update fixed_expenses "
+                + $"Set name = '{name}', "
+                + $"value = '{value}', "
+                + $"dueDay = '{dueDay}', "
+                + $"category = '{category}'"
+                + $"description = '{description}' "
+                + $"Where id = {id})";
+
+            return SimpleQuery(editQuery);
         }
 
         // Método para deletar um gasto fixo
@@ -146,6 +177,20 @@ namespace SysExpenseControl.Data
             return SimpleQuery(insertQuery);
         }
 
+        // Método para Editar um gasto fixo
+        public static string EditMonthProfits(int id, string name, decimal value, string description, int year, int month)
+        {
+            string profitsTableName = "profits_" + year + "_" + month;
+            string editQuery =
+                $"Update {profitsTableName} "
+                + $"Set name = '{name}', "
+                + $"value = '{value}', "
+                + $"description = '{description}' "
+                + $"Where id = '{id}')";
+
+            return SimpleQuery(editQuery);
+        }
+
         // Método para deletar lucro no mês
         public static string DeleteMonthProfits(int id, int year, int month)
         {
@@ -172,6 +217,22 @@ namespace SysExpenseControl.Data
             string insertQuery = $"Insert Into {expensesTableName} Values ('{name}', '{value}', '{dateOfExpenditure}', '{category}', '{description}')";
 
             return SimpleQuery(insertQuery);
+        }
+
+        // Método para Editar um gasto fixo
+        public static string EditMonthProfits(int id, string name, decimal value, DateTime dateOfExpenditure, int category, string description, int year, int month)
+        {
+            string expensesTableName = "expenses_" + year + "_" + month;
+            string editQuery =
+                $"Update {expensesTableName} "
+                + $"Set name = '{name}', "
+                + $"value = '{value}', "
+                + $"dateOfExpenditure = '{dateOfExpenditure}', "
+                + $"category = '{category}', "
+                + $"description = '{description}' "
+                + $"Where id = '{id}')";
+
+            return SimpleQuery(editQuery);
         }
 
         // Método para Deletar um gasto no mês

@@ -7,14 +7,23 @@ namespace SysExpenseControl.Data
 {
     static class DatabaseManager
     {
-        // Verifica se existe o arquivo do banco de dados do Sqlite
-        public static void CheckIfCatabaseExists()
+        // Verifica se existe o arquivo do banco de dados do Sqlite e se não cria o arquivo e as tabelas
+        public static void CheckIfDatabaseExists()
         {
-            string caminhoDoArquivo = @"./{" + Connection.TableName + "}";
+            string filePath = @"./" + Connection.TableName;
 
-            if (!File.Exists(caminhoDoArquivo))
+            if (!File.Exists(filePath))
             {
+                //Debug.WriteLine("não tem um arquivo");
+
                 CreateTables();
+                InsertDemoCategories();// cria as categorias de demonstração
+                CreateDynamicTable_Reserve("Reserva Geral", "Uma reserva de dinheiro para fins gerais");// cria uma reserva de dinheiro basica
+                
+            }
+            else
+            {
+                //Debug.WriteLine("Tem um arquivo");
             }
         }
 
@@ -55,6 +64,14 @@ namespace SysExpenseControl.Data
                         + "category Integer References categories (id) On Delete Set Default Default '0',"// 0 Para sem categoria
                         + "description Text)";
 
+                    // Tabela para as referencias das tabelas das reservas de dinheiro
+                    string createReferencesToTablesReserve =
+                        "Create Table If Not Exists references_to_reserves("
+                        + "id Integer Primary Key, "
+                        + "tableName Varchar (50) Not Null, "
+                        + "reservationAmount Decimal Not Null, "
+                        + "description Text)";
+
                     // Referencias as tabelas
                     string createTableReferencesToTables =
                         "Create Table If Not Exists references_to_tables("
@@ -81,6 +98,12 @@ namespace SysExpenseControl.Data
                         command.ExecuteNonQuery();
                     }
 
+                    // Criando a tabela que vai conter as referencias as tabelas que forem criadas dinamicamente para as reservas de dinheiro
+                    using (SQLiteCommand command = new SQLiteCommand(createReferencesToTablesReserve, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+
                     // Criando a tabela que vai conter as referencias as tabelas que forem criadas dinamicamente
                     using (SQLiteCommand command = new SQLiteCommand(createTableReferencesToTables, connection))
                     {
@@ -94,8 +117,16 @@ namespace SysExpenseControl.Data
             }
         }
 
+        // Verifica se já existem as tabelas para esse mês e cria se não
+        public static void CheckIfThereAreAlreadyTablesForThisMonth()
+        {
+            // Verifica se já existem as tabelas desse mês
+            if (!DataConsultant.QueryInReferencesToTables())
+                CreateDynamicTables();// cria a tabela desse mês
+        }
+
         // Insere as categorias de demonstração
-        public static void InsertDemoCategories()
+        private static void InsertDemoCategories()
         {
             try
             {
@@ -129,7 +160,7 @@ namespace SysExpenseControl.Data
         }
 
         // Criador de tabelas dinamico
-        public static void CreateDynamicTables()
+        private static void CreateDynamicTables()
         {
             try
             {
@@ -248,6 +279,116 @@ namespace SysExpenseControl.Data
                 Debug.WriteLine("Exception in DatabaseManager.CreateProfitsAndExpenses: " + e.Message);
             }
         }
-    
+
+        // Método que vai criar uma tabela de serva de dinheiro dinamicamente 
+        public static void CreateDynamicTable_Reserve(string name, string description)
+        {
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(Connection.Cn))
+                {
+                    // Abre a conexão
+                    connection.Open();
+
+                    // Gerando nome
+                    string TableName = GenerateRandonTableName(name, "references_to_reserves");
+
+                    // Query para criar a tabela
+                    string createTableProfits =
+                        $"Create Table If Not Exists \"{TableName}\"("
+                        + "id Integer Primary Key, "
+                        + "operation Bit Not Null, "// 0 para subtração, 1 para adição
+                        + "value Decimal Not Null, "
+                        + "description Text)";
+
+                    // criar tabela
+                    using (SQLiteCommand command = new SQLiteCommand(createTableProfits, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+
+                    // ----------------------------------------- Guardando os valores na tabela de referencias
+                    // Comando para guardar os nomes
+                    string insertInReferences =
+                        "Insert Into references_to_reserves "
+                        + "(tableName, reservationAmount, description)"
+                        + "Values "
+                        + $"('{TableName}', 0, '{description}')";
+
+                    // Guardando os nomes das tabelas
+                    using (var command = new SQLiteCommand(insertInReferences, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Exception in DatabaseManager.CreateDynamicTable_Reserve: " + e.Message);
+            }
+        }
+
+        // Método que vai gerar um nome aleatorio para uma tabela e verificar se ele é unico
+        private static string GenerateRandonTableName(string name, string tableToConsult)
+        {
+            string tableName = "";
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(Connection.Cn))
+                {
+                    // Abre a conexão
+                    connection.Open();
+
+                    // Primeiro tem q limpar a string para garantir que não tem nenhum caractere ilegal
+                    string result = RemoveProhibitedCharacters(name);
+
+                    // depois tem que gerar um nome aleatorio e verificar em loop se já tem esse nome no banco de dados
+                    bool loop = true;
+                    while (loop)
+                    {
+                        // Gerando o nome aleatorio
+                        tableName = result + "_" + DateTime.Now.Millisecond;
+
+                        // Query para verificar se o nome é unico
+                        string createTableProfits =
+                        $"Select Exists (Select 1 From {tableToConsult} "
+                        + "Where tableName = @tableName)";
+
+                        // Executando a query
+                        using (SQLiteCommand command = new SQLiteCommand(createTableProfits, connection))
+                        {
+                            command.Parameters.AddWithValue("@tableName", tableName);
+
+                            loop = Convert.ToBoolean(command.ExecuteScalar());// se retornar true o loop continua
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Exception in DatabaseManager.GenerateRandonTableName: " + e.Message);
+            }
+
+            return tableName;
+        }
+
+        // Método que retira da string caracteres que não podem ser usados para o nome de uma tabela
+        private static string RemoveProhibitedCharacters(string name)
+        {
+            string result = "";
+
+            for (int i = 0; i < name.Length; i++)
+            {
+                if ((name[i] >= 48 && name[i] <= 57) || // números
+                    (name[i] >= 65 && name[i] <= 90) || // letras maiusculas
+                    (name[i] >= 97 && name[i] <= 122)) // letras minusculas
+                    result += name[i];
+
+                else
+                    result += '_';
+            }
+
+            return result;
+        }
     }
 }
