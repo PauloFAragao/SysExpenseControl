@@ -13,7 +13,8 @@ namespace SysExpenseControl
             FormLoader.PanelBody = this.PanelBody;// Enviando a referencia do painel
 
             // Enviando as dos botões
-            ButtonsController.SetButtonsData(this.BtnHome, this.BtnAccountsPayable, this.BtnDetailedExpenses ,this.BtnSettings);
+            ButtonsController.SetButtonsData(this.BtnHome, this.BtnAccountsPayable, this.BtnFixedExpensesAndProfits,
+                this.BtnMonthlyExpensesAndProfits, this.BtnReserves, this.BtnInvestments, this.BtnSettings);
 
             ButtonsController.SetBtnHomeSelected();// Para iniciar
             FormLoader.OpenChildForm(new FrmHome());
@@ -28,16 +29,37 @@ namespace SysExpenseControl
         private void AccountsPayable()
         {
             ButtonsController.SetBtnAccountsPayableSelected();
+            FormLoader.OpenChildForm(new FrmAccountsPayable());
         }
 
-        private void Settings() 
+        private void FixedExpensesAndProfits()
+        {
+            ButtonsController.SetBtnFixedExpensesAndProfitsSelected();
+            FormLoader.OpenChildForm(new FrmFixedExpensesAndProfits());
+        }
+
+        private void MonthlyExpensesAndProfits()
+        {
+            ButtonsController.SetBtnMonthlyExpensesAndProfitsSelected();
+            FormLoader.OpenChildForm(new FrmMonthlyExpensesAndProfits());
+        }
+
+        private void Reserves() 
+        {
+            ButtonsController.SetBtnReservesSelected();
+            FormLoader.OpenChildForm(new FrmReserves());
+        }
+
+        private void Investments()
+        {
+            ButtonsController.SetBtnInvestmentsSelected();
+            FormLoader.OpenChildForm(new FrmInvestments());
+        }
+
+        private void Settings()
         {
             ButtonsController.SetBtnSettingsSelected();
-        }
-
-        private void DetailedExpenses()
-        {
-            ButtonsController.SetBtnDetailedExpensesSelected();
+            FormLoader.OpenChildForm(new FrmSettings());
         }
 
         // ---------------------------- Métodos criados pelo Visual Studio
@@ -56,9 +78,24 @@ namespace SysExpenseControl
             Settings();
         }
 
-        private void BtnDetailedExpenses_Click(object sender, System.EventArgs e)
+        private void BtnFixedExpensesAndProfits_Click(object sender, System.EventArgs e)
         {
-            DetailedExpenses();
+            FixedExpensesAndProfits();
+        }
+
+        private void BtnMonthlyExpensesAndProfits_Click(object sender, System.EventArgs e)
+        {
+            MonthlyExpensesAndProfits();
+        }
+
+        private void BtnReserves_Click(object sender, System.EventArgs e)
+        {
+            Reserves();
+        }
+
+        private void BtnInvestments_Click(object sender, System.EventArgs e)
+        {
+            Investments();
         }
     }
 }

@@ -60,7 +60,7 @@ namespace SysExpenseControl.Data
                         + "name Varchar (50),"
                         + "value Decimal Not Null,"
                         + "dueDay Integer,"// data para o vencimento 
-                                           //References categories (id) - indica foreign key //On Delete Set Default - quando a categoria for deletada muda para o default que é 0
+                        //References categories (id) - indica foreign key //On Delete Set Default - quando a categoria for deletada muda para o default que é 0
                         + "category Integer References categories (id) On Delete Set Default Default '0',"// 0 Para sem categoria
                         + "description Text)";
 
@@ -79,6 +79,15 @@ namespace SysExpenseControl.Data
                         + "month Integer Not Null,"
                         + "nameOfTheTableProfits Varchar(10),"
                         + "nameOfTheTableExpenses Varchar(10))";
+
+                    // Tabela para as referencias das tabelas dos investimentos
+                    string createTableReferencesToTablesInvestiment =
+                        "Create Table If Not Exists references_to_investiments("
+                        + "id Integer Primary Key, "
+                        + "tableName Varchar (50) Not Null, "
+                        + "investmentAmount Decimal Not Null, "
+                        + "incomeDate Date, "
+                        + "description Text)";
 
                     //------------------------------------ Executando as querys
                     // Criando a tabela das categorias
@@ -106,6 +115,12 @@ namespace SysExpenseControl.Data
 
                     // Criando a tabela que vai conter as referencias as tabelas que forem criadas dinamicamente
                     using (SQLiteCommand command = new SQLiteCommand(createTableReferencesToTables, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+
+                    // Criando a tabela que vai conter as referencias as tabelas que forem criadas dinamicamente para os investimentos
+                    using (SQLiteCommand command = new SQLiteCommand(createTableReferencesToTablesInvestiment, connection))
                     {
                         command.ExecuteNonQuery();
                     }
@@ -138,13 +153,14 @@ namespace SysExpenseControl.Data
                     // Consulta
                     string insertCategories =
                         $"Insert Into categories"
-                        + "(name, description)"
+                        + "(id, name, description)"
                         + "Values"
-                        + "('Alimentação', 'Gastos com comida, lanches, petiscos e afins'),"
-                        + "('Transpote', 'Gastos com combustivel, passagens e afins'),"
-                        + "('Vestuario', 'Gastos com peças de vestuario, sapatos e afins'),"
-                        + "('Contas', 'Contas de luz, água, internet, cartão e afins'),"
-                        + "('remédios', 'Gastos com remédios ded uso contidiano ou por necessidades potuais')";
+                        + "('0', 'Sem categoria', ''),"
+                        + "('1', 'Alimentação', 'Gastos com comida, lanches, petiscos e afins'),"
+                        + "('2', 'Transpote', 'Gastos com combustivel, passagens e afins'),"
+                        + "('3', 'Vestuario', 'Gastos com peças de vestuario, sapatos e afins'),"
+                        + "('4', 'Contas', 'Contas de luz, água, internet, cartão e afins'),"
+                        + "('5', 'remédios', 'Gastos com remédios ded uso contidiano ou por necessidades potuais')";
 
                     // Executando a Query
                     using (SQLiteCommand command = new SQLiteCommand(insertCategories, connection))
@@ -181,6 +197,7 @@ namespace SysExpenseControl.Data
                         + "id Integer Primary Key,"
                         + "name Varchar (50),"
                         + "value Decimal Not Null,"
+                        + "date Date,"
                         + "description Text)";
 
                     // Gastos do mês
@@ -190,10 +207,11 @@ namespace SysExpenseControl.Data
                         + "id Integer Primary Key,"
                         + "name Varchar (50),"
                         + "value Decimal Not Null,"
-                        + "dateOfExpenditure Date,"
+                        + "date Date,"
                         //References categories (id) - indica foreign key //On Delete Set Default - quando a categoria for deletada muda para o default que é 0
                         + "category Integer References categories (id) On Delete Set Default Default '0',"// 0 Para sem categoria
-                        + "description Text)";
+                        + "description Text, "
+                        + "idFixedExpenses Integer Default '0')";
 
                     //------------------------------------ Executando as querys
                     // criar tabela de lucros
@@ -255,10 +273,10 @@ namespace SysExpenseControl.Data
                     string expensesTableName = "expenses_" + DateTime.Now.Date.Year + "_" + DateTime.Now.Date.Month;// nome da tabela
                     string insertExpense =
                         $"Insert Into {expensesTableName} "
-                        + "(name, value, dateOfExpenditure, category, description) "
+                        + "(name, value, date, category, description, idFixedExpenses) "
                         + "Select name, value, "
-                        + "date(strftime('%Y-%m', 'now') || '-' || printf('%02d', dueDay))"// transformando int em date
-                        + ", category, description "
+                        + "date(strftime('%Y-%m', 'now') || '-' || printf('%02d', dueDay)), "// transformando int em date
+                        + "category, description, id "
                         + "From fixed_expenses";
 
                     // Copiando os lucros
@@ -312,6 +330,54 @@ namespace SysExpenseControl.Data
                     string insertInReferences =
                         "Insert Into references_to_reserves "
                         + "(tableName, reservationAmount, description)"
+                        + "Values "
+                        + $"('{TableName}', 0, '{description}')";
+
+                    // Guardando os nomes das tabelas
+                    using (var command = new SQLiteCommand(insertInReferences, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Exception in DatabaseManager.CreateDynamicTable_Reserve: " + e.Message);
+            }
+        }
+
+        // Método que vai criar uma tabela de serva de dinheiro dinamicamente 
+        public static void CreateDynamicTable_Investiments(string name, string description)
+        {
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(Connection.Cn))
+                {
+                    // Abre a conexão
+                    connection.Open();
+
+                    // Gerando nome
+                    string TableName = GenerateRandonTableName(name, "references_to_investiments");
+
+                    // Query para criar a tabela
+                    string createTableProfits =
+                        $"Create Table If Not Exists \"{TableName}\"("
+                        + "id Integer Primary Key, "
+                        + "income Decimal Not Null, "
+                        + "incomeDate Date, "
+                        + "description Text)";
+
+                    // criar tabela
+                    using (SQLiteCommand command = new SQLiteCommand(createTableProfits, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+
+                    // ----------------------------------------- Guardando os valores na tabela de referencias
+                    // Comando para guardar os nomes
+                    string insertInReferences =
+                        "Insert Into references_to_reserves "
+                        + "(tableName, investmentAmount, description)"
                         + "Values "
                         + $"('{TableName}', 0, '{description}')";
 

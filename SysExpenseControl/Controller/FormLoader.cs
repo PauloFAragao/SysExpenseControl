@@ -20,8 +20,10 @@ namespace SysExpenseControl.Controller
         {
             if (_activeForm != null)// verifica se tem alguma form aberta e fecha
             {
-                if(_activeForm == childForm)// para não recarregar a form caso ela já esteja aberta
+                if(_activeForm.Text == childForm.Text)// para não recarregar a form caso ela já esteja aberta
+                {
                     return;
+                }
 
                 _activeForm.Close();
             }

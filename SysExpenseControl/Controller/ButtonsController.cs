@@ -9,7 +9,12 @@ namespace SysExpenseControl.Controller
 
         private static Button _btnHome;// botão de iniciar
         private static Button _btnAccountsPayable;// botão das contas a pagar
-        private static Button _btnDetailedExpenses;// botão para visualizar os gastos
+
+        private static Button _btnFixedExpensesAndProfits;// botão para a tela de gastos e lucros fixos
+        private static Button _btnMonthlyExpensesAndProfits;// botão para a tela de gastos e lucros do mês
+        private static Button _btnReserves;// botão para tela de reservas
+        private static Button _btnInvestments;// botão para tela de investimentos
+
         private static Button _btnSettings;// botão das configurações
 
         //cores
@@ -17,12 +22,16 @@ namespace SysExpenseControl.Controller
         private static Color _selectedButton = Color.FromArgb(159, 159, 159);
 
         // Método para passar as referencias dos botões
-        public static void SetButtonsData(
-            Button btnHome, Button btnAccountsPayable, Button btnDetailedExpenses, Button btnSettings)
+        public static void SetButtonsData( Button btnHome, Button btnAccountsPayable, 
+            Button btnFixedExpensesAndProfits, Button btnMonthlyExpensesAndProfits, Button btnReserves, 
+            Button btnInvestments, Button btnSettings)
         {
             _btnHome = btnHome;
             _btnAccountsPayable = btnAccountsPayable;
-            _btnDetailedExpenses = btnDetailedExpenses;
+            _btnFixedExpensesAndProfits = btnFixedExpensesAndProfits;
+            _btnMonthlyExpensesAndProfits = btnMonthlyExpensesAndProfits;
+            _btnReserves = btnReserves;
+            _btnInvestments = btnInvestments;
             _btnSettings = btnSettings;
         }
 
@@ -62,15 +71,54 @@ namespace SysExpenseControl.Controller
             }
         }
 
-        // Método para marcar que o botão de Despesas detalhadas
-        public static void SetBtnDetailedExpensesSelected()
+        // Método para marcar que o botão de gastos e lucros do fixos
+        public static void SetBtnFixedExpensesAndProfitsSelected()
         {
-            if (_currentButton != _btnDetailedExpenses)
+            if (_currentButton != _btnFixedExpensesAndProfits)
             {
                 if (_currentButton != null)
                     UnselectCurrentButton();
 
-                _currentButton = _btnDetailedExpenses;
+                _currentButton = _btnFixedExpensesAndProfits;
+                _currentButton.BackColor = _selectedButton;
+            }
+        }
+
+        // Método para marcar que o botão de gastos e lucros do mês
+        public static void SetBtnMonthlyExpensesAndProfitsSelected()
+        {
+            if (_currentButton != _btnMonthlyExpensesAndProfits)
+            {
+                if (_currentButton != null)
+                    UnselectCurrentButton();
+
+                _currentButton = _btnMonthlyExpensesAndProfits;
+                _currentButton.BackColor = _selectedButton;
+            }
+        }
+
+        // Método para marcar que o botão de reservas
+        public static void SetBtnReservesSelected()
+        {
+            if (_currentButton != _btnReserves)
+            {
+                if (_currentButton != null)
+                    UnselectCurrentButton();
+
+                _currentButton = _btnReserves;
+                _currentButton.BackColor = _selectedButton;
+            }
+        }
+
+        // Método para marcar que o botão de investimentos
+        public static void SetBtnInvestmentsSelected()
+        {
+            if (_currentButton != _btnInvestments)
+            {
+                if (_currentButton != null)
+                    UnselectCurrentButton();
+
+                _currentButton = _btnInvestments;
                 _currentButton.BackColor = _selectedButton;
             }
         }

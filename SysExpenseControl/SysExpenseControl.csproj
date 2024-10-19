@@ -77,19 +77,73 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FrmAccountsPayable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmAccountsPayable.Designer.cs">
+      <DependentUpon>FrmAccountsPayable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmFixedExpensesAndProfits.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmFixedExpensesAndProfits.Designer.cs">
+      <DependentUpon>FrmFixedExpensesAndProfits.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FrmHome.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FrmHome.Designer.cs">
       <DependentUpon>FrmHome.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FrmInvestments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmInvestments.Designer.cs">
+      <DependentUpon>FrmInvestments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmMonthlyExpensesAndProfits.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmMonthlyExpensesAndProfits.Designer.cs">
+      <DependentUpon>FrmMonthlyExpensesAndProfits.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmReserves.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmReserves.Designer.cs">
+      <DependentUpon>FrmReserves.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmSettings.Designer.cs">
+      <DependentUpon>FrmSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmAccountsPayable.resx">
+      <DependentUpon>FrmAccountsPayable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmFixedExpensesAndProfits.resx">
+      <DependentUpon>FrmFixedExpensesAndProfits.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmHome.resx">
       <DependentUpon>FrmHome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmInvestments.resx">
+      <DependentUpon>FrmInvestments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmMonthlyExpensesAndProfits.resx">
+      <DependentUpon>FrmMonthlyExpensesAndProfits.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmReserves.resx">
+      <DependentUpon>FrmReserves.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmSettings.resx">
+      <DependentUpon>FrmSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

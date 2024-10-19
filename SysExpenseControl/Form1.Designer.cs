@@ -29,8 +29,14 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.BtnDetailedExpenses = new System.Windows.Forms.Button();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.BtnInvestments = new System.Windows.Forms.Button();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.BtnReserves = new System.Windows.Forms.Button();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.BtnMonthlyExpensesAndProfits = new System.Windows.Forms.Button();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.BtnFixedExpensesAndProfits = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.BtnAccountsPayable = new System.Windows.Forms.Button();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -39,7 +45,10 @@
             this.BtnHome = new System.Windows.Forms.Button();
             this.PanelBody = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.panel9.SuspendLayout();
+            this.panel7.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -48,7 +57,10 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(102)))), ((int)(((byte)(102)))));
-            this.panel1.Controls.Add(this.panel2);
+            this.panel1.Controls.Add(this.panel9);
+            this.panel1.Controls.Add(this.panel7);
+            this.panel1.Controls.Add(this.panel6);
+            this.panel1.Controls.Add(this.panel5);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.panel8);
             this.panel1.Controls.Add(this.panel4);
@@ -59,28 +71,97 @@
             this.panel1.Size = new System.Drawing.Size(242, 611);
             this.panel1.TabIndex = 0;
             // 
-            // panel2
+            // panel9
             // 
-            this.panel2.Controls.Add(this.BtnDetailedExpenses);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 84);
-            this.panel2.Name = "panel2";
-            this.panel2.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
-            this.panel2.Size = new System.Drawing.Size(242, 37);
-            this.panel2.TabIndex = 21;
+            this.panel9.Controls.Add(this.BtnInvestments);
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel9.Location = new System.Drawing.Point(0, 195);
+            this.panel9.Name = "panel9";
+            this.panel9.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
+            this.panel9.Size = new System.Drawing.Size(242, 37);
+            this.panel9.TabIndex = 25;
             // 
-            // BtnDetailedExpenses
+            // BtnInvestments
             // 
-            this.BtnDetailedExpenses.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BtnDetailedExpenses.FlatAppearance.BorderSize = 2;
-            this.BtnDetailedExpenses.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnDetailedExpenses.Location = new System.Drawing.Point(10, 5);
-            this.BtnDetailedExpenses.Name = "BtnDetailedExpenses";
-            this.BtnDetailedExpenses.Size = new System.Drawing.Size(222, 27);
-            this.BtnDetailedExpenses.TabIndex = 0;
-            this.BtnDetailedExpenses.Text = "Despesas detalhadas";
-            this.BtnDetailedExpenses.UseVisualStyleBackColor = true;
-            this.BtnDetailedExpenses.Click += new System.EventHandler(this.BtnDetailedExpenses_Click);
+            this.BtnInvestments.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnInvestments.FlatAppearance.BorderSize = 2;
+            this.BtnInvestments.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnInvestments.Location = new System.Drawing.Point(10, 5);
+            this.BtnInvestments.Name = "BtnInvestments";
+            this.BtnInvestments.Size = new System.Drawing.Size(222, 27);
+            this.BtnInvestments.TabIndex = 0;
+            this.BtnInvestments.Text = "Investimentos";
+            this.BtnInvestments.UseVisualStyleBackColor = true;
+            this.BtnInvestments.Click += new System.EventHandler(this.BtnInvestments_Click);
+            // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.BtnReserves);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel7.Location = new System.Drawing.Point(0, 158);
+            this.panel7.Name = "panel7";
+            this.panel7.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
+            this.panel7.Size = new System.Drawing.Size(242, 37);
+            this.panel7.TabIndex = 24;
+            // 
+            // BtnReserves
+            // 
+            this.BtnReserves.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnReserves.FlatAppearance.BorderSize = 2;
+            this.BtnReserves.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnReserves.Location = new System.Drawing.Point(10, 5);
+            this.BtnReserves.Name = "BtnReserves";
+            this.BtnReserves.Size = new System.Drawing.Size(222, 27);
+            this.BtnReserves.TabIndex = 0;
+            this.BtnReserves.Text = "Reservas";
+            this.BtnReserves.UseVisualStyleBackColor = true;
+            this.BtnReserves.Click += new System.EventHandler(this.BtnReserves_Click);
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.BtnMonthlyExpensesAndProfits);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel6.Location = new System.Drawing.Point(0, 121);
+            this.panel6.Name = "panel6";
+            this.panel6.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
+            this.panel6.Size = new System.Drawing.Size(242, 37);
+            this.panel6.TabIndex = 23;
+            // 
+            // BtnMonthlyExpensesAndProfits
+            // 
+            this.BtnMonthlyExpensesAndProfits.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnMonthlyExpensesAndProfits.FlatAppearance.BorderSize = 2;
+            this.BtnMonthlyExpensesAndProfits.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnMonthlyExpensesAndProfits.Location = new System.Drawing.Point(10, 5);
+            this.BtnMonthlyExpensesAndProfits.Name = "BtnMonthlyExpensesAndProfits";
+            this.BtnMonthlyExpensesAndProfits.Size = new System.Drawing.Size(222, 27);
+            this.BtnMonthlyExpensesAndProfits.TabIndex = 0;
+            this.BtnMonthlyExpensesAndProfits.Text = "Gastos e lucros do mês";
+            this.BtnMonthlyExpensesAndProfits.UseVisualStyleBackColor = true;
+            this.BtnMonthlyExpensesAndProfits.Click += new System.EventHandler(this.BtnMonthlyExpensesAndProfits_Click);
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.BtnFixedExpensesAndProfits);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel5.Location = new System.Drawing.Point(0, 84);
+            this.panel5.Name = "panel5";
+            this.panel5.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
+            this.panel5.Size = new System.Drawing.Size(242, 37);
+            this.panel5.TabIndex = 22;
+            // 
+            // BtnFixedExpensesAndProfits
+            // 
+            this.BtnFixedExpensesAndProfits.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnFixedExpensesAndProfits.FlatAppearance.BorderSize = 2;
+            this.BtnFixedExpensesAndProfits.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnFixedExpensesAndProfits.Location = new System.Drawing.Point(10, 5);
+            this.BtnFixedExpensesAndProfits.Name = "BtnFixedExpensesAndProfits";
+            this.BtnFixedExpensesAndProfits.Size = new System.Drawing.Size(222, 27);
+            this.BtnFixedExpensesAndProfits.TabIndex = 0;
+            this.BtnFixedExpensesAndProfits.Text = "Fixos";
+            this.BtnFixedExpensesAndProfits.UseVisualStyleBackColor = true;
+            this.BtnFixedExpensesAndProfits.Click += new System.EventHandler(this.BtnFixedExpensesAndProfits_Click);
             // 
             // panel3
             // 
@@ -158,6 +239,7 @@
             this.PanelBody.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PanelBody.Location = new System.Drawing.Point(242, 0);
             this.PanelBody.Name = "PanelBody";
+            this.PanelBody.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
             this.PanelBody.Size = new System.Drawing.Size(942, 611);
             this.PanelBody.TabIndex = 1;
             // 
@@ -171,7 +253,10 @@
             this.Name = "Form1";
             this.Text = "SysExpenseControl";
             this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
+            this.panel9.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
@@ -189,8 +274,14 @@
         private System.Windows.Forms.Button BtnHome;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button BtnAccountsPayable;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button BtnDetailedExpenses;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Button BtnFixedExpensesAndProfits;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Button BtnMonthlyExpensesAndProfits;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Button BtnInvestments;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Button BtnReserves;
     }
 }
 

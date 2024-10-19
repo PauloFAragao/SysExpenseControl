@@ -11,8 +11,12 @@ selecionados foram implementados
 -A ideia geral do design foi definida
 -O programa já está com algums botões no menu lateral e tem uma form para ser a tela inicial
 
-
-
+-Novas tabelas do banco de dados: referencias as tabelas de investimentos e tabelas dinamicas para
+os investimentos
+-Criadas Forms para telas de: contas a pagar, gastos e lucros fixos, gastos e lucros do mês, reservas
+Investimentos e Configurações
+-Alterações nas tabelas de gastos e lucros do mês
+-As telas receberam alguns elementos para servir de guia no desenvolvimento
 
 
 
