@@ -18,11 +18,15 @@ Investimentos e Configurações
 -Alterações nas tabelas de gastos e lucros do mês
 -As telas receberam alguns elementos para servir de guia no desenvolvimento
 
-
-
-
-
-
+-Algumas alterações nas tabelas e criada pesquisa só sobre gastos na categoria contas
+-Inicio da implementação da tela de Contas
+-A tela contas aprenseta as informações do valor total das contas pagas, das contas a pagar, das contas
+vencidas, o total geral e a quantidade de contas.
+-Na tela contas o combo box que filtra (todas, contas pagas, contas a pagar e contas vencidas) está 
+implementado
+-Os dados carregados no DataGridView da tela de contas, são carregados atravez de uma thread
+-Os dados carregados no DataGridView de Resumo de gastos da dela inicial são carregados atravez de uma thread
+-O grafico de Gastos do mês agora está exibindo os gastos por categoria
 
 
 

@@ -119,7 +119,24 @@ namespace SysExpenseControl.Data
         // Método para visualizar os gastos fixos
         public static DataTable ViewFixedExpenses()
         {
-            string viewQuery = $"Select * From fixed_expenses";
+            string viewQuery = "Select * From fixed_expenses";
+
+            return ViewQuery(viewQuery);
+        }
+
+        public static DataTable ViewAccountsPayable()
+        {
+            string expensesTableName = "expenses_" + DateTime.Now.Date.Year + "_" + DateTime.Now.Date.Month;
+            string viewQuery =
+            "Select "
+            + "f.id, f.name, "
+            + "f.value, f.dueDay, "
+            + "f.category, c.name As categorieName, "
+            + "e.date As dayItWasPaid "
+            + "From fixed_expenses f "
+            + "Join categories c On f.category = c.id "
+            + $"Join {expensesTableName} e On f.id = e.idFixedExpenses "
+            + $"Where f.category = 4 Order by dueDay Desc";
 
             return ViewQuery(viewQuery);
         }
@@ -205,7 +222,14 @@ namespace SysExpenseControl.Data
         public static DataTable ViewMonthExpenses(int year, int month)
         {
             string expensesTableName = "expenses_" + year + "_" + month;
-            string viewQuery = $"Select * From {expensesTableName}";
+            //string viewQuery = $"Select * From {expensesTableName}";
+
+            string viewQuery =
+                "Select "
+                + "f.name, f.value, f.date, c.name As categorieName "
+                + $"From {expensesTableName} f "
+                + "Join categories c On f.category = c.id "
+                + $"Order by date Asc";
 
             return ViewQuery(viewQuery);
         }
@@ -292,6 +316,7 @@ namespace SysExpenseControl.Data
             catch (Exception e)
             {
                 Debug.WriteLine("Exception in DataConsultant.ViewQuery: " + e.Message);
+                dtResult = null;
             }
             return dtResult;
         }

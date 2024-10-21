@@ -67,7 +67,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(0, 10, 0, 15);
+            this.panel1.Padding = new System.Windows.Forms.Padding(0, 20, 0, 15);
             this.panel1.Size = new System.Drawing.Size(242, 611);
             this.panel1.TabIndex = 0;
             // 
@@ -75,10 +75,10 @@
             // 
             this.panel9.Controls.Add(this.BtnInvestments);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel9.Location = new System.Drawing.Point(0, 195);
+            this.panel9.Location = new System.Drawing.Point(0, 245);
             this.panel9.Name = "panel9";
             this.panel9.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
-            this.panel9.Size = new System.Drawing.Size(242, 37);
+            this.panel9.Size = new System.Drawing.Size(242, 45);
             this.panel9.TabIndex = 25;
             // 
             // BtnInvestments
@@ -88,7 +88,7 @@
             this.BtnInvestments.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnInvestments.Location = new System.Drawing.Point(10, 5);
             this.BtnInvestments.Name = "BtnInvestments";
-            this.BtnInvestments.Size = new System.Drawing.Size(222, 27);
+            this.BtnInvestments.Size = new System.Drawing.Size(222, 35);
             this.BtnInvestments.TabIndex = 0;
             this.BtnInvestments.Text = "Investimentos";
             this.BtnInvestments.UseVisualStyleBackColor = true;
@@ -98,10 +98,10 @@
             // 
             this.panel7.Controls.Add(this.BtnReserves);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel7.Location = new System.Drawing.Point(0, 158);
+            this.panel7.Location = new System.Drawing.Point(0, 200);
             this.panel7.Name = "panel7";
             this.panel7.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
-            this.panel7.Size = new System.Drawing.Size(242, 37);
+            this.panel7.Size = new System.Drawing.Size(242, 45);
             this.panel7.TabIndex = 24;
             // 
             // BtnReserves
@@ -111,7 +111,7 @@
             this.BtnReserves.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnReserves.Location = new System.Drawing.Point(10, 5);
             this.BtnReserves.Name = "BtnReserves";
-            this.BtnReserves.Size = new System.Drawing.Size(222, 27);
+            this.BtnReserves.Size = new System.Drawing.Size(222, 35);
             this.BtnReserves.TabIndex = 0;
             this.BtnReserves.Text = "Reservas";
             this.BtnReserves.UseVisualStyleBackColor = true;
@@ -121,10 +121,10 @@
             // 
             this.panel6.Controls.Add(this.BtnMonthlyExpensesAndProfits);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel6.Location = new System.Drawing.Point(0, 121);
+            this.panel6.Location = new System.Drawing.Point(0, 155);
             this.panel6.Name = "panel6";
             this.panel6.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
-            this.panel6.Size = new System.Drawing.Size(242, 37);
+            this.panel6.Size = new System.Drawing.Size(242, 45);
             this.panel6.TabIndex = 23;
             // 
             // BtnMonthlyExpensesAndProfits
@@ -134,7 +134,7 @@
             this.BtnMonthlyExpensesAndProfits.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnMonthlyExpensesAndProfits.Location = new System.Drawing.Point(10, 5);
             this.BtnMonthlyExpensesAndProfits.Name = "BtnMonthlyExpensesAndProfits";
-            this.BtnMonthlyExpensesAndProfits.Size = new System.Drawing.Size(222, 27);
+            this.BtnMonthlyExpensesAndProfits.Size = new System.Drawing.Size(222, 35);
             this.BtnMonthlyExpensesAndProfits.TabIndex = 0;
             this.BtnMonthlyExpensesAndProfits.Text = "Gastos e lucros do mês";
             this.BtnMonthlyExpensesAndProfits.UseVisualStyleBackColor = true;
@@ -144,10 +144,10 @@
             // 
             this.panel5.Controls.Add(this.BtnFixedExpensesAndProfits);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(0, 84);
+            this.panel5.Location = new System.Drawing.Point(0, 110);
             this.panel5.Name = "panel5";
             this.panel5.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
-            this.panel5.Size = new System.Drawing.Size(242, 37);
+            this.panel5.Size = new System.Drawing.Size(242, 45);
             this.panel5.TabIndex = 22;
             // 
             // BtnFixedExpensesAndProfits
@@ -157,7 +157,7 @@
             this.BtnFixedExpensesAndProfits.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnFixedExpensesAndProfits.Location = new System.Drawing.Point(10, 5);
             this.BtnFixedExpensesAndProfits.Name = "BtnFixedExpensesAndProfits";
-            this.BtnFixedExpensesAndProfits.Size = new System.Drawing.Size(222, 27);
+            this.BtnFixedExpensesAndProfits.Size = new System.Drawing.Size(222, 35);
             this.BtnFixedExpensesAndProfits.TabIndex = 0;
             this.BtnFixedExpensesAndProfits.Text = "Fixos";
             this.BtnFixedExpensesAndProfits.UseVisualStyleBackColor = true;
@@ -167,10 +167,10 @@
             // 
             this.panel3.Controls.Add(this.BtnAccountsPayable);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 47);
+            this.panel3.Location = new System.Drawing.Point(0, 65);
             this.panel3.Name = "panel3";
             this.panel3.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
-            this.panel3.Size = new System.Drawing.Size(242, 37);
+            this.panel3.Size = new System.Drawing.Size(242, 45);
             this.panel3.TabIndex = 20;
             // 
             // BtnAccountsPayable
@@ -180,9 +180,9 @@
             this.BtnAccountsPayable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnAccountsPayable.Location = new System.Drawing.Point(10, 5);
             this.BtnAccountsPayable.Name = "BtnAccountsPayable";
-            this.BtnAccountsPayable.Size = new System.Drawing.Size(222, 27);
+            this.BtnAccountsPayable.Size = new System.Drawing.Size(222, 35);
             this.BtnAccountsPayable.TabIndex = 0;
-            this.BtnAccountsPayable.Text = "Contas a pagar";
+            this.BtnAccountsPayable.Text = "Contas";
             this.BtnAccountsPayable.UseVisualStyleBackColor = true;
             this.BtnAccountsPayable.Click += new System.EventHandler(this.BtnAccountsPayable_Click);
             // 
@@ -190,10 +190,10 @@
             // 
             this.panel8.Controls.Add(this.BtnSettings);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel8.Location = new System.Drawing.Point(0, 559);
+            this.panel8.Location = new System.Drawing.Point(0, 551);
             this.panel8.Name = "panel8";
             this.panel8.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
-            this.panel8.Size = new System.Drawing.Size(242, 37);
+            this.panel8.Size = new System.Drawing.Size(242, 45);
             this.panel8.TabIndex = 19;
             // 
             // BtnSettings
@@ -203,7 +203,7 @@
             this.BtnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnSettings.Location = new System.Drawing.Point(10, 5);
             this.BtnSettings.Name = "BtnSettings";
-            this.BtnSettings.Size = new System.Drawing.Size(222, 27);
+            this.BtnSettings.Size = new System.Drawing.Size(222, 35);
             this.BtnSettings.TabIndex = 1;
             this.BtnSettings.Text = "Configurações";
             this.BtnSettings.UseVisualStyleBackColor = true;
@@ -213,10 +213,10 @@
             // 
             this.panel4.Controls.Add(this.BtnHome);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(0, 10);
+            this.panel4.Location = new System.Drawing.Point(0, 20);
             this.panel4.Name = "panel4";
             this.panel4.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
-            this.panel4.Size = new System.Drawing.Size(242, 37);
+            this.panel4.Size = new System.Drawing.Size(242, 45);
             this.panel4.TabIndex = 18;
             // 
             // BtnHome
@@ -228,7 +228,7 @@
             this.BtnHome.ForeColor = System.Drawing.SystemColors.ControlText;
             this.BtnHome.Location = new System.Drawing.Point(10, 5);
             this.BtnHome.Name = "BtnHome";
-            this.BtnHome.Size = new System.Drawing.Size(222, 27);
+            this.BtnHome.Size = new System.Drawing.Size(222, 35);
             this.BtnHome.TabIndex = 0;
             this.BtnHome.Text = "Inicio";
             this.BtnHome.UseVisualStyleBackColor = false;
