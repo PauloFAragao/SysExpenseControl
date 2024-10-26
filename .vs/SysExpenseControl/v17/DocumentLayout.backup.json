@@ -3,16 +3,28 @@
   "WorkspaceRootPath": "C:\\Sistemas\\SysExpenseControl\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|c:\\sistemas\\sysexpensecontrol\\sysexpensecontrol\\forms\\frmhome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|c:\\sistemas\\sysexpensecontrol\\sysexpensecontrol\\forms\\frmaccountspayable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|solutionrelative:sysexpensecontrol\\forms\\frmaccountspayable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|C:\\Sistemas\\SysExpenseControl\\sysexpensecontrol\\entities\\threadhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|solutionrelative:sysexpensecontrol\\entities\\threadhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|c:\\sistemas\\sysexpensecontrol\\sysexpensecontrol\\data\\dataconsultant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|solutionrelative:sysexpensecontrol\\data\\dataconsultant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|C:\\Sistemas\\SysExpenseControl\\sysexpensecontrol\\forms\\frmaccountspayable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|solutionrelative:sysexpensecontrol\\forms\\frmaccountspayable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|C:\\Sistemas\\SysExpenseControl\\sysexpensecontrol\\forms\\frmhome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|solutionrelative:sysexpensecontrol\\forms\\frmhome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|c:\\sistemas\\sysexpensecontrol\\sysexpensecontrol\\forms\\frmhome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|C:\\Sistemas\\SysExpenseControl\\sysexpensecontrol\\forms\\frmhome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|solutionrelative:sysexpensecontrol\\forms\\frmhome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|c:\\sistemas\\sysexpensecontrol\\sysexpensecontrol\\entities\\threadhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|solutionrelative:sysexpensecontrol\\entities\\threadhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,37 +34,75 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "DataConsultant.cs",
+              "DocumentMoniker": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Data\\DataConsultant.cs",
+              "RelativeDocumentMoniker": "SysExpenseControl\\Data\\DataConsultant.cs",
+              "ToolTip": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Data\\DataConsultant.cs",
+              "RelativeToolTip": "SysExpenseControl\\Data\\DataConsultant.cs",
+              "ViewState": "AgIAAFcAAAAAAAAAAAASwHwAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-26T15:34:48.527Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "ThreadHelper.cs",
               "DocumentMoniker": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Entities\\ThreadHelper.cs",
               "RelativeDocumentMoniker": "SysExpenseControl\\Entities\\ThreadHelper.cs",
               "ToolTip": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Entities\\ThreadHelper.cs",
               "RelativeToolTip": "SysExpenseControl\\Entities\\ThreadHelper.cs",
-              "ViewState": "AgIAAFQAAAAAAAAAAAAgwIYAAABiAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-21T02:23:03.95Z",
+              "WhenOpened": "2024-10-26T12:35:47.319Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "FrmAccountsPayable.cs",
+              "DocumentMoniker": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmAccountsPayable.cs",
+              "RelativeDocumentMoniker": "SysExpenseControl\\Forms\\FrmAccountsPayable.cs",
+              "ToolTip": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmAccountsPayable.cs",
+              "RelativeToolTip": "SysExpenseControl\\Forms\\FrmAccountsPayable.cs",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAcwEsAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-26T12:18:05.828Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FrmAccountsPayable.cs [Design]",
+              "DocumentMoniker": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmAccountsPayable.cs",
+              "RelativeDocumentMoniker": "SysExpenseControl\\Forms\\FrmAccountsPayable.cs",
+              "ToolTip": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmAccountsPayable.cs [Design]",
+              "RelativeToolTip": "SysExpenseControl\\Forms\\FrmAccountsPayable.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-26T12:24:30.587Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "FrmHome.cs",
               "DocumentMoniker": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmHome.cs",
               "RelativeDocumentMoniker": "SysExpenseControl\\Forms\\FrmHome.cs",
               "ToolTip": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmHome.cs",
               "RelativeToolTip": "SysExpenseControl\\Forms\\FrmHome.cs",
-              "ViewState": "AgIAAEYAAAAAAAAAAAAuwHYAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAD0AAAAAAAAAAAAowJYAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-21T02:22:26.233Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "FrmHome.cs [Design]",
               "DocumentMoniker": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmHome.cs",
               "RelativeDocumentMoniker": "SysExpenseControl\\Forms\\FrmHome.cs",

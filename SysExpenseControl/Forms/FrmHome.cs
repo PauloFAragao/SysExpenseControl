@@ -195,9 +195,6 @@ namespace SysExpenseControl.Forms
             {
                 ThreadHelper.SetChartData(this.ChartSpent, categories, values);
             }
-
-            
-
         }
 
         private void ChangeColumnsSpent()
@@ -214,7 +211,6 @@ namespace SysExpenseControl.Forms
             ThreadHelper.SetColumnHeaderText(this.DgvSpent, 3, "Categoria");
             ThreadHelper.SetColumnAutoSizeMode(this.DgvSpent, 3, DataGridViewAutoSizeColumnMode.DisplayedCells);
         }
-    
     
     }
 }

@@ -33,6 +33,39 @@ namespace SysExpenseControl.Entities
             }
         }
 
+        public static void SetFieldValue(Control control, string fieldName, object value)
+        {
+            if (control.InvokeRequired)
+            {
+                control.Invoke(new Action(() => SetFieldValue(control, fieldName, value)));
+            }
+            else
+            {
+                try
+                {
+                    FieldInfo field = control.GetType().GetField(fieldName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+
+                    if (field != null)
+                    {
+                        field.SetValue(control, value);
+                    }
+                    else
+                    {
+                        // Caso o campo não seja encontrado, você pode tentar acessar como uma propriedade
+                        PropertyInfo prop = control.GetType().GetProperty(fieldName, BindingFlags.Public | BindingFlags.Instance);
+                        if (prop != null && prop.CanWrite)
+                        {
+                            prop.SetValue(control, value);
+                        }
+                    }
+                }
+                catch (TargetInvocationException ex)
+                {
+                    Console.WriteLine(ex.InnerException?.Message);
+                }
+            }
+        }
+
         //-------------------------- métodos para manipular DataGridView
         public static void SetColumnVisibility(DataGridView dataGridView, int columnIndex, bool visible)
         {

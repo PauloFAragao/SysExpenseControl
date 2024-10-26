@@ -28,7 +28,8 @@ implementado
 -Os dados carregados no DataGridView de Resumo de gastos da dela inicial são carregados atravez de uma thread
 -O grafico de Gastos do mês agora está exibindo os gastos por categoria
 
-
+-Resolvidos alguns problemas na tela contas: um erro que gerava uma excessão alguns erros de logica entre 
+outros
 
 
 

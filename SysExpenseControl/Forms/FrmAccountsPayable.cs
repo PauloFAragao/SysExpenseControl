@@ -1,14 +1,18 @@
-﻿using SysExpenseControl.Data;
-using System;
+﻿using System;
 using System.Data;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading.Tasks;
+using SysExpenseControl.Data;
 using SysExpenseControl.Entities;
+using System.Diagnostics;
+using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 
 namespace SysExpenseControl.Forms
 {
     public partial class FrmAccountsPayable : Form
     {
+        DataTable _data;
+
         public FrmAccountsPayable()
         {
             InitializeComponent();
@@ -21,57 +25,58 @@ namespace SysExpenseControl.Forms
 
         private void SelectedFilterChanged()
         {
-            if (this.DgvData.Rows.Count > 0)
+            if (this.CbxFilter.SelectedIndex == 0)// sem filtros
             {
-                if (this.CbxFilter.SelectedIndex == 0)// sem filtros
-                {
-                    foreach (DataGridViewRow row in DgvData.Rows)
-                    {
-                        row.Visible = true;
-                    }
-                }
-                else if (this.CbxFilter.SelectedIndex == 1)// contas pagas
-                {
-                    foreach (DataGridViewRow row in DgvData.Rows)
-                    {
-                        var paymentDate = row.Cells[6].Value;
-                        if (!DateTime.TryParse(paymentDate.ToString(), out DateTime result))
-                            row.Visible = false;
-                        
-                        else
-                            row.Visible = true;
-                    }
-                }
-                else if (this.CbxFilter.SelectedIndex == 2)// contas a pagar
-                {
-                    foreach (DataGridViewRow row in DgvData.Rows)
-                    {
-                        var paymentDate = row.Cells[6].Value;
-                        if (DateTime.TryParse(paymentDate.ToString(), out DateTime result))
-                            row.Visible = false;
+                DgvData.DataSource = _data;
+            }
+            else if (this.CbxFilter.SelectedIndex == 1)// contas pagas
+            {
+                DataTable dt = _data.Copy();
 
-                        else
-                            row.Visible = true;
-                    }
-                }
-                else// contas vencidas
+                for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    foreach (DataGridViewRow row in DgvData.Rows)
-                    {
-                        var paymentDate = row.Cells[6].Value;
-                        if (DateTime.TryParse(paymentDate.ToString(), out DateTime result))// já está pago
-                            row.Visible = false;
-                        
-                        else if (Convert.ToInt32(row.Cells[3].Value) < DateTime.Now.Day)// está atrasado 
-                            row.Visible = true;
-                        
-                        else// não foi pago mais ainda não está atrasado
-                            row.Visible = false;
-                    }
+                    var paymentDate = dt.Rows[i][6];
+
+                    if ( paymentDate.ToString() == string.Empty )
+                        dt.Rows[i].Delete();// marcando para deletar
                 }
+                dt.AcceptChanges();// confirmando a deleção
+
+                DgvData.DataSource = dt;
+            }
+            else if (this.CbxFilter.SelectedIndex == 2)// contas a pagar
+            {
+                DataTable dt = _data.Copy();
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    var paymentDate = dt.Rows[i][6];
+
+                    if (paymentDate.ToString() != string.Empty)
+                        dt.Rows[i].Delete();// marcando para deletar
+                }
+                dt.AcceptChanges();// confirmando a deleção
+
+                DgvData.DataSource = dt;
+            }
+            else// contas vencidas
+            {
+                DataTable dt = _data.Copy();
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    var paymentDate = dt.Rows[i][6];
+
+                    if (paymentDate.ToString() != string.Empty ||
+                            !(Convert.ToInt32(dt.Rows[i][3]) < DateTime.Now.Day))
+                        dt.Rows[i].Delete();// marcando para deletar
+                }
+                dt.AcceptChanges();// confirmando a deleção
+
+                DgvData.DataSource = dt;
             }
         }
-        
+
         // ------------------------- Thread
         private void Initialize()
         {
@@ -79,6 +84,9 @@ namespace SysExpenseControl.Forms
             {
                 HideColumns();
                 ChangeColumns();
+
+                ThreadHelper.SetPropertyValue(LblWait, "Visible", false);
+                ThreadHelper.SetPropertyValue(CbxFilter, "Enabled", true);
             }
         }
 
@@ -88,6 +96,8 @@ namespace SysExpenseControl.Forms
 
             if (dataTable != null)
             {
+                ThreadHelper.SetFieldValue(this, "_data", dataTable);
+
                 TakeDataFromDataTable(dataTable);
 
                 // carregando os dados no DataGridView
@@ -150,10 +160,10 @@ namespace SysExpenseControl.Forms
                 total += amaunt;
             }
 
-            this.LblAmountPaid.Text = "R$: " + amountpaid.ToString("F2");
-            this.LblAmountPayable.Text = "R$: " + amountPayable.ToString("F2");
-            this.LblOverdueAccounts.Text = "R$: " + overdueAccounts.ToString("F2");
-            this.LblTotal.Text = "R$: " + total.ToString("F2");
+            ThreadHelper.SetPropertyValue(this.LblAmountPaid, "Text", "R$: " + amountpaid.ToString("F2"));
+            ThreadHelper.SetPropertyValue(this.LblAmountPayable, "Text", "R$: " + amountPayable.ToString("F2"));
+            ThreadHelper.SetPropertyValue(this.LblOverdueAccounts, "Text", "R$: " + overdueAccounts.ToString("F2"));
+            ThreadHelper.SetPropertyValue(this.LblTotal, "Text", "R$: " + total.ToString("F2"));
 
             //this.LblAmount.Text = dataTable.Rows.Count.ToString();
             ThreadHelper.SetPropertyValue(this.LblAmount, "Text", dataTable.Rows.Count.ToString());

@@ -56,6 +56,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.LblWait = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
             this.groupBox3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -66,6 +68,7 @@
             this.panel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvData)).BeginInit();
             this.panel5.SuspendLayout();
+            this.LblWait.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox3
@@ -222,9 +225,9 @@
             // 
             this.panel7.Controls.Add(this.groupBox3);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel7.Location = new System.Drawing.Point(626, 0);
+            this.panel7.Location = new System.Drawing.Point(618, 0);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(300, 572);
+            this.panel7.Size = new System.Drawing.Size(308, 572);
             this.panel7.TabIndex = 7;
             // 
             // panel6
@@ -234,18 +237,19 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Location = new System.Drawing.Point(0, 0);
             this.panel6.Name = "panel6";
-            this.panel6.Padding = new System.Windows.Forms.Padding(8, 0, 8, 8);
-            this.panel6.Size = new System.Drawing.Size(626, 572);
+            this.panel6.Padding = new System.Windows.Forms.Padding(14, 0, 0, 8);
+            this.panel6.Size = new System.Drawing.Size(618, 572);
             this.panel6.TabIndex = 8;
             // 
             // panel8
             // 
+            this.panel8.Controls.Add(this.LblWait);
             this.panel8.Controls.Add(this.DgvData);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel8.Location = new System.Drawing.Point(8, 75);
+            this.panel8.Location = new System.Drawing.Point(14, 75);
             this.panel8.Name = "panel8";
             this.panel8.Padding = new System.Windows.Forms.Padding(0, 5, 0, 30);
-            this.panel8.Size = new System.Drawing.Size(610, 489);
+            this.panel8.Size = new System.Drawing.Size(604, 489);
             this.panel8.TabIndex = 9;
             // 
             // DgvData
@@ -259,7 +263,7 @@
             this.DgvData.MultiSelect = false;
             this.DgvData.Name = "DgvData";
             this.DgvData.ReadOnly = true;
-            this.DgvData.Size = new System.Drawing.Size(610, 454);
+            this.DgvData.Size = new System.Drawing.Size(604, 454);
             this.DgvData.TabIndex = 8;
             // 
             // panel5
@@ -277,9 +281,9 @@
             this.panel5.Controls.Add(this.label2);
             this.panel5.Controls.Add(this.label1);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(8, 0);
+            this.panel5.Location = new System.Drawing.Point(14, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(610, 75);
+            this.panel5.Size = new System.Drawing.Size(604, 75);
             this.panel5.TabIndex = 7;
             // 
             // button4
@@ -338,6 +342,7 @@
             // CbxFilter
             // 
             this.CbxFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CbxFilter.Enabled = false;
             this.CbxFilter.FormattingEnabled = true;
             this.CbxFilter.Items.AddRange(new object[] {
             "Todas",
@@ -388,6 +393,24 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Mês referente: ";
             // 
+            // LblWait
+            // 
+            this.LblWait.Controls.Add(this.label4);
+            this.LblWait.Location = new System.Drawing.Point(182, 204);
+            this.LblWait.Name = "LblWait";
+            this.LblWait.Size = new System.Drawing.Size(205, 52);
+            this.LblWait.TabIndex = 5;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(72, 18);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 20);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Wait...";
+            // 
             // FrmAccountsPayable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -412,6 +435,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.DgvData)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            this.LblWait.ResumeLayout(false);
+            this.LblWait.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -445,5 +470,7 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Panel LblWait;
+        private System.Windows.Forms.Label label4;
     }
 }
