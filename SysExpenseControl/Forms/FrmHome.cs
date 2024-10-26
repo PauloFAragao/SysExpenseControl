@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
@@ -34,7 +33,7 @@ namespace SysExpenseControl.Forms
             Title titulo = new Title();
             titulo.Font = new Font("Elephant", 12, FontStyle.Bold);
             titulo.ForeColor = Color.DarkBlue;
-            titulo.Text = "Gastos do mês de março";
+            titulo.Text = "Gastos do mês de " + DateTime.Now.ToString("MMMM");
             this.ChartSpent.Titles.Add(titulo);
 
             // inserir legenda
@@ -136,6 +135,7 @@ namespace SysExpenseControl.Forms
             if (LoadDataSpent())
             {
                 ChangeColumnsSpent();
+                HideColumnsSpent();
             }
         }
 
@@ -148,7 +148,7 @@ namespace SysExpenseControl.Forms
                 // retirando as contas que ainda não foram pagas
                 foreach (DataRow row in dataTable.Rows)
                 {
-                    var paymentDate = row[2];
+                    var paymentDate = row[3];
                     if (!DateTime.TryParse(paymentDate.ToString(), out DateTime result))
                         row.Delete();// marcando para deletar
                 }
@@ -172,8 +172,8 @@ namespace SysExpenseControl.Forms
 
             for (int i = 0; i < dataTable.Rows.Count; i++)
             {
-                string category = dataTable.Rows[i][3].ToString();
-                decimal value = Convert.ToDecimal(dataTable.Rows[i][1]);
+                string category = dataTable.Rows[i][4].ToString();
+                decimal value = Convert.ToDecimal(dataTable.Rows[i][2]);
 
                 if (!categories.Contains(category))
                 {
@@ -199,18 +199,23 @@ namespace SysExpenseControl.Forms
 
         private void ChangeColumnsSpent()
         {
-            ThreadHelper.SetColumnHeaderText(this.DgvSpent, 0, "Nome");
-            ThreadHelper.SetColumnAutoSizeMode(this.DgvSpent, 0, DataGridViewAutoSizeColumnMode.Fill);
+            ThreadHelper.SetColumnHeaderText(this.DgvSpent, 1, "Nome");
+            ThreadHelper.SetColumnAutoSizeMode(this.DgvSpent, 1, DataGridViewAutoSizeColumnMode.Fill);
 
-            ThreadHelper.SetColumnHeaderText(this.DgvSpent, 1, "Valor R$");
-            ThreadHelper.SetColumnAutoSizeMode(this.DgvSpent, 1, DataGridViewAutoSizeColumnMode.DisplayedCells);
-
-            ThreadHelper.SetColumnHeaderText(this.DgvSpent, 2, "Data");
+            ThreadHelper.SetColumnHeaderText(this.DgvSpent, 2, "Valor R$");
             ThreadHelper.SetColumnAutoSizeMode(this.DgvSpent, 2, DataGridViewAutoSizeColumnMode.DisplayedCells);
 
-            ThreadHelper.SetColumnHeaderText(this.DgvSpent, 3, "Categoria");
+            ThreadHelper.SetColumnHeaderText(this.DgvSpent, 3, "Data");
             ThreadHelper.SetColumnAutoSizeMode(this.DgvSpent, 3, DataGridViewAutoSizeColumnMode.DisplayedCells);
+
+            ThreadHelper.SetColumnHeaderText(this.DgvSpent, 4, "Categoria");
+            ThreadHelper.SetColumnAutoSizeMode(this.DgvSpent, 4, DataGridViewAutoSizeColumnMode.DisplayedCells);
         }
-    
+
+        private void HideColumnsSpent()
+        {
+            ThreadHelper.SetColumnVisibility(this.DgvSpent, 0, false);//mudando a visibilidade da coluna id
+            ThreadHelper.SetColumnVisibility(this.DgvSpent, 5, false);//mudando a visibilidade da coluna descrição
+        }
     }
 }

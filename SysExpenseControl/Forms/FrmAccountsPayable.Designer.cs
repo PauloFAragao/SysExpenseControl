@@ -44,6 +44,8 @@
             this.panel7 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.LblWait = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
             this.DgvData = new System.Windows.Forms.DataGridView();
             this.panel5 = new System.Windows.Forms.Panel();
             this.button4 = new System.Windows.Forms.Button();
@@ -56,8 +58,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.LblWait = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
             this.groupBox3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -66,9 +66,9 @@
             this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel8.SuspendLayout();
+            this.LblWait.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvData)).BeginInit();
             this.panel5.SuspendLayout();
-            this.LblWait.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox3
@@ -252,11 +252,31 @@
             this.panel8.Size = new System.Drawing.Size(604, 489);
             this.panel8.TabIndex = 9;
             // 
+            // LblWait
+            // 
+            this.LblWait.Controls.Add(this.label4);
+            this.LblWait.Location = new System.Drawing.Point(182, 204);
+            this.LblWait.Name = "LblWait";
+            this.LblWait.Size = new System.Drawing.Size(205, 52);
+            this.LblWait.TabIndex = 5;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(72, 18);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 20);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Wait...";
+            // 
             // DgvData
             // 
             this.DgvData.AllowUserToAddRows = false;
             this.DgvData.AllowUserToDeleteRows = false;
             this.DgvData.AllowUserToOrderColumns = true;
+            this.DgvData.AllowUserToResizeColumns = false;
+            this.DgvData.AllowUserToResizeRows = false;
             this.DgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgvData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DgvData.Location = new System.Drawing.Point(0, 5);
@@ -349,7 +369,7 @@
             "Pagas",
             "A pagar",
             "Vencidas"});
-            this.CbxFilter.Location = new System.Drawing.Point(54, 44);
+            this.CbxFilter.Location = new System.Drawing.Point(50, 44);
             this.CbxFilter.Name = "CbxFilter";
             this.CbxFilter.Size = new System.Drawing.Size(152, 21);
             this.CbxFilter.TabIndex = 4;
@@ -393,24 +413,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Mês referente: ";
             // 
-            // LblWait
-            // 
-            this.LblWait.Controls.Add(this.label4);
-            this.LblWait.Location = new System.Drawing.Point(182, 204);
-            this.LblWait.Name = "LblWait";
-            this.LblWait.Size = new System.Drawing.Size(205, 52);
-            this.LblWait.TabIndex = 5;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(72, 18);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 20);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Wait...";
-            // 
             // FrmAccountsPayable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -432,11 +434,11 @@
             this.panel7.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
+            this.LblWait.ResumeLayout(false);
+            this.LblWait.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvData)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
-            this.LblWait.ResumeLayout(false);
-            this.LblWait.PerformLayout();
             this.ResumeLayout(false);
 
         }

@@ -92,9 +92,12 @@
             this.DgvSpent.AllowUserToAddRows = false;
             this.DgvSpent.AllowUserToDeleteRows = false;
             this.DgvSpent.AllowUserToOrderColumns = true;
+            this.DgvSpent.AllowUserToResizeColumns = false;
+            this.DgvSpent.AllowUserToResizeRows = false;
             this.DgvSpent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgvSpent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DgvSpent.Location = new System.Drawing.Point(10, 23);
+            this.DgvSpent.MultiSelect = false;
             this.DgvSpent.Name = "DgvSpent";
             this.DgvSpent.ReadOnly = true;
             this.DgvSpent.Size = new System.Drawing.Size(410, 241);
@@ -128,9 +131,12 @@
             this.DgvData.AllowUserToAddRows = false;
             this.DgvData.AllowUserToDeleteRows = false;
             this.DgvData.AllowUserToOrderColumns = true;
+            this.DgvData.AllowUserToResizeColumns = false;
+            this.DgvData.AllowUserToResizeRows = false;
             this.DgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgvData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DgvData.Location = new System.Drawing.Point(0, 0);
+            this.DgvData.MultiSelect = false;
             this.DgvData.Name = "DgvData";
             this.DgvData.ReadOnly = true;
             this.DgvData.Size = new System.Drawing.Size(410, 184);
@@ -181,9 +187,12 @@
             this.DgvReserves.AllowUserToAddRows = false;
             this.DgvReserves.AllowUserToDeleteRows = false;
             this.DgvReserves.AllowUserToOrderColumns = true;
+            this.DgvReserves.AllowUserToResizeColumns = false;
+            this.DgvReserves.AllowUserToResizeRows = false;
             this.DgvReserves.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgvReserves.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DgvReserves.Location = new System.Drawing.Point(10, 23);
+            this.DgvReserves.MultiSelect = false;
             this.DgvReserves.Name = "DgvReserves";
             this.DgvReserves.ReadOnly = true;
             this.DgvReserves.Size = new System.Drawing.Size(410, 222);
@@ -206,7 +215,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(10);
-            this.tabPage1.Size = new System.Drawing.Size(422, 229);
+            this.tabPage1.Size = new System.Drawing.Size(422, 248);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Gastos do mês";
             this.tabPage1.UseVisualStyleBackColor = true;

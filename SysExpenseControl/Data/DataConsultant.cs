@@ -119,7 +119,16 @@ namespace SysExpenseControl.Data
         // Método para visualizar os gastos fixos
         public static DataTable ViewFixedExpenses()
         {
-            string viewQuery = "Select * From fixed_expenses";
+            //string viewQuery = "Select * From fixed_expenses";
+
+            string viewQuery =
+            "Select "
+            + "f.id, f.name, "
+            + "f.value, f.dueDay, "
+            + "c.name As categorieName, "
+            + "f.description "
+            + "From fixed_expenses f "
+            + "Join categories c On f.category = c.id ";
 
             return ViewQuery(viewQuery);
         }
@@ -226,7 +235,8 @@ namespace SysExpenseControl.Data
 
             string viewQuery =
                 "Select "
-                + "f.name, f.value, f.date, c.name As categorieName "
+                + "f.id, f.name, f.value, f.date, c.name As categorieName, "
+                + "f.description "
                 + $"From {expensesTableName} f "
                 + "Join categories c On f.category = c.id "
                 + $"Order by date Asc";
@@ -266,6 +276,14 @@ namespace SysExpenseControl.Data
             string deleteQuery = $"Delete From {expensesTableName} where id = {id} ";
 
             return SimpleQuery(deleteQuery);
+        }
+
+        // ---------------------------------- 
+        public static DataTable ViewReserves()//references_to_reserves
+        {
+            string viewQuery = "Select * From references_to_reserves";
+
+            return ViewQuery(viewQuery);
         }
 
         // ---------------------------------- 

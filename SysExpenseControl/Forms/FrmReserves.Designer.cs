@@ -32,69 +32,84 @@
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.label3 = new System.Windows.Forms.Label();
+            this.DgvData = new System.Windows.Forms.DataGridView();
+            this.LblValue = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DgvData)).BeginInit();
             this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(361, 124);
+            this.button5.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Location = new System.Drawing.Point(361, 96);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(109, 23);
             this.button5.TabIndex = 15;
             this.button5.Text = "Visualizar";
-            this.button5.UseVisualStyleBackColor = true;
+            this.button5.UseVisualStyleBackColor = false;
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(246, 124);
+            this.button6.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.Location = new System.Drawing.Point(246, 96);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(109, 23);
             this.button6.TabIndex = 14;
-            this.button6.Text = "Editar Receita";
-            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Text = "Editar";
+            this.button6.UseVisualStyleBackColor = false;
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(131, 124);
+            this.button7.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button7.Location = new System.Drawing.Point(131, 96);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(109, 23);
             this.button7.TabIndex = 13;
-            this.button7.Text = "Remover Receita";
-            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Text = "Remover";
+            this.button7.UseVisualStyleBackColor = false;
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(16, 124);
+            this.button8.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button8.Location = new System.Drawing.Point(16, 96);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(109, 23);
             this.button8.TabIndex = 12;
-            this.button8.Text = "Adicionar Despesa";
-            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Text = "Adicionar";
+            this.button8.UseVisualStyleBackColor = false;
             // 
-            // dataGridView2
+            // DgvData
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(12, 163);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(893, 397);
-            this.dataGridView2.TabIndex = 11;
+            this.DgvData.AllowUserToAddRows = false;
+            this.DgvData.AllowUserToDeleteRows = false;
+            this.DgvData.AllowUserToOrderColumns = true;
+            this.DgvData.AllowUserToResizeColumns = false;
+            this.DgvData.AllowUserToResizeRows = false;
+            this.DgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DgvData.Location = new System.Drawing.Point(12, 130);
+            this.DgvData.MultiSelect = false;
+            this.DgvData.Name = "DgvData";
+            this.DgvData.ReadOnly = true;
+            this.DgvData.Size = new System.Drawing.Size(910, 430);
+            this.DgvData.TabIndex = 11;
             // 
-            // label3
+            // LblValue
             // 
-            this.label3.AutoSize = true;
-            this.label3.Cursor = System.Windows.Forms.Cursors.Default;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(162, 41);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(73, 24);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "R$ 0,00";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.LblValue.AutoSize = true;
+            this.LblValue.Cursor = System.Windows.Forms.Cursors.Default;
+            this.LblValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblValue.Location = new System.Drawing.Point(134, 41);
+            this.LblValue.Name = "LblValue";
+            this.LblValue.Size = new System.Drawing.Size(103, 24);
+            this.LblValue.TabIndex = 3;
+            this.LblValue.Text = "R$ 0000,00";
+            this.LblValue.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label4
             // 
@@ -110,9 +125,9 @@
             // 
             this.panel5.BackColor = System.Drawing.Color.Cyan;
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Controls.Add(this.label3);
+            this.panel5.Controls.Add(this.LblValue);
             this.panel5.Controls.Add(this.label4);
-            this.panel5.Location = new System.Drawing.Point(16, 20);
+            this.panel5.Location = new System.Drawing.Point(19, 3);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(241, 72);
             this.panel5.TabIndex = 12;
@@ -127,10 +142,10 @@
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button8);
-            this.Controls.Add(this.dataGridView2);
+            this.Controls.Add(this.DgvData);
             this.Name = "FrmReserves";
             this.Text = "FrmReserves";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DgvData)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.ResumeLayout(false);
@@ -143,8 +158,8 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DataGridView DgvData;
+        private System.Windows.Forms.Label LblValue;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel5;
     }

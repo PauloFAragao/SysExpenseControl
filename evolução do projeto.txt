@@ -31,7 +31,10 @@ implementado
 -Resolvidos alguns problemas na tela contas: um erro que gerava uma excessão alguns erros de logica entre 
 outros
 
-
+-As telas: lucros e gastos fixos, lucros e gastos do mês, Reservas e Investimentos foram organizadas
+-Inicio da implementação da tela de lucros e gastos fixos
+-Inicio da implementação da tela de lucros e gastos do mês
+-Inicio da implementação da tela de reservas
 
 
 

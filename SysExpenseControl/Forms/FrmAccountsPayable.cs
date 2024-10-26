@@ -4,18 +4,18 @@ using System.Windows.Forms;
 using System.Threading.Tasks;
 using SysExpenseControl.Data;
 using SysExpenseControl.Entities;
-using System.Diagnostics;
-using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 
 namespace SysExpenseControl.Forms
 {
     public partial class FrmAccountsPayable : Form
     {
-        DataTable _data;
+        readonly DataTable _data;
 
         public FrmAccountsPayable()
         {
             InitializeComponent();
+
+            _data = new DataTable();
 
             this.CbxFilter.SelectedIndex = 0;
 
@@ -25,55 +25,58 @@ namespace SysExpenseControl.Forms
 
         private void SelectedFilterChanged()
         {
-            if (this.CbxFilter.SelectedIndex == 0)// sem filtros
+            if(DgvData.Rows.Count > 0)
             {
-                DgvData.DataSource = _data;
-            }
-            else if (this.CbxFilter.SelectedIndex == 1)// contas pagas
-            {
-                DataTable dt = _data.Copy();
-
-                for (int i = 0; i < dt.Rows.Count; i++)
+                if (this.CbxFilter.SelectedIndex == 0)// sem filtros
                 {
-                    var paymentDate = dt.Rows[i][6];
-
-                    if ( paymentDate.ToString() == string.Empty )
-                        dt.Rows[i].Delete();// marcando para deletar
+                    DgvData.DataSource = _data;
                 }
-                dt.AcceptChanges();// confirmando a deleção
-
-                DgvData.DataSource = dt;
-            }
-            else if (this.CbxFilter.SelectedIndex == 2)// contas a pagar
-            {
-                DataTable dt = _data.Copy();
-
-                for (int i = 0; i < dt.Rows.Count; i++)
+                else if (this.CbxFilter.SelectedIndex == 1)// contas pagas
                 {
-                    var paymentDate = dt.Rows[i][6];
+                    DataTable dt = _data.Copy();
 
-                    if (paymentDate.ToString() != string.Empty)
-                        dt.Rows[i].Delete();// marcando para deletar
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        var paymentDate = dt.Rows[i][6];
+
+                        if (paymentDate.ToString() == string.Empty)
+                            dt.Rows[i].Delete();// marcando para deletar
+                    }
+                    dt.AcceptChanges();// confirmando a deleção
+
+                    DgvData.DataSource = dt;
                 }
-                dt.AcceptChanges();// confirmando a deleção
-
-                DgvData.DataSource = dt;
-            }
-            else// contas vencidas
-            {
-                DataTable dt = _data.Copy();
-
-                for (int i = 0; i < dt.Rows.Count; i++)
+                else if (this.CbxFilter.SelectedIndex == 2)// contas a pagar
                 {
-                    var paymentDate = dt.Rows[i][6];
+                    DataTable dt = _data.Copy();
 
-                    if (paymentDate.ToString() != string.Empty ||
-                            !(Convert.ToInt32(dt.Rows[i][3]) < DateTime.Now.Day))
-                        dt.Rows[i].Delete();// marcando para deletar
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        var paymentDate = dt.Rows[i][6];
+
+                        if (paymentDate.ToString() != string.Empty)
+                            dt.Rows[i].Delete();// marcando para deletar
+                    }
+                    dt.AcceptChanges();// confirmando a deleção
+
+                    DgvData.DataSource = dt;
                 }
-                dt.AcceptChanges();// confirmando a deleção
+                else// contas vencidas
+                {
+                    DataTable dt = _data.Copy();
 
-                DgvData.DataSource = dt;
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        var paymentDate = dt.Rows[i][6];
+
+                        if (paymentDate.ToString() != string.Empty ||
+                                !(Convert.ToInt32(dt.Rows[i][3]) < DateTime.Now.Day))
+                            dt.Rows[i].Delete();// marcando para deletar
+                    }
+                    dt.AcceptChanges();// confirmando a deleção
+
+                    DgvData.DataSource = dt;
+                }
             }
         }
 
@@ -101,7 +104,7 @@ namespace SysExpenseControl.Forms
                 TakeDataFromDataTable(dataTable);
 
                 // carregando os dados no DataGridView
-                ThreadHelper.SetPropertyValue(DgvData, "DataSource", dataTable);
+                ThreadHelper.SetPropertyValue(this.DgvData, "DataSource", dataTable);
                 return true;
             }
             else
