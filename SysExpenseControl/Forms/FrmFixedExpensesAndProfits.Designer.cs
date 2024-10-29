@@ -30,16 +30,16 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.BtnViewFixedProfits = new System.Windows.Forms.Button();
+            this.BtnEditFixedProfits = new System.Windows.Forms.Button();
+            this.BtnDelFixedProfits = new System.Windows.Forms.Button();
+            this.BtnAddFixedProfits = new System.Windows.Forms.Button();
             this.DgvFixedProfits = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
+            this.BtnViewFixedExpenses = new System.Windows.Forms.Button();
+            this.BtnEditFixedExpenses = new System.Windows.Forms.Button();
+            this.BtnDelFixedExpenses = new System.Windows.Forms.Button();
+            this.BtnAddFixedExpenses = new System.Windows.Forms.Button();
             this.DgvFixedExpenses = new System.Windows.Forms.DataGridView();
             this.panel5 = new System.Windows.Forms.Panel();
             this.LblFixedProfits = new System.Windows.Forms.Label();
@@ -68,10 +68,10 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.button4);
-            this.tabPage1.Controls.Add(this.button3);
-            this.tabPage1.Controls.Add(this.button2);
-            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Controls.Add(this.BtnViewFixedProfits);
+            this.tabPage1.Controls.Add(this.BtnEditFixedProfits);
+            this.tabPage1.Controls.Add(this.BtnDelFixedProfits);
+            this.tabPage1.Controls.Add(this.BtnAddFixedProfits);
             this.tabPage1.Controls.Add(this.DgvFixedProfits);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -81,49 +81,53 @@
             this.tabPage1.Text = "Recetias Fixas";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // BtnViewFixedProfits
             // 
-            this.button4.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(358, 20);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(109, 23);
-            this.button4.TabIndex = 10;
-            this.button4.Text = "Visualizar";
-            this.button4.UseVisualStyleBackColor = false;
+            this.BtnViewFixedProfits.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtnViewFixedProfits.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnViewFixedProfits.Location = new System.Drawing.Point(358, 20);
+            this.BtnViewFixedProfits.Name = "BtnViewFixedProfits";
+            this.BtnViewFixedProfits.Size = new System.Drawing.Size(109, 23);
+            this.BtnViewFixedProfits.TabIndex = 10;
+            this.BtnViewFixedProfits.Text = "Visualizar";
+            this.BtnViewFixedProfits.UseVisualStyleBackColor = false;
+            this.BtnViewFixedProfits.Click += new System.EventHandler(this.BtnViewFixedProfits_Click);
             // 
-            // button3
+            // BtnEditFixedProfits
             // 
-            this.button3.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(243, 20);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(109, 23);
-            this.button3.TabIndex = 9;
-            this.button3.Text = "Editar Receita";
-            this.button3.UseVisualStyleBackColor = false;
+            this.BtnEditFixedProfits.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtnEditFixedProfits.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnEditFixedProfits.Location = new System.Drawing.Point(243, 20);
+            this.BtnEditFixedProfits.Name = "BtnEditFixedProfits";
+            this.BtnEditFixedProfits.Size = new System.Drawing.Size(109, 23);
+            this.BtnEditFixedProfits.TabIndex = 9;
+            this.BtnEditFixedProfits.Text = "Editar Receita";
+            this.BtnEditFixedProfits.UseVisualStyleBackColor = false;
+            this.BtnEditFixedProfits.Click += new System.EventHandler(this.BtnEditFixedProfits_Click);
             // 
-            // button2
+            // BtnDelFixedProfits
             // 
-            this.button2.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(128, 20);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(109, 23);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "Remover Receita";
-            this.button2.UseVisualStyleBackColor = false;
+            this.BtnDelFixedProfits.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtnDelFixedProfits.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnDelFixedProfits.Location = new System.Drawing.Point(128, 20);
+            this.BtnDelFixedProfits.Name = "BtnDelFixedProfits";
+            this.BtnDelFixedProfits.Size = new System.Drawing.Size(109, 23);
+            this.BtnDelFixedProfits.TabIndex = 8;
+            this.BtnDelFixedProfits.Text = "Remover Receita";
+            this.BtnDelFixedProfits.UseVisualStyleBackColor = false;
+            this.BtnDelFixedProfits.Click += new System.EventHandler(this.BtnDelFixedProfits_Click);
             // 
-            // button1
+            // BtnAddFixedProfits
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(13, 20);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(109, 23);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Adicionar Receita";
-            this.button1.UseVisualStyleBackColor = false;
+            this.BtnAddFixedProfits.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtnAddFixedProfits.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnAddFixedProfits.Location = new System.Drawing.Point(13, 20);
+            this.BtnAddFixedProfits.Name = "BtnAddFixedProfits";
+            this.BtnAddFixedProfits.Size = new System.Drawing.Size(109, 23);
+            this.BtnAddFixedProfits.TabIndex = 7;
+            this.BtnAddFixedProfits.Text = "Adicionar Receita";
+            this.BtnAddFixedProfits.UseVisualStyleBackColor = false;
+            this.BtnAddFixedProfits.Click += new System.EventHandler(this.BtnAddFixedProfits_Click);
             // 
             // DgvFixedProfits
             // 
@@ -142,10 +146,10 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.button5);
-            this.tabPage2.Controls.Add(this.button6);
-            this.tabPage2.Controls.Add(this.button7);
-            this.tabPage2.Controls.Add(this.button8);
+            this.tabPage2.Controls.Add(this.BtnViewFixedExpenses);
+            this.tabPage2.Controls.Add(this.BtnEditFixedExpenses);
+            this.tabPage2.Controls.Add(this.BtnDelFixedExpenses);
+            this.tabPage2.Controls.Add(this.BtnAddFixedExpenses);
             this.tabPage2.Controls.Add(this.DgvFixedExpenses);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -155,49 +159,49 @@
             this.tabPage2.Text = "Despesas Fixas";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // BtnViewFixedExpenses
             // 
-            this.button5.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(358, 20);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(109, 23);
-            this.button5.TabIndex = 15;
-            this.button5.Text = "Visualizar";
-            this.button5.UseVisualStyleBackColor = false;
+            this.BtnViewFixedExpenses.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtnViewFixedExpenses.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnViewFixedExpenses.Location = new System.Drawing.Point(358, 20);
+            this.BtnViewFixedExpenses.Name = "BtnViewFixedExpenses";
+            this.BtnViewFixedExpenses.Size = new System.Drawing.Size(109, 23);
+            this.BtnViewFixedExpenses.TabIndex = 15;
+            this.BtnViewFixedExpenses.Text = "Visualizar";
+            this.BtnViewFixedExpenses.UseVisualStyleBackColor = false;
             // 
-            // button6
+            // BtnEditFixedExpenses
             // 
-            this.button6.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Location = new System.Drawing.Point(243, 20);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(109, 23);
-            this.button6.TabIndex = 14;
-            this.button6.Text = "Editar Despesa";
-            this.button6.UseVisualStyleBackColor = false;
+            this.BtnEditFixedExpenses.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtnEditFixedExpenses.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnEditFixedExpenses.Location = new System.Drawing.Point(243, 20);
+            this.BtnEditFixedExpenses.Name = "BtnEditFixedExpenses";
+            this.BtnEditFixedExpenses.Size = new System.Drawing.Size(109, 23);
+            this.BtnEditFixedExpenses.TabIndex = 14;
+            this.BtnEditFixedExpenses.Text = "Editar Despesa";
+            this.BtnEditFixedExpenses.UseVisualStyleBackColor = false;
             // 
-            // button7
+            // BtnDelFixedExpenses
             // 
-            this.button7.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Location = new System.Drawing.Point(128, 20);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(109, 23);
-            this.button7.TabIndex = 13;
-            this.button7.Text = "Remover Despesa";
-            this.button7.UseVisualStyleBackColor = false;
+            this.BtnDelFixedExpenses.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtnDelFixedExpenses.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnDelFixedExpenses.Location = new System.Drawing.Point(128, 20);
+            this.BtnDelFixedExpenses.Name = "BtnDelFixedExpenses";
+            this.BtnDelFixedExpenses.Size = new System.Drawing.Size(109, 23);
+            this.BtnDelFixedExpenses.TabIndex = 13;
+            this.BtnDelFixedExpenses.Text = "Remover Despesa";
+            this.BtnDelFixedExpenses.UseVisualStyleBackColor = false;
             // 
-            // button8
+            // BtnAddFixedExpenses
             // 
-            this.button8.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Location = new System.Drawing.Point(13, 20);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(109, 23);
-            this.button8.TabIndex = 12;
-            this.button8.Text = "Adicionar Despesa";
-            this.button8.UseVisualStyleBackColor = false;
+            this.BtnAddFixedExpenses.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtnAddFixedExpenses.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnAddFixedExpenses.Location = new System.Drawing.Point(13, 20);
+            this.BtnAddFixedExpenses.Name = "BtnAddFixedExpenses";
+            this.BtnAddFixedExpenses.Size = new System.Drawing.Size(109, 23);
+            this.BtnAddFixedExpenses.TabIndex = 12;
+            this.BtnAddFixedExpenses.Text = "Adicionar Despesa";
+            this.BtnAddFixedExpenses.UseVisualStyleBackColor = false;
             // 
             // DgvFixedExpenses
             // 
@@ -317,14 +321,14 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label LblFixedExpenses;
         private System.Windows.Forms.DataGridView DgvFixedProfits;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button BtnViewFixedProfits;
+        private System.Windows.Forms.Button BtnEditFixedProfits;
+        private System.Windows.Forms.Button BtnDelFixedProfits;
+        private System.Windows.Forms.Button BtnAddFixedProfits;
+        private System.Windows.Forms.Button BtnViewFixedExpenses;
+        private System.Windows.Forms.Button BtnEditFixedExpenses;
+        private System.Windows.Forms.Button BtnDelFixedExpenses;
+        private System.Windows.Forms.Button BtnAddFixedExpenses;
         private System.Windows.Forms.DataGridView DgvFixedExpenses;
     }
 }

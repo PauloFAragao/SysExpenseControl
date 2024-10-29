@@ -50,7 +50,7 @@ namespace SysExpenseControl.Data
                         "Create Table If Not Exists fixed_profits("
                         + "id Integer Primary Key,"
                         + "name Varchar (50),"
-                        + "value Decimal,"
+                        + "value Real,"
                         + "description Text)";
 
                     // Gastos fixos
@@ -58,7 +58,7 @@ namespace SysExpenseControl.Data
                         "Create Table If Not Exists fixed_expenses("
                         + "id Integer Primary Key,"
                         + "name Varchar (50),"
-                        + "value Decimal Not Null,"
+                        + "value Real Not Null,"
                         + "dueDay Integer,"// data para o vencimento 
                         //References categories (id) - indica foreign key //On Delete Set Default - quando a categoria for deletada muda para o default que é 0
                         + "category Integer References categories (id) On Delete Set Default Default '0',"// 0 Para sem categoria
@@ -70,7 +70,7 @@ namespace SysExpenseControl.Data
                         + "id Integer Primary Key, "
                         + "name Varchar (50) Not Null, "
                         + "tableName Varchar (20) Not Null, "
-                        + "reservationAmount Decimal Not Null, "
+                        + "reservationAmount Real Not Null, "
                         + "description Text)";
 
                     // Referencias as tabelas
@@ -87,7 +87,7 @@ namespace SysExpenseControl.Data
                         + "id Integer Primary Key, "
                         + "name Varchar (50) Not Null, "
                         + "tableName Varchar (20) Not Null, "
-                        + "investmentAmount Decimal Not Null, "
+                        + "investmentAmount Real Not Null, "
                         + "incomeDate Date, "
                         + "description Text)";
 
@@ -198,7 +198,7 @@ namespace SysExpenseControl.Data
                         $"Create Table If Not Exists \"{profitsTableName}\"("
                         + "id Integer Primary Key,"
                         + "name Varchar (50),"
-                        + "value Decimal Not Null,"
+                        + "value Real Not Null,"
                         + "date Date,"
                         + "description Text)";
 
@@ -208,7 +208,7 @@ namespace SysExpenseControl.Data
                         $"Create Table If Not Exists \"{expensesTableName}\"("
                         + "id Integer Primary Key,"
                         + "name Varchar (50),"
-                        + "value Decimal Not Null,"
+                        + "value Real Not Null,"
                         + "date Date,"
                         //References categories (id) - indica foreign key //On Delete Set Default - quando a categoria for deletada muda para o default que é 0
                         + "category Integer References categories (id) On Delete Set Default Default '0',"// 0 Para sem categoria
@@ -317,7 +317,7 @@ namespace SysExpenseControl.Data
                         $"Create Table If Not Exists \"{TableName}\"("
                         + "id Integer Primary Key, "
                         + "operation Bit Not Null, "// 0 para subtração, 1 para adição
-                        + "value Decimal Not Null, "
+                        + "value Real Not Null, "
                         + "description Text)";
 
                     // criar tabela
@@ -364,7 +364,7 @@ namespace SysExpenseControl.Data
                     string createTableProfits =
                         $"Create Table If Not Exists \"{TableName}\"("
                         + "id Integer Primary Key, "
-                        + "income Decimal Not Null, "
+                        + "income Real Not Null, "
                         + "incomeDate Date, "
                         + "description Text)";
 

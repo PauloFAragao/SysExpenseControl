@@ -28,7 +28,7 @@ namespace SysExpenseControl.Entities
                 }
                 catch (TargetInvocationException ex)
                 {
-                    Console.WriteLine(ex.InnerException?.Message);
+                    Debug.WriteLine(ex.InnerException?.Message);
                 }
             }
         }
@@ -61,7 +61,7 @@ namespace SysExpenseControl.Entities
                 }
                 catch (TargetInvocationException ex)
                 {
-                    Console.WriteLine(ex.InnerException?.Message);
+                    Debug.WriteLine(ex.InnerException?.Message);
                 }
             }
         }
@@ -161,6 +161,21 @@ namespace SysExpenseControl.Entities
             catch (ObjectDisposedException ex)
             {
                 Debug.WriteLine($"O controle foi descartado: {ex.Message}");
+            }
+        }
+
+        public static void SetDefaultCellStyle(DataGridView dataGridView, string colum)
+        {
+            if (dataGridView.InvokeRequired)
+            {
+                dataGridView.Invoke(new Action(() =>
+                {
+                    dataGridView.Columns[colum].DefaultCellStyle.Format = "N2";
+                }));
+            }
+            else
+            {
+                dataGridView.Columns[colum].DefaultCellStyle.Format = "N2";
             }
         }
 

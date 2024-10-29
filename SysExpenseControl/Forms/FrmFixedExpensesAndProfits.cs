@@ -2,6 +2,7 @@
 using SysExpenseControl.Entities;
 using System;
 using System.Data;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -17,6 +18,47 @@ namespace SysExpenseControl.Forms
             Task.Run(() => Initialize());
         }
 
+        private void AddFixedProfits()
+        {
+            FrmAddEditFixedProfits frmAddEditFixedProfits = new FrmAddEditFixedProfits(0, CallLoadData);
+
+            frmAddEditFixedProfits.ShowDialog();
+        }
+
+        private void DelFixedProfits()
+        {
+
+        }
+
+        private void EditFixedProfits()
+        {
+            if (DgvFixedProfits.Rows.Count > 0)
+            {
+                FrmAddEditFixedProfits frmAddEditFixedProfits = new FrmAddEditFixedProfits(1, CallLoadData,
+                    Convert.ToInt32(this.DgvFixedProfits.CurrentRow.Cells["id"].Value),
+                    Convert.ToString(this.DgvFixedProfits.CurrentRow.Cells["name"].Value),
+                    Convert.ToDouble(this.DgvFixedProfits.CurrentRow.Cells["value"].Value),
+                    Convert.ToString(this.DgvFixedProfits.CurrentRow.Cells["description"].Value));
+
+                frmAddEditFixedProfits.ShowDialog();
+            }
+            else
+            {
+                Debug.WriteLine("não tem dados");
+            }
+        }
+
+        private void ViewFixedProfits()
+        {
+
+        }
+
+        // ------------------------- Eventos
+        private void CallLoadData()
+        {
+            Task.Run(() => LoadFixedProfitsData());
+        }
+
         // ------------------------- Thread
         private void Initialize()
         {
@@ -24,6 +66,8 @@ namespace SysExpenseControl.Forms
             {
                 HideColumnsFixedProfits();
                 ChangeColumnsFixedProfits();
+
+                ThreadHelper.SetDefaultCellStyle(DgvFixedProfits, "value");
             }
 
             if (LoadFixedExpensesData())
@@ -31,6 +75,7 @@ namespace SysExpenseControl.Forms
                 HideColumnsFixedExpenses();
                 ChangeColumnsFixedExpenses();
             }
+
         }
 
         // ------ Lucros fixos
@@ -118,6 +163,27 @@ namespace SysExpenseControl.Forms
             }
 
             ThreadHelper.SetPropertyValue(label, "Text", "R$: " + FixedProfits.ToString("F2"));
+        }
+
+        // ------------------------- Métodos criados pelo visual studio
+        private void BtnAddFixedProfits_Click(object sender, EventArgs e)
+        {
+            AddFixedProfits();
+        }
+
+        private void BtnDelFixedProfits_Click(object sender, EventArgs e)
+        {
+            DelFixedProfits();
+        }
+
+        private void BtnEditFixedProfits_Click(object sender, EventArgs e)
+        {
+            EditFixedProfits();
+        }
+
+        private void BtnViewFixedProfits_Click(object sender, EventArgs e)
+        {
+            ViewFixedProfits();
         }
     }
 

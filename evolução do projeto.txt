@@ -36,7 +36,8 @@ outros
 -Inicio da implementação da tela de lucros e gastos do mês
 -Inicio da implementação da tela de reservas
 
-
+-Alterado todos os tipos de dados de decimal para real no banco de dados
+-Implementado inserção e edição de ganhos fixos
 
 
 

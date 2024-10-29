@@ -2,6 +2,7 @@
 using System.Data.SQLite;
 using System.Data;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace SysExpenseControl.Data
 {
@@ -54,27 +55,27 @@ namespace SysExpenseControl.Data
         }
 
         // Método para inserir uma categoria
-        public static string InsertCategory(string name, string description)
+        public static void InsertCategory(string name, string description)
         {
             string insertQuery = $"Insert Into categories Values ('{name}', '{description}')";
 
-            return SimpleQuery(insertQuery);
+            SimpleQuery(insertQuery);
         }
 
         // Método para editar uma categoria
-        public static string EditCategory(int id, string name, string description)
+        public static void EditCategory(int id, string name, string description)
         {
             string editQuery = $"Update categories Set name = '{name}', description = '{description}' Where id = {id} ";
 
-            return SimpleQuery(editQuery);
+            SimpleQuery(editQuery);
         }
 
         // Deleta uma categoria
-        public static string DeleteCategory(int id)
+        public static void DeleteCategory(int id)
         {
             string deleteQuery = $"Delete From categories where id = {id} ";
 
-            return SimpleQuery(deleteQuery);
+            SimpleQuery(deleteQuery);
         }
 
         // ---------------------------------- Lucros fixos
@@ -87,32 +88,33 @@ namespace SysExpenseControl.Data
         }
 
         // Método para Inserir uma fonte de lucro fixa
-        public static string InsertFixedProfit(string name, decimal value, string description)
+        public static void InsertFixedProfit(string name, double value, string description)
         {
-            string insertQuery = $"Insert Into fixed_profits Values ('{name}', '{value}', '{description}')";
+            string insertQuery = $"Insert Into fixed_profits (name, value, description) "
+                + $"Values ('{name}', '{value.ToString(CultureInfo.InvariantCulture)}', '{description}')";
 
-            return SimpleQuery(insertQuery);
+            SimpleQuery(insertQuery);
         }
 
         // Método para editar uma fonte de lucro fixa
-        public static string EditFixedProfit(int id, string name, decimal value, string description)
+        public static void EditFixedProfit(int id, string name, double value, string description)
         {
             string editQuery =
                 "Update fixed_profits "
                 + $"Set name = '{name}', "
-                + $"value = '{value}', "
+                + $"value = '{value.ToString(CultureInfo.InvariantCulture)}', "
                 + $"description = '{description}' "
-                + $"Where id = {id})";
+                + $"Where id = {id}";
 
-            return SimpleQuery(editQuery);
+            SimpleQuery(editQuery);
         }
 
         // Método que vai deletar um lucro fixo
-        public static string DeleteFixedProfit(int id)
+        public static void DeleteFixedProfit(int id)
         {
             string deleteQuery = $"Delete From fixed_profits where id = {id} ";
 
-            return SimpleQuery(deleteQuery);
+            SimpleQuery(deleteQuery);
         }
 
         // ---------------------------------- Gastos fixos
@@ -151,18 +153,18 @@ namespace SysExpenseControl.Data
         }
 
         // Método para Inserir um gasto fixo
-        public static string InsertFixedExpense(string name, decimal value, int dueDay, int category, string description)
+        public static void InsertFixedExpense(string name, decimal value, int dueDay, int category, string description)
         {
             string insertQuery =
                 $"Insert Into fixed_expenses "
                 + "(name, value, dueDay, category, description)"
                 + $"Values ('{name}', '{value}', '{dueDay}', '{category}', '{description}')";
 
-            return SimpleQuery(insertQuery);
+            SimpleQuery(insertQuery);
         }
 
         // Método para Editar um gasto fixo
-        public static string EditFixedExpense(int id, string name, decimal value, int dueDay, int category, string description)
+        public static void EditFixedExpense(int id, string name, decimal value, int dueDay, int category, string description)
         {
             string editQuery =
                 "Update fixed_expenses "
@@ -171,17 +173,17 @@ namespace SysExpenseControl.Data
                 + $"dueDay = '{dueDay}', "
                 + $"category = '{category}'"
                 + $"description = '{description}' "
-                + $"Where id = {id})";
+                + $"Where id = {id}";
 
-            return SimpleQuery(editQuery);
+            SimpleQuery(editQuery);
         }
 
         // Método para deletar um gasto fixo
-        public static string DeleteFixedExpense(int id)
+        public static void DeleteFixedExpense(int id)
         {
             string deleteQuery = $"Delete From fixed_expenses where id = {id} ";
 
-            return SimpleQuery(deleteQuery);
+            SimpleQuery(deleteQuery);
         }
 
         // ---------------------------------- Lucros do mês
@@ -195,16 +197,16 @@ namespace SysExpenseControl.Data
         }
 
         // Método para inserir um lucro no mês
-        public static string InsertMonthProfits(string name, decimal value, string description, int year, int month)
+        public static void InsertMonthProfits(string name, decimal value, string description, int year, int month)
         {
             string profitsTableName = "profits_" + year + "_" + month;
             string insertQuery = $"Insert Into {profitsTableName} Values ('{name}', '{value}', '{description}')";
 
-            return SimpleQuery(insertQuery);
+            SimpleQuery(insertQuery);
         }
 
         // Método para Editar um gasto fixo
-        public static string EditMonthProfits(int id, string name, decimal value, string description, int year, int month)
+        public static void EditMonthProfits(int id, string name, decimal value, string description, int year, int month)
         {
             string profitsTableName = "profits_" + year + "_" + month;
             string editQuery =
@@ -212,18 +214,18 @@ namespace SysExpenseControl.Data
                 + $"Set name = '{name}', "
                 + $"value = '{value}', "
                 + $"description = '{description}' "
-                + $"Where id = '{id}')";
+                + $"Where id = '{id}'";
 
-            return SimpleQuery(editQuery);
+            SimpleQuery(editQuery);
         }
 
         // Método para deletar lucro no mês
-        public static string DeleteMonthProfits(int id, int year, int month)
+        public static void DeleteMonthProfits(int id, int year, int month)
         {
             string profitsTableName = "profits_" + year + "_" + month;
             string deleteQuery = $"Delete From {profitsTableName} where id = {id} ";
 
-            return SimpleQuery(deleteQuery);
+            SimpleQuery(deleteQuery);
         }
 
         // ---------------------------------- Gastos do mês
@@ -245,16 +247,16 @@ namespace SysExpenseControl.Data
         }
 
         // Método para inserir um gasto no mês
-        public static string InsertMonthExpense(string name, decimal value, DateTime dateOfExpenditure, int category, string description, int year, int month)
+        public static void InsertMonthExpense(string name, decimal value, DateTime dateOfExpenditure, int category, string description, int year, int month)
         {
             string expensesTableName = "expenses_" + year + "_" + month;
             string insertQuery = $"Insert Into {expensesTableName} Values ('{name}', '{value}', '{dateOfExpenditure}', '{category}', '{description}')";
 
-            return SimpleQuery(insertQuery);
+            SimpleQuery(insertQuery);
         }
 
         // Método para Editar um gasto fixo
-        public static string EditMonthProfits(int id, string name, decimal value, DateTime dateOfExpenditure, int category, string description, int year, int month)
+        public static void EditMonthProfits(int id, string name, decimal value, DateTime dateOfExpenditure, int category, string description, int year, int month)
         {
             string expensesTableName = "expenses_" + year + "_" + month;
             string editQuery =
@@ -266,16 +268,16 @@ namespace SysExpenseControl.Data
                 + $"description = '{description}' "
                 + $"Where id = '{id}')";
 
-            return SimpleQuery(editQuery);
+            SimpleQuery(editQuery);
         }
 
         // Método para Deletar um gasto no mês
-        public static string DeleteMonthExpense(int id, int year, int month)
+        public static void DeleteMonthExpense(int id, int year, int month)
         {
             string expensesTableName = "expenses_" + year + "_" + month;
             string deleteQuery = $"Delete From {expensesTableName} where id = {id} ";
 
-            return SimpleQuery(deleteQuery);
+            SimpleQuery(deleteQuery);
         }
 
         // ---------------------------------- 
@@ -287,9 +289,8 @@ namespace SysExpenseControl.Data
         }
 
         // ---------------------------------- 
-        private static string SimpleQuery(string query)
+        private static void SimpleQuery(string query)
         {
-            string result = "";
 
             try
             {
@@ -310,13 +311,11 @@ namespace SysExpenseControl.Data
             {
                 Debug.WriteLine("Exception in DataConsultant.SimpleQuery: " + e.Message);
             }
-
-            return result;
         }
 
         private static DataTable ViewQuery(string query)
         {
-            DataTable dtResult = new DataTable("dados");
+            DataTable dtResult = new DataTable("data");
             try
             {
                 using (SQLiteConnection connection = new SQLiteConnection(Connection.Cn))
@@ -329,6 +328,7 @@ namespace SysExpenseControl.Data
                     {
                         sqlDat.Fill(dtResult);
                     }
+
                 }
             }
             catch (Exception e)
