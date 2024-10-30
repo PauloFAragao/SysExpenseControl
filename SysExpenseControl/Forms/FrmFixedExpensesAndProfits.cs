@@ -20,21 +20,38 @@ namespace SysExpenseControl.Forms
 
         private void AddFixedProfits()
         {
-            FrmAddEditFixedProfits frmAddEditFixedProfits = new FrmAddEditFixedProfits(0, CallLoadData);
-
+            FrmAddEditFixedProfits frmAddEditFixedProfits = new FrmAddEditFixedProfits(0, CallLoadFixedProfitsData);
             frmAddEditFixedProfits.ShowDialog();
         }
 
         private void DelFixedProfits()
         {
+            if (DgvFixedProfits.Rows.Count > 0)
+            {
+                if (MessageBox.Show(
+                    "Confirme para deletar: " + this.DgvFixedProfits.CurrentRow.Cells["name"].Value,
+                    "Deletar Receita Fixa?",
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Question) == DialogResult.OK)
+                {
+                    DataConsultant.DeleteFixedProfit(
+                        Convert.ToInt32(this.DgvFixedProfits.CurrentRow.Cells["id"].Value));
 
+                    //carregando os dados
+                    Task.Run(() => LoadFixedProfitsData());
+                }
+            }
+            else
+            {
+                Debug.WriteLine("não tem dados");
+            }
         }
 
-        private void EditFixedProfits()
+        private void ViewEditFixedProfits(int tipe)
         {
             if (DgvFixedProfits.Rows.Count > 0)
             {
-                FrmAddEditFixedProfits frmAddEditFixedProfits = new FrmAddEditFixedProfits(1, CallLoadData,
+                FrmAddEditFixedProfits frmAddEditFixedProfits = new FrmAddEditFixedProfits(tipe, CallLoadFixedProfitsData,
                     Convert.ToInt32(this.DgvFixedProfits.CurrentRow.Cells["id"].Value),
                     Convert.ToString(this.DgvFixedProfits.CurrentRow.Cells["name"].Value),
                     Convert.ToDouble(this.DgvFixedProfits.CurrentRow.Cells["value"].Value),
@@ -48,15 +65,65 @@ namespace SysExpenseControl.Forms
             }
         }
 
-        private void ViewFixedProfits()
+        private void AddFixedExpenses()
         {
-
+            FrmAddEditFixedExpenses frmAddEditFixedExpenses = new FrmAddEditFixedExpenses(0, CallLoadFixedExpensesData);
+            frmAddEditFixedExpenses.ShowDialog();
         }
 
+        private void DelFixedExpenses()
+        {
+            if (DgvFixedExpenses.Rows.Count > 0)
+            {
+                if (MessageBox.Show(
+                    "Confirme para deletar: " + this.DgvFixedExpenses.CurrentRow.Cells["name"].Value,
+                    "Deletar Gasto Fixo?",
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Question) == DialogResult.OK)
+                {
+                    DataConsultant.DeleteFixedExpense(
+                        Convert.ToInt32(this.DgvFixedExpenses.CurrentRow.Cells["id"].Value));
+
+                    //carregando os dados
+                    Task.Run(() => LoadFixedExpensesData());
+                }
+            }
+            else
+            {
+                Debug.WriteLine("não tem dados");
+            }
+        }
+
+        private void ViewEditFixedExpenses(int tipe)
+        {
+            if (DgvFixedExpenses.Rows.Count > 0)
+            {
+                FrmAddEditFixedExpenses frmAddEditFixedExpenses = new FrmAddEditFixedExpenses(tipe, CallLoadFixedExpensesData,
+                    Convert.ToInt32(this.DgvFixedExpenses.CurrentRow.Cells["id"].Value),
+                    Convert.ToString(this.DgvFixedExpenses.CurrentRow.Cells["name"].Value),
+                    Convert.ToDouble(this.DgvFixedExpenses.CurrentRow.Cells["value"].Value),
+                    Convert.ToInt32(this.DgvFixedExpenses.CurrentRow.Cells["dueDay"].Value),
+                    Convert.ToInt32(this.DgvFixedExpenses.CurrentRow.Cells["numberOfInstallments"].Value),
+                    Convert.ToString(this.DgvFixedExpenses.CurrentRow.Cells["categorieName"].Value),
+                    Convert.ToString(this.DgvFixedExpenses.CurrentRow.Cells["description"].Value));
+                    
+                frmAddEditFixedExpenses.ShowDialog();
+            }
+            else
+            {
+                Debug.WriteLine("não tem dados");
+            }
+}
+
         // ------------------------- Eventos
-        private void CallLoadData()
+        private void CallLoadFixedProfitsData()
         {
             Task.Run(() => LoadFixedProfitsData());
+        }
+
+        private void CallLoadFixedExpensesData()
+        {
+            Task.Run(() => LoadFixedExpensesData());
         }
 
         // ------------------------- Thread
@@ -145,11 +212,14 @@ namespace SysExpenseControl.Forms
             ThreadHelper.SetColumnHeaderText(this.DgvFixedExpenses, 3, "Dia do vencimento");
             ThreadHelper.SetColumnAutoSizeMode(this.DgvFixedExpenses, 3, DataGridViewAutoSizeColumnMode.DisplayedCells);
 
-            ThreadHelper.SetColumnHeaderText(this.DgvFixedExpenses, 4, "Categoria");
+            ThreadHelper.SetColumnHeaderText(this.DgvFixedExpenses, 4, "Quantidade de parcelas restante");
             ThreadHelper.SetColumnAutoSizeMode(this.DgvFixedExpenses, 4, DataGridViewAutoSizeColumnMode.DisplayedCells);
 
-            ThreadHelper.SetColumnHeaderText(this.DgvFixedExpenses, 5, "Descrição");
-            ThreadHelper.SetColumnAutoSizeMode(this.DgvFixedExpenses, 5, DataGridViewAutoSizeColumnMode.Fill);
+            ThreadHelper.SetColumnHeaderText(this.DgvFixedExpenses, 5, "Categoria");
+            ThreadHelper.SetColumnAutoSizeMode(this.DgvFixedExpenses, 5, DataGridViewAutoSizeColumnMode.DisplayedCells);
+
+            ThreadHelper.SetColumnHeaderText(this.DgvFixedExpenses, 6, "Descrição");
+            ThreadHelper.SetColumnAutoSizeMode(this.DgvFixedExpenses, 6, DataGridViewAutoSizeColumnMode.Fill);
         }
 
         // Método que soma os valores dos gastos e lucros e imprime os valores
@@ -178,12 +248,32 @@ namespace SysExpenseControl.Forms
 
         private void BtnEditFixedProfits_Click(object sender, EventArgs e)
         {
-            EditFixedProfits();
+            ViewEditFixedProfits(1);
         }
 
         private void BtnViewFixedProfits_Click(object sender, EventArgs e)
         {
-            ViewFixedProfits();
+            ViewEditFixedProfits(2);
+        }
+
+        private void BtnAddFixedExpenses_Click(object sender, EventArgs e)
+        {
+            AddFixedExpenses();
+        }
+
+        private void BtnDelFixedExpenses_Click(object sender, EventArgs e)
+        {
+            DelFixedExpenses();
+        }
+
+        private void BtnEditFixedExpenses_Click(object sender, EventArgs e)
+        {
+            ViewEditFixedExpenses(1);
+        }
+
+        private void BtnViewFixedExpenses_Click(object sender, EventArgs e)
+        {
+            ViewEditFixedExpenses(2);
         }
     }
 

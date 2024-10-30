@@ -42,7 +42,7 @@ namespace SysExpenseControl.Data
                     string createTableCategories =
                         "Create Table If Not Exists categories("
                         + "id Integer Primary Key,"
-                        + "name Varchar (50),"
+                        + "name Varchar (50) Unique,"
                         + "description Text)";
 
                     // Lucros fixos
@@ -59,7 +59,8 @@ namespace SysExpenseControl.Data
                         + "id Integer Primary Key,"
                         + "name Varchar (50),"
                         + "value Real Not Null,"
-                        + "dueDay Integer,"// data para o vencimento 
+                        + "dueDay Integer,"// data para o vencimento
+                        + "numberOfInstallments, "// parcelas restantes
                         //References categories (id) - indica foreign key //On Delete Set Default - quando a categoria for deletada muda para o default que é 0
                         + "category Integer References categories (id) On Delete Set Default Default '0',"// 0 Para sem categoria
                         + "description Text)";

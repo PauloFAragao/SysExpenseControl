@@ -101,12 +101,12 @@
             this.LblTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.LblTotal.AutoSize = true;
             this.LblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblTotal.Location = new System.Drawing.Point(154, 26);
+            this.LblTotal.Location = new System.Drawing.Point(143, 26);
             this.LblTotal.Name = "LblTotal";
             this.LblTotal.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.LblTotal.Size = new System.Drawing.Size(87, 20);
+            this.LblTotal.Size = new System.Drawing.Size(96, 20);
             this.LblTotal.TabIndex = 4;
-            this.LblTotal.Text = "R$: 000,00";
+            this.LblTotal.Text = "R$: 0000,00";
             this.LblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label13
@@ -135,12 +135,12 @@
             this.LblOverdueAccounts.AutoSize = true;
             this.LblOverdueAccounts.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LblOverdueAccounts.ForeColor = System.Drawing.Color.White;
-            this.LblOverdueAccounts.Location = new System.Drawing.Point(154, 26);
+            this.LblOverdueAccounts.Location = new System.Drawing.Point(143, 26);
             this.LblOverdueAccounts.Name = "LblOverdueAccounts";
             this.LblOverdueAccounts.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.LblOverdueAccounts.Size = new System.Drawing.Size(87, 20);
+            this.LblOverdueAccounts.Size = new System.Drawing.Size(96, 20);
             this.LblOverdueAccounts.TabIndex = 6;
-            this.LblOverdueAccounts.Text = "R$: 000,00";
+            this.LblOverdueAccounts.Text = "R$: 0000,00";
             this.LblOverdueAccounts.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label11
@@ -170,12 +170,12 @@
             this.LblAmountPayable.AutoSize = true;
             this.LblAmountPayable.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LblAmountPayable.ForeColor = System.Drawing.Color.White;
-            this.LblAmountPayable.Location = new System.Drawing.Point(154, 26);
+            this.LblAmountPayable.Location = new System.Drawing.Point(143, 26);
             this.LblAmountPayable.Name = "LblAmountPayable";
             this.LblAmountPayable.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.LblAmountPayable.Size = new System.Drawing.Size(87, 20);
+            this.LblAmountPayable.Size = new System.Drawing.Size(96, 20);
             this.LblAmountPayable.TabIndex = 4;
-            this.LblAmountPayable.Text = "R$: 000,00";
+            this.LblAmountPayable.Text = "R$: 0000,00";
             this.LblAmountPayable.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label9
@@ -204,12 +204,12 @@
             this.LblAmountPaid.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.LblAmountPaid.AutoSize = true;
             this.LblAmountPaid.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblAmountPaid.Location = new System.Drawing.Point(156, 25);
+            this.LblAmountPaid.Location = new System.Drawing.Point(144, 25);
             this.LblAmountPaid.Name = "LblAmountPaid";
             this.LblAmountPaid.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.LblAmountPaid.Size = new System.Drawing.Size(87, 20);
+            this.LblAmountPaid.Size = new System.Drawing.Size(96, 20);
             this.LblAmountPaid.TabIndex = 2;
-            this.LblAmountPaid.Text = "R$: 000,00";
+            this.LblAmountPaid.Text = "R$: 0000,00";
             this.LblAmountPaid.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label6

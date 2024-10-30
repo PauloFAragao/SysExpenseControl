@@ -203,6 +203,29 @@ namespace SysExpenseControl.Entities
                 Debug.WriteLine($"O controle foi descartado: {ex.Message}");
             }
         }
-    
+
+        //-------------------------- métodos para manipular ComboBox
+        public static void SetComboBoxData(ComboBox comboBox, List<string> data)
+        {
+            try
+            {
+                // Verifica se precisamos invocar na thread da UI
+                if (comboBox.InvokeRequired)
+                {
+                    // Invoca o método na thread da UI
+                    comboBox.Invoke(new Action(() => SetComboBoxData(comboBox, data)));
+                }
+                else
+                {
+                    comboBox.Items.Clear(); // Limpa itens anteriores
+                    comboBox.Items.AddRange(data.ToArray()); // Adiciona as categorias
+                }
+            }
+            catch (ObjectDisposedException ex)
+            {
+                Debug.WriteLine($"O controle foi descartado: {ex.Message}");
+            }
+        }
+
     }
 }

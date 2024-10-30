@@ -114,7 +114,7 @@ namespace SysExpenseControl.Forms
         private void HideColumns()
         {
             ThreadHelper.SetColumnVisibility(this.DgvData, 0, false);//mudando a visibilidade da coluna id
-            ThreadHelper.SetColumnVisibility(this.DgvData, 4, false);//mudando a visibilidade da coluna category
+            ThreadHelper.SetColumnVisibility(this.DgvData, 5, false);//mudando a visibilidade da coluna category
         }
 
         private void ChangeColumns()
@@ -128,11 +128,14 @@ namespace SysExpenseControl.Forms
             ThreadHelper.SetColumnHeaderText(this.DgvData, 3, "Data de vencimento");
             ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 3, DataGridViewAutoSizeColumnMode.DisplayedCells);
 
-            ThreadHelper.SetColumnHeaderText(this.DgvData, 5, "Nome da categoria");
-            ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 5, DataGridViewAutoSizeColumnMode.DisplayedCells);
+            ThreadHelper.SetColumnHeaderText(this.DgvData, 4, "Quantidade de parcelas restante");
+            ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 4, DataGridViewAutoSizeColumnMode.DisplayedCells);
 
-            ThreadHelper.SetColumnHeaderText(this.DgvData, 6, "Pagamento realizado em");
+            ThreadHelper.SetColumnHeaderText(this.DgvData, 6, "Nome da categoria");
             ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 6, DataGridViewAutoSizeColumnMode.DisplayedCells);
+
+            ThreadHelper.SetColumnHeaderText(this.DgvData, 7, "Pagamento realizado em");
+            ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 7, DataGridViewAutoSizeColumnMode.DisplayedCells);
         }
 
         private void TakeDataFromDataTable(DataTable dataTable)

@@ -30,18 +30,26 @@ namespace SysExpenseControl.Forms
 
         private void FillFields(string desciption)
         {
-            if(_tipe == 1)
+            if(_tipe != 0)
             {
                 this.LblTitle.Text = "Editar Receita Fixa";
                 this.TxtName.Text = _name;
                 this.TxtValue.Text = _amount.ToString("F2", CultureInfo.InstalledUICulture);
                 this.RtbDescription.Text = desciption;
+
+                if (_tipe == 2)
+                {
+                    this.LblTitle.Text = _name;
+
+                    this.BtnEdit.Visible = true;
+                    this.BtnSave.Visible = false;
+                    this.BtnCancel.Visible = false;
+                }
             }
         }
 
         private void Save()
         {
-            
             if (CaptureAndVerifyData())
             {
                 if (_tipe == 0)// Adicionar
@@ -80,10 +88,19 @@ namespace SysExpenseControl.Forms
 
             if (!allFieldsAreCorrect)// se algum campo não foi preencido dá um erro
             {
-                MessageBox.Show(msg, "Campos não preenchidos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(msg, "Preenchimento incorreto ou não preencimento", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return allFieldsAreCorrect;
+        }
+
+        private void Edit()
+        {
+            this.LblTitle.Text = "Editar Receita Fixa";
+
+            this.BtnEdit.Visible = false;
+            this.BtnSave.Visible = true;
+            this.BtnCancel.Visible = true;
         }
 
         // ------------------------- Métodos criados pelo visual studio
@@ -100,6 +117,11 @@ namespace SysExpenseControl.Forms
         private void FrmAddEditFixedProfits_FormClosed(object sender, FormClosedEventArgs e)
         {
             _onCloseCallback?.Invoke();
+        }
+
+        private void BtnEdit_Click(object sender, EventArgs e)
+        {
+            Edit();
         }
     }
 }

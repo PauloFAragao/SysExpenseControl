@@ -3,6 +3,7 @@ using System.Data.SQLite;
 using System.Data;
 using System.Diagnostics;
 using System.Globalization;
+using System.Collections.Generic;
 
 namespace SysExpenseControl.Data
 {
@@ -49,9 +50,46 @@ namespace SysExpenseControl.Data
         // Método para visualizar todas as categorias
         public static DataTable ViewCategory()
         {
-            string viewQuery = $"Select * From categories";
+            string viewQuery = "Select * From categories";
 
             return ViewQuery(viewQuery);
+        }
+
+        //Método para pesquisar os nomes das categorias
+        public static List<string> GetCategorys()
+        {
+            string query = "Select name From categories";
+
+            List<string> result = new List<string>();
+
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(Connection.Cn))
+                {
+                    // Abre a conexão
+                    connection.Open();
+
+                    // Executando a Query
+                    using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                    {
+                        // Executa a consulta e captura o resultado
+                        using (SQLiteDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                // Adiciona o nome da categoria à lista
+                                result.Add(reader.GetString(0));
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Exception in DataConsultant.GetCategorys: " + e.Message);
+            }
+
+            return result;
         }
 
         // Método para inserir uma categoria
@@ -91,7 +129,7 @@ namespace SysExpenseControl.Data
         public static void InsertFixedProfit(string name, double value, string description)
         {
             string insertQuery = $"Insert Into fixed_profits (name, value, description) "
-                + $"Values ('{name}', '{value.ToString(CultureInfo.InvariantCulture)}', '{description}')";
+                + $"Values ('{name}', {value.ToString(CultureInfo.InvariantCulture)}, '{description}')";
 
             SimpleQuery(insertQuery);
         }
@@ -102,7 +140,7 @@ namespace SysExpenseControl.Data
             string editQuery =
                 "Update fixed_profits "
                 + $"Set name = '{name}', "
-                + $"value = '{value.ToString(CultureInfo.InvariantCulture)}', "
+                + $"value = {value.ToString(CultureInfo.InvariantCulture)}, "
                 + $"description = '{description}' "
                 + $"Where id = {id}";
 
@@ -126,7 +164,7 @@ namespace SysExpenseControl.Data
             string viewQuery =
             "Select "
             + "f.id, f.name, "
-            + "f.value, f.dueDay, "
+            + "f.value, f.dueDay, f.numberOfInstallments, "
             + "c.name As categorieName, "
             + "f.description "
             + "From fixed_expenses f "
@@ -141,7 +179,7 @@ namespace SysExpenseControl.Data
             string viewQuery =
             "Select "
             + "f.id, f.name, "
-            + "f.value, f.dueDay, "
+            + "f.value, f.dueDay, f.numberOfInstallments, "
             + "f.category, c.name As categorieName, "
             + "e.date As dayItWasPaid "
             + "From fixed_expenses f "
@@ -153,25 +191,31 @@ namespace SysExpenseControl.Data
         }
 
         // Método para Inserir um gasto fixo
-        public static void InsertFixedExpense(string name, decimal value, int dueDay, int category, string description)
+        public static void InsertFixedExpense(string name, double value, int dueDay, int numberOfInstallments, 
+            string category, string description)
         {
             string insertQuery =
                 $"Insert Into fixed_expenses "
-                + "(name, value, dueDay, category, description)"
-                + $"Values ('{name}', '{value}', '{dueDay}', '{category}', '{description}')";
+                + "(name, value, dueDay, numberOfInstallments, category, description)"
+                + $"Values ('{name}', {value.ToString(CultureInfo.InvariantCulture)}, "
+                + $"{dueDay}, {numberOfInstallments}, "
+                + $"(Select id From categories where name = '{category}'), "
+                + $"'{description}')";
 
             SimpleQuery(insertQuery);
         }
 
         // Método para Editar um gasto fixo
-        public static void EditFixedExpense(int id, string name, decimal value, int dueDay, int category, string description)
+        public static void EditFixedExpense(int id, string name, double value, int dueDay, int numberOfInstallments,
+            string category, string description)
         {
             string editQuery =
                 "Update fixed_expenses "
                 + $"Set name = '{name}', "
-                + $"value = '{value}', "
-                + $"dueDay = '{dueDay}', "
-                + $"category = '{category}'"
+                + $"value = {value.ToString(CultureInfo.InvariantCulture)}, "
+                + $"dueDay = {dueDay}, "
+                + $"numberOfInstallments = {numberOfInstallments}, "
+                + $"category = (Select id From categories where name = '{category}'), "
                 + $"description = '{description}' "
                 + $"Where id = {id}";
 
@@ -197,24 +241,24 @@ namespace SysExpenseControl.Data
         }
 
         // Método para inserir um lucro no mês
-        public static void InsertMonthProfits(string name, decimal value, string description, int year, int month)
+        public static void InsertMonthProfits(string name, double value, string description, int year, int month)
         {
             string profitsTableName = "profits_" + year + "_" + month;
-            string insertQuery = $"Insert Into {profitsTableName} Values ('{name}', '{value}', '{description}')";
+            string insertQuery = $"Insert Into {profitsTableName} Values ('{name}', {value}, '{description}')";
 
             SimpleQuery(insertQuery);
         }
 
         // Método para Editar um gasto fixo
-        public static void EditMonthProfits(int id, string name, decimal value, string description, int year, int month)
+        public static void EditMonthProfits(int id, string name, double value, string description, int year, int month)
         {
             string profitsTableName = "profits_" + year + "_" + month;
             string editQuery =
                 $"Update {profitsTableName} "
                 + $"Set name = '{name}', "
-                + $"value = '{value}', "
+                + $"value = {value}, "
                 + $"description = '{description}' "
-                + $"Where id = '{id}'";
+                + $"Where id = {id}";
 
             SimpleQuery(editQuery);
         }
@@ -247,26 +291,26 @@ namespace SysExpenseControl.Data
         }
 
         // Método para inserir um gasto no mês
-        public static void InsertMonthExpense(string name, decimal value, DateTime dateOfExpenditure, int category, string description, int year, int month)
+        public static void InsertMonthExpense(string name, double value, DateTime dateOfExpenditure, int category, string description, int year, int month)
         {
             string expensesTableName = "expenses_" + year + "_" + month;
-            string insertQuery = $"Insert Into {expensesTableName} Values ('{name}', '{value}', '{dateOfExpenditure}', '{category}', '{description}')";
+            string insertQuery = $"Insert Into {expensesTableName} Values ('{name}', {value}, {dateOfExpenditure}, {category}, '{description}')";
 
             SimpleQuery(insertQuery);
         }
 
         // Método para Editar um gasto fixo
-        public static void EditMonthProfits(int id, string name, decimal value, DateTime dateOfExpenditure, int category, string description, int year, int month)
+        public static void EditMonthProfits(int id, string name, double value, DateTime dateOfExpenditure, int category, string description, int year, int month)
         {
             string expensesTableName = "expenses_" + year + "_" + month;
             string editQuery =
                 $"Update {expensesTableName} "
                 + $"Set name = '{name}', "
-                + $"value = '{value}', "
+                + $"value = {value}, "
                 + $"dateOfExpenditure = '{dateOfExpenditure}', "
-                + $"category = '{category}', "
+                + $"category = {category}, "
                 + $"description = '{description}' "
-                + $"Where id = '{id}')";
+                + $"Where id = {id})";
 
             SimpleQuery(editQuery);
         }
@@ -281,7 +325,7 @@ namespace SysExpenseControl.Data
         }
 
         // ---------------------------------- 
-        public static DataTable ViewReserves()//references_to_reserves
+        public static DataTable ViewReserves()
         {
             string viewQuery = "Select * From references_to_reserves";
 
@@ -291,7 +335,6 @@ namespace SysExpenseControl.Data
         // ---------------------------------- 
         private static void SimpleQuery(string query)
         {
-
             try
             {
                 using (SQLiteConnection connection = new SQLiteConnection(Connection.Cn))
@@ -328,7 +371,6 @@ namespace SysExpenseControl.Data
                     {
                         sqlDat.Fill(dtResult);
                     }
-
                 }
             }
             catch (Exception e)

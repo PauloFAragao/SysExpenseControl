@@ -169,6 +169,7 @@
             this.BtnViewFixedExpenses.TabIndex = 15;
             this.BtnViewFixedExpenses.Text = "Visualizar";
             this.BtnViewFixedExpenses.UseVisualStyleBackColor = false;
+            this.BtnViewFixedExpenses.Click += new System.EventHandler(this.BtnViewFixedExpenses_Click);
             // 
             // BtnEditFixedExpenses
             // 
@@ -180,6 +181,7 @@
             this.BtnEditFixedExpenses.TabIndex = 14;
             this.BtnEditFixedExpenses.Text = "Editar Despesa";
             this.BtnEditFixedExpenses.UseVisualStyleBackColor = false;
+            this.BtnEditFixedExpenses.Click += new System.EventHandler(this.BtnEditFixedExpenses_Click);
             // 
             // BtnDelFixedExpenses
             // 
@@ -191,6 +193,7 @@
             this.BtnDelFixedExpenses.TabIndex = 13;
             this.BtnDelFixedExpenses.Text = "Remover Despesa";
             this.BtnDelFixedExpenses.UseVisualStyleBackColor = false;
+            this.BtnDelFixedExpenses.Click += new System.EventHandler(this.BtnDelFixedExpenses_Click);
             // 
             // BtnAddFixedExpenses
             // 
@@ -202,6 +205,7 @@
             this.BtnAddFixedExpenses.TabIndex = 12;
             this.BtnAddFixedExpenses.Text = "Adicionar Despesa";
             this.BtnAddFixedExpenses.UseVisualStyleBackColor = false;
+            this.BtnAddFixedExpenses.Click += new System.EventHandler(this.BtnAddFixedExpenses_Click);
             // 
             // DgvFixedExpenses
             // 
