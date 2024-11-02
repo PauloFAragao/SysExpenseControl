@@ -56,7 +56,7 @@
             this.CbxFilter = new System.Windows.Forms.ComboBox();
             this.LblAmount = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.LblDisplayMonth = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox3.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -298,7 +298,7 @@
             this.panel5.Controls.Add(this.CbxFilter);
             this.panel5.Controls.Add(this.LblAmount);
             this.panel5.Controls.Add(this.label3);
-            this.panel5.Controls.Add(this.label2);
+            this.panel5.Controls.Add(this.LblDisplayMonth);
             this.panel5.Controls.Add(this.label1);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(14, 0);
@@ -394,15 +394,15 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "Quantidade de contas:";
             // 
-            // label2
+            // LblDisplayMonth
             // 
-            this.label2.AutoSize = true;
-            this.label2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.label2.Location = new System.Drawing.Point(249, 15);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(48, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "01/2000";
+            this.LblDisplayMonth.AutoSize = true;
+            this.LblDisplayMonth.Cursor = System.Windows.Forms.Cursors.Default;
+            this.LblDisplayMonth.Location = new System.Drawing.Point(249, 15);
+            this.LblDisplayMonth.Name = "LblDisplayMonth";
+            this.LblDisplayMonth.Size = new System.Drawing.Size(48, 13);
+            this.LblDisplayMonth.TabIndex = 1;
+            this.LblDisplayMonth.Text = "01/2000";
             // 
             // label1
             // 
@@ -466,7 +466,7 @@
         private System.Windows.Forms.ComboBox CbxFilter;
         private System.Windows.Forms.Label LblAmount;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label LblDisplayMonth;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Button button4;

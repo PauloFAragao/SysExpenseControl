@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -27,13 +28,13 @@ namespace SysExpenseControl.Forms
             if (LoadProfitsData())
             {
                 HideColumnsProfits();
-                ChangeColumnsProfits();
+                //ChangeColumnsProfits();
             }
 
             if (LoadExpensesData())
             {
                 HideColumnsExpenses();
-                ChangeColumnsExpenses();
+                //ChangeColumnsExpenses();
             }
         }
 
@@ -117,14 +118,17 @@ namespace SysExpenseControl.Forms
         // Método que soma os valores dos gastos e lucros e imprime os valores
         private void TakeDataFromDataTable(DataTable dataTable, Label label)
         {
-            decimal FixedProfits = 0;
+            decimal value = 0;
 
             foreach (DataRow row in dataTable.Rows)
             {
-                FixedProfits += Convert.ToDecimal(row["value"]);// capturando o valor
+                if (row["date"].ToString() != "")
+                {
+                    value += Convert.ToDecimal(row["value"]);// capturando o valor
+                }
             }
 
-            ThreadHelper.SetPropertyValue(label, "Text", "R$: " + FixedProfits.ToString("F2"));
+            ThreadHelper.SetPropertyValue(label, "Text", "R$: " + value.ToString("F2"));
         }
     }
 }

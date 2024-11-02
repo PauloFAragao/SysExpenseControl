@@ -17,7 +17,9 @@ namespace SysExpenseControl.Forms
 
             _data = new DataTable();
 
-            this.CbxFilter.SelectedIndex = 0;
+            this.CbxFilter.SelectedIndex = 0;// para iniciar sem filtros
+
+            this.LblDisplayMonth.Text = DateTime.Now.ToString("MM/yyyy");// para exibir o mês atual
 
             //carregando os dados
             Task.Run(() => Initialize());

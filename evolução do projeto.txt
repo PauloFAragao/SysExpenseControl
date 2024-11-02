@@ -47,3 +47,16 @@ outros
 -Agora ao adicionar um gasto fixo ele tambem é adicionado como gasto no mês corrente
 -Resolvido um erro na consulta de contas
 
+-Resolvido um erro na tela de gastos do mês que fazia valores que não foram recebidos ou pagos serem somados
+ao montante
+
+
+
+
+
+
+
+
+
+
+
