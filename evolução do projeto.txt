@@ -42,7 +42,8 @@ outros
 -Implementados os botões de deletar e visualizar na tela de lucros fixos
 -Implementados os botões de inserir, remover, editar e visualizar na tela de gastos fixos
 
-
-
-
+-Agora ao adicionar um lucro fixo ele tambem é adicionado como lucro no mês corrente
+-Resolvido um erro na consulta de categorias
+-Agora ao adicionar um gasto fixo ele tambem é adicionado como gasto no mês corrente
+-Resolvido um erro na consulta de contas
 

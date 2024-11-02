@@ -2,6 +2,7 @@
 using SysExpenseControl.Entities;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -81,11 +82,19 @@ namespace SysExpenseControl.Forms
             {
                 if (_tipe == 0)// Adicionar
                 {
-                    DataConsultant.InsertFixedExpense(
-                        _name, _amount, _dueDay, _numberOfInstallments,
+                    // Adicionando na tabela de gastos fixos
+                    int id = DataConsultant.InsertFixedExpense(_name, _amount, _dueDay, _numberOfInstallments,
                         this.CbxCategories.Text, this.RtbDescription.Text);
+
+                    if (id == -1) return; //erro
+
+                    // Adicionando na tabela de gastos do Mês corrente
+                    DataConsultant.InsertMonthExpense(_name, _amount, null, id,
+                        this.CbxCategories.Text, this.RtbDescription.Text, DateTime.Now.Year,
+                        DateTime.Now.Month);
+
                 }
-                //else// Editar
+                else// Editar
                     DataConsultant.EditFixedExpense(_id, _name, _amount, _dueDay, _numberOfInstallments,
                         this.CbxCategories.Text, this.RtbDescription.Text);
 

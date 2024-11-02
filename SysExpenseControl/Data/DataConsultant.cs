@@ -4,6 +4,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Globalization;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace SysExpenseControl.Data
 {
@@ -58,7 +59,7 @@ namespace SysExpenseControl.Data
         //Método para pesquisar os nomes das categorias
         public static List<string> GetCategorys()
         {
-            string query = "Select name From categories";
+            string query = "Select name From categories Order by id";
 
             List<string> result = new List<string>();
 
@@ -175,7 +176,7 @@ namespace SysExpenseControl.Data
 
         public static DataTable ViewAccountsPayable()
         {
-            string expensesTableName = "expenses_" + DateTime.Now.Date.Year + "_" + DateTime.Now.Date.Month;
+            string expensesTableName = "expenses_" + DateTime.Now.Year + "_" + DateTime.Now.Month;
             string viewQuery =
             "Select "
             + "f.id, f.name, "
@@ -185,13 +186,13 @@ namespace SysExpenseControl.Data
             + "From fixed_expenses f "
             + "Join categories c On f.category = c.id "
             + $"Join {expensesTableName} e On f.id = e.idFixedExpenses "
-            + $"Where f.category = 4 Order by dueDay Desc";
+            + $"Where f.category = 1 Order by dueDay Desc";
 
             return ViewQuery(viewQuery);
         }
 
         // Método para Inserir um gasto fixo
-        public static void InsertFixedExpense(string name, double value, int dueDay, int numberOfInstallments, 
+        public static int InsertFixedExpense(string name, double value, int dueDay, int numberOfInstallments, 
             string category, string description)
         {
             string insertQuery =
@@ -202,7 +203,8 @@ namespace SysExpenseControl.Data
                 + $"(Select id From categories where name = '{category}'), "
                 + $"'{description}')";
 
-            SimpleQuery(insertQuery);
+            //SimpleQuery(insertQuery);
+            return InsertQuery(insertQuery);
         }
 
         // Método para Editar um gasto fixo
@@ -244,12 +246,14 @@ namespace SysExpenseControl.Data
         public static void InsertMonthProfits(string name, double value, string description, int year, int month)
         {
             string profitsTableName = "profits_" + year + "_" + month;
-            string insertQuery = $"Insert Into {profitsTableName} Values ('{name}', {value}, '{description}')";
+            string insertQuery = $"Insert Into {profitsTableName} "
+                + "(name, value, description) "
+                + $"Values ('{name}', {value.ToString(CultureInfo.InvariantCulture)}, '{description}')";
 
             SimpleQuery(insertQuery);
         }
 
-        // Método para Editar um gasto fixo
+        // Método para Editar um lucro do mês
         public static void EditMonthProfits(int id, string name, double value, string description, int year, int month)
         {
             string profitsTableName = "profits_" + year + "_" + month;
@@ -291,15 +295,36 @@ namespace SysExpenseControl.Data
         }
 
         // Método para inserir um gasto no mês
-        public static void InsertMonthExpense(string name, double value, DateTime dateOfExpenditure, int category, string description, int year, int month)
+        public static void InsertMonthExpense(string name, double value, DateTime? dateOfExpenditure,
+            int idFixedExpenses, string category, string description, int year, int month)
         {
             string expensesTableName = "expenses_" + year + "_" + month;
-            string insertQuery = $"Insert Into {expensesTableName} Values ('{name}', {value}, {dateOfExpenditure}, {category}, '{description}')";
 
-            SimpleQuery(insertQuery);
+            string insertQuery = $"Insert Into {expensesTableName} (name, value, category, ";
+            string values = $"Values ('{name}', {value.ToString(CultureInfo.InvariantCulture)}, "
+                + $"(Select id From categories where name = '{category}'), ";
+
+            // Se já vai inserir com uma data
+            if(dateOfExpenditure != null)
+            {
+                insertQuery += "date, ";
+                values += $"{dateOfExpenditure}, ";
+            }
+
+            // se tem referencia a tabela de gastos fixos
+            if(idFixedExpenses != -1)
+            {
+                insertQuery += "idFixedExpenses, ";
+                values += $"{idFixedExpenses}, ";
+            }
+
+            insertQuery += "description) ";
+            values += $"'{description}')";
+
+            SimpleQuery(insertQuery + values);
         }
 
-        // Método para Editar um gasto fixo
+        // Método para Editar um gasto do mês
         public static void EditMonthProfits(int id, string name, double value, DateTime dateOfExpenditure, int category, string description, int year, int month)
         {
             string expensesTableName = "expenses_" + year + "_" + month;
@@ -346,7 +371,8 @@ namespace SysExpenseControl.Data
                     using (SQLiteCommand command = new SQLiteCommand(query, connection))
                     {
                         // Executa a consulta e captura o resultado
-                        command.ExecuteScalar();
+                        //command.ExecuteScalar();
+                        command.ExecuteNonQuery();
                     }
                 }
             }
@@ -354,6 +380,41 @@ namespace SysExpenseControl.Data
             {
                 Debug.WriteLine("Exception in DataConsultant.SimpleQuery: " + e.Message);
             }
+        }
+
+        private static int InsertQuery(string query)
+        {
+            int id = -1;
+
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(Connection.Cn))
+                {
+                    // Abre a conexão
+                    connection.Open();
+
+                    // Executando a Query
+                    using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                    {
+                        // Executa a consulta e captura o resultado
+                        command.ExecuteNonQuery();
+                    }
+
+                    // capturar o id 
+                    using (SQLiteCommand command = new SQLiteCommand("SELECT last_insert_rowid();", connection))
+                    {
+                        id = Convert.ToInt32(command.ExecuteScalar());
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Exception in DataConsultant.SimpleQuery: " + e.Message);
+
+                id = -1;
+            }
+
+            return id;
         }
 
         private static DataTable ViewQuery(string query)
@@ -378,6 +439,7 @@ namespace SysExpenseControl.Data
                 Debug.WriteLine("Exception in DataConsultant.ViewQuery: " + e.Message);
                 dtResult = null;
             }
+
             return dtResult;
         }
 

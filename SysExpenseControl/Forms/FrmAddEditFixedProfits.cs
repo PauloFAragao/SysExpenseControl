@@ -53,8 +53,14 @@ namespace SysExpenseControl.Forms
             if (CaptureAndVerifyData())
             {
                 if (_tipe == 0)// Adicionar
+                {
+                    // Adicionando na tabela de lucros fixos
                     DataConsultant.InsertFixedProfit(_name, _amount, this.RtbDescription.Text);
 
+                    // Adicionando na tabela de lucros do mês corrente
+                    DataConsultant.InsertMonthProfits(_name, _amount, this.RtbDescription.Text, 
+                        DateTime.Now.Year, DateTime.Now.Month);
+                }
                 else// Editar
                     DataConsultant.EditFixedProfit(_id, _name, _amount, this.RtbDescription.Text);
                 
