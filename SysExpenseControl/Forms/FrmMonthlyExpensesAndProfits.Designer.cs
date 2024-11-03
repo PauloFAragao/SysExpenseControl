@@ -28,27 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
+            this.BtnViewExpenses = new System.Windows.Forms.Button();
+            this.BtnEditExpenses = new System.Windows.Forms.Button();
+            this.BtnDelExpenses = new System.Windows.Forms.Button();
             this.DgvExpenses = new System.Windows.Forms.DataGridView();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
+            this.BtnViewProfits = new System.Windows.Forms.Button();
+            this.BtnEditProfits = new System.Windows.Forms.Button();
+            this.BtnDelProfits = new System.Windows.Forms.Button();
+            this.BtnAddProfits = new System.Windows.Forms.Button();
+            this.BtnAddExpenses = new System.Windows.Forms.Button();
             this.DgvProfits = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
+            this.LblExepencesMonth = new System.Windows.Forms.Label();
             this.LblExpenses = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.LblProfits = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
+            this.LblProftsMonth = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.LblMonth = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.DgvExpenses)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DgvProfits)).BeginInit();
             this.panel1.SuspendLayout();
@@ -56,40 +60,44 @@
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button5
+            // BtnViewExpenses
             // 
-            this.button5.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(358, 20);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(109, 23);
-            this.button5.TabIndex = 15;
-            this.button5.Text = "Visualizar";
-            this.button5.UseVisualStyleBackColor = false;
+            this.BtnViewExpenses.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtnViewExpenses.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnViewExpenses.Location = new System.Drawing.Point(358, 20);
+            this.BtnViewExpenses.Name = "BtnViewExpenses";
+            this.BtnViewExpenses.Size = new System.Drawing.Size(109, 23);
+            this.BtnViewExpenses.TabIndex = 15;
+            this.BtnViewExpenses.Text = "Visualizar";
+            this.BtnViewExpenses.UseVisualStyleBackColor = false;
+            this.BtnViewExpenses.Click += new System.EventHandler(this.BtnViewExpenses_Click);
             // 
-            // button6
+            // BtnEditExpenses
             // 
-            this.button6.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Location = new System.Drawing.Point(243, 20);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(109, 23);
-            this.button6.TabIndex = 14;
-            this.button6.Text = "Editar Despesa";
-            this.button6.UseVisualStyleBackColor = false;
+            this.BtnEditExpenses.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtnEditExpenses.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnEditExpenses.Location = new System.Drawing.Point(243, 20);
+            this.BtnEditExpenses.Name = "BtnEditExpenses";
+            this.BtnEditExpenses.Size = new System.Drawing.Size(109, 23);
+            this.BtnEditExpenses.TabIndex = 14;
+            this.BtnEditExpenses.Text = "Editar Despesa";
+            this.BtnEditExpenses.UseVisualStyleBackColor = false;
+            this.BtnEditExpenses.Click += new System.EventHandler(this.BtnEditExpenses_Click);
             // 
-            // button7
+            // BtnDelExpenses
             // 
-            this.button7.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Location = new System.Drawing.Point(128, 20);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(109, 23);
-            this.button7.TabIndex = 13;
-            this.button7.Text = "Remover Despesa";
-            this.button7.UseVisualStyleBackColor = false;
+            this.BtnDelExpenses.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtnDelExpenses.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnDelExpenses.Location = new System.Drawing.Point(128, 20);
+            this.BtnDelExpenses.Name = "BtnDelExpenses";
+            this.BtnDelExpenses.Size = new System.Drawing.Size(109, 23);
+            this.BtnDelExpenses.TabIndex = 13;
+            this.BtnDelExpenses.Text = "Remover Despesa";
+            this.BtnDelExpenses.UseVisualStyleBackColor = false;
+            this.BtnDelExpenses.Click += new System.EventHandler(this.BtnDelExpenses_Click);
             // 
             // DgvExpenses
             // 
@@ -106,60 +114,65 @@
             this.DgvExpenses.Size = new System.Drawing.Size(868, 358);
             this.DgvExpenses.TabIndex = 11;
             // 
-            // button4
+            // BtnViewProfits
             // 
-            this.button4.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(358, 20);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(109, 23);
-            this.button4.TabIndex = 10;
-            this.button4.Text = "Visualizar";
-            this.button4.UseVisualStyleBackColor = false;
+            this.BtnViewProfits.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtnViewProfits.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnViewProfits.Location = new System.Drawing.Point(358, 20);
+            this.BtnViewProfits.Name = "BtnViewProfits";
+            this.BtnViewProfits.Size = new System.Drawing.Size(109, 23);
+            this.BtnViewProfits.TabIndex = 10;
+            this.BtnViewProfits.Text = "Visualizar";
+            this.BtnViewProfits.UseVisualStyleBackColor = false;
+            this.BtnViewProfits.Click += new System.EventHandler(this.BtnViewProfits_Click);
             // 
-            // button3
+            // BtnEditProfits
             // 
-            this.button3.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(243, 20);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(109, 23);
-            this.button3.TabIndex = 9;
-            this.button3.Text = "Editar Receita";
-            this.button3.UseVisualStyleBackColor = false;
+            this.BtnEditProfits.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtnEditProfits.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnEditProfits.Location = new System.Drawing.Point(243, 20);
+            this.BtnEditProfits.Name = "BtnEditProfits";
+            this.BtnEditProfits.Size = new System.Drawing.Size(109, 23);
+            this.BtnEditProfits.TabIndex = 9;
+            this.BtnEditProfits.Text = "Editar Receita";
+            this.BtnEditProfits.UseVisualStyleBackColor = false;
+            this.BtnEditProfits.Click += new System.EventHandler(this.BtnEditProfits_Click);
             // 
-            // button2
+            // BtnDelProfits
             // 
-            this.button2.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(128, 20);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(109, 23);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "Remover Receita";
-            this.button2.UseVisualStyleBackColor = false;
+            this.BtnDelProfits.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtnDelProfits.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnDelProfits.Location = new System.Drawing.Point(128, 20);
+            this.BtnDelProfits.Name = "BtnDelProfits";
+            this.BtnDelProfits.Size = new System.Drawing.Size(109, 23);
+            this.BtnDelProfits.TabIndex = 8;
+            this.BtnDelProfits.Text = "Remover Receita";
+            this.BtnDelProfits.UseVisualStyleBackColor = false;
+            this.BtnDelProfits.Click += new System.EventHandler(this.BtnDelProfits_Click);
             // 
-            // button1
+            // BtnAddProfits
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(13, 20);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(109, 23);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Adicionar Receita";
-            this.button1.UseVisualStyleBackColor = false;
+            this.BtnAddProfits.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtnAddProfits.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnAddProfits.Location = new System.Drawing.Point(13, 20);
+            this.BtnAddProfits.Name = "BtnAddProfits";
+            this.BtnAddProfits.Size = new System.Drawing.Size(109, 23);
+            this.BtnAddProfits.TabIndex = 7;
+            this.BtnAddProfits.Text = "Adicionar Receita";
+            this.BtnAddProfits.UseVisualStyleBackColor = false;
+            this.BtnAddProfits.Click += new System.EventHandler(this.BtnAddProfits_Click);
             // 
-            // button8
+            // BtnAddExpenses
             // 
-            this.button8.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Location = new System.Drawing.Point(13, 20);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(109, 23);
-            this.button8.TabIndex = 12;
-            this.button8.Text = "Adicionar Despesa";
-            this.button8.UseVisualStyleBackColor = false;
+            this.BtnAddExpenses.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtnAddExpenses.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnAddExpenses.Location = new System.Drawing.Point(13, 20);
+            this.BtnAddExpenses.Name = "BtnAddExpenses";
+            this.BtnAddExpenses.Size = new System.Drawing.Size(109, 23);
+            this.BtnAddExpenses.TabIndex = 12;
+            this.BtnAddExpenses.Text = "Adicionar Despesa";
+            this.BtnAddExpenses.UseVisualStyleBackColor = false;
+            this.BtnAddExpenses.Click += new System.EventHandler(this.BtnAddExpenses_Click);
             // 
             // DgvProfits
             // 
@@ -180,7 +193,7 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.Red;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.LblExepencesMonth);
             this.panel1.Controls.Add(this.LblExpenses);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(296, 3);
@@ -188,16 +201,16 @@
             this.panel1.Size = new System.Drawing.Size(241, 72);
             this.panel1.TabIndex = 10;
             // 
-            // label6
+            // LblExepencesMonth
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(158, 4);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(61, 20);
-            this.label6.TabIndex = 4;
-            this.label6.Text = "Janeiro";
+            this.LblExepencesMonth.AutoSize = true;
+            this.LblExepencesMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblExepencesMonth.ForeColor = System.Drawing.Color.White;
+            this.LblExepencesMonth.Location = new System.Drawing.Point(158, 4);
+            this.LblExepencesMonth.Name = "LblExepencesMonth";
+            this.LblExepencesMonth.Size = new System.Drawing.Size(61, 20);
+            this.LblExepencesMonth.TabIndex = 4;
+            this.LblExepencesMonth.Text = "Janeiro";
             // 
             // LblExpenses
             // 
@@ -249,7 +262,7 @@
             // 
             this.panel5.BackColor = System.Drawing.Color.Lime;
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Controls.Add(this.label2);
+            this.panel5.Controls.Add(this.LblProftsMonth);
             this.panel5.Controls.Add(this.LblProfits);
             this.panel5.Controls.Add(this.label4);
             this.panel5.Location = new System.Drawing.Point(19, 3);
@@ -257,22 +270,22 @@
             this.panel5.Size = new System.Drawing.Size(241, 72);
             this.panel5.TabIndex = 9;
             // 
-            // label2
+            // LblProftsMonth
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(150, 4);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(61, 20);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Janeiro";
+            this.LblProftsMonth.AutoSize = true;
+            this.LblProftsMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblProftsMonth.Location = new System.Drawing.Point(150, 4);
+            this.LblProftsMonth.Name = "LblProftsMonth";
+            this.LblProftsMonth.Size = new System.Drawing.Size(61, 20);
+            this.LblProftsMonth.TabIndex = 4;
+            this.LblProftsMonth.Text = "Janeiro";
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.button4);
-            this.tabPage1.Controls.Add(this.button3);
-            this.tabPage1.Controls.Add(this.button2);
-            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Controls.Add(this.BtnViewProfits);
+            this.tabPage1.Controls.Add(this.BtnEditProfits);
+            this.tabPage1.Controls.Add(this.BtnDelProfits);
+            this.tabPage1.Controls.Add(this.BtnAddProfits);
             this.tabPage1.Controls.Add(this.DgvProfits);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -284,10 +297,10 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.button5);
-            this.tabPage2.Controls.Add(this.button6);
-            this.tabPage2.Controls.Add(this.button7);
-            this.tabPage2.Controls.Add(this.button8);
+            this.tabPage2.Controls.Add(this.BtnViewExpenses);
+            this.tabPage2.Controls.Add(this.BtnEditExpenses);
+            this.tabPage2.Controls.Add(this.BtnDelExpenses);
+            this.tabPage2.Controls.Add(this.BtnAddExpenses);
             this.tabPage2.Controls.Add(this.DgvExpenses);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -307,14 +320,59 @@
             this.tabControl1.Size = new System.Drawing.Size(902, 467);
             this.tabControl1.TabIndex = 8;
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(140, 23);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(100, 27);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "Mudar Mês";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(3, 5);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(117, 16);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Referente ao Mês:";
+            // 
+            // LblMonth
+            // 
+            this.LblMonth.AutoSize = true;
+            this.LblMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblMonth.Location = new System.Drawing.Point(21, 27);
+            this.LblMonth.Name = "LblMonth";
+            this.LblMonth.Size = new System.Drawing.Size(75, 24);
+            this.LblMonth.TabIndex = 13;
+            this.LblMonth.Text = "01/2000";
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.LblMonth);
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Controls.Add(this.button1);
+            this.panel2.Location = new System.Drawing.Point(573, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(261, 72);
+            this.panel2.TabIndex = 14;
+            // 
             // FrmMonthlyExpensesAndProfits
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(926, 572);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel5);
-            this.Controls.Add(this.tabControl1);
             this.Name = "FrmMonthlyExpensesAndProfits";
             this.Text = "FrmMonthlyExpensesAndProfits";
             ((System.ComponentModel.ISupportInitialize)(this.DgvExpenses)).EndInit();
@@ -326,32 +384,38 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button BtnViewExpenses;
+        private System.Windows.Forms.Button BtnEditExpenses;
+        private System.Windows.Forms.Button BtnDelExpenses;
         private System.Windows.Forms.DataGridView DgvExpenses;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button BtnViewProfits;
+        private System.Windows.Forms.Button BtnEditProfits;
+        private System.Windows.Forms.Button BtnDelProfits;
+        private System.Windows.Forms.Button BtnAddProfits;
+        private System.Windows.Forms.Button BtnAddExpenses;
         private System.Windows.Forms.DataGridView DgvProfits;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label LblExepencesMonth;
         private System.Windows.Forms.Label LblExpenses;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label LblProfits;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label LblProftsMonth;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label LblMonth;
+        private System.Windows.Forms.Panel panel2;
     }
 }

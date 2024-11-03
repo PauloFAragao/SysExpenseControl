@@ -1,13 +1,9 @@
 ﻿using SysExpenseControl.Data;
 using SysExpenseControl.Entities;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,26 +11,78 @@ namespace SysExpenseControl.Forms
 {
     public partial class FrmMonthlyExpensesAndProfits : Form
     {
+        DateTime _date;
+
         public FrmMonthlyExpensesAndProfits()
         {
             InitializeComponent();
 
+            //Mês corrente
+            _date = DateTime.Now;
+            this.LblProftsMonth.Text = _date.ToString("MMMM");
+            this.LblExepencesMonth.Text = _date.ToString("MMMM");
+            this.LblMonth.Text = _date.ToString("MM/yyyy");
+            //this.LblDisplayMonth.Text = DateTime.Now.ToString("MM/yyyy");// para exibir o mês atual
+
             //carregando os dados
             Task.Run(() => Initialize());
         }
+
+        private void AddProfits()
+        {
+            FrmAddEditMonthProfits frmAddEditMonthProfits = new FrmAddEditMonthProfits(0,
+                CallLoadProfitsData, DateTime.Now, "profits_" + _date.Year + "_" + _date.Month);
+            frmAddEditMonthProfits.ShowDialog();
+        }
+
+        private void DelProfits()
+        {
+
+        }
+
+        private void ViewEditProfits(int tipe)
+        {
+            if (DgvProfits.Rows.Count > 0)
+            {
+                DateTime date;
+
+                if (DateTime.TryParse(this.DgvProfits.CurrentRow.Cells["date"].Value.ToString(),
+                    out DateTime dateValue))
+                    date = dateValue;
+                
+                else
+                    date = DateTime.Now;
+
+                FrmAddEditMonthProfits frmAddEditMonthProfits = new FrmAddEditMonthProfits(tipe, 
+                    CallLoadProfitsData,
+                    date,
+                    "profits_" + _date.Year + "_" + _date.Month,// nome da tabela
+                    Convert.ToInt32(this.DgvProfits.CurrentRow.Cells["id"].Value),
+                    Convert.ToString(this.DgvProfits.CurrentRow.Cells["name"].Value),
+                    Convert.ToDouble(this.DgvProfits.CurrentRow.Cells["value"].Value),
+                    Convert.ToString(this.DgvProfits.CurrentRow.Cells["description"].Value) );
+
+                frmAddEditMonthProfits.ShowDialog();
+            }
+            else
+            {
+                Debug.WriteLine("não tem dados");
+            }
+        }
+
         // ------------------------- Thread
         private void Initialize()
         {
             if (LoadProfitsData())
             {
                 HideColumnsProfits();
-                //ChangeColumnsProfits();
+                ChangeColumnsProfits();
             }
 
             if (LoadExpensesData())
             {
                 HideColumnsExpenses();
-                //ChangeColumnsExpenses();
+                ChangeColumnsExpenses();
             }
         }
 
@@ -129,6 +177,58 @@ namespace SysExpenseControl.Forms
             }
 
             ThreadHelper.SetPropertyValue(label, "Text", "R$: " + value.ToString("F2"));
+        }
+
+        // ------------------------- Eventos
+        private void CallLoadProfitsData()
+        {
+            Task.Run(() => LoadProfitsData());
+        }
+
+        private void CallLoadExpensesData()
+        {
+
+        }
+
+        // ------------------------- Métodos criados pelo visual studo
+        private void BtnAddProfits_Click(object sender, EventArgs e)
+        {
+            AddProfits();
+        }
+
+        private void BtnDelProfits_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnEditProfits_Click(object sender, EventArgs e)
+        {
+            ViewEditProfits(1);
+        }
+
+        private void BtnViewProfits_Click(object sender, EventArgs e)
+        {
+            ViewEditProfits(2);
+        }
+
+        private void BtnAddExpenses_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnDelExpenses_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnEditExpenses_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnViewExpenses_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

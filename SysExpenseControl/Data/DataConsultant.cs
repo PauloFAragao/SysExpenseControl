@@ -243,24 +243,35 @@ namespace SysExpenseControl.Data
         }
 
         // Método para inserir um lucro no mês
-        public static void InsertMonthProfits(string name, double value, string description, int year, int month)
+        public static void InsertMonthProfits(string name, double value, DateTime? date, string description, int year, int month)
         {
             string profitsTableName = "profits_" + year + "_" + month;
-            string insertQuery = $"Insert Into {profitsTableName} "
-                + "(name, value, description) "
-                + $"Values ('{name}', {value.ToString(CultureInfo.InvariantCulture)}, '{description}')";
 
-            SimpleQuery(insertQuery);
+            string insertQuery = $"Insert Into {profitsTableName} (name, value, ";
+            string values = $"Values ('{name}', {value.ToString(CultureInfo.InvariantCulture)}, ";
+
+            if(date != null)
+            {
+                insertQuery += "date, ";
+                values += $"'{date:yyyy-MM-dd}', ";
+            }
+
+            insertQuery += "description) ";
+            values += $"'{description}')";
+
+            SimpleQuery(insertQuery + values);
         }
 
         // Método para Editar um lucro do mês
-        public static void EditMonthProfits(int id, string name, double value, string description, int year, int month)
+        public static void EditMonthProfits(int id, string name, double value, DateTime date, 
+            string description, string tableName)
         {
-            string profitsTableName = "profits_" + year + "_" + month;
+            //string profitsTableName = "profits_" + year + "_" + month;
             string editQuery =
-                $"Update {profitsTableName} "
+                $"Update {tableName} "
                 + $"Set name = '{name}', "
-                + $"value = {value}, "
+                + $"value = {value.ToString(CultureInfo.InvariantCulture)}, "
+                + $"date = '{date:yyyy-MM-dd}', "
                 + $"description = '{description}' "
                 + $"Where id = {id}";
 
