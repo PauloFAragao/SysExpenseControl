@@ -1,23 +1,27 @@
 ﻿using SysExpenseControl.Data;
+using SysExpenseControl.Entities;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SysExpenseControl.Forms
 {
-    public partial class FrmAddEditMonthProfits : Form
+    public partial class FrmAddEditMonthExpenses : Form
     {
         private int _tipe;
         private int _id;
         private string _name;
         private double _amount;
         private DateTime _date;
-        private Action _onCloseCallback;
-
         private string _tableName;
 
-        public FrmAddEditMonthProfits(int tipe, Action onCloseCallback, DateTime date, string tableName, int id = 0,
-                string name = "", double amount = 0, string desciption = "")
+        private Action _onCloseCallback;
+
+        public FrmAddEditMonthExpenses(int tipe, Action onCloseCallback, DateTime date, string tableName,
+            int id = 0, string name = "", double amount = 0, string category = "",
+            string desciption = "")
         {
             InitializeComponent();
 
@@ -26,21 +30,24 @@ namespace SysExpenseControl.Forms
             _name = name;
             _amount = amount;
             _date = date;
-            _onCloseCallback = onCloseCallback;
             _tableName = tableName;
+            _onCloseCallback = onCloseCallback;
 
             FillFields(desciption);
+
+            // Carregando os dados
+            Task.Run(() => Initialize(category));
         }
 
         private void FillFields(string desciption)
         {
             if (_tipe != 0)
             {
-                this.LblTitle.Text = "Editar Receita";
+                this.LblTitle.Text = "Editar Gasto Fixo";
                 this.TxtName.Text = _name;
                 this.TxtValue.Text = _amount.ToString("F2", CultureInfo.InstalledUICulture);
-                this.RtbDescription.Text = desciption;
                 this.DateTimePicker.Text = _date.ToString();
+                this.RtbDescription.Text = desciption;
 
                 if (_tipe == 2)
                 {
@@ -59,13 +66,15 @@ namespace SysExpenseControl.Forms
             {
                 if (_tipe == 0)// Adicionar
                 {
-                    DataConsultant.InsertMonthProfits(_name, _amount, Convert.ToDateTime(DateTimePicker.Value),
-                         this.RtbDescription.Text, DateTime.Now.Year, DateTime.Now.Month);
+                    DataConsultant.InsertMonthExpense(_name, _amount, Convert.ToDateTime(DateTimePicker.Value), 
+                        -1, this.CbxCategories.Text, this.RtbDescription.Text, DateTime.Now.Year, 
+                        DateTime.Now.Month);
+
                 }
                 else// Editar
                 {
                     DataConsultant.EditMonthProfits(_id, _name, _amount, Convert.ToDateTime(DateTimePicker.Value),
-                        this.RtbDescription.Text, _tableName);
+                        this.CbxCategories.Text, this.RtbDescription.Text, _tableName);
                 }
 
                 this.Close();
@@ -113,12 +122,22 @@ namespace SysExpenseControl.Forms
             this.BtnCancel.Visible = true;
         }
 
-        // ------------------------- Métodos criados pelo visual studio
-        private void BtnEdit_Click(object sender, EventArgs e)
+        // ------------------------- Thread
+        private void Initialize(string category)
         {
-            Edit();
+            List<string> data = DataConsultant.GetCategorys();
+
+            // Carregando os dados no comboBox
+            ThreadHelper.SetComboBoxData(CbxCategories, data);
+
+            if (category != "")
+                ThreadHelper.SetPropertyValue(CbxCategories, "Text", category);
+
+            else
+                ThreadHelper.SetPropertyValue(CbxCategories, "SelectedIndex", 0);
         }
 
+        // ------------------------- Métodos criados pelo visual studio
         private void BtnSave_Click(object sender, EventArgs e)
         {
             Save();
@@ -129,7 +148,17 @@ namespace SysExpenseControl.Forms
             this.Close();
         }
 
-        private void FrmAddEditMonthProfits_FormClosed(object sender, FormClosedEventArgs e)
+        private void BtnEdit_Click(object sender, EventArgs e)
+        {
+            Edit();
+        }
+
+        private void BtnView_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FrmAddEditMonthExpenses_FormClosed(object sender, FormClosedEventArgs e)
         {
             _onCloseCallback?.Invoke();
         }

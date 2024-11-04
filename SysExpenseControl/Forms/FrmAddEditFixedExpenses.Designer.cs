@@ -153,7 +153,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(19, 128);
+            this.label5.Location = new System.Drawing.Point(17, 128);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(59, 13);
             this.label5.TabIndex = 23;
@@ -208,7 +208,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(293, 378);
+            this.ClientSize = new System.Drawing.Size(294, 378);
             this.Controls.Add(this.TxtNumberOfInstallments);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -226,7 +226,11 @@
             this.Controls.Add(this.RtbDescription);
             this.Controls.Add(this.TxtName);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FrmAddEditFixedExpenses";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Gasto Fixo";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmAddEditFixedExpenses_FormClosed);
             this.ResumeLayout(false);

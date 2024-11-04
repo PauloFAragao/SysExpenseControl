@@ -122,22 +122,23 @@ namespace SysExpenseControl.Forms
         private void ChangeColumns()
         {
             ThreadHelper.SetColumnHeaderText(this.DgvData, 1, "Nome");
-            ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 1, DataGridViewAutoSizeColumnMode.Fill);
+            //ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 1, DataGridViewAutoSizeColumnMode.Fill);
+            ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 1, DataGridViewAutoSizeColumnMode.AllCells);
 
             ThreadHelper.SetColumnHeaderText(this.DgvData, 2, "Valor R$");
-            ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 2, DataGridViewAutoSizeColumnMode.DisplayedCells);
+            //ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 2, DataGridViewAutoSizeColumnMode.DisplayedCells);
 
             ThreadHelper.SetColumnHeaderText(this.DgvData, 3, "Data de vencimento");
-            ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 3, DataGridViewAutoSizeColumnMode.DisplayedCells);
+            //ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 3, DataGridViewAutoSizeColumnMode.DisplayedCells);
 
             ThreadHelper.SetColumnHeaderText(this.DgvData, 4, "Quantidade de parcelas restante");
-            ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 4, DataGridViewAutoSizeColumnMode.DisplayedCells);
+            //ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 4, DataGridViewAutoSizeColumnMode.DisplayedCells);
 
             ThreadHelper.SetColumnHeaderText(this.DgvData, 6, "Nome da categoria");
-            ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 6, DataGridViewAutoSizeColumnMode.DisplayedCells);
+            //ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 6, DataGridViewAutoSizeColumnMode.DisplayedCells);
 
             ThreadHelper.SetColumnHeaderText(this.DgvData, 7, "Pagamento realizado em");
-            ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 7, DataGridViewAutoSizeColumnMode.DisplayedCells);
+            //ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 7, DataGridViewAutoSizeColumnMode.DisplayedCells);
         }
 
         private void TakeDataFromDataTable(DataTable dataTable)

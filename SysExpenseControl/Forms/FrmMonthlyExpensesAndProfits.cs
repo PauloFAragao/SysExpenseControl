@@ -28,41 +28,122 @@ namespace SysExpenseControl.Forms
             Task.Run(() => Initialize());
         }
 
-        private void AddProfits()
+        private void AddProfit()
         {
             FrmAddEditMonthProfits frmAddEditMonthProfits = new FrmAddEditMonthProfits(0,
                 CallLoadProfitsData, DateTime.Now, "profits_" + _date.Year + "_" + _date.Month);
             frmAddEditMonthProfits.ShowDialog();
         }
 
-        private void DelProfits()
+        private void DelProfit()
         {
+            if (DgvProfits.Rows.Count > 0)
+            {
+                if (MessageBox.Show(
+                    "Confirme para deletar: " + this.DgvProfits.CurrentRow.Cells["name"].Value,
+                    "Deletar Receita?",
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Question) == DialogResult.OK)
+                {
+                    DataConsultant.DeleteMonthProfits(
+                        Convert.ToInt32(this.DgvProfits.CurrentRow.Cells["id"].Value),
+                        _date.Year, _date.Month);
 
+                    //carregando os dados
+                    Task.Run(() => LoadProfitsData());
+                }
+            }
+            else
+            {
+                Debug.WriteLine("não tem dados");
+            }
         }
 
-        private void ViewEditProfits(int tipe)
+        private void ViewEditProfit(int tipe)
         {
             if (DgvProfits.Rows.Count > 0)
             {
                 DateTime date;
 
+                // Verificando se o campo data está vazio e capturando o valor
                 if (DateTime.TryParse(this.DgvProfits.CurrentRow.Cells["date"].Value.ToString(),
                     out DateTime dateValue))
                     date = dateValue;
-                
+
                 else
                     date = DateTime.Now;
 
-                FrmAddEditMonthProfits frmAddEditMonthProfits = new FrmAddEditMonthProfits(tipe, 
+                FrmAddEditMonthProfits frmAddEditMonthProfits = new FrmAddEditMonthProfits(tipe,
                     CallLoadProfitsData,
                     date,
                     "profits_" + _date.Year + "_" + _date.Month,// nome da tabela
                     Convert.ToInt32(this.DgvProfits.CurrentRow.Cells["id"].Value),
                     Convert.ToString(this.DgvProfits.CurrentRow.Cells["name"].Value),
                     Convert.ToDouble(this.DgvProfits.CurrentRow.Cells["value"].Value),
-                    Convert.ToString(this.DgvProfits.CurrentRow.Cells["description"].Value) );
+                    Convert.ToString(this.DgvProfits.CurrentRow.Cells["description"].Value));
 
                 frmAddEditMonthProfits.ShowDialog();
+            }
+            else
+            {
+                Debug.WriteLine("não tem dados");
+            }
+        }
+
+        private void AddExpense()
+        {
+            FrmAddEditMonthExpenses frmAddEditMonthExpenses = new FrmAddEditMonthExpenses(0,
+                CallLoadExpensesData, DateTime.Now, "expenses_" + _date.Year + "_" + _date.Month);
+            frmAddEditMonthExpenses.ShowDialog();
+        }
+
+        private void DelExpense()
+        {
+            if (DgvExpenses.Rows.Count > 0)
+            {
+                if (MessageBox.Show(
+                    "Confirme para deletar: " + this.DgvExpenses.CurrentRow.Cells["name"].Value,
+                    "Deletar Receita?",
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Question) == DialogResult.OK)
+                {
+                    DataConsultant.DeleteMonthExpense(
+                        Convert.ToInt32(this.DgvExpenses.CurrentRow.Cells["id"].Value),
+                        _date.Year, _date.Month);
+
+                    //carregando os dados
+                    Task.Run(() => LoadExpensesData());
+                }
+            }
+            else
+            {
+                Debug.WriteLine("não tem dados");
+            }
+        }
+
+        private void ViewEditExepense(int tipe)
+        {
+            if (DgvExpenses.Rows.Count > 0)
+            {
+                DateTime date;
+
+                // Verificando se o campo data está vazio e capturando o valor
+                if (DateTime.TryParse(this.DgvExpenses.CurrentRow.Cells["date"].Value.ToString(),
+                    out DateTime dateValue))
+                    date = dateValue;
+
+                else
+                    date = DateTime.Now;
+
+                FrmAddEditMonthExpenses frmAddEditMonthExpenses = new FrmAddEditMonthExpenses(tipe,
+                CallLoadExpensesData, date, "expenses_" + _date.Year + "_" + _date.Month,
+                Convert.ToInt32(this.DgvExpenses.CurrentRow.Cells["id"].Value),
+                Convert.ToString(this.DgvExpenses.CurrentRow.Cells["name"].Value),
+                Convert.ToDouble(this.DgvExpenses.CurrentRow.Cells["value"].Value),
+                Convert.ToString(this.DgvExpenses.CurrentRow.Cells["categorieName"].Value),
+                Convert.ToString(this.DgvExpenses.CurrentRow.Cells["description"].Value) );
+
+                frmAddEditMonthExpenses.ShowDialog();
             }
             else
             {
@@ -187,48 +268,48 @@ namespace SysExpenseControl.Forms
 
         private void CallLoadExpensesData()
         {
-
+            Task.Run(() => LoadExpensesData());
         }
 
         // ------------------------- Métodos criados pelo visual studo
         private void BtnAddProfits_Click(object sender, EventArgs e)
         {
-            AddProfits();
+            AddProfit();
         }
 
         private void BtnDelProfits_Click(object sender, EventArgs e)
         {
-
+            DelProfit();
         }
 
         private void BtnEditProfits_Click(object sender, EventArgs e)
         {
-            ViewEditProfits(1);
+            ViewEditProfit(1);
         }
 
         private void BtnViewProfits_Click(object sender, EventArgs e)
         {
-            ViewEditProfits(2);
+            ViewEditProfit(2);
         }
 
         private void BtnAddExpenses_Click(object sender, EventArgs e)
         {
-
+            AddExpense();
         }
 
         private void BtnDelExpenses_Click(object sender, EventArgs e)
         {
-
+            DelExpense();
         }
 
         private void BtnEditExpenses_Click(object sender, EventArgs e)
         {
-
+            ViewEditExepense(1);
         }
 
         private void BtnViewExpenses_Click(object sender, EventArgs e)
         {
-
+            ViewEditExepense(2);
         }
     }
 }

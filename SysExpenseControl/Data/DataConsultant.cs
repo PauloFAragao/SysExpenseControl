@@ -56,7 +56,7 @@ namespace SysExpenseControl.Data
             return ViewQuery(viewQuery);
         }
 
-        //Método para pesquisar os nomes das categorias
+        // Método que vai pegar os nomes das categorias
         public static List<string> GetCategorys()
         {
             string query = "Select name From categories Order by id";
@@ -180,7 +180,7 @@ namespace SysExpenseControl.Data
             string viewQuery =
             "Select "
             + "f.id, f.name, "
-            + "f.value, f.dueDay, f.numberOfInstallments, "
+            + "e.value, f.dueDay, f.numberOfInstallments, "
             + "f.category, c.name As categorieName, "
             + "e.date As dayItWasPaid "
             + "From fixed_expenses f "
@@ -243,7 +243,8 @@ namespace SysExpenseControl.Data
         }
 
         // Método para inserir um lucro no mês
-        public static void InsertMonthProfits(string name, double value, DateTime? date, string description, int year, int month)
+        public static void InsertMonthProfits(string name, double value, DateTime? date, string description, 
+            int year, int month)
         {
             string profitsTableName = "profits_" + year + "_" + month;
 
@@ -307,7 +308,8 @@ namespace SysExpenseControl.Data
 
         // Método para inserir um gasto no mês
         public static void InsertMonthExpense(string name, double value, DateTime? dateOfExpenditure,
-            int idFixedExpenses, string category, string description, int year, int month)
+            int idFixedExpenses, string category, string description, int year, int month, 
+            string fixedExpense = "")
         {
             string expensesTableName = "expenses_" + year + "_" + month;
 
@@ -319,14 +321,21 @@ namespace SysExpenseControl.Data
             if(dateOfExpenditure != null)
             {
                 insertQuery += "date, ";
-                values += $"{dateOfExpenditure}, ";
+                values += $"'{dateOfExpenditure:yyyy-MM-dd}', ";
             }
 
             // se tem referencia a tabela de gastos fixos
-            if(idFixedExpenses != -1)
+            if (idFixedExpenses != -1)
             {
                 insertQuery += "idFixedExpenses, ";
                 values += $"{idFixedExpenses}, ";
+            }
+
+            // Referencia a tabela de gastos fixos pelo nome do gasto
+            if(fixedExpense != "")
+            {
+                insertQuery += "idFixedExpenses, ";
+                values += $"(Select id From fixed_expenses Where name = {fixedExpense}), ";
             }
 
             insertQuery += "description) ";
@@ -336,17 +345,17 @@ namespace SysExpenseControl.Data
         }
 
         // Método para Editar um gasto do mês
-        public static void EditMonthProfits(int id, string name, double value, DateTime dateOfExpenditure, int category, string description, int year, int month)
+        public static void EditMonthProfits(int id, string name, double value, DateTime dateOfExpenditure, 
+            string category, string description, string tableName)
         {
-            string expensesTableName = "expenses_" + year + "_" + month;
             string editQuery =
-                $"Update {expensesTableName} "
+                $"Update {tableName} "
                 + $"Set name = '{name}', "
-                + $"value = {value}, "
-                + $"dateOfExpenditure = '{dateOfExpenditure}', "
-                + $"category = {category}, "
+                + $"value = {value.ToString(CultureInfo.InvariantCulture)}, "
+                + $"date = '{dateOfExpenditure:yyyy-MM-dd}', "
+                + $"category = (Select id From categories Where name = '{category}'), "
                 + $"description = '{description}' "
-                + $"Where id = {id})";
+                + $"Where id = {id}";
 
             SimpleQuery(editQuery);
         }

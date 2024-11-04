@@ -162,11 +162,11 @@
             this.Controls.Add(this.RtbDescription);
             this.Controls.Add(this.TxtName);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(310, 340);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(310, 340);
             this.Name = "FrmAddEditFixedProfits";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Receita Fixa";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmAddEditFixedProfits_FormClosed);
             this.ResumeLayout(false);

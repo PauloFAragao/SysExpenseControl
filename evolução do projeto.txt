@@ -53,10 +53,11 @@ ao montante
 -Implementados os botões de Adicionar, Editar e Visualizar na tela de lucros do mês corrente
 -Agora o label que exibe o Mês corrente na tela de visualizar contas está funcionando
 
-
-
-
-
+-Implementado o botão de deletar na tela de lucros do mês corrente
+-Implementado o botão de Adicionar, Visualizar, Remover e Editar na tela de gastos do mês corrente
+-Resolvido um bug na tela de contas, a consulta ao banco de dados estava pegando um valor da tabela errada
+-Alterada a forma como o DataGridView da tela de contas exibia os dados
+-O tamanho minimo da janela foi limitado
 
 
 
