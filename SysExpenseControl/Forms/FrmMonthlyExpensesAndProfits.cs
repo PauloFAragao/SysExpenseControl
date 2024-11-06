@@ -141,7 +141,9 @@ namespace SysExpenseControl.Forms
                 Convert.ToString(this.DgvExpenses.CurrentRow.Cells["name"].Value),
                 Convert.ToDouble(this.DgvExpenses.CurrentRow.Cells["value"].Value),
                 Convert.ToString(this.DgvExpenses.CurrentRow.Cells["categorieName"].Value),
-                Convert.ToString(this.DgvExpenses.CurrentRow.Cells["description"].Value) );
+                Convert.ToString(this.DgvExpenses.CurrentRow.Cells["description"].Value),
+                Convert.ToInt32(this.DgvExpenses.CurrentRow.Cells["idFixedExpenses"].Value),
+                Convert.ToBoolean(this.DgvExpenses.CurrentRow.Cells["paid"].Value));
 
                 frmAddEditMonthExpenses.ShowDialog();
             }
@@ -223,7 +225,9 @@ namespace SysExpenseControl.Forms
 
         private void HideColumnsExpenses()
         {
-            ThreadHelper.SetColumnVisibility(this.DgvExpenses, 0, false);//mudando a visibilidade da coluna id
+            ThreadHelper.SetColumnVisibility(this.DgvExpenses, 0, false);// mudando a visibilidade da coluna id
+            ThreadHelper.SetColumnVisibility(this.DgvExpenses, 6, false);// coluna com os ids a tabela de gastos fixos
+            ThreadHelper.SetColumnVisibility(this.DgvExpenses, 7, false);// coluna que indica que já foi pago
         }
 
         private void ChangeColumnsExpenses()

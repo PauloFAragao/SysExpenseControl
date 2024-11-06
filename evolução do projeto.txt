@@ -59,6 +59,21 @@ ao montante
 -Alterada a forma como o DataGridView da tela de contas exibia os dados
 -O tamanho minimo da janela foi limitado
 
+-Adicionada uma colula nas tabelas de gastos do mês
+-Agora quando uma conta é marcada como paga subtrai 1 a quantidade de parcelas se aplicavel
+-Agora ao editar uma conta marcada como paga é possivel marcar ela como não paga
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

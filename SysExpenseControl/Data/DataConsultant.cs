@@ -23,7 +23,7 @@ namespace SysExpenseControl.Data
                     connection.Open();
 
                     // Consulta 
-                    string query = 
+                    string query =
                         "Select Exists(Select 1 From references_to_tables "
                         + "Where year = @year And month = @month)";
 
@@ -192,7 +192,7 @@ namespace SysExpenseControl.Data
         }
 
         // Método para Inserir um gasto fixo
-        public static int InsertFixedExpense(string name, double value, int dueDay, int numberOfInstallments, 
+        public static int InsertFixedExpense(string name, double value, int dueDay, int numberOfInstallments,
             string category, string description)
         {
             string insertQuery =
@@ -224,6 +224,37 @@ namespace SysExpenseControl.Data
             SimpleQuery(editQuery);
         }
 
+        // Método para subtrair uma parcela
+        public static void SubtractInstallment(int id)
+        {
+            string editQuery = "Update fixed_Expenses "
+                + "Set numberOfInstallments = "
+                + "Case When numberOfInstallments > 0 Then numberOfInstallments - 1 Else 0 End "
+                + $"Where id = {id}";
+
+            SimpleQuery(editQuery);
+        }
+
+        // Método para substituir o método SubtractInstallment
+        public static void EditInstallment(int id, bool subtract)
+        {
+            string editQuery = "Update fixed_Expenses "
+                + "Set numberOfInstallments = ";
+
+            if (subtract)// para subtrair uma prestação
+            {
+                editQuery += "Case When numberOfInstallments > 0 Then numberOfInstallments - 1 Else 0 End ";
+            }
+            else// para somar uma prestação
+            {
+                editQuery += "numberOfInstallments + 1 ";
+            }
+
+            editQuery += $"Where id = {id}";
+
+            SimpleQuery(editQuery);
+        }
+
         // Método para deletar um gasto fixo
         public static void DeleteFixedExpense(int id)
         {
@@ -243,7 +274,7 @@ namespace SysExpenseControl.Data
         }
 
         // Método para inserir um lucro no mês
-        public static void InsertMonthProfits(string name, double value, DateTime? date, string description, 
+        public static void InsertMonthProfits(string name, double value, DateTime? date, string description,
             int year, int month)
         {
             string profitsTableName = "profits_" + year + "_" + month;
@@ -251,7 +282,7 @@ namespace SysExpenseControl.Data
             string insertQuery = $"Insert Into {profitsTableName} (name, value, ";
             string values = $"Values ('{name}', {value.ToString(CultureInfo.InvariantCulture)}, ";
 
-            if(date != null)
+            if (date != null)
             {
                 insertQuery += "date, ";
                 values += $"'{date:yyyy-MM-dd}', ";
@@ -264,10 +295,9 @@ namespace SysExpenseControl.Data
         }
 
         // Método para Editar um lucro do mês
-        public static void EditMonthProfits(int id, string name, double value, DateTime date, 
+        public static void EditMonthProfits(int id, string name, double value, DateTime date,
             string description, string tableName)
         {
-            //string profitsTableName = "profits_" + year + "_" + month;
             string editQuery =
                 $"Update {tableName} "
                 + $"Set name = '{name}', "
@@ -298,7 +328,7 @@ namespace SysExpenseControl.Data
             string viewQuery =
                 "Select "
                 + "f.id, f.name, f.value, f.date, c.name As categorieName, "
-                + "f.description "
+                + "f.description, f.idFixedExpenses, f.paid "
                 + $"From {expensesTableName} f "
                 + "Join categories c On f.category = c.id "
                 + $"Order by date Asc";
@@ -308,17 +338,17 @@ namespace SysExpenseControl.Data
 
         // Método para inserir um gasto no mês
         public static void InsertMonthExpense(string name, double value, DateTime? dateOfExpenditure,
-            int idFixedExpenses, string category, string description, int year, int month, 
+            int idFixedExpenses, string category, string description, int year, int month, bool paid,
             string fixedExpense = "")
         {
             string expensesTableName = "expenses_" + year + "_" + month;
 
-            string insertQuery = $"Insert Into {expensesTableName} (name, value, category, ";
+            string insertQuery = $"Insert Into {expensesTableName} (name, value, category, paid, ";
             string values = $"Values ('{name}', {value.ToString(CultureInfo.InvariantCulture)}, "
-                + $"(Select id From categories where name = '{category}'), ";
+                + $"(Select id From categories where name = '{category}'), {paid}, ";
 
             // Se já vai inserir com uma data
-            if(dateOfExpenditure != null)
+            if (dateOfExpenditure != null)
             {
                 insertQuery += "date, ";
                 values += $"'{dateOfExpenditure:yyyy-MM-dd}', ";
@@ -332,7 +362,7 @@ namespace SysExpenseControl.Data
             }
 
             // Referencia a tabela de gastos fixos pelo nome do gasto
-            if(fixedExpense != "")
+            if (fixedExpense != "")
             {
                 insertQuery += "idFixedExpenses, ";
                 values += $"(Select id From fixed_expenses Where name = {fixedExpense}), ";
@@ -345,16 +375,21 @@ namespace SysExpenseControl.Data
         }
 
         // Método para Editar um gasto do mês
-        public static void EditMonthProfits(int id, string name, double value, DateTime dateOfExpenditure, 
-            string category, string description, string tableName)
+        public static void EditMonthExpense(int id, string name, double value, DateTime dateOfExpenditure,
+            string category, string description, string tableName, bool paid)
         {
             string editQuery =
                 $"Update {tableName} "
                 + $"Set name = '{name}', "
                 + $"value = {value.ToString(CultureInfo.InvariantCulture)}, "
-                + $"date = '{dateOfExpenditure:yyyy-MM-dd}', "
                 + $"category = (Select id From categories Where name = '{category}'), "
-                + $"description = '{description}' "
+                + $"paid = {paid}, ";
+
+            if (paid) editQuery += $"date = '{dateOfExpenditure:yyyy-MM-dd}', ";
+            else editQuery += "date = NULL, ";
+
+            editQuery +=
+                $"description = '{description}' "
                 + $"Where id = {id}";
 
             SimpleQuery(editQuery);

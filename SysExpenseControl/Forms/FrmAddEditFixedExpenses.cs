@@ -91,7 +91,7 @@ namespace SysExpenseControl.Forms
                     // Adicionando na tabela de gastos do Mês corrente
                     DataConsultant.InsertMonthExpense(_name, _amount, null, id,
                         this.CbxCategories.Text, this.RtbDescription.Text, DateTime.Now.Year,
-                        DateTime.Now.Month);
+                        DateTime.Now.Month, false);
 
                 }
                 else// Editar

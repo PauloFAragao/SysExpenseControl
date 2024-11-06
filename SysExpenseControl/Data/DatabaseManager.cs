@@ -206,15 +206,18 @@ namespace SysExpenseControl.Data
                     // Gastos do mês
                     string expensesTableName = "expenses_" + year + "_" + month;// gerando o nome da tabela
                     string createTableExpenses =
-                        $"Create Table If Not Exists \"{expensesTableName}\"("
-                        + "id Integer Primary Key,"
-                        + "name Varchar (50) Unique,"
-                        + "value Real Not Null,"
-                        + "date Date,"
+                        $"Create Table If Not Exists \"{expensesTableName}\"( "
+                        + "id Integer Primary Key, "
+                        + "name Varchar (50) Unique, "
+                        + "value Real Not Null, "
+                        + "date Date, "
                         //References categories (id) - indica foreign key //On Delete Set Default - quando a categoria for deletada muda para o default que é 0
-                        + "category Integer References categories (id) On Delete Set Default Default '0',"// 0 Para sem categoria
+                        + "category Integer References categories (id) On Delete Set Default Default '0', "// 0 Para sem categoria
+                        + "paid Bit Default '0', "// se já foi pago ou não
                         + "description Text, "
-                        + "idFixedExpenses Integer Default '0')";
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>> essa constrain de Delete Set Default não está funcionando aqui <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+                        + "idFixedExpenses Integer References fixed_expenses (id) On Delete Set Default Default '0')";
+
 
                     //------------------------------------ Executando as querys
                     // criar tabela de lucros

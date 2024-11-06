@@ -43,6 +43,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.LblDate = new System.Windows.Forms.Label();
             this.DateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.BtnNotPaid = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label6
@@ -184,11 +185,25 @@
             this.DateTimePicker.Size = new System.Drawing.Size(218, 20);
             this.DateTimePicker.TabIndex = 45;
             // 
+            // BtnNotPaid
+            // 
+            this.BtnNotPaid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.BtnNotPaid.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnNotPaid.Location = new System.Drawing.Point(199, 6);
+            this.BtnNotPaid.Name = "BtnNotPaid";
+            this.BtnNotPaid.Size = new System.Drawing.Size(75, 23);
+            this.BtnNotPaid.TabIndex = 47;
+            this.BtnNotPaid.Text = "Paga";
+            this.BtnNotPaid.UseVisualStyleBackColor = false;
+            this.BtnNotPaid.Visible = false;
+            this.BtnNotPaid.Click += new System.EventHandler(this.BtnNotPaid_Click);
+            // 
             // FrmAddEditMonthExpenses
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(294, 351);
+            this.Controls.Add(this.BtnNotPaid);
             this.Controls.Add(this.LblDate);
             this.Controls.Add(this.DateTimePicker);
             this.Controls.Add(this.label6);
@@ -232,5 +247,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label LblDate;
         private System.Windows.Forms.DateTimePicker DateTimePicker;
+        private System.Windows.Forms.Button BtnNotPaid;
     }
 }
