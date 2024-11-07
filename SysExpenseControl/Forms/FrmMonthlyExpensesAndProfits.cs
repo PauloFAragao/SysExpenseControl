@@ -135,15 +135,33 @@ namespace SysExpenseControl.Forms
                 else
                     date = DateTime.Now;
 
+                // capturando se é uma conta que tem uma quantidade de parcelas para terminar
+                bool definedNumberOfInstallments;
+                if(bool.TryParse(this.DgvExpenses.CurrentRow.Cells["definedNumberOfInstallments"].Value.ToString(),
+                     out bool value))
+                {
+                    definedNumberOfInstallments = value;
+                }
+                else definedNumberOfInstallments = false;
+
+                // capturando a refencia a tabela de gastos fixos
+                int idFixedExpenses;
+                if(int.TryParse(this.DgvExpenses.CurrentRow.Cells["idFixedExpenses"].Value.ToString(), out int id))
+                {
+                    idFixedExpenses = id;
+                }
+                else idFixedExpenses = 0;
+
                 FrmAddEditMonthExpenses frmAddEditMonthExpenses = new FrmAddEditMonthExpenses(tipe,
-                CallLoadExpensesData, date, "expenses_" + _date.Year + "_" + _date.Month,
-                Convert.ToInt32(this.DgvExpenses.CurrentRow.Cells["id"].Value),
-                Convert.ToString(this.DgvExpenses.CurrentRow.Cells["name"].Value),
-                Convert.ToDouble(this.DgvExpenses.CurrentRow.Cells["value"].Value),
-                Convert.ToString(this.DgvExpenses.CurrentRow.Cells["categorieName"].Value),
-                Convert.ToString(this.DgvExpenses.CurrentRow.Cells["description"].Value),
-                Convert.ToInt32(this.DgvExpenses.CurrentRow.Cells["idFixedExpenses"].Value),
-                Convert.ToBoolean(this.DgvExpenses.CurrentRow.Cells["paid"].Value));
+                    CallLoadExpensesData, date, "expenses_" + _date.Year + "_" + _date.Month,
+                    Convert.ToInt32(this.DgvExpenses.CurrentRow.Cells["id"].Value),
+                    Convert.ToString(this.DgvExpenses.CurrentRow.Cells["name"].Value),
+                    Convert.ToDouble(this.DgvExpenses.CurrentRow.Cells["value"].Value),
+                    Convert.ToString(this.DgvExpenses.CurrentRow.Cells["categorieName"].Value),
+                    Convert.ToString(this.DgvExpenses.CurrentRow.Cells["description"].Value),
+                    idFixedExpenses,
+                    Convert.ToBoolean(this.DgvExpenses.CurrentRow.Cells["paid"].Value),
+                    definedNumberOfInstallments);
 
                 frmAddEditMonthExpenses.ShowDialog();
             }
@@ -226,8 +244,9 @@ namespace SysExpenseControl.Forms
         private void HideColumnsExpenses()
         {
             ThreadHelper.SetColumnVisibility(this.DgvExpenses, 0, false);// mudando a visibilidade da coluna id
-            ThreadHelper.SetColumnVisibility(this.DgvExpenses, 6, false);// coluna com os ids a tabela de gastos fixos
-            ThreadHelper.SetColumnVisibility(this.DgvExpenses, 7, false);// coluna que indica que já foi pago
+            ThreadHelper.SetColumnVisibility(this.DgvExpenses, 7, false);// coluna com os ids a tabela de gastos fixos
+            ThreadHelper.SetColumnVisibility(this.DgvExpenses, 8, false);// coluna que indica que já foi pago
+            ThreadHelper.SetColumnVisibility(this.DgvExpenses, 9, false);// coluna que indica se tem quantidade de parcelas
         }
 
         private void ChangeColumnsExpenses()
@@ -244,8 +263,11 @@ namespace SysExpenseControl.Forms
             ThreadHelper.SetColumnHeaderText(this.DgvExpenses, 4, "Categoria");
             ThreadHelper.SetColumnAutoSizeMode(this.DgvExpenses, 4, DataGridViewAutoSizeColumnMode.DisplayedCells);
 
-            ThreadHelper.SetColumnHeaderText(this.DgvExpenses, 5, "Descrição");
-            ThreadHelper.SetColumnAutoSizeMode(this.DgvExpenses, 5, DataGridViewAutoSizeColumnMode.Fill);
+            ThreadHelper.SetColumnHeaderText(this.DgvExpenses, 5, "Quantidade de parcelas restantes");
+            ThreadHelper.SetColumnAutoSizeMode(this.DgvExpenses, 5, DataGridViewAutoSizeColumnMode.DisplayedCells);
+
+            ThreadHelper.SetColumnHeaderText(this.DgvExpenses, 6, "Descrição");
+            ThreadHelper.SetColumnAutoSizeMode(this.DgvExpenses, 6, DataGridViewAutoSizeColumnMode.Fill);
         }
 
         // Método que soma os valores dos gastos e lucros e imprime os valores

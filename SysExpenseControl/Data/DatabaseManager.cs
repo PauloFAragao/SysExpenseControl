@@ -60,7 +60,8 @@ namespace SysExpenseControl.Data
                         + "name Varchar (50) Unique,"
                         + "value Real Not Null,"
                         + "dueDay Integer,"// data para o vencimento
-                        + "numberOfInstallments, "// parcelas restantes
+                        + "numberOfInstallments Integer, "// parcelas restantes
+                        + "definedNumberOfInstallments Bit, "// se tem uma quantidade de parcelas
                         //References categories (id) - indica foreign key //On Delete Set Default - quando a categoria for deletada muda para o default que é 0
                         + "category Integer References categories (id) On Delete Set Default Default '0',"// 0 Para sem categoria
                         + "description Text)";
@@ -79,8 +80,8 @@ namespace SysExpenseControl.Data
                         "Create Table If Not Exists references_to_tables("
                         + "year Integer Not Null,"
                         + "month Integer Not Null,"
-                        + "nameOfTheTableProfits Varchar(15),"
-                        + "nameOfTheTableExpenses Varchar(16))";
+                        + "nameTableProfits Varchar(15),"
+                        + "nameTableExpenses Varchar(16))";
 
                     // Tabela para as referencias das tabelas dos investimentos
                     string createTableReferencesToTablesInvestiment =
@@ -208,16 +209,14 @@ namespace SysExpenseControl.Data
                     string createTableExpenses =
                         $"Create Table If Not Exists \"{expensesTableName}\"( "
                         + "id Integer Primary Key, "
-                        + "name Varchar (50) Unique, "
+                        + "name Varchar (50), "//Unique
                         + "value Real Not Null, "
                         + "date Date, "
                         //References categories (id) - indica foreign key //On Delete Set Default - quando a categoria for deletada muda para o default que é 0
                         + "category Integer References categories (id) On Delete Set Default Default '0', "// 0 Para sem categoria
                         + "paid Bit Default '0', "// se já foi pago ou não
                         + "description Text, "
-// >>>>>>>>>>>>>>>>>>>>>>>>>>>>> essa constrain de Delete Set Default não está funcionando aqui <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-                        + "idFixedExpenses Integer References fixed_expenses (id) On Delete Set Default Default '0')";
-
+                        + "idFixedExpenses Integer Null References fixed_expenses (id) On Delete Set Null)";
 
                     //------------------------------------ Executando as querys
                     // criar tabela de lucros
@@ -234,17 +233,17 @@ namespace SysExpenseControl.Data
                     // Comando para guardar os nomes
                     string insertInReferences_to_tables =
                         "Insert Into References_to_tables "
-                        + "(year, month, nameOfTheTableProfits, nameOfTheTableExpenses) "
+                        + "(year, month, nameTableProfits, nameTableExpenses) "
                         + "Values "
-                        + "(@year, @month, @nameOfTheTableProfits, @nameOfTheTableExpenses)";
+                        + "(@year, @month, @nameTableProfits, @nameTableExpenses)";
 
                     // Guardando os nomes das tabelas
                     using (var command = new SQLiteCommand(insertInReferences_to_tables, connection))
                     {
                         command.Parameters.AddWithValue("@year", year);
                         command.Parameters.AddWithValue("@month", month);
-                        command.Parameters.AddWithValue("@nameOfTheTableProfits", profitsTableName);
-                        command.Parameters.AddWithValue("@nameOfTheTableExpenses", expensesTableName);
+                        command.Parameters.AddWithValue("@nameTableProfits", profitsTableName);
+                        command.Parameters.AddWithValue("@nameTableExpenses", expensesTableName);
 
                         command.ExecuteNonQuery();
                     }

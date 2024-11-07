@@ -84,6 +84,8 @@ namespace SysExpenseControl.Forms
                     DataConsultant.DeleteFixedExpense(
                         Convert.ToInt32(this.DgvFixedExpenses.CurrentRow.Cells["id"].Value));
 
+
+
                     //carregando os dados
                     Task.Run(() => LoadFixedExpensesData());
                 }

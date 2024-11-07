@@ -12,36 +12,39 @@ namespace SysExpenseControl.Forms
 {
     public partial class FrmAddEditMonthExpenses : Form
     {
-        private int _tipe;
-        private int _id;
-        private string _name;
-        private double _amount;
-        private DateTime _date;
-        private string _tableName;
-        private string _category;
-        private bool _paid;
+        private int _tipe;// 0 - adicionar/1 - editar/2 - visualizar
+        private int _id;// id no banco de dados - só no caso de editar/visualizar
+        private string _name;// nome da despesa
+        private double _value;// valor da despesa
+        private DateTime _date;// data da despesa
+        private string _tableName;// nome da tabela 
+        private string _category;// categoria do gasto
+        private bool _paid;// se já está pago ou não
+        private bool _definedNumberOfInstallments;// se tem uma quantidade de parcelas para terminar
 
-        private bool _statusPaid = true;
+        private bool _statusPaid = true;// para mudar para não pago 
 
         private int _idFixedExpenses;// chave estrangeira para a tabela de gastos fixos
 
-        private Action _onCloseCallback;
+        private Action _onCloseCallback;// evento para atualizar a outra janela
 
         public FrmAddEditMonthExpenses(int tipe, Action onCloseCallback, DateTime date, string tableName,
-            int id = 0, string name = "", double amount = 0, string category = "",
-            string desciption = "", int idFixedExpenses = 0, bool paid = false)
+            int id = 0, string name = "", double value = 0, string category = "",
+            string desciption = "", int idFixedExpenses = 0, bool paid = false, 
+            bool definedNumberOfInstallments = false)
         {
             InitializeComponent();
 
             _tipe = tipe;
             _id = id;
             _name = name;
-            _amount = amount;
+            _value = value;
             _date = date;
             _tableName = tableName;
             _onCloseCallback = onCloseCallback;
             _category = category;
             _paid = paid;
+            _definedNumberOfInstallments = definedNumberOfInstallments;
 
             _idFixedExpenses = idFixedExpenses;
 
@@ -59,7 +62,7 @@ namespace SysExpenseControl.Forms
 
                 this.LblTitle.Text = "Editar Gasto Fixo";
                 this.TxtName.Text = _name;
-                this.TxtValue.Text = _amount.ToString("F2", CultureInfo.InstalledUICulture);
+                this.TxtValue.Text = _value.ToString("F2", CultureInfo.InstalledUICulture);
                 this.DateTimePicker.Text = _date.ToString();
                 this.RtbDescription.Text = desciption;
 
@@ -80,26 +83,29 @@ namespace SysExpenseControl.Forms
             {
                 if (_tipe == 0)// Adicionar
                 {
-                    DataConsultant.InsertMonthExpense(_name, _amount, Convert.ToDateTime(DateTimePicker.Value),
+                    DataConsultant.InsertMonthExpense(_name, _value, Convert.ToDateTime(DateTimePicker.Value),
                         -1, this.CbxCategories.Text, this.RtbDescription.Text, DateTime.Now.Year,
                         DateTime.Now.Month, true);
-
                 }
                 else// Editar
                 {
-                    DataConsultant.EditMonthExpense(_id, _name, _amount, Convert.ToDateTime(DateTimePicker.Value),
+                    DataConsultant.EditMonthExpense(_id, _name, _value, Convert.ToDateTime(DateTimePicker.Value),
                         this.CbxCategories.Text, this.RtbDescription.Text, _tableName, _statusPaid);
 
-                    // para subtrair uma parcela
-                    if (_idFixedExpenses != 0 &&// tem referencia a um gasto fixo
-                        _category == "Contas" &&// é uma conta
-                        !_paid &&// não está paga
-                        _statusPaid)// está editando para pagar
+                    // para cuidar das contas que tem uma quantidade de parcelas para acabar
+                    if(_category == "Contas" && _definedNumberOfInstallments && 
+                        !_paid && // se não está marcada como paga
+                        _statusPaid)// se está marcada para ser paga
                     {
-                        DataConsultant.SubtractInstallment(_idFixedExpenses);
+                        DataConsultant.EditInstallment(_idFixedExpenses, true);// subitrair uma parcela
+                    }
+                    else if(_category == "Contas" && _definedNumberOfInstallments && 
+                        _paid &&// se está marcada como paga
+                        !_statusPaid)// se está marcada para não paga
+                    {
+                        DataConsultant.EditInstallment(_idFixedExpenses, false);// somar uma parcela
                     }
                 }
-
                 this.Close();
             }
         }
@@ -121,7 +127,7 @@ namespace SysExpenseControl.Forms
             // Valor
             if (!String.IsNullOrWhiteSpace(this.TxtValue.Text) &&
                 Double.TryParse(this.TxtValue.Text, out double value))
-                _amount = value;
+                _value = value;
             else
             {
                 allFieldsAreCorrect = false;

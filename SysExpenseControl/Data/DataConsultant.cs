@@ -4,7 +4,6 @@ using System.Data;
 using System.Diagnostics;
 using System.Globalization;
 using System.Collections.Generic;
-using System.Drawing;
 
 namespace SysExpenseControl.Data
 {
@@ -174,15 +173,12 @@ namespace SysExpenseControl.Data
             return ViewQuery(viewQuery);
         }
 
+        // Método para visualizar as contas
         public static DataTable ViewAccountsPayable()
         {
             string expensesTableName = "expenses_" + DateTime.Now.Year + "_" + DateTime.Now.Month;
-            string viewQuery =
-            "Select "
-            + "f.id, f.name, "
-            + "e.value, f.dueDay, f.numberOfInstallments, "
-            + "f.category, c.name As categorieName, "
-            + "e.date As dayItWasPaid "
+            string viewQuery = "Select f.id, f.name, e.value, f.dueDay, f.numberOfInstallments, f.category, "
+            + "c.name As categorieName, e.date As dayItWasPaid "
             + "From fixed_expenses f "
             + "Join categories c On f.category = c.id "
             + $"Join {expensesTableName} e On f.id = e.idFixedExpenses "
@@ -191,15 +187,24 @@ namespace SysExpenseControl.Data
             return ViewQuery(viewQuery);
         }
 
+        // Novo método para visualizar as contas <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+        public static DataTable ViewBills(DateTime date)
+        {
+            string expensesTableName = "expenses_" + date.Year + "_" + date.Month;
+            string viewQuery = "Select  ";
+
+            return ViewQuery(viewQuery);
+        }
+
         // Método para Inserir um gasto fixo
         public static int InsertFixedExpense(string name, double value, int dueDay, int numberOfInstallments,
-            string category, string description)
+            string category, string description, bool definedNumberOfInstallments)
         {
             string insertQuery =
                 $"Insert Into fixed_expenses "
-                + "(name, value, dueDay, numberOfInstallments, category, description)"
+                + "(name, value, dueDay, numberOfInstallments, definedNumberOfInstallments, category, description)"
                 + $"Values ('{name}', {value.ToString(CultureInfo.InvariantCulture)}, "
-                + $"{dueDay}, {numberOfInstallments}, "
+                + $"{dueDay}, {numberOfInstallments}, {definedNumberOfInstallments}, "
                 + $"(Select id From categories where name = '{category}'), "
                 + $"'{description}')";
 
@@ -209,7 +214,7 @@ namespace SysExpenseControl.Data
 
         // Método para Editar um gasto fixo
         public static void EditFixedExpense(int id, string name, double value, int dueDay, int numberOfInstallments,
-            string category, string description)
+            string category, string description, bool definedNumberOfInstallments)
         {
             string editQuery =
                 "Update fixed_expenses "
@@ -217,6 +222,7 @@ namespace SysExpenseControl.Data
                 + $"value = {value.ToString(CultureInfo.InvariantCulture)}, "
                 + $"dueDay = {dueDay}, "
                 + $"numberOfInstallments = {numberOfInstallments}, "
+                + $"definedNumberOfInstallments = {definedNumberOfInstallments}, "
                 + $"category = (Select id From categories where name = '{category}'), "
                 + $"description = '{description}' "
                 + $"Where id = {id}";
@@ -224,18 +230,7 @@ namespace SysExpenseControl.Data
             SimpleQuery(editQuery);
         }
 
-        // Método para subtrair uma parcela
-        public static void SubtractInstallment(int id)
-        {
-            string editQuery = "Update fixed_Expenses "
-                + "Set numberOfInstallments = "
-                + "Case When numberOfInstallments > 0 Then numberOfInstallments - 1 Else 0 End "
-                + $"Where id = {id}";
-
-            SimpleQuery(editQuery);
-        }
-
-        // Método para substituir o método SubtractInstallment
+        // Método para subtrair ou somar 1 na quantidade de parcelas de uma conta
         public static void EditInstallment(int id, bool subtract)
         {
             string editQuery = "Update fixed_Expenses "
@@ -258,9 +253,32 @@ namespace SysExpenseControl.Data
         // Método para deletar um gasto fixo
         public static void DeleteFixedExpense(int id)
         {
-            string deleteQuery = $"Delete From fixed_expenses where id = {id} ";
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(Connection.Cn))
+                {
+                    // Abre a conexão
+                    connection.Open();
 
-            SimpleQuery(deleteQuery);
+                    // Ativa as restrições de chaves estrangeiras
+                    using (SQLiteCommand command = new SQLiteCommand("PRAGMA foreign_keys = ON", connection))
+                    {
+                        // Executa a consulta e captura o resultado
+                        command.ExecuteNonQuery();
+                    }
+
+                    // Deleta o registro da tabela fixed_expenses com id = {id}
+                    using (SQLiteCommand command = new SQLiteCommand($"Delete From fixed_expenses where id = {id}", connection))
+                    {
+                        // Executa a consulta e captura o resultado
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Exception in DataConsultant.SimpleQuery: " + e.Message);
+            }
         }
 
         // ---------------------------------- Lucros do mês
@@ -323,15 +341,15 @@ namespace SysExpenseControl.Data
         public static DataTable ViewMonthExpenses(int year, int month)
         {
             string expensesTableName = "expenses_" + year + "_" + month;
-            //string viewQuery = $"Select * From {expensesTableName}";
 
             string viewQuery =
                 "Select "
-                + "f.id, f.name, f.value, f.date, c.name As categorieName, "
-                + "f.description, f.idFixedExpenses, f.paid "
+                + "f.id, f.name, f.value, f.date, c.name As categorieName, e.numberOfInstallments, "
+                + "f.description, f.idFixedExpenses, f.paid, e.definedNumberOfInstallments "
                 + $"From {expensesTableName} f "
                 + "Join categories c On f.category = c.id "
-                + $"Order by date Asc";
+                + "Left Join fixed_expenses e On f.idFixedExpenses = e.id "
+                + $"Order by f.date Asc";
 
             return ViewQuery(viewQuery);
         }
@@ -402,6 +420,40 @@ namespace SysExpenseControl.Data
             string deleteQuery = $"Delete From {expensesTableName} where id = {id} ";
 
             SimpleQuery(deleteQuery);
+        }
+
+        // ---------------------------------- Tabela de referencias
+
+        // Método que vai retornar a quantidade de referencias na tabela references_to_tables
+        public static int GetReferences_to_tablesQuantity()
+        {
+            int quantity = 0;
+
+            string query = "Select Count(*) From references_to_tables;";
+
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(Connection.Cn))
+                {
+                    // Abre a conexão
+                    connection.Open();
+
+                    // Executando a Query
+                    using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                    {
+                        // Executa a consulta e captura o resultado
+                        quantity = Convert.ToInt32(command.ExecuteScalar());
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Exception in DataConsultant.SimpleQuery: " + e.Message);
+
+                quantity = 0;
+            }
+
+            return quantity;
         }
 
         // ---------------------------------- 

@@ -63,11 +63,14 @@ ao montante
 -Agora quando uma conta é marcada como paga subtrai 1 a quantidade de parcelas se aplicavel
 -Agora ao editar uma conta marcada como paga é possivel marcar ela como não paga
 
-
-
-
-
-
+-Criada uma nova coluna na tabela de gastos fixos para identificar se é uma conta com limite de parcelas
+-Agora quando uma conta que tem uma quantidade de parcelas para acabar que já foi paga é marcada como não
+paga a quantidade de percelas é somada em 1
+-Retirei a constraint Unique do nome na tabela de gastos do Mês corrente (isso pode gerar algum erro)
+-Agora quando uma conta fixa é deletada as contas de mês que tinham referencias a ela ficam com a 
+referencia null
+-Resolvido um problema na tela de gastos do mês que gerava uma exceção quando campo de referencia a tabela
+de gastos fixos era nulo
 
 
 

@@ -10,19 +10,19 @@ namespace SysExpenseControl.Forms
         private int _tipe;
         private int _id;
         private string _name;
-        private double _amount;
+        private double _value;
 
         private Action _onCloseCallback;
 
         public FrmAddEditFixedProfits(int tipe, Action onCloseCallback, int id = 0,
-                string name = "", double amount = 0,string desciption = "")
+                string name = "", double value = 0,string desciption = "")
         {
             InitializeComponent();
 
             _tipe = tipe;
             _id = id;
             _name = name;
-            _amount = amount;
+            _value = value;
             _onCloseCallback = onCloseCallback;
 
             FillFields(desciption);
@@ -34,7 +34,7 @@ namespace SysExpenseControl.Forms
             {
                 this.LblTitle.Text = "Editar Receita Fixa";
                 this.TxtName.Text = _name;
-                this.TxtValue.Text = _amount.ToString("F2", CultureInfo.InstalledUICulture);
+                this.TxtValue.Text = _value.ToString("F2", CultureInfo.InstalledUICulture);
                 this.RtbDescription.Text = desciption;
 
                 if (_tipe == 2)
@@ -55,14 +55,14 @@ namespace SysExpenseControl.Forms
                 if (_tipe == 0)// Adicionar
                 {
                     // Adicionando na tabela de lucros fixos
-                    DataConsultant.InsertFixedProfit(_name, _amount, this.RtbDescription.Text);
+                    DataConsultant.InsertFixedProfit(_name, _value, this.RtbDescription.Text);
 
                     // Adicionando na tabela de lucros do mês corrente
-                    DataConsultant.InsertMonthProfits(_name, _amount, null, this.RtbDescription.Text, 
+                    DataConsultant.InsertMonthProfits(_name, _value, null, this.RtbDescription.Text, 
                         DateTime.Now.Year, DateTime.Now.Month);
                 }
                 else// Editar
-                    DataConsultant.EditFixedProfit(_id, _name, _amount, this.RtbDescription.Text);
+                    DataConsultant.EditFixedProfit(_id, _name, _value, this.RtbDescription.Text);
                 
                 this.Close();
             }
@@ -85,7 +85,7 @@ namespace SysExpenseControl.Forms
             // Valor
             if (!String.IsNullOrWhiteSpace(this.TxtValue.Text) &&
                 Double.TryParse(this.TxtValue.Text, out double value))
-                _amount = value;
+                _value = value;
             else
             {
                 allFieldsAreCorrect = false;

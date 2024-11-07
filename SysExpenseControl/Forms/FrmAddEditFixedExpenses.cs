@@ -14,7 +14,7 @@ namespace SysExpenseControl.Forms
         private int _tipe;
         private int _id;
         private string _name;
-        private double _amount;
+        private double _value;
         private int _dueDay;
         private int _numberOfInstallments;
         //private string _category;
@@ -22,7 +22,7 @@ namespace SysExpenseControl.Forms
         private Action _onCloseCallback;
 
         public FrmAddEditFixedExpenses(int tipe, Action onCloseCallback, int id = 0, string name = "",
-            double amount = 0, int dueDay = 0, int numberOfInstallments = 0, string category = "", 
+            double value = 0, int dueDay = 0, int numberOfInstallments = 0, string category = "", 
             string desciption = "")
         {
             InitializeComponent();
@@ -30,7 +30,7 @@ namespace SysExpenseControl.Forms
             _tipe = tipe;
             _id = id;
             _name = name;
-            _amount = amount;
+            _value = value;
             _dueDay = dueDay;
             _numberOfInstallments = numberOfInstallments;
             _onCloseCallback = onCloseCallback;
@@ -48,7 +48,7 @@ namespace SysExpenseControl.Forms
             {
                 this.LblTitle.Text = "Editar Gasto Fixo";
                 this.TxtName.Text = _name;
-                this.TxtValue.Text = _amount.ToString("F2", CultureInfo.InstalledUICulture);
+                this.TxtValue.Text = _value.ToString("F2", CultureInfo.InstalledUICulture);
                 this.TxtDueDay.Text = _dueDay.ToString();
                 this.TxtNumberOfInstallments.Text = _numberOfInstallments.ToString();
                 this.RtbDescription.Text = desciption;
@@ -80,23 +80,26 @@ namespace SysExpenseControl.Forms
         {
             if (CaptureAndVerifyData())
             {
+                // se a quantidade de parcelas for diferente de 0 é pq tem um número de parcelas
+                bool definedNumberOfInstallments = _numberOfInstallments != 0 ;
+
                 if (_tipe == 0)// Adicionar
                 {
                     // Adicionando na tabela de gastos fixos
-                    int id = DataConsultant.InsertFixedExpense(_name, _amount, _dueDay, _numberOfInstallments,
-                        this.CbxCategories.Text, this.RtbDescription.Text);
+                    int id = DataConsultant.InsertFixedExpense(_name, _value, _dueDay, _numberOfInstallments,
+                        this.CbxCategories.Text, this.RtbDescription.Text, definedNumberOfInstallments);
 
                     if (id == -1) return; //erro
 
                     // Adicionando na tabela de gastos do Mês corrente
-                    DataConsultant.InsertMonthExpense(_name, _amount, null, id,
+                    DataConsultant.InsertMonthExpense(_name, _value, null, id,
                         this.CbxCategories.Text, this.RtbDescription.Text, DateTime.Now.Year,
                         DateTime.Now.Month, false);
 
                 }
                 else// Editar
-                    DataConsultant.EditFixedExpense(_id, _name, _amount, _dueDay, _numberOfInstallments,
-                        this.CbxCategories.Text, this.RtbDescription.Text);
+                    DataConsultant.EditFixedExpense(_id, _name, _value, _dueDay, _numberOfInstallments,
+                        this.CbxCategories.Text, this.RtbDescription.Text, definedNumberOfInstallments);
 
                 this.Close();
             }
@@ -120,7 +123,7 @@ namespace SysExpenseControl.Forms
             if (!String.IsNullOrWhiteSpace(this.TxtValue.Text))
             {
                 if (Double.TryParse(this.TxtValue.Text, out double value))
-                    _amount = value;
+                    _value = value;
                 else
                 {
                     allFieldsAreCorrect = false;

@@ -9,7 +9,8 @@ namespace SysExpenseControl.Forms
 {
     public partial class FrmAccountsPayable : Form
     {
-        readonly DataTable _data;
+        private DataTable _data;// gambiarra para alterar o que está sendo exibido no DataGridView
+        private DateTime _date;// para guardar o Mês e o ano que está sendo exibido
 
         public FrmAccountsPayable()
         {
@@ -19,7 +20,8 @@ namespace SysExpenseControl.Forms
 
             this.CbxFilter.SelectedIndex = 0;// para iniciar sem filtros
 
-            this.LblDisplayMonth.Text = DateTime.Now.ToString("MM/yyyy");// para exibir o mês atual
+            _date = DateTime.Now;
+            this.LblDisplayMonth.Text = _date.ToString("MM/yyyy");// para exibir o mês atual
 
             //carregando os dados
             Task.Run(() => Initialize());
@@ -82,6 +84,12 @@ namespace SysExpenseControl.Forms
             }
         }
 
+        private void Add()
+        {
+            FrmAddEditBill frmAddEditBill = new FrmAddEditBill();
+            frmAddEditBill.ShowDialog();
+        }
+
         // ------------------------- Thread
         private void Initialize()
         {
@@ -131,7 +139,7 @@ namespace SysExpenseControl.Forms
             ThreadHelper.SetColumnHeaderText(this.DgvData, 3, "Data de vencimento");
             //ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 3, DataGridViewAutoSizeColumnMode.DisplayedCells);
 
-            ThreadHelper.SetColumnHeaderText(this.DgvData, 4, "Quantidade de parcelas restante");
+            ThreadHelper.SetColumnHeaderText(this.DgvData, 4, "Quantidade de parcelas restantes");
             //ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 4, DataGridViewAutoSizeColumnMode.DisplayedCells);
 
             ThreadHelper.SetColumnHeaderText(this.DgvData, 6, "Nome da categoria");
@@ -182,6 +190,21 @@ namespace SysExpenseControl.Forms
         private void CbxFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
             SelectedFilterChanged();
+        }
+
+        private void BtnAdd_Click(object sender, EventArgs e)
+        {
+            Add();
+        }
+
+        private void BtnEdit_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnView_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -84,6 +84,12 @@
     <Compile Include="Forms\FrmAccountsPayable.Designer.cs">
       <DependentUpon>FrmAccountsPayable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FrmAddEditBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmAddEditBill.Designer.cs">
+      <DependentUpon>FrmAddEditBill.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FrmAddEditFixedExpenses.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,6 +157,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmAccountsPayable.resx">
       <DependentUpon>FrmAccountsPayable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmAddEditBill.resx">
+      <DependentUpon>FrmAddEditBill.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmAddEditFixedExpenses.resx">
       <DependentUpon>FrmAddEditFixedExpenses.cs</DependentUpon>

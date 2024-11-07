@@ -10,21 +10,21 @@ namespace SysExpenseControl.Forms
         private int _tipe;
         private int _id;
         private string _name;
-        private double _amount;
+        private double _value;
         private DateTime _date;
         private Action _onCloseCallback;
 
         private string _tableName;
 
         public FrmAddEditMonthProfits(int tipe, Action onCloseCallback, DateTime date, string tableName, int id = 0,
-                string name = "", double amount = 0, string desciption = "")
+                string name = "", double value = 0, string desciption = "")
         {
             InitializeComponent();
 
             _tipe = tipe;
             _id = id;
             _name = name;
-            _amount = amount;
+            _value = value;
             _date = date;
             _onCloseCallback = onCloseCallback;
             _tableName = tableName;
@@ -38,7 +38,7 @@ namespace SysExpenseControl.Forms
             {
                 this.LblTitle.Text = "Editar Receita";
                 this.TxtName.Text = _name;
-                this.TxtValue.Text = _amount.ToString("F2", CultureInfo.InstalledUICulture);
+                this.TxtValue.Text = _value.ToString("F2", CultureInfo.InstalledUICulture);
                 this.RtbDescription.Text = desciption;
                 this.DateTimePicker.Text = _date.ToString();
 
@@ -59,12 +59,12 @@ namespace SysExpenseControl.Forms
             {
                 if (_tipe == 0)// Adicionar
                 {
-                    DataConsultant.InsertMonthProfits(_name, _amount, Convert.ToDateTime(DateTimePicker.Value),
+                    DataConsultant.InsertMonthProfits(_name, _value, Convert.ToDateTime(DateTimePicker.Value),
                          this.RtbDescription.Text, DateTime.Now.Year, DateTime.Now.Month);
                 }
                 else// Editar
                 {
-                    DataConsultant.EditMonthProfits(_id, _name, _amount, Convert.ToDateTime(DateTimePicker.Value),
+                    DataConsultant.EditMonthProfits(_id, _name, _value, Convert.ToDateTime(DateTimePicker.Value),
                         this.RtbDescription.Text, _tableName);
                 }
 
@@ -89,7 +89,7 @@ namespace SysExpenseControl.Forms
             // Valor
             if (!String.IsNullOrWhiteSpace(this.TxtValue.Text) &&
                 Double.TryParse(this.TxtValue.Text, out double value))
-                _amount = value;
+                _value = value;
             else
             {
                 allFieldsAreCorrect = false;

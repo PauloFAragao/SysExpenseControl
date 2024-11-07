@@ -48,9 +48,9 @@
             this.label4 = new System.Windows.Forms.Label();
             this.DgvData = new System.Windows.Forms.DataGridView();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.BtnAdd = new System.Windows.Forms.Button();
+            this.BtnEdit = new System.Windows.Forms.Button();
+            this.BtnView = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.CbxFilter = new System.Windows.Forms.ComboBox();
@@ -290,9 +290,9 @@
             // 
             this.panel5.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Controls.Add(this.button4);
-            this.panel5.Controls.Add(this.button3);
-            this.panel5.Controls.Add(this.button2);
+            this.panel5.Controls.Add(this.BtnAdd);
+            this.panel5.Controls.Add(this.BtnEdit);
+            this.panel5.Controls.Add(this.BtnView);
             this.panel5.Controls.Add(this.button1);
             this.panel5.Controls.Add(this.label5);
             this.panel5.Controls.Add(this.CbxFilter);
@@ -306,38 +306,41 @@
             this.panel5.Size = new System.Drawing.Size(604, 75);
             this.panel5.TabIndex = 7;
             // 
-            // button4
+            // BtnAdd
             // 
-            this.button4.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(360, 42);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 9;
-            this.button4.Text = "Adicionar";
-            this.button4.UseVisualStyleBackColor = false;
+            this.BtnAdd.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnAdd.Location = new System.Drawing.Point(357, 42);
+            this.BtnAdd.Name = "BtnAdd";
+            this.BtnAdd.Size = new System.Drawing.Size(75, 23);
+            this.BtnAdd.TabIndex = 9;
+            this.BtnAdd.Text = "Adicionar";
+            this.BtnAdd.UseVisualStyleBackColor = false;
+            this.BtnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
             // 
-            // button3
+            // BtnEdit
             // 
-            this.button3.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(441, 42);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 8;
-            this.button3.Text = "Editar";
-            this.button3.UseVisualStyleBackColor = false;
+            this.BtnEdit.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnEdit.Location = new System.Drawing.Point(438, 42);
+            this.BtnEdit.Name = "BtnEdit";
+            this.BtnEdit.Size = new System.Drawing.Size(75, 23);
+            this.BtnEdit.TabIndex = 8;
+            this.BtnEdit.Text = "Editar";
+            this.BtnEdit.UseVisualStyleBackColor = false;
+            this.BtnEdit.Click += new System.EventHandler(this.BtnEdit_Click);
             // 
-            // button2
+            // BtnView
             // 
-            this.button2.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(522, 42);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Visualizar";
-            this.button2.UseVisualStyleBackColor = false;
+            this.BtnView.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtnView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnView.Location = new System.Drawing.Point(519, 42);
+            this.BtnView.Name = "BtnView";
+            this.BtnView.Size = new System.Drawing.Size(75, 23);
+            this.BtnView.TabIndex = 7;
+            this.BtnView.Text = "Visualizar";
+            this.BtnView.UseVisualStyleBackColor = false;
+            this.BtnView.Click += new System.EventHandler(this.BtnView_Click);
             // 
             // button1
             // 
@@ -469,9 +472,9 @@
         private System.Windows.Forms.Label LblDisplayMonth;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button BtnAdd;
+        private System.Windows.Forms.Button BtnEdit;
+        private System.Windows.Forms.Button BtnView;
         private System.Windows.Forms.Panel LblWait;
         private System.Windows.Forms.Label label4;
     }
