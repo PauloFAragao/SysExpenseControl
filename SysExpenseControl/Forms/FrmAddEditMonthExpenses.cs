@@ -84,7 +84,7 @@ namespace SysExpenseControl.Forms
                 if (_tipe == 0)// Adicionar
                 {
                     DataConsultant.InsertMonthExpense(_name, _value, Convert.ToDateTime(DateTimePicker.Value),
-                        -1, this.CbxCategories.Text, this.RtbDescription.Text, DateTime.Now.Year,
+                        null, this.CbxCategories.Text, this.RtbDescription.Text, DateTime.Now.Year,
                         DateTime.Now.Month, true);
                 }
                 else// Editar

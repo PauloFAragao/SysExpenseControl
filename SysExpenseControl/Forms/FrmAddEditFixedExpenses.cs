@@ -86,10 +86,10 @@ namespace SysExpenseControl.Forms
                 if (_tipe == 0)// Adicionar
                 {
                     // Adicionando na tabela de gastos fixos
-                    int id = DataConsultant.InsertFixedExpense(_name, _value, _dueDay, _numberOfInstallments,
+                    int? id = DataConsultant.InsertFixedExpense(_name, _value, _dueDay, _numberOfInstallments,
                         this.CbxCategories.Text, this.RtbDescription.Text, definedNumberOfInstallments);
 
-                    if (id == -1) return; //erro
+                    if (id == null) return; //erro
 
                     // Adicionando na tabela de gastos do Mês corrente
                     DataConsultant.InsertMonthExpense(_name, _value, null, id,

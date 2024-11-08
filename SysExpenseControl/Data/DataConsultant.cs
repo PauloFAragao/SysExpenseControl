@@ -173,31 +173,8 @@ namespace SysExpenseControl.Data
             return ViewQuery(viewQuery);
         }
 
-        // Método para visualizar as contas
-        public static DataTable ViewAccountsPayable()
-        {
-            string expensesTableName = "expenses_" + DateTime.Now.Year + "_" + DateTime.Now.Month;
-            string viewQuery = "Select f.id, f.name, e.value, f.dueDay, f.numberOfInstallments, f.category, "
-            + "c.name As categorieName, e.date As dayItWasPaid "
-            + "From fixed_expenses f "
-            + "Join categories c On f.category = c.id "
-            + $"Join {expensesTableName} e On f.id = e.idFixedExpenses "
-            + $"Where f.category = 1 Order by dueDay Desc";
-
-            return ViewQuery(viewQuery);
-        }
-
-        // Novo método para visualizar as contas <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-        public static DataTable ViewBills(DateTime date)
-        {
-            string expensesTableName = "expenses_" + date.Year + "_" + date.Month;
-            string viewQuery = "Select  ";
-
-            return ViewQuery(viewQuery);
-        }
-
         // Método para Inserir um gasto fixo
-        public static int InsertFixedExpense(string name, double value, int dueDay, int numberOfInstallments,
+        public static int? InsertFixedExpense(string name, double value, int dueDay, int numberOfInstallments,
             string category, string description, bool definedNumberOfInstallments)
         {
             string insertQuery =
@@ -208,7 +185,6 @@ namespace SysExpenseControl.Data
                 + $"(Select id From categories where name = '{category}'), "
                 + $"'{description}')";
 
-            //SimpleQuery(insertQuery);
             return InsertQuery(insertQuery);
         }
 
@@ -354,9 +330,22 @@ namespace SysExpenseControl.Data
             return ViewQuery(viewQuery);
         }
 
+        // Novo método para visualizar as contas <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+        public static DataTable ViewBills(DateTime date)
+        {
+            string expensesTableName = "expenses_" + date.Year + "_" + date.Month;
+            string viewQuery = "Select e.id, e.idFixedExpenses, e.name, e.value, e.date, e.description, "
+                + "f.dueDay, f.numberOfInstallments, e.paid "
+                + $"From {expensesTableName} e "
+                + "Left Join fixed_expenses f on e.idFixedExpenses = f.id "
+                + "Where e.category = 1 Order by e.date Desc";
+
+            return ViewQuery(viewQuery);
+        }
+
         // Método para inserir um gasto no mês
         public static void InsertMonthExpense(string name, double value, DateTime? dateOfExpenditure,
-            int idFixedExpenses, string category, string description, int year, int month, bool paid,
+            int? idFixedExpenses, string category, string description, int year, int month, bool paid,
             string fixedExpense = "")
         {
             string expensesTableName = "expenses_" + year + "_" + month;
@@ -489,9 +478,9 @@ namespace SysExpenseControl.Data
             }
         }
 
-        private static int InsertQuery(string query)
+        private static int? InsertQuery(string query)
         {
-            int id = -1;
+            int? id = null;
 
             try
             {
@@ -518,7 +507,7 @@ namespace SysExpenseControl.Data
             {
                 Debug.WriteLine("Exception in DataConsultant.SimpleQuery: " + e.Message);
 
-                id = -1;
+                id = null;
             }
 
             return id;

@@ -108,14 +108,14 @@ namespace SysExpenseControl.Forms
                     Convert.ToInt32(this.DgvFixedExpenses.CurrentRow.Cells["numberOfInstallments"].Value),
                     Convert.ToString(this.DgvFixedExpenses.CurrentRow.Cells["categorieName"].Value),
                     Convert.ToString(this.DgvFixedExpenses.CurrentRow.Cells["description"].Value));
-                    
+
                 frmAddEditFixedExpenses.ShowDialog();
             }
             else
             {
                 Debug.WriteLine("não tem dados");
             }
-}
+        }
 
         // ------------------------- Eventos
         private void CallLoadFixedProfitsData()

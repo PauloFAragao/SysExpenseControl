@@ -72,7 +72,7 @@ referencia null
 -Resolvido um problema na tela de gastos do mês que gerava uma exceção quando campo de referencia a tabela
 de gastos fixos era nulo
 
-
+-Botão adicionar na tela de contas implementado, os outros botões estão praticamente implementados
 
 
 

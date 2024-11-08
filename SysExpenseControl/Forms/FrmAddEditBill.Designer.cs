@@ -148,9 +148,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(19, 73);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(61, 13);
+            this.label3.Size = new System.Drawing.Size(57, 13);
             this.label3.TabIndex = 52;
-            this.label3.Text = "Valor (R$)*:";
+            this.label3.Text = "Valor (R$):";
             // 
             // LblTitle
             // 
@@ -222,9 +222,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(19, 130);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(107, 13);
+            this.label2.Size = new System.Drawing.Size(111, 13);
             this.label2.TabIndex = 66;
-            this.label2.Text = "Data de Vencimento:";
+            this.label2.Text = "Data de Vencimento*:";
             // 
             // TxtNumberOfInstallments
             // 
@@ -286,6 +286,7 @@
             this.Name = "FrmAddEditBill";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Contas";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmAddEditBill_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

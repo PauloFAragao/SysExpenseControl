@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Threading.Tasks;
 using SysExpenseControl.Data;
 using SysExpenseControl.Entities;
+using System.Diagnostics;
 
 namespace SysExpenseControl.Forms
 {
@@ -86,8 +87,52 @@ namespace SysExpenseControl.Forms
 
         private void Add()
         {
-            FrmAddEditBill frmAddEditBill = new FrmAddEditBill();
+            FrmAddEditBill frmAddEditBill = new FrmAddEditBill(0, CallLoadData, DateTime.Now);
             frmAddEditBill.ShowDialog();
+        }
+
+        private void ViewEditBill(int tipe)
+        {
+            if(DgvData.Rows.Count > 0)
+            {
+                // capturando a data que foi pago, se for null pega a data corrente
+                DateTime date;
+                if(DateTime.TryParse(this.DgvData.CurrentRow.Cells["date"].Value.ToString(), out DateTime d))
+                {
+                    date = d;
+                }
+                else date = DateTime.Now;
+
+                // capturando o id referencia a tabela de gastos fixos, se não tiver manda 0 
+                int idFixedExpenses;
+                if(int.TryParse(this.DgvData.CurrentRow.Cells["idFixedExpenses"].Value.ToString(), out int ife))
+                {
+                    idFixedExpenses = ife;
+                }
+                else idFixedExpenses = 0;
+
+                FrmAddEditBill frmAddEditBill = new FrmAddEditBill(tipe, CallLoadData, date,
+                    Convert.ToInt32(this.DgvData.CurrentRow.Cells["id"].Value),
+                    idFixedExpenses,
+                    Convert.ToString(this.DgvData.CurrentRow.Cells["name"].Value),
+                    Convert.ToDouble(this.DgvData.CurrentRow.Cells["value"].Value),
+                    Convert.ToString(this.DgvData.CurrentRow.Cells["description"].Value),
+                    Convert.ToInt32(this.DgvData.CurrentRow.Cells["dueDay"].Value),
+                    Convert.ToInt32(this.DgvData.CurrentRow.Cells["numberOfInstallments"].Value),
+                    Convert.ToBoolean(this.DgvData.CurrentRow.Cells["paid"].Value));
+
+                frmAddEditBill.ShowDialog();
+            }
+            else
+            {
+                Debug.WriteLine("não tem dados");
+            }
+        }
+
+        // ------------------------- Eventos
+        private void CallLoadData()
+        {
+            Task.Run(() => LoadData());
         }
 
         // ------------------------- Thread
@@ -95,8 +140,8 @@ namespace SysExpenseControl.Forms
         {
             if (LoadData())
             {
-                HideColumns();
-                ChangeColumns();
+                //HideColumns();
+                //ChangeColumns();
 
                 ThreadHelper.SetPropertyValue(LblWait, "Visible", false);
                 ThreadHelper.SetPropertyValue(CbxFilter, "Enabled", true);
@@ -105,7 +150,7 @@ namespace SysExpenseControl.Forms
 
         private bool LoadData()
         {
-            DataTable dataTable = DataConsultant.ViewAccountsPayable();
+            DataTable dataTable = DataConsultant.ViewBills(_date); //DataConsultant.ViewAccountsPayable();
 
             if (dataTable != null)
             {
@@ -161,11 +206,13 @@ namespace SysExpenseControl.Forms
                 decimal amaunt = Convert.ToDecimal(row["value"]);// capturando o valor
 
                 // ainda não foi pago
-                if (row.IsNull("dayItWasPaid") || string.IsNullOrEmpty(row["dayItWasPaid"].ToString()))
+                if (row.IsNull("date") || string.IsNullOrEmpty(row["date"].ToString()))
                 {
                     //está vencida
-                    if (Convert.ToInt32(row["dueDay"]) < DateTime.Now.Day)
+                    if(int.TryParse(row["dueDay"].ToString(), out int dueDay) && dueDay < DateTime.Now.Day)
+                    {
                         overdueAccounts += amaunt;//somando valor atrasado
+                    }
 
                     amountPayable += amaunt;//total a pagar
                 }
@@ -199,12 +246,12 @@ namespace SysExpenseControl.Forms
 
         private void BtnEdit_Click(object sender, EventArgs e)
         {
-
+            ViewEditBill(1);
         }
 
         private void BtnView_Click(object sender, EventArgs e)
         {
-
+            ViewEditBill(2);
         }
     }
 }
