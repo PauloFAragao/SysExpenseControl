@@ -362,7 +362,7 @@ namespace SysExpenseControl.Data
             }
 
             // se tem referencia a tabela de gastos fixos
-            if (idFixedExpenses != -1)
+            if (idFixedExpenses != -1 /*&& idFixedExpenses != null*/)
             {
                 insertQuery += "idFixedExpenses, ";
                 values += $"{idFixedExpenses}, ";
@@ -383,7 +383,7 @@ namespace SysExpenseControl.Data
 
         // Método para Editar um gasto do mês
         public static void EditMonthExpense(int id, string name, double value, DateTime dateOfExpenditure,
-            string category, string description, string tableName, bool paid)
+            string category, string description, string tableName, bool paid, int? idReference = 0)
         {
             string editQuery =
                 $"Update {tableName} "
@@ -392,14 +392,47 @@ namespace SysExpenseControl.Data
                 + $"category = (Select id From categories Where name = '{category}'), "
                 + $"paid = {paid}, ";
 
+            // se estiver paga
             if (paid) editQuery += $"date = '{dateOfExpenditure:yyyy-MM-dd}', ";
             else editQuery += "date = NULL, ";
+
+            // adicionando referencia a uma conta fixa
+            if(idReference != 0 && idReference != null)
+                editQuery += $"idFixedExpenses = {idReference}, ";
 
             editQuery +=
                 $"description = '{description}' "
                 + $"Where id = {id}";
 
             SimpleQuery(editQuery);
+        }
+
+        // Método para editar todas as tabelas que tenham referencia a um gasto fixo
+        public static void EditAllMonthExpense(int idFixedExpenses, string name, double value,
+            string category, string description, bool removeReference = false)
+        {
+            // nomes das tabelas de gastos
+            List<string> tableNames= GetExpenseTables();
+
+            // loop para editar todas as tables
+            foreach(string tablename in tableNames)
+            {
+                string editQuery = $"Update {tablename} Set "
+                    + $"name = '{name}', "
+                    + $"value = {value.ToString(CultureInfo.InvariantCulture)}, "
+                    + $"category = (Select id From categories Where name = '{category}'), ";
+                    
+                if (removeReference)
+                {
+                    editQuery += "idFixedExpenses = null, ";
+                }
+
+                editQuery += $"description = '{description}' "
+                    + $"Where idFixedExpenses = {idFixedExpenses}";
+
+                SimpleQuery(editQuery);
+            }
+
         }
 
         // Método para Deletar um gasto no mês
@@ -418,7 +451,7 @@ namespace SysExpenseControl.Data
         {
             int quantity = 0;
 
-            string query = "Select Count(*) From references_to_tables;";
+            string query = "Select Count(*) From references_to_tables";
 
             try
             {
@@ -443,6 +476,42 @@ namespace SysExpenseControl.Data
             }
 
             return quantity;
+        }
+
+        public static List<string> GetExpenseTables()
+        {
+            string query = "Select nameTableExpenses From references_to_tables";
+
+            List<string> result = new List<string>();
+
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(Connection.Cn))
+                {
+                    // Abre a conexão
+                    connection.Open();
+
+                    // Executando a Query
+                    using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                    {
+                        // Executa a consulta e captura o resultado
+                        using (SQLiteDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                // Adiciona o nome da categoria à lista
+                                result.Add(reader.GetString(0));
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Exception in DataConsultant.GetCategorys: " + e.Message);
+            }
+
+            return result;
         }
 
         // ---------------------------------- 

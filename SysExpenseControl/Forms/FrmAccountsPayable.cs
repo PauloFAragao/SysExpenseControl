@@ -97,9 +97,9 @@ namespace SysExpenseControl.Forms
             {
                 // capturando a data que foi pago, se for null pega a data corrente
                 DateTime date;
-                if(DateTime.TryParse(this.DgvData.CurrentRow.Cells["date"].Value.ToString(), out DateTime d))
+                if(DateTime.TryParse(this.DgvData.CurrentRow.Cells["date"].Value.ToString(), out DateTime dt))
                 {
-                    date = d;
+                    date = dt;
                 }
                 else date = DateTime.Now;
 
@@ -111,15 +111,39 @@ namespace SysExpenseControl.Forms
                 }
                 else idFixedExpenses = 0;
 
+                // capturando o valor
+                double value;
+                if (double.TryParse(this.DgvData.CurrentRow.Cells["value"].Value.ToString(), out double amount))
+                {
+                    value = amount;
+                }
+                else value = 0;
+
+                // capturando a data de pagamento
+                int dueDay;
+                if (int.TryParse(this.DgvData.CurrentRow.Cells["dueDay"].Value.ToString(), out int dueD))
+                {
+                    dueDay = dueD;
+                }
+                else dueDay = 0;
+
+                // capturando a data de pagamento
+                int numberOfInstallments;
+                if (int.TryParse(this.DgvData.CurrentRow.Cells["numberOfInstallments"].Value.ToString(), out int nInstallments))
+                {
+                    numberOfInstallments = nInstallments;
+                }
+                else numberOfInstallments = 0;
+
                 FrmAddEditBill frmAddEditBill = new FrmAddEditBill(tipe, CallLoadData, date,
                     Convert.ToInt32(this.DgvData.CurrentRow.Cells["id"].Value),
                     idFixedExpenses,
                     Convert.ToString(this.DgvData.CurrentRow.Cells["name"].Value),
-                    Convert.ToDouble(this.DgvData.CurrentRow.Cells["value"].Value),
+                    value,
                     Convert.ToString(this.DgvData.CurrentRow.Cells["description"].Value),
-                    Convert.ToInt32(this.DgvData.CurrentRow.Cells["dueDay"].Value),
-                    Convert.ToInt32(this.DgvData.CurrentRow.Cells["numberOfInstallments"].Value),
-                    Convert.ToBoolean(this.DgvData.CurrentRow.Cells["paid"].Value));
+                    dueDay, numberOfInstallments,
+                    Convert.ToBoolean(this.DgvData.CurrentRow.Cells["paid"].Value),
+                    $"expenses_{_date.Year}_{_date.Month}" );
 
                 frmAddEditBill.ShowDialog();
             }

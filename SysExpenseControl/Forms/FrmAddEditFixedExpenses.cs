@@ -98,8 +98,15 @@ namespace SysExpenseControl.Forms
 
                 }
                 else// Editar
+                {
+                    // Editar gasto fixo
                     DataConsultant.EditFixedExpense(_id, _name, _value, _dueDay, _numberOfInstallments,
                         this.CbxCategories.Text, this.RtbDescription.Text, definedNumberOfInstallments);
+
+                    // Editar gasto do Mês referente ao gasto fixo
+                    DataConsultant.EditAllMonthExpense(_id, _name, _value, this.CbxCategories.Text,
+                        this.RtbDescription.Text );
+                }
 
                 this.Close();
             }

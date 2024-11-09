@@ -74,8 +74,9 @@ de gastos fixos era nulo
 
 -Botão adicionar na tela de contas implementado, os outros botões estão praticamente implementados
 
-
-
+-Agora, quando editado um gasto fixo, o programa tbm edita as tabelas de gasto do mês que tenham 
+referencia a aquele gasto fixo.
+-Botões de editar e visualizar da tela de contas implementados.
 
 
 

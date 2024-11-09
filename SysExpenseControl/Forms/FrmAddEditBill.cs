@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace SysExpenseControl.Forms
 {
@@ -19,12 +20,13 @@ namespace SysExpenseControl.Forms
         private int _numberOfInstallments;
         private bool _paid;
         private bool _statusPaid = false;
+        private string _tableName;
 
         private Action _onCloseCallback;// evento para atualizar a outra janela
 
         public FrmAddEditBill(int tipe, Action onCloseCallback, DateTime date, int id = 0, 
             int idFixedExpenses = 0, string name = "", double value = 0, string description = "", 
-            int dueDay = 0, int numberOfInstallments = 0, bool paid = false)
+            int dueDay = 0, int numberOfInstallments = 0, bool paid = false, string tableName = "")
         {
             InitializeComponent();
 
@@ -38,6 +40,7 @@ namespace SysExpenseControl.Forms
             _date = date;
             _numberOfInstallments = numberOfInstallments;
             _paid = paid;
+            _tableName = tableName;
 
             _statusPaid = _paid;// ao editar deve marcar como pago
 
@@ -131,14 +134,14 @@ namespace SysExpenseControl.Forms
             {
                 if (_tipe == 0)// para adicionar
                 {
-                    int? idFixedExpenses = null;
+                    int? idFixedExpenses = -1;
 
                     if (this.RbFixedBill.Checked)// verifica se é uma conta fixa
                     {
-                        // adionar nas contas fixas
+                        // adionar nas contas fixas 
                         idFixedExpenses = DataConsultant.InsertFixedExpense( _name, _value, 
                             Convert.ToInt32(_dueDay), _numberOfInstallments,"Contas", 
-                            this.RtbDescription.Text, _numberOfInstallments == 0 );
+                            this.RtbDescription.Text, _numberOfInstallments != 0 );
                     }
 
                     if (idFixedExpenses == null) return; //erro
@@ -160,13 +163,23 @@ namespace SysExpenseControl.Forms
                     {
                         if (this.RbFixedBill.Checked)// não mudou, ainda é uma conta fixa
                         {
-                            // fazer edições
+                            // editar o gasto fixo
+                            DataConsultant.EditFixedExpense(_idFixedExpenses, _name, _value, _dueDay, 
+                                _numberOfInstallments, "Contas", this.RtbDescription.Text, 
+                                _numberOfInstallments != 0 );
+
+                            // editar todas as tabelas de gastos de mês com referencia a aquele gasto fixo
+                            DataConsultant.EditAllMonthExpense(_id, _name, _value, "Contas", 
+                                this.RtbDescription.Text);
                         }
                         else// mudou de conta fixa para conta não fixa
                         {
                             // deletar conta fixa
+                            DataConsultant.DeleteFixedExpense(_idFixedExpenses);
 
-                            // fazer outras edições
+                            // Editar as contas não fixas
+                            DataConsultant.EditAllMonthExpense(_id, _name, _value, "Contas", 
+                                this.RtbDescription.Text, true);
                         }
                     }
                     else// não é uma conta fixa
@@ -174,12 +187,19 @@ namespace SysExpenseControl.Forms
                         if (this.RbFixedBill.Checked)// Mudou para conta fixa
                         {
                             // adicionar conta fixa
+                            int? idFixedExpenses = DataConsultant.InsertFixedExpense(_name, _value,
+                            Convert.ToInt32(_dueDay), _numberOfInstallments, "Contas",
+                            this.RtbDescription.Text, _numberOfInstallments != 0);
 
                             // fazer edições
+                            DataConsultant.EditMonthExpense(_id, _name, _value, _date, "Contas", 
+                                this.RtbDescription.Text,_tableName, _paid, idFixedExpenses);
                         }
                         else// não mudou para conta fixa
                         {
                             // fazer edições
+                            DataConsultant.EditMonthExpense(_id, _name, _value, _date, "Contas",
+                                this.RtbDescription.Text, _tableName, _paid);
                         }
                     }
                 }
