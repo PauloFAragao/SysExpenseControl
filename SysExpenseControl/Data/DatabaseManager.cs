@@ -202,7 +202,8 @@ namespace SysExpenseControl.Data
                         + "name Varchar (50) Unique,"
                         + "value Real Not Null,"
                         + "date Date,"
-                        + "description Text)";
+                        + "description Text, "
+                        + "idFixedProfits Integer Null References fixed_profits (id) On Delete Set Null)";
 
                     // Gastos do mês
                     string expensesTableName = "expenses_" + year + "_" + month;// gerando o nome da tabela
@@ -267,11 +268,12 @@ namespace SysExpenseControl.Data
                     // Abre a conexão
                     connection.Open();
 
+                    // Query para copiar os lucros
                     string profitsTableName = "profits_" + DateTime.Now.Date.Year + "_" + DateTime.Now.Date.Month;// nome da tabela
-                    string insertProfits = // Query para copiar os lucros
+                    string insertProfits = // Query para copiar os lucros 
                         $"Insert Into {profitsTableName} "
-                        + "(name, value, description)"
-                        + "Select name, value, description "
+                        + "(name, value, description, idFixedProfits)"
+                        + "Select name, value, description, id "
                         + "From fixed_profits";
 
                     // Query para copiar os gastos
@@ -302,7 +304,7 @@ namespace SysExpenseControl.Data
             }
         }
 
-        // Método que vai criar uma tabela de serva de dinheiro dinamicamente 
+        // Método que vai criar uma tabela de reserva de dinheiro dinamicamente 
         public static void CreateDynamicTable_Reserve(string name, string description)
         {
             try
@@ -350,7 +352,7 @@ namespace SysExpenseControl.Data
             }
         }
 
-        // Método que vai criar uma tabela de serva de dinheiro dinamicamente 
+        // Método que vai criar uma tabela para um investimento
         public static void CreateDynamicTable_Investiments(string name, string description)
         {
             try

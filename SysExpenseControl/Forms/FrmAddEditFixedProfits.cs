@@ -55,14 +55,31 @@ namespace SysExpenseControl.Forms
                 if (_tipe == 0)// Adicionar
                 {
                     // Adicionando na tabela de lucros fixos
-                    DataConsultant.InsertFixedProfit(_name, _value, this.RtbDescription.Text);
+                    int? idFixedProfit = DataConsultant.InsertFixedProfit(_name, _value, this.RtbDescription.Text);
+
+                    if (idFixedProfit == null) return; // deu erro
 
                     // Adicionando na tabela de lucros do mês corrente
-                    DataConsultant.InsertMonthProfits(_name, _value, null, this.RtbDescription.Text, 
-                        DateTime.Now.Year, DateTime.Now.Month);
+                    int? idMonthProfits =  DataConsultant.InsertMonthProfits(_name, _value, null, this.RtbDescription.Text, 
+                        DateTime.Now.Year, DateTime.Now.Month, (int)idFixedProfit);
+
+                    if (idMonthProfits == null) return; // deu erro
                 }
                 else// Editar
-                    DataConsultant.EditFixedProfit(_id, _name, _value, this.RtbDescription.Text);
+                {
+                    // Editando o lucro fixo
+                    bool result = DataConsultant.EditFixedProfit(_id, _name, _value, 
+                        this.RtbDescription.Text);
+
+                    if(!result) return;// deu erro
+
+                    // Editar o lucro do mês corrente
+                    bool resultEditProfit = DataConsultant.EditProfit(_id, _name, _value, 
+                        this.RtbDescription.Text,
+                        "profits_" + DateTime.Now.Year + "_" + DateTime.Now.Month);
+
+                    if (!resultEditProfit) return;// deu erro
+                }
                 
                 this.Close();
             }

@@ -3,7 +3,6 @@ using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace SysExpenseControl.Forms
 {
@@ -142,6 +141,7 @@ namespace SysExpenseControl.Forms
                         idFixedExpenses = DataConsultant.InsertFixedExpense( _name, _value, 
                             Convert.ToInt32(_dueDay), _numberOfInstallments,"Contas", 
                             this.RtbDescription.Text, _numberOfInstallments != 0 );
+
                     }
 
                     if (idFixedExpenses == null) return; //erro
@@ -154,8 +154,10 @@ namespace SysExpenseControl.Forms
                         date = null;
 
                     // adiconar nas contas desse mês
-                    DataConsultant.InsertMonthExpense(_name, _value, date, idFixedExpenses, "Contas",
+                    int? id = DataConsultant.InsertMonthExpense(_name, _value, date, idFixedExpenses, "Contas",
                         this.RtbDescription.Text, DateTime.Now.Year, DateTime.Now.Month, _paid);
+
+                    if (id == null) return; // deu erro
                 }
                 else// para editar
                 {
@@ -164,13 +166,17 @@ namespace SysExpenseControl.Forms
                         if (this.RbFixedBill.Checked)// não mudou, ainda é uma conta fixa
                         {
                             // editar o gasto fixo
-                            DataConsultant.EditFixedExpense(_idFixedExpenses, _name, _value, _dueDay, 
+                            bool result = DataConsultant.EditFixedExpense(_idFixedExpenses, _name, _value, _dueDay, 
                                 _numberOfInstallments, "Contas", this.RtbDescription.Text, 
                                 _numberOfInstallments != 0 );
 
+                            if (!result) return; // deu erro
+
                             // editar todas as tabelas de gastos de mês com referencia a aquele gasto fixo
-                            DataConsultant.EditAllMonthExpense(_id, _name, _value, "Contas", 
+                            bool resultEditAllMonthExpense = DataConsultant.EditAllMonthExpense(_id, _name, _value, "Contas", 
                                 this.RtbDescription.Text);
+
+                            if(!resultEditAllMonthExpense) return;// deu erro
                         }
                         else// mudou de conta fixa para conta não fixa
                         {
@@ -178,8 +184,10 @@ namespace SysExpenseControl.Forms
                             DataConsultant.DeleteFixedExpense(_idFixedExpenses);
 
                             // Editar as contas não fixas
-                            DataConsultant.EditAllMonthExpense(_id, _name, _value, "Contas", 
+                            bool result = DataConsultant.EditAllMonthExpense(_id, _name, _value, "Contas", 
                                 this.RtbDescription.Text, true);
+
+                            if (!result) return; // deu erro
                         }
                     }
                     else// não é uma conta fixa
@@ -192,14 +200,18 @@ namespace SysExpenseControl.Forms
                             this.RtbDescription.Text, _numberOfInstallments != 0);
 
                             // fazer edições
-                            DataConsultant.EditMonthExpense(_id, _name, _value, _date, "Contas", 
+                            bool result = DataConsultant.EditMonthExpense(_id, _name, _value, _date, "Contas", 
                                 this.RtbDescription.Text,_tableName, _paid, idFixedExpenses);
+
+                            if (!result) return;// deu erro
                         }
                         else// não mudou para conta fixa
                         {
                             // fazer edições
-                            DataConsultant.EditMonthExpense(_id, _name, _value, _date, "Contas",
+                            bool result = DataConsultant.EditMonthExpense(_id, _name, _value, _date, "Contas",
                                 this.RtbDescription.Text, _tableName, _paid);
+
+                            if (!result) return;// deu erro
                         }
                     }
                 }

@@ -59,13 +59,17 @@ namespace SysExpenseControl.Forms
             {
                 if (_tipe == 0)// Adicionar
                 {
-                    DataConsultant.InsertMonthProfits(_name, _value, Convert.ToDateTime(DateTimePicker.Value),
+                    int? id = DataConsultant.InsertMonthProfits(_name, _value, Convert.ToDateTime(DateTimePicker.Value),
                          this.RtbDescription.Text, DateTime.Now.Year, DateTime.Now.Month);
+
+                    if (id == null) return; // deu erro
                 }
                 else// Editar
                 {
-                    DataConsultant.EditMonthProfits(_id, _name, _value, Convert.ToDateTime(DateTimePicker.Value),
+                    bool result = DataConsultant.EditMonthProfits(_id, _name, _value, Convert.ToDateTime(DateTimePicker.Value),
                         this.RtbDescription.Text, _tableName);
+
+                    if (!result) return;
                 }
 
                 this.Close();

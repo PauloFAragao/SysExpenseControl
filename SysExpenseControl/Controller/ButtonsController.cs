@@ -3,18 +3,16 @@ using System.Windows.Forms;
 
 namespace SysExpenseControl.Controller
 {
-    internal class ButtonsController
+    static class ButtonsController
     {
-        private static Button _currentButton;// botão senecionado
+        private static Button _currentButton;// botão selecionado
 
-        private static Button _btnHome;// botão de iniciar
+        private static Button _btnHome;// botão de inicio
         private static Button _btnAccountsPayable;// botão das contas a pagar
-
         private static Button _btnFixedExpensesAndProfits;// botão para a tela de gastos e lucros fixos
         private static Button _btnMonthlyExpensesAndProfits;// botão para a tela de gastos e lucros do mês
         private static Button _btnReserves;// botão para tela de reservas
         private static Button _btnInvestments;// botão para tela de investimentos
-
         private static Button _btnSettings;// botão das configurações
 
         //cores

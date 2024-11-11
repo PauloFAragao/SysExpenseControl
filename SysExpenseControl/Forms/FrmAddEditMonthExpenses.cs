@@ -83,27 +83,35 @@ namespace SysExpenseControl.Forms
             {
                 if (_tipe == 0)// Adicionar
                 {
-                    DataConsultant.InsertMonthExpense(_name, _value, Convert.ToDateTime(DateTimePicker.Value),
+                    int? id = DataConsultant.InsertMonthExpense(_name, _value, Convert.ToDateTime(DateTimePicker.Value),
                         null, this.CbxCategories.Text, this.RtbDescription.Text, DateTime.Now.Year,
                         DateTime.Now.Month, true);
+
+                    if (id == null) return; // deu erro
                 }
                 else// Editar
                 {
-                    DataConsultant.EditMonthExpense(_id, _name, _value, Convert.ToDateTime(DateTimePicker.Value),
+                    bool resultEditMonthExpense = DataConsultant.EditMonthExpense(_id, _name, _value, Convert.ToDateTime(DateTimePicker.Value),
                         this.CbxCategories.Text, this.RtbDescription.Text, _tableName, _statusPaid);
+
+                    if (!resultEditMonthExpense) return;
 
                     // para cuidar das contas que tem uma quantidade de parcelas para acabar
                     if(_category == "Contas" && _definedNumberOfInstallments && 
                         !_paid && // se não está marcada como paga
                         _statusPaid)// se está marcada para ser paga
                     {
-                        DataConsultant.EditInstallment(_idFixedExpenses, true);// subitrair uma parcela
+                        bool result = DataConsultant.EditInstallment(_idFixedExpenses, true);// subitrair uma parcela
+
+                        if (!result) return;
                     }
                     else if(_category == "Contas" && _definedNumberOfInstallments && 
                         _paid &&// se está marcada como paga
                         !_statusPaid)// se está marcada para não paga
                     {
-                        DataConsultant.EditInstallment(_idFixedExpenses, false);// somar uma parcela
+                        bool result = DataConsultant.EditInstallment(_idFixedExpenses, false);// somar uma parcela
+
+                        if (!result) return;
                     }
                 }
                 this.Close();

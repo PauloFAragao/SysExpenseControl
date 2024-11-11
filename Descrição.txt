@@ -1,0 +1,228 @@
+Classes
+	ButtonsController - Essa classe muda a cor dos botões da interface, fazendo os botões selecionados mudarem de cor.
+	{
+	Propriedades:
+		Button _currentButton - botão selecionado.
+		Button _btnHome - referencia ao botão Inicio da interface da janela Form1.
+		Button _btnAccountsPayable - referencia ao botão Contas da interface da janela Form1.
+		Button _btnFixedExpensesAndProfits - referencia ao botão Fixos da interface da janela Form1.
+		Button _btnMonthlyExpensesAndProfits - referencia ao botão Gastos e Lucros do mês da interface da janela Form1.
+		Button _btnReserves - referencia ao botão Reservas da interface da janela Form1.
+		Button _btnInvestments - referencia ao botão Investimentos da interface da janela Form1.
+		Button _btnSettings - referencia ao botão Configurações da interface da janela Form1.
+		Color _unselectedButton - cor dos botões não selecionados.
+		Color _selectedButton - cor do botão selecionado.
+		
+	Métodos:
+		void SetButtonsData - método para passar as referencias dos botões.
+			Argumentos:
+				Button btnHome - referencia ao botão Inicio da interface.
+				Button btnAccountsPayable - referencia ao botão Contas da interface.
+				Button btnFixedExpensesAndProfitsreferencia ao botão Fixos da interface.
+				Button btnMonthlyExpensesAndProfits - referencia ao botão Gastos e Lucros do mês da interface.
+				Button btnReserves - referencia ao botão Reservas da interface.
+				Button btnInvestments - referencia ao botão Investimentos da interface.
+				Button btnSettings - referencia ao botão Configurações da interface.
+			
+		void UnselectCurrentButton - método para desselecionar o botão que está selecionado atualmente.
+		void SetBtnHomeSelected - método para marcar que o botão inicio foi selecionado.
+		void SetBtnAccountsPayableSelected - método para marcar que o botão Contas foi selecionado.
+		void SetBtnFixedExpensesAndProfitsSelected - método para marcar que o botão Fixos foi selecionado.
+		void SetBtnMonthlyExpensesAndProfitsSelected - método para marcar que o botão Gastos e Lucros do mês foi selecionado.
+		void SetBtnReservesSelected - método para marcar que o botão Reservas foi selecionado.
+		void SetBtnInvestmentsSelected - método para marcar que o botão Configurações foi selecionado.
+	}
+	
+	FormLoader - Essa classe faz as forms serem carregadas dentro do panel da From1.
+	{
+	Propriedades:
+		Panel PanelBody - refencia ao panel onde as forms vão ser carregadas.
+		Form _activeForm - referencia a from que está carregada no panel.
+		
+	Métodos:
+		void OpenChildForm - método que carrega a form no panel.
+			Argumentos:
+				Form childForm - a form que deve ser carregada.
+	}
+	
+	Connection - Essa classe contem as strings para o banco de dados.
+	{
+	Propriedades:
+		string TableName - nome do arquivo do bando de dados.
+		string Cn - string de conexão ao banco de dados.
+	}
+	
+	DatabaseManager - Essa classe é responsavel por criar e fazer as primeiras configurações do banco de dados e tabelas.
+	{
+	Métodos:
+		void CheckIfDatabaseExists - Verifica se existe o arquivo do banco de dados do Sqlite e se não cria o arquivo e as 
+		tabelas.
+		void CreateTables - Cria as tabelas basicas do banco de dados (categories, fixed_profits, fixed_expenses, 
+		references_to_reserves, references_to_tables, references_to_investiments).
+		void InsertDemoCategories - Insere as categorias de demonstração (Sem categoria, Contas, Alimentação, Transpote, 
+		Vestuario, Remédios).
+		void CheckIfThereAreAlreadyTablesForThisMonth - Verifica se já existem as tabelas para esse mês e chama o método 
+		que cria as tabelas do mês se não.
+		void CreateDynamicTables - Criador de tabelas dinamico, cria as tabelas para os dados do mês corrente e guarga o
+		nome das tabelas na tabela References_to_tables (profits_ano_mês, expenses_ano_mês).
+		void CreateProfitsAndExpenses -  Adiciona os gastos e os lucros fixos aos gastos e lucros mensais. (copia)
+		>precisa de revisão<
+		void CreateDynamicTable_Reserve - Método que vai criar uma tabela de reserva de dinheiro dinamicamente.
+			Argumentos:
+				string name - nome da reserva.
+				string description - descrição.
+		>precisa de revisão<
+		void CreateDynamicTable_Investiments - Método que vai criar uma tabela tabela para um investimento.
+			Argumentos:
+				string name - nome do investimento.
+				string description - descrição.
+		>precisa de revisão<
+		string GenerateRandonTableName - Método que vai gerar um nome aleatorio para uma tabela e verificar se ele é unico.
+			Argumentos:
+				string name - nome para gerar o nome aleatorio da tabela.
+				string tableToConsult - nome da tabela onde tem as referencias dos nomes.
+		string RemoveProhibitedCharacters - Método que retira da string caracteres que não podem ser usados para o nome de 
+		uma tabela.
+			Argumentos:
+				string name - string que vai ter os caracteres analizados
+	}
+	
+	DataConsultant - Essa classe comtem as consultas ao banco de dados
+	{
+		bool QueryInReferencesToTables - Método que verifica se já tem as tabelas referentes ao ano e mes corrente.
+		
+		DataTable ViewCategory - Método para visualizar todas as categorias.
+		List<string> GetCategorys - Método que vai pegar os nomes das categorias.
+		void InsertCategory - Método para inserir uma categoria.
+			Argumentos:
+				string name - nome da categoria.
+				string description - descrição da categoria.
+		void EditCategory - Método para editar uma categoria.
+			Argumentos:
+				int id - id da categoria a ser editada.
+				string name - nome da categoria.
+				string description - descrição da categoria.
+		void DeleteCategory - Deleta uma categoria
+			Argumentos:
+				int id - id da categoria a ser deletada.
+		
+		DataTable ViewFixedProfits - Método para visualizar todos os lucros fixos.
+		void InsertFixedProfit - Método para Inserir uma fonte de lucro fixa.
+			Argumentos:
+				string name - nome para o lucro.
+				double value - valor do lucro.
+				string description - descrição do lucro.
+		void EditFixedProfit - Método para editar uma fonte de lucro fixa.
+			Argumentos:
+				int id - id o lucro que deve ser editado.
+				string name - nome para o lucro.
+				double value - valor do lucro.
+				string description - descrição do lucro.
+		void DeleteFixedProfit - Método que vai deletar um lucro fixo.
+			Argumentos:
+				int id - id o lucro que deve ser deletado.
+				
+		DataTable ViewFixedExpenses - Método para visualizar os gastos fixos.
+		int? InsertFixedExpense - Método para Inserir um gasto fixo.
+			Retorno: esse método vai retornar o id do gasto fixo ou null em caso de erro.
+			Argumentos:
+				string name - nome do gasto fixo.
+				double value - valor do gasto fixo se o valor for fixo.
+				int dueDay - dia do vencimento se aplicavel.
+				int numberOfInstallments - quantidade de parcelas se aplicavel.
+				string category - categoria (recebe uma string mais a referencia no banco de dados é um int).
+				string description - descrição do gasto.
+				bool definedNumberOfInstallments - para indicar se tem uma quantidade de parcelas para terminar.
+		void EditFixedExpense - Método para Editar um gasto fixo.
+			Argumentos:
+				int id - id do gasto que deve ser editado
+				string name - nome do gasto fixo. 
+				double value - valor do gasto fixo se o valor for fixo.
+				int dueDay - dia do vencimento se aplicavel. 
+				int numberOfInstallments,
+				string category - categoria (recebe uma string mais a referencia no banco de dados é um int). 
+				string description - descrição do gasto. 
+				bool definedNumberOfInstallments - para indicar se tem uma quantidade de parcelas para terminar.
+		void EditInstallment - Método para subtrair ou somar 1 na quantidade de parcelas de uma conta.
+			Argumentos:
+				int id - id do gasto que deve ser editado.
+				bool subtract - indica se deve subtrair ou somar 1 na quantidade de parcelas restantes.
+		void DeleteFixedExpense - Método para deletar um gasto fixo
+			Argumentos:
+				int id - id do gasto que deve ser deletado.
+			
+	}
+	
+	ThreadHelper - Essa classe comtem métodos para ajudar quando uma thread é usada
+	{
+		
+	}
+
+Froms
+	Form1 - Essa form é a janela principal do programa, ela tem um panel com os botões a esquerda e um panel central para
+	abrir as outras forms
+	{
+		
+	}
+
+	FrmAccountsPayable - Essa Form exibe as contas do Mês selecionado, exibindo tambem quais contas já foram pagas, quais
+	não foram, se a contas atrasadas e o total gasto com contas. Tambem é possivel adicionar, editar e visualizar uma conta
+	{
+		
+	}
+	
+	FrmAddEditBill - Essa form é uma pequena janela para adicionar, editar ou visualizar uma conta.
+	{
+		
+	}
+	
+	FrmAddEditFixedExpenses - Essa form é uma pequena janela para adicionar, editar ou visualizar um gasto fixo.
+	{
+		
+	}
+	
+	FrmAddEditFixedProfits - Essa form é uma pequena janela para adicionar, editar ou visualizar um lucro fixo.
+	{
+		
+	}
+	
+	FrmAddEditMonthExpenses - Essa form é uma pequena janela para adicionar, editar ou visualizar um Gasto do mês.
+	{
+		
+	}
+	
+	FrmAddEditMonthProfits - Essa form é uma pequena janela para adicionar, editar ou visualizar um lucro do mês.
+	{
+		
+	}
+	
+	FrmFixedExpensesAndProfits - Essa form é a tela que vai exibir os gastos e lucros fixos
+	{
+		
+	}
+	
+	FrmHome - Essa form é a tela inicial, ela exibe um resumo dos gastos do mês corrente, um grafico dos gastos do 
+	mês corrente, as reservas de dinheiro e os gastos por categoria.
+	{
+		
+	}
+	
+	FrmInvestments - Essa form é a tela que exibe os investimentos.
+	{
+		
+	}
+	
+	FrmMonthlyExpensesAndProfits - Essa form é a tela que exibe os gastos e lucros do mês.
+	{
+		
+	}
+	
+	FrmReserves - Essa form é a tela que exibe as reservas
+	{
+		
+	}
+	
+	FrmSettings - Essa form é a tela das configurações
+	{
+		
+	}

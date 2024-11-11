@@ -4,12 +4,13 @@ using System.Data;
 using System.Diagnostics;
 using System.Globalization;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace SysExpenseControl.Data
 {
     static class DataConsultant
     {
-        // Método que verifica se já tem as tabelas referentes ao ano e mes
+        // Método que verifica se já tem as tabelas referentes ao ano e mes corrente
         public static bool QueryInReferencesToTables()
         {
             bool result = false;
@@ -93,19 +94,21 @@ namespace SysExpenseControl.Data
         }
 
         // Método para inserir uma categoria
-        public static void InsertCategory(string name, string description)
+        public static int? InsertCategory(string name, string description)
         {
             string insertQuery = $"Insert Into categories Values ('{name}', '{description}')";
 
-            SimpleQuery(insertQuery);
+            //SimpleQuery(insertQuery);
+            return InsertQuery(insertQuery);
         }
 
         // Método para editar uma categoria
-        public static void EditCategory(int id, string name, string description)
+        public static bool EditCategory(int id, string name, string description)
         {
             string editQuery = $"Update categories Set name = '{name}', description = '{description}' Where id = {id} ";
 
-            SimpleQuery(editQuery);
+            //SimpleQuery(editQuery);
+            return EditQuery(editQuery);
         }
 
         // Deleta uma categoria
@@ -117,7 +120,7 @@ namespace SysExpenseControl.Data
         }
 
         // ---------------------------------- Lucros fixos
-        // Método para visualizar todas os lucros fixos
+        // Método para visualizar todos os lucros fixos
         public static DataTable ViewFixedProfits()
         {
             string viewQuery = $"Select * From fixed_profits";
@@ -126,16 +129,19 @@ namespace SysExpenseControl.Data
         }
 
         // Método para Inserir uma fonte de lucro fixa
-        public static void InsertFixedProfit(string name, double value, string description)
+        public static int? InsertFixedProfit(string name, double value, string description)
         {
             string insertQuery = $"Insert Into fixed_profits (name, value, description) "
-                + $"Values ('{name}', {value.ToString(CultureInfo.InvariantCulture)}, '{description}')";
+                + $"Values ('{name}', " +
+                $"{value.ToString(CultureInfo.InvariantCulture)}, " +
+                $"'{description}')";
 
-            SimpleQuery(insertQuery);
+            //SimpleQuery(insertQuery);
+            return InsertQuery(insertQuery);
         }
 
         // Método para editar uma fonte de lucro fixa
-        public static void EditFixedProfit(int id, string name, double value, string description)
+        public static bool EditFixedProfit(int id, string name, double value, string description)
         {
             string editQuery =
                 "Update fixed_profits "
@@ -144,15 +150,39 @@ namespace SysExpenseControl.Data
                 + $"description = '{description}' "
                 + $"Where id = {id}";
 
-            SimpleQuery(editQuery);
+            //SimpleQuery(editQuery);
+            return EditQuery(editQuery);
         }
 
         // Método que vai deletar um lucro fixo
         public static void DeleteFixedProfit(int id)
         {
-            string deleteQuery = $"Delete From fixed_profits where id = {id} ";
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(Connection.Cn))
+                {
+                    // Abre a conexão
+                    connection.Open();
 
-            SimpleQuery(deleteQuery);
+                    // Ativa as restrições de chaves estrangeiras
+                    using (SQLiteCommand command = new SQLiteCommand("PRAGMA foreign_keys = ON", connection))
+                    {
+                        // Executa a consulta e captura o resultado
+                        command.ExecuteNonQuery();
+                    }
+
+                    // Deleta o registro da tabela fixed_expenses com id = {id}
+                    using (SQLiteCommand command = new SQLiteCommand($"Delete From fixed_profits where id = {id}", connection))
+                    {
+                        // Executa a consulta e captura o resultado
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Exception in DataConsultant.SimpleQuery: " + e.Message);
+            }
         }
 
         // ---------------------------------- Gastos fixos
@@ -189,7 +219,7 @@ namespace SysExpenseControl.Data
         }
 
         // Método para Editar um gasto fixo
-        public static void EditFixedExpense(int id, string name, double value, int dueDay, int numberOfInstallments,
+        public static bool EditFixedExpense(int id, string name, double value, int dueDay, int numberOfInstallments,
             string category, string description, bool definedNumberOfInstallments)
         {
             string editQuery =
@@ -203,11 +233,12 @@ namespace SysExpenseControl.Data
                 + $"description = '{description}' "
                 + $"Where id = {id}";
 
-            SimpleQuery(editQuery);
+            //SimpleQuery(editQuery);
+            return EditQuery(editQuery);
         }
 
         // Método para subtrair ou somar 1 na quantidade de parcelas de uma conta
-        public static void EditInstallment(int id, bool subtract)
+        public static bool EditInstallment(int id, bool subtract)
         {
             string editQuery = "Update fixed_Expenses "
                 + "Set numberOfInstallments = ";
@@ -223,7 +254,8 @@ namespace SysExpenseControl.Data
 
             editQuery += $"Where id = {id}";
 
-            SimpleQuery(editQuery);
+            //SimpleQuery(editQuery);
+            return EditQuery(editQuery);
         }
 
         // Método para deletar um gasto fixo
@@ -268,8 +300,8 @@ namespace SysExpenseControl.Data
         }
 
         // Método para inserir um lucro no mês
-        public static void InsertMonthProfits(string name, double value, DateTime? date, string description,
-            int year, int month)
+        public static int? InsertMonthProfits(string name, double value, DateTime? date, 
+            string description, int year, int month, int idFixedProfits = 0)
         {
             string profitsTableName = "profits_" + year + "_" + month;
 
@@ -282,14 +314,21 @@ namespace SysExpenseControl.Data
                 values += $"'{date:yyyy-MM-dd}', ";
             }
 
+            if(idFixedProfits != 0)
+            {
+                insertQuery += "idFixedProfits, ";
+                values += $"{idFixedProfits}, ";
+            }
+
             insertQuery += "description) ";
             values += $"'{description}')";
 
-            SimpleQuery(insertQuery + values);
+            //SimpleQuery(insertQuery + values);
+            return InsertQuery(insertQuery + values);
         }
 
         // Método para Editar um lucro do mês
-        public static void EditMonthProfits(int id, string name, double value, DateTime date,
+        public static bool EditMonthProfits(int id, string name, double value, DateTime date,
             string description, string tableName)
         {
             string editQuery =
@@ -300,7 +339,23 @@ namespace SysExpenseControl.Data
                 + $"description = '{description}' "
                 + $"Where id = {id}";
 
-            SimpleQuery(editQuery);
+            //SimpleQuery(editQuery);
+            return EditQuery(editQuery);
+        }
+
+        // Método para editar um lucro do mês a partir da referencia de um lucro fixo
+        public static bool EditProfit(int idFixedProfits, string name, double value, 
+            string description, string tableName)
+        {
+            string editQuery = $"Update {tableName} "
+                + $"Set name = '{name}', "
+                + $"value = {value.ToString(CultureInfo.InvariantCulture)}, "
+                + $"description = '{description}' "
+                + $"Where idFixedProfits = {idFixedProfits}";
+
+            Debug.WriteLine(">>Query: "+editQuery);
+
+            return EditQuery(editQuery);
         }
 
         // Método para deletar lucro no mês
@@ -330,12 +385,12 @@ namespace SysExpenseControl.Data
             return ViewQuery(viewQuery);
         }
 
-        // Novo método para visualizar as contas <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+        // Novo método para visualizar as contas
         public static DataTable ViewBills(DateTime date)
         {
             string expensesTableName = "expenses_" + date.Year + "_" + date.Month;
-            string viewQuery = "Select e.id, e.idFixedExpenses, e.name, e.value, e.date, e.description, "
-                + "f.dueDay, f.numberOfInstallments, e.paid "
+            string viewQuery = "Select e.id, e.idFixedExpenses, e.name, e.value, f.dueDay, "
+                + "e.date, f.numberOfInstallments, e.description, e.paid "
                 + $"From {expensesTableName} e "
                 + "Left Join fixed_expenses f on e.idFixedExpenses = f.id "
                 + "Where e.category = 1 Order by e.date Desc";
@@ -344,7 +399,7 @@ namespace SysExpenseControl.Data
         }
 
         // Método para inserir um gasto no mês
-        public static void InsertMonthExpense(string name, double value, DateTime? dateOfExpenditure,
+        public static int? InsertMonthExpense(string name, double value, DateTime? dateOfExpenditure,
             int? idFixedExpenses, string category, string description, int year, int month, bool paid,
             string fixedExpense = "")
         {
@@ -378,11 +433,12 @@ namespace SysExpenseControl.Data
             insertQuery += "description) ";
             values += $"'{description}')";
 
-            SimpleQuery(insertQuery + values);
+            //SimpleQuery(insertQuery + values);
+            return InsertQuery(insertQuery + values);
         }
 
         // Método para Editar um gasto do mês
-        public static void EditMonthExpense(int id, string name, double value, DateTime dateOfExpenditure,
+        public static bool EditMonthExpense(int id, string name, double value, DateTime dateOfExpenditure,
             string category, string description, string tableName, bool paid, int? idReference = 0)
         {
             string editQuery =
@@ -404,11 +460,12 @@ namespace SysExpenseControl.Data
                 $"description = '{description}' "
                 + $"Where id = {id}";
 
-            SimpleQuery(editQuery);
+            //SimpleQuery(editQuery);
+            return EditQuery(editQuery);
         }
 
         // Método para editar todas as tabelas que tenham referencia a um gasto fixo
-        public static void EditAllMonthExpense(int idFixedExpenses, string name, double value,
+        public static bool EditAllMonthExpense(int idFixedExpenses, string name, double value,
             string category, string description, bool removeReference = false)
         {
             // nomes das tabelas de gastos
@@ -430,9 +487,14 @@ namespace SysExpenseControl.Data
                 editQuery += $"description = '{description}' "
                     + $"Where idFixedExpenses = {idFixedExpenses}";
 
-                SimpleQuery(editQuery);
+                //SimpleQuery(editQuery);
+                if(!EditQuery(editQuery))
+                {
+                    return false;
+                }
             }
 
+            return true;
         }
 
         // Método para Deletar um gasto no mês
@@ -478,6 +540,7 @@ namespace SysExpenseControl.Data
             return quantity;
         }
 
+        // Método que vai retornar uma lista com os nomes das tables de gastos do mês
         public static List<string> GetExpenseTables()
         {
             string query = "Select nameTableExpenses From references_to_tables";
@@ -515,6 +578,7 @@ namespace SysExpenseControl.Data
         }
 
         // ---------------------------------- 
+        // Método que vai visualizar as reservas
         public static DataTable ViewReserves()
         {
             string viewQuery = "Select * From references_to_reserves";
@@ -576,10 +640,47 @@ namespace SysExpenseControl.Data
             {
                 Debug.WriteLine("Exception in DataConsultant.SimpleQuery: " + e.Message);
 
+                MessageBox.Show("Exception in DataConsultant.SimpleQuery: " + e.Message, 
+                    "Erro ao inserir dados no banco de dados", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 id = null;
             }
 
             return id;
+        }
+
+        private static bool EditQuery(string query)
+        {
+            bool result = true;
+
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(Connection.Cn))
+                {
+                    // Abre a conexão
+                    connection.Open();
+
+                    // Executando a Query
+                    using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                    {
+                        // Executa a consulta e captura o resultado
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Exception in DataConsultant.EditQuery: " + e.Message);
+
+                MessageBox.Show("Exception in DataConsultant.EditQuery: " + e.Message,
+                    "Erro ao Editar dados no banco de dados",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                result = false;
+            }
+
+            return result;
         }
 
         private static DataTable ViewQuery(string query)

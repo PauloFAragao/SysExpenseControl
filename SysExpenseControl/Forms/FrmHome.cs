@@ -133,8 +133,8 @@ namespace SysExpenseControl.Forms
         {
             if (LoadDataSpent())
             {
-                ChangeColumnsSpent();
-                HideColumnsSpent();
+                //ChangeColumnsSpent();
+                //HideColumnsSpent();
             }
         }
 

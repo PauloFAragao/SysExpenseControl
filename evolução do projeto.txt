@@ -78,6 +78,21 @@ de gastos fixos era nulo
 referencia a aquele gasto fixo.
 -Botões de editar e visualizar da tela de contas implementados.
 
+-Comecei a escrever um arquivo .txt com a descrição das classes e métodos para me ajudar a não me perder
+-Todas as inserções no banco de dados agora retornam um int? id, se der erro retorna null, se não retorna
+o id de onde foi inserido
+-Todas as edições no banco de dados retornam um bool onde: true - deu tudo certo, false - deu erro
+-Agora se der um erro inserindo ou editando dados no banco de dados o programa vai exibir uma caixa
+de erro com uma mensagem mostrando a exceção.
+-Agora ao Editar um lucro fixo o lucro do mês corrente tambem é editado
+
+
+
+
+
+
+
+
 
 
 

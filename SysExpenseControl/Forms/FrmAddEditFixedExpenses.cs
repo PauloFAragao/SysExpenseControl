@@ -86,26 +86,31 @@ namespace SysExpenseControl.Forms
                 if (_tipe == 0)// Adicionar
                 {
                     // Adicionando na tabela de gastos fixos
-                    int? id = DataConsultant.InsertFixedExpense(_name, _value, _dueDay, _numberOfInstallments,
+                    int? idFixedExpense = DataConsultant.InsertFixedExpense(_name, _value, _dueDay, _numberOfInstallments,
                         this.CbxCategories.Text, this.RtbDescription.Text, definedNumberOfInstallments);
 
-                    if (id == null) return; //erro
+                    if (idFixedExpense == null) return; //erro
 
                     // Adicionando na tabela de gastos do Mês corrente
-                    DataConsultant.InsertMonthExpense(_name, _value, null, id,
+                    int? idMonthExpense =  DataConsultant.InsertMonthExpense(_name, _value, null, idFixedExpense,
                         this.CbxCategories.Text, this.RtbDescription.Text, DateTime.Now.Year,
                         DateTime.Now.Month, false);
 
+                    if (idMonthExpense == null) return; //erro
                 }
                 else// Editar
                 {
                     // Editar gasto fixo
-                    DataConsultant.EditFixedExpense(_id, _name, _value, _dueDay, _numberOfInstallments,
+                    bool result = DataConsultant.EditFixedExpense(_id, _name, _value, _dueDay, _numberOfInstallments,
                         this.CbxCategories.Text, this.RtbDescription.Text, definedNumberOfInstallments);
 
-                    // Editar gasto do Mês referente ao gasto fixo
-                    DataConsultant.EditAllMonthExpense(_id, _name, _value, this.CbxCategories.Text,
+                    if (!result) return;// deu erro
+
+                    // Editar gasto dos Mêses referente ao gasto fixo
+                    bool resultEditAllMonthExpense = DataConsultant.EditAllMonthExpense(_id, _name, _value, this.CbxCategories.Text,
                         this.RtbDescription.Text );
+
+                    if (!resultEditAllMonthExpense) return;// deu erro
                 }
 
                 this.Close();
