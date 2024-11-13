@@ -3,7 +3,6 @@ using SysExpenseControl.Entities;
 using System;
 using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -45,12 +44,20 @@ namespace SysExpenseControl.Forms
                     MessageBoxButtons.OKCancel,
                     MessageBoxIcon.Question) == DialogResult.OK)
                 {
+                    // deletando da tabela de lucros do mês
                     DataConsultant.DeleteMonthProfits(
                         Convert.ToInt32(this.DgvProfits.CurrentRow.Cells["id"].Value),
                         _date.Year, _date.Month);
 
+                    // subtraindo o valor do lucro total (tabela references_to_tables)
+                    DataConsultant.InsertProfit(
+                        -1 * Convert.ToDouble(this.DgvProfits.CurrentRow.Cells["value"].Value),
+                        _date.Year, _date.Month);
+
+                    SetInLoad();// mudando para loading.
+
                     //carregando os dados
-                    Task.Run(() => LoadProfitsData());
+                    Task.Run(() => ReloadProfitsData());
                 }
             }
             else
@@ -64,23 +71,29 @@ namespace SysExpenseControl.Forms
             if (DgvProfits.Rows.Count > 0)
             {
                 DateTime date;
+                bool confirm;
 
                 // Verificando se o campo data está vazio e capturando o valor
                 if (DateTime.TryParse(this.DgvProfits.CurrentRow.Cells["date"].Value.ToString(),
                     out DateTime dateValue))
+                {
                     date = dateValue;
-
+                    confirm = false;
+                }
                 else
+                {
                     date = DateTime.Now;
+                    confirm = true;
+                }
 
                 FrmAddEditMonthProfits frmAddEditMonthProfits = new FrmAddEditMonthProfits(tipe,
-                    CallLoadProfitsData,
-                    date,
+                    CallLoadProfitsData, date,
                     "profits_" + _date.Year + "_" + _date.Month,// nome da tabela
                     Convert.ToInt32(this.DgvProfits.CurrentRow.Cells["id"].Value),
                     Convert.ToString(this.DgvProfits.CurrentRow.Cells["name"].Value),
                     Convert.ToDouble(this.DgvProfits.CurrentRow.Cells["value"].Value),
-                    Convert.ToString(this.DgvProfits.CurrentRow.Cells["description"].Value));
+                    Convert.ToString(this.DgvProfits.CurrentRow.Cells["description"].Value), 
+                    confirm);
 
                 frmAddEditMonthProfits.ShowDialog();
             }
@@ -107,12 +120,18 @@ namespace SysExpenseControl.Forms
                     MessageBoxButtons.OKCancel,
                     MessageBoxIcon.Question) == DialogResult.OK)
                 {
+                    // deletando da tabela de gastos do mês
                     DataConsultant.DeleteMonthExpense(
                         Convert.ToInt32(this.DgvExpenses.CurrentRow.Cells["id"].Value),
                         _date.Year, _date.Month);
 
+                    // removendo o gasto na tabela references_to_tables 
+                    DataConsultant.InsertExpense(
+                        -1 * Convert.ToDouble(this.DgvExpenses.CurrentRow.Cells["value"].Value),
+                        _date.Year, _date.Month);
+
                     //carregando os dados
-                    Task.Run(() => LoadExpensesData());
+                    Task.Run(() => ReloadExpensesData());
                 }
             }
             else
@@ -126,14 +145,15 @@ namespace SysExpenseControl.Forms
             if (DgvExpenses.Rows.Count > 0)
             {
                 DateTime date;
+                bool confirm;
 
                 // Verificando se o campo data está vazio e capturando o valor
                 if (DateTime.TryParse(this.DgvExpenses.CurrentRow.Cells["date"].Value.ToString(),
                     out DateTime dateValue))
                     date = dateValue;
-
                 else
                     date = DateTime.Now;
+                
 
                 // capturando se é uma conta que tem uma quantidade de parcelas para terminar
                 bool definedNumberOfInstallments;
@@ -171,19 +191,42 @@ namespace SysExpenseControl.Forms
             }
         }
 
+        private void SetInLoad()
+        {
+            this.LblWait.Visible = true;
+            this.TabControl.Enabled = false;
+            this.BtnChangeMonth.Enabled = false;
+        }
+
         // ------------------------- Thread
         private void Initialize()
         {
+            bool allDone = true;
+
             if (LoadProfitsData())
             {
                 HideColumnsProfits();
                 ChangeColumnsProfits();
+
+                ThreadHelper.SetDefaultCellStyle(DgvProfits, "value");// para a coluna dos valores ter ,00
             }
+            else allDone = false;
 
             if (LoadExpensesData())
             {
                 HideColumnsExpenses();
                 ChangeColumnsExpenses();
+
+                ThreadHelper.SetDefaultCellStyle(DgvExpenses, "value");// para a coluna dos valores ter ,00
+            }
+            else allDone = false;
+
+            if (allDone)
+            {
+                ThreadHelper.SetPropertyValue(LblWait, "Visible", false);// retirando o label wait da tela
+
+                ThreadHelper.SetPropertyValue(TabControl, "Enabled", true);// habilitando tudo
+                ThreadHelper.SetPropertyValue(BtnChangeMonth, "Enabled", true);// habilitando o botão para mudar o mês
             }
         }
 
@@ -194,7 +237,10 @@ namespace SysExpenseControl.Forms
 
             if (dataTable != null)
             {
-                TakeDataFromDataTable(dataTable, this.LblProfits);
+                // Total
+                string total = "R$: ";
+                total += DataConsultant.GetMonthProfit(_date.Year, _date.Month).ToString("F2");
+                ThreadHelper.SetPropertyValue(LblProfits, "Text", total);
 
                 // carregando os dados no DataGridView
                 ThreadHelper.SetPropertyValue(DgvProfits, "DataSource", dataTable);
@@ -207,6 +253,7 @@ namespace SysExpenseControl.Forms
         private void HideColumnsProfits()
         {
             ThreadHelper.SetColumnVisibility(this.DgvProfits, 0, false);//mudando a visibilidade da coluna id
+            ThreadHelper.SetColumnVisibility(this.DgvProfits, 5, false);//coluna idfixed profits
         }
 
         private void ChangeColumnsProfits()
@@ -224,6 +271,17 @@ namespace SysExpenseControl.Forms
             ThreadHelper.SetColumnAutoSizeMode(this.DgvProfits, 4, DataGridViewAutoSizeColumnMode.Fill);
         }
 
+        private void ReloadProfitsData()
+        {
+            if(LoadProfitsData())
+            {
+                ThreadHelper.SetPropertyValue(LblWait, "Visible", false);// retirando o label wait da tela
+
+                ThreadHelper.SetPropertyValue(TabControl, "Enabled", true);// habilitando tudo
+                ThreadHelper.SetPropertyValue(BtnChangeMonth, "Enabled", true);// habilitando o botão para mudar o mês
+            }
+        }
+
         // ------ Gastos do mês
         private bool LoadExpensesData()
         {
@@ -231,7 +289,12 @@ namespace SysExpenseControl.Forms
 
             if (dataTable != null)
             {
-                TakeDataFromDataTable(dataTable, this.LblExpenses);
+                //TakeDataFromDataTable(dataTable, this.LblExpenses);
+
+                // Total
+                string total = "R$: ";
+                total += DataConsultant.GetMonthExpense(_date.Year, _date.Month).ToString("F2");
+                ThreadHelper.SetPropertyValue(LblExpenses, "Text", total);
 
                 // carregando os dados no DataGridView
                 ThreadHelper.SetPropertyValue(DgvExpenses, "DataSource", dataTable);
@@ -270,6 +333,17 @@ namespace SysExpenseControl.Forms
             ThreadHelper.SetColumnAutoSizeMode(this.DgvExpenses, 6, DataGridViewAutoSizeColumnMode.Fill);
         }
 
+        private void ReloadExpensesData()
+        {
+            if(LoadExpensesData())
+            {
+                ThreadHelper.SetPropertyValue(LblWait, "Visible", false);// retirando o label wait da tela
+
+                ThreadHelper.SetPropertyValue(TabControl, "Enabled", true);// habilitando tudo
+                ThreadHelper.SetPropertyValue(BtnChangeMonth, "Enabled", true);// habilitando o botão para mudar o mês
+            }
+        }
+
         // Método que soma os valores dos gastos e lucros e imprime os valores
         private void TakeDataFromDataTable(DataTable dataTable, Label label)
         {
@@ -289,12 +363,14 @@ namespace SysExpenseControl.Forms
         // ------------------------- Eventos
         private void CallLoadProfitsData()
         {
-            Task.Run(() => LoadProfitsData());
+            SetInLoad();
+            Task.Run(() => ReloadProfitsData());
         }
 
         private void CallLoadExpensesData()
         {
-            Task.Run(() => LoadExpensesData());
+            SetInLoad();
+            Task.Run(() => ReloadExpensesData());
         }
 
         // ------------------------- Métodos criados pelo visual studo

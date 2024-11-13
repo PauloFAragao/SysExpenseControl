@@ -49,7 +49,7 @@
             this.label2.Location = new System.Drawing.Point(14, 258);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(270, 13);
-            this.label2.TabIndex = 21;
+            this.label2.TabIndex = 95;
             this.label2.Text = "Os campos marcados com asterisco (*) são obrigatórios.";
             // 
             // BtnEdit
@@ -59,7 +59,7 @@
             this.BtnEdit.Location = new System.Drawing.Point(20, 292);
             this.BtnEdit.Name = "BtnEdit";
             this.BtnEdit.Size = new System.Drawing.Size(75, 23);
-            this.BtnEdit.TabIndex = 20;
+            this.BtnEdit.TabIndex = 7;
             this.BtnEdit.Text = "Editar";
             this.BtnEdit.UseVisualStyleBackColor = false;
             this.BtnEdit.Visible = false;
@@ -72,7 +72,7 @@
             this.BtnCancel.Location = new System.Drawing.Point(204, 292);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(75, 23);
-            this.BtnCancel.TabIndex = 19;
+            this.BtnCancel.TabIndex = 6;
             this.BtnCancel.Text = "Cancelar";
             this.BtnCancel.UseVisualStyleBackColor = false;
             this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
@@ -84,7 +84,7 @@
             this.BtnSave.Location = new System.Drawing.Point(123, 292);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(75, 23);
-            this.BtnSave.TabIndex = 18;
+            this.BtnSave.TabIndex = 5;
             this.BtnSave.Text = "Salvar";
             this.BtnSave.UseVisualStyleBackColor = false;
             this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
@@ -95,7 +95,7 @@
             this.label4.Location = new System.Drawing.Point(17, 130);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(58, 13);
-            this.label4.TabIndex = 17;
+            this.label4.TabIndex = 96;
             this.label4.Text = "Descrição:";
             // 
             // TxtValue
@@ -103,7 +103,7 @@
             this.TxtValue.Location = new System.Drawing.Point(80, 73);
             this.TxtValue.Name = "TxtValue";
             this.TxtValue.Size = new System.Drawing.Size(194, 20);
-            this.TxtValue.TabIndex = 16;
+            this.TxtValue.TabIndex = 2;
             // 
             // label3
             // 
@@ -111,7 +111,7 @@
             this.label3.Location = new System.Drawing.Point(17, 76);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(61, 13);
-            this.label3.TabIndex = 15;
+            this.label3.TabIndex = 98;
             this.label3.Text = "Valor (R$)*:";
             // 
             // LblTitle
@@ -121,7 +121,7 @@
             this.LblTitle.Location = new System.Drawing.Point(12, 12);
             this.LblTitle.Name = "LblTitle";
             this.LblTitle.Size = new System.Drawing.Size(134, 20);
-            this.LblTitle.TabIndex = 14;
+            this.LblTitle.TabIndex = 100;
             this.LblTitle.Text = "Adicionar Receita";
             // 
             // RtbDescription
@@ -129,7 +129,7 @@
             this.RtbDescription.Location = new System.Drawing.Point(20, 152);
             this.RtbDescription.Name = "RtbDescription";
             this.RtbDescription.Size = new System.Drawing.Size(254, 96);
-            this.RtbDescription.TabIndex = 13;
+            this.RtbDescription.TabIndex = 4;
             this.RtbDescription.Text = "";
             // 
             // TxtName
@@ -137,7 +137,7 @@
             this.TxtName.Location = new System.Drawing.Point(61, 47);
             this.TxtName.Name = "TxtName";
             this.TxtName.Size = new System.Drawing.Size(213, 20);
-            this.TxtName.TabIndex = 12;
+            this.TxtName.TabIndex = 1;
             // 
             // label1
             // 
@@ -145,7 +145,7 @@
             this.label1.Location = new System.Drawing.Point(17, 50);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 13);
-            this.label1.TabIndex = 11;
+            this.label1.TabIndex = 99;
             this.label1.Text = "Nome*:";
             // 
             // DateTimePicker
@@ -153,7 +153,7 @@
             this.DateTimePicker.Location = new System.Drawing.Point(56, 99);
             this.DateTimePicker.Name = "DateTimePicker";
             this.DateTimePicker.Size = new System.Drawing.Size(218, 20);
-            this.DateTimePicker.TabIndex = 22;
+            this.DateTimePicker.TabIndex = 3;
             // 
             // LblDate
             // 
@@ -161,7 +161,7 @@
             this.LblDate.Location = new System.Drawing.Point(17, 105);
             this.LblDate.Name = "LblDate";
             this.LblDate.Size = new System.Drawing.Size(33, 13);
-            this.LblDate.TabIndex = 23;
+            this.LblDate.TabIndex = 97;
             this.LblDate.Text = "Data:";
             // 
             // FrmAddEditMonthProfits

@@ -92,27 +92,34 @@ Classes
 		bool QueryInReferencesToTables - Método que verifica se já tem as tabelas referentes ao ano e mes corrente.
 		
 		DataTable ViewCategory - Método para visualizar todas as categorias.
+			Retorno: esse método retorna um DataTable com o resultado da pesquisa.
 		List<string> GetCategorys - Método que vai pegar os nomes das categorias.
-		void InsertCategory - Método para inserir uma categoria.
+			Retorno: esse método vai retornar uma List de strings com todas as categorias.
+		int? InsertCategory - Método para inserir uma categoria.
+			Retorno: esser método vai tornar o id da categoria ou null em caso de erro.
 			Argumentos:
 				string name - nome da categoria.
 				string description - descrição da categoria.
-		void EditCategory - Método para editar uma categoria.
+		bool EditCategory - Método para editar uma categoria.
+			Retorno: retorna true se não houver erros e false se houver.
 			Argumentos:
 				int id - id da categoria a ser editada.
 				string name - nome da categoria.
 				string description - descrição da categoria.
-		void DeleteCategory - Deleta uma categoria
+		void DeleteCategory - Deleta uma categoria.
 			Argumentos:
 				int id - id da categoria a ser deletada.
 		
 		DataTable ViewFixedProfits - Método para visualizar todos os lucros fixos.
-		void InsertFixedProfit - Método para Inserir uma fonte de lucro fixa.
+			Retorno: esse método retorna um DataTable com o resultado da pesquisa.
+		int? InsertFixedProfit - Método para Inserir uma fonte de lucro fixa.
+			Retorno: esser método vai tornar o id ou null em caso de erro.
 			Argumentos:
 				string name - nome para o lucro.
 				double value - valor do lucro.
 				string description - descrição do lucro.
-		void EditFixedProfit - Método para editar uma fonte de lucro fixa.
+		bool EditFixedProfit - Método para editar uma fonte de lucro fixa.
+			Retorno: retorna true se não houver erros e false se houver.
 			Argumentos:
 				int id - id o lucro que deve ser editado.
 				string name - nome para o lucro.
@@ -123,6 +130,7 @@ Classes
 				int id - id o lucro que deve ser deletado.
 				
 		DataTable ViewFixedExpenses - Método para visualizar os gastos fixos.
+			Retorno: esse método retorna um DataTable com o resultado da pesquisa.
 		int? InsertFixedExpense - Método para Inserir um gasto fixo.
 			Retorno: esse método vai retornar o id do gasto fixo ou null em caso de erro.
 			Argumentos:
@@ -133,9 +141,10 @@ Classes
 				string category - categoria (recebe uma string mais a referencia no banco de dados é um int).
 				string description - descrição do gasto.
 				bool definedNumberOfInstallments - para indicar se tem uma quantidade de parcelas para terminar.
-		void EditFixedExpense - Método para Editar um gasto fixo.
+		bool EditFixedExpense - Método para Editar um gasto fixo.
+			Retorno: retorna true se não houver erros e false se houver.
 			Argumentos:
-				int id - id do gasto que deve ser editado
+				int id - id do gasto que deve ser editado.
 				string name - nome do gasto fixo. 
 				double value - valor do gasto fixo se o valor for fixo.
 				int dueDay - dia do vencimento se aplicavel. 
@@ -143,20 +152,207 @@ Classes
 				string category - categoria (recebe uma string mais a referencia no banco de dados é um int). 
 				string description - descrição do gasto. 
 				bool definedNumberOfInstallments - para indicar se tem uma quantidade de parcelas para terminar.
-		void EditInstallment - Método para subtrair ou somar 1 na quantidade de parcelas de uma conta.
+		bool EditInstallment - Método para subtrair ou somar 1 na quantidade de parcelas de uma conta.
+			Retorno: retorna true se não houver erros e false se houver.
 			Argumentos:
 				int id - id do gasto que deve ser editado.
 				bool subtract - indica se deve subtrair ou somar 1 na quantidade de parcelas restantes.
-		void DeleteFixedExpense - Método para deletar um gasto fixo
+		void DeleteFixedExpense - Método para deletar um gasto fixo.
 			Argumentos:
 				int id - id do gasto que deve ser deletado.
 			
-	}
+		DataTable ViewMonthProfits - Método para visualizar todos os lucros de um mês.
+			Retorno: esse método retorna um DataTable com o resultado da pesquisa.
+			Argumentos:
+				int year - ano para compor o nome da tabela onde deve pesquisar.
+				int month - mês para compor o nome da tabela onde deve pesquisar.
+		int? InsertMonthProfits - Método para inserir um lucro no mês.
+			Retorno: esser método vai tornar o id ou null em caso de erro.
+			Argumentos:
+				string name - Nome do lucro.
+				double value - Valor do lucro.
+				DateTime? date - Data do lucro.
+				string description - Descrição do lucro.
+				int year - ano para compor o nome da tabela.
+				int month - mês para compor o nome da tabela.
+				int idFixedProfits = 0 - id referencia a tabela de lucros fixos.
+		bool EditMonthProfits - Método para Editar um lucro do mês.
+			Retorno: retorna true se não houver erros e false se houver.
+			Argumentos:
+				int id - id do lucro que deve ser editado.
+				string name - nome do lucro.
+				double value - Valor do lucro.
+				DateTime? date - Data do lucro.
+				string description - Descrição do lucro.
+				string tableName - nome da tabela.
+		bool EditProfit - Método para editar um lucro do mês a partir da referencia de um lucro fixo.
+			Retorno: retorna true se não houver erros e false se houver.
+			Argumentos:
+				int idFixedProfits - id refencia a um lucro fixo.
+				string name - nome do lucro.
+				double value - Valor do lucro.
+				string description - Descrição do lucro.
+				string tableName - nome da tabela.
+		void DeleteMonthProfits - Método para deletar lucro no mês.
+			Argumentos:
+				int id - id do lucro.
+				int year - ano para compor o nome da tabela. 
+				int month - mês para compor o nome da tabela.
+				
+		DataTable ViewMonthExpenses - Método para visualizar todos os gastos de um mês.
+			Retorno: esse método retorna um DataTable com o resultado da pesquisa.
+			Argumentos:
+				int year - ano para compor o nome da tabela. 
+				int month - mês para compor o nome da tabela.
+		DataTable ViewBills -  Novo método para visualizar as contas
+			Retorno: esse método retorna um DataTable com o resultado da pesquisa.
+			Argumentos:
+				DateTime date - para capturar o ano e o mês para compor o nome da tabela.
+		int? InsertMonthExpense - Método para inserir um gasto no mês.
+			Retorno: esser método vai tornar o id ou null em caso de erro.
+			Argumentos:
+				string name - nome do gasto.
+				double value - valor gasto.
+				DateTime? dateOfExpenditure - data que foi gasto.
+				int? idFixedExpenses - referencia a tabela de gastos fixos.
+				string category - categoria (recebe uma string mais a referencia no banco de dados é um int).
+				string description - decrição do gasto.
+				int year - ano para compor o nome da tabela.
+				int month - mês para compor o nome da tabela.
+				bool paid - se está pago ou não.
+				string fixedExpense = "" - Referencia a tabela de gastos fixos pelo nome do gasto.
+		bool EditMonthExpense - Método para Editar um gasto do mês.
+			Retorno: retorna true se não houver erros e false se houver.
+			Argumentos:
+				int id - id do gasto.
+				string name - nome do gasto.
+				double value - valor gasto.
+				DateTime dateOfExpenditure - data do gasto.
+				string category - categoria (recebe uma string mais a referencia no banco de dados é um int).
+				string description - decrição do gasto.
+				string tableName - nome da tabela.
+				bool paid - se está pago ou não.
+				int? idReference = 0 - id referencia a tabela de gastos fixos.
+		bool EditAllMonthExpense - Método para editar todas as tabelas que tenham referencia a um gasto fixo
+			Retorno: retorna true se não houver erros e false se houver.
+			Argumentos:
+				int idFixedExpenses - id referencia a tabela de gastos fixos
+				string name - nome do gasto
+				string category - categoria (recebe uma string mais a referencia no banco de dados é um int).
+				string description - descrição do gasto
+				bool removeReference = false - se deve remover a referencia a um gasto fixo
+		void DeleteMonthExpense - Método para Deletar um gasto no mês.
+			Argumentos:
+				int id - id do gasto que deve ser deletado.
+				int year - ano para compor o nome da tabela.
+				int month - mês para compor o nome da tabela.
+				
+		int GetReferences_to_tablesQuantity - Método que vai retornar a quantidade de referencias na tabela references_to_tables
+			Retorno: retorna a quantidade de referencias na tabela references_to_tables
+		List<string> GetExpenseProfit - Método que vai retornar uma lista com os nomes das tables de lucros do mês.
+			Retorno: esse método vai retornar uma List de strings com todas as tabelas de Lucros do mês
+		List<string> GetExpenseTables - Método que vai retornar uma lista com os nomes das tables de gastos do mês.
+			Retorno: esse método vai retornar uma List de strings com todas as tabelas de gastos do mês.
+		bool InsertProfit - Método que vai somar a quantidade de lucros do mês na tabela references_to_tables
+			Retorno: retorna true se não houver erros e false se houver.
+			Argumentos:
+				double value - valor que vai ser calculado
+				int year - ano para compor o nome da tabela.
+				int month - mês para compor o nome da tabela.
+		bool InsertExpense - Método que vai somar a quantidade de gastos do mês na tabela references_to_tables 
+		Retorno: retorna true se não houver erros e false se houver.
+			Argumentos:
+				double value - valor que vai ser calculado
+				int year - ano para compor o nome da tabela.
+				int month - mês para compor o nome da tabela.
+		double GetMonthProfit - Método que vai retornar o lucro total do mês
+			Retorno: Esse método retorna o lucro total do mês
+			Argumentos:
+				int year - ano para compor o nome da tabela.
+				int month - mês para compor o nome da tabela.
+		double GetMonthExpense - Método que vai retornar o gasto total do mês
+		Retorno: Esse método retorna o Gasto total do mês
+			Argumentos:
+				int year - ano para compor o nome da tabela.
+				int month - mês para compor o nome da tabela.
+			
+		DataTable ViewReserves() - Método que vai visualizar as reservas.
+			Retorno: esse método retorna um DataTable com o resultado da pesquisa.
+			
+		int? InsertQuery - Método para auxiliar os métodos de inserir da classe.
+			Retorno: esse método vai retornar o id do que foi inserido.
+			Argumentos:
+				string query - String com a query para ser executada.
+		bool SimpleQuery - Método para auxiliar os métodos da classe.
+			Retorno: retorna true se não houver erros e false se houver.
+			Argumentos:
+				string query - String com a query para ser executada.
+		List<string> GetList - Método para auxiliar os métodos que precisam retornar uma lista
+			Retorno: retorna uma lista de strings
+			Argumentos:
+				string query - String com a query para ser executada.
+		double GetDoubleQuery - Método auxiliar para pesquisar valores no banco de dados
+			Retorno: retorna um valor do tipo Double.
+			Argumentos:
+				string query - String com a query para ser executada.
+		DataTable ViewQuery - Método para auxiliar os métodos view da classe.
+			Retorno: esse método retorna um DataTable com o resultado da pesquisa.
+			Argumentos:
+				string query - String com a query para ser executada.
+	}			
 	
 	ThreadHelper - Essa classe comtem métodos para ajudar quando uma thread é usada
 	{
+		void SetPropertyValue - Método para setar um valor a uma propriedade de fora da thread.
+			Argumentos:
+				Control control - contexto de onde deve acontecer a alteração
+				string property - propriedade que deve ser alterada
+				object value - valor que vai ser alterado
+				
+		void SetFieldValue - Método para setar um valor a um campo de fora da thread.
+			Argumentos:
+				Control control - contexto de onde deve acontecer a alteração
+				string fieldName - campo que deve ser alterada
+				object value - valor que vai ser alterado
 		
-	}
+		void SetColumnVisibility - Método para mudar a visibilidade de uma coluna de um DataGridView de fora da thread.
+			Argumentos:
+				DataGridView dataGridView - referencia ao DataGridView.
+				int columnIndex - número da coluna.
+				bool visible - mudar para visivel ou não.
+				
+		void SetColumnHeaderText - Método para mudar o nome que é exibido das colunas.
+			Argumentos:
+				DataGridView dataGridView - referencia ao DataGridView.
+				int columnIndex - número da coluna.
+				string headerText - nome que deve ser dado a coluna.
+				
+		void SetColumnAutoSizeMode - Método para mudar o tipo de tamanho automatico das colunas.
+			Argumentos:
+				DataGridView dataGridView - referencia ao DataGridView.
+				int columnIndex - número da coluna.
+				DataGridViewAutoSizeColumnMode autoSizeMode - tipo de autosize.
+				
+		void SelectFirstRow - método para selecionar a primeira linha do DataGridView.
+			Argumentos:
+				DataGridView dataGridView - referencia ao DataGridView.
+				
+		void SetDefaultCellStyle - Método para o DataGridView exibir os números com virgula (,00).
+			Argumentos:
+				DataGridView dataGridView - referencia ao DataGridView.
+				string colum - Nome da coluna.
+				
+		void SetChartData - Método para enviar dados para um grafico.
+			Argumentos:
+				Chart chart - referencia ao grafico.
+				List<string> strings - lista com os nomes.
+				List<decimal> decimals - lista com os valores.
+				
+		void SetComboBoxData - Método para enviar dados para um combobox.
+			Argumentos:
+				ComboBox comboBox - referencia ao comboBox.
+				List<string> data - dados a serem inseridos no comboBox.
+	}			
 
 Froms
 	Form1 - Essa form é a janela principal do programa, ela tem um panel com os botões a esquerda e um panel central para
@@ -226,3 +422,103 @@ Froms
 	{
 		
 	}
+	
+Bando de dados Sqlite
+	
+	Tabela categories - Tabela que vai conter as categorias de gastos.
+		Colunas:
+			id Integer Primary Key - id de cada categoria.
+			name Varchar (50) Unique - nome da categoria.
+			description Text - descrição da categoria.
+		Dados inseridos automaticamente pelo programa:
+			Sem categoria id 0 - para os gastos sem categoria (essa categoria não pode ser deletada).
+			Contas id 1 - para as contas  (essa categoria não pode ser deletada).
+			Alimentação - Gastos com comida, lanches, petiscos e afins.
+			Transpote - Gastos com combustivel, passagens e afins.
+			Vestuario - Gastos com peças de vestuario, sapatos e afins.
+			Remédios - Gastos com remédios ded uso contidiano ou por necessidades potuais.
+			
+	Tabela fixed_profits - Tabela que vai conter os lucros fixos.
+		Colunas:
+			id Integer Primary Key - id de cada lucro
+			name Varchar (50) Unique - nome do lucro
+			value Real - valor recebido
+			description Text - descrição do lucro
+			
+	Tabela fixed_expenses - Tabela que vai conter os gastos fixos.
+		Colunas:
+			id Integer Primary Key - id do gasto fixo.
+			name Varchar (50) Unique - nome do gasto dixo.
+			value Real Not Null - valor gasto dixo  se aplicavel.
+			dueDay Integer - data de vencimento se aplicavel.
+			numberOfInstallments Integer - número de parcelas restantes se aplicavel.
+			definedNumberOfInstallments Bit - indica se tem um numero de parcelas para acabar.
+			category Integer References categories (id) On Delete Set Default Default '0' - categoria do tipo de gasto.
+			description Text - descrição do gasto fixo.
+			
+	Tabela references_to_tables - Tabela que vai conter a referencia as tabelas de gastos e lucros dos mêses.
+		Colunas:
+			year Integer Not Null - ano referente.
+			month Integer Not Null - mês referente.
+			nameTableProfits Varchar(15) - nome da tabela de lucros do ano-mês referente.
+			nameTableExpenses Varchar(16) - nome da tabela de gastos do ano-mês referente.
+			totalProfits Real Default '0' - valor total dos ganhos do mês.
+			totalExpenses Real Default '0' - valor total dos gastos do mês.
+			
+	Tabela references_to_reserves - Tabela que vai conter a refencia as tabelas de reservas de dinheiro.
+		Colunas:
+			id Integer Primary Key - id.
+			name Varchar (50) Not Null - nome da reserva de dinheiro.
+			tableName Varchar (20) Not Null - referenia a tabela da reserva de dinheiro.
+			reservationAmount Real Not Null - valor guardado na reserva de dinheiro.
+			description Text - descrição da reserva de dinheiro.
+			
+	Tabela references_to_investiments - Tabela que vai conter a referencia as tabelas de investimentos. (Essa tabela 
+		provavelmente vai sofrer modificações)
+		Colunas:
+			id Integer Primary Key - id.
+			name Varchar (50) Not Null - nome do investimento.
+			tableName Varchar (20) Not Null - nome da tabela do investomento.
+			investmentAmount Real Not Null - valor investido.
+			incomeDate Date - data do redimento.
+			description Text - descrição do investimento.
+			
+	Tabela "profits_" + year + "_" + month - essa tabela vai ser criada dinamicamente pelo programa para indicar o ano e 
+		o mês referente, ela vai conter os lucros desse mês.
+		Colunas:
+			id Integer Primary Key - id do lucro do mês.
+			name Varchar (50) Unique - nome do lucro.
+			value Real Not Null - valor lucrado.
+			date Date - data do lucro.
+			description Text - descrição do lucro.
+			idFixedProfits Integer Null References fixed_profits (id) On Delete Set Null - id referencia a tabala de 
+				lucros fixos.
+				
+	Tabela "expenses_" + year + "_" + month - essa tabela vai ser criada dinamicamente pelo programa para indicar o ano e 
+		o mês referente, ela vai conter os gastos desse mês.
+		Colunas:
+			id Integer Primary Key - id do gasto. 
+			name Varchar (50) - nome do gasto.
+			value Real Not Null - valor gasto.
+			date Date - data do gasto.
+			category Integer References categories (id) On Delete Set Default Default '0' - categoria do gasto.
+			paid Bit Default '0' - indica se foi pago ou não.
+			description Text - descrição do gasto.
+			idFixedExpenses Integer Null References fixed_expenses (id) On Delete Set Null - id refencia a tabela de gastos 
+			fixos.
+	
+	Tabela (essa tabela tem o nome de acordo com o que o usuario escrever mais alguns números aleatorios) - essa tabela vai
+		conter o historico de valores inseridos e valores retirados da reserva de dinheiro.
+		Colunas:
+			id Integer Primary Key - id da operação.
+			operation Bit Not Null - tipo da operação (0 para subtração, 1 para adição).
+			value Real Not Null - valor da operação.
+			description Text - descrição da operação.
+	
+		Tabela (essa tabela tem o nome de acordo com o que o usuario escrever mais alguns números aleatorios) - essa tabela vai
+		conter o historico de rendimentos do investimento (Essa tabela provavelmente vai sofrer modificações).
+		Colunas:
+			id Integer Primary Key - id da operação.
+			income Real Not Null - valor do rendimento.
+			incomeDate Date - Data do rendimento.
+			description Text - descrição da operação.

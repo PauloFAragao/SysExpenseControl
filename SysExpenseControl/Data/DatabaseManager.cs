@@ -66,6 +66,16 @@ namespace SysExpenseControl.Data
                         + "category Integer References categories (id) On Delete Set Default Default '0',"// 0 Para sem categoria
                         + "description Text)";
 
+                    // Referencias as tabelas
+                    string createTableReferencesToTables =
+                        "Create Table If Not Exists references_to_tables("
+                        + "year Integer Not Null,"
+                        + "month Integer Not Null,"
+                        + "nameTableProfits Varchar(15) Unique,"
+                        + "nameTableExpenses Varchar(16) Unique, "
+                        + "totalProfits Real Default '0', "
+                        + "totalExpenses Real Default '0')";
+
                     // Tabela para as referencias das tabelas das reservas de dinheiro
                     string createReferencesToTablesReserve =
                         "Create Table If Not Exists references_to_reserves("
@@ -74,14 +84,6 @@ namespace SysExpenseControl.Data
                         + "tableName Varchar (20) Not Null, "
                         + "reservationAmount Real Not Null, "
                         + "description Text)";
-
-                    // Referencias as tabelas
-                    string createTableReferencesToTables =
-                        "Create Table If Not Exists references_to_tables("
-                        + "year Integer Not Null,"
-                        + "month Integer Not Null,"
-                        + "nameTableProfits Varchar(15),"
-                        + "nameTableExpenses Varchar(16))";
 
                     // Tabela para as referencias das tabelas dos investimentos
                     string createTableReferencesToTablesInvestiment =
@@ -111,14 +113,14 @@ namespace SysExpenseControl.Data
                         command.ExecuteNonQuery();
                     }
 
-                    // Criando a tabela que vai conter as referencias as tabelas que forem criadas dinamicamente para as reservas de dinheiro
-                    using (SQLiteCommand command = new SQLiteCommand(createReferencesToTablesReserve, connection))
+                    // Criando a tabela que vai conter as referencias as tabelas que forem criadas dinamicamente
+                    using (SQLiteCommand command = new SQLiteCommand(createTableReferencesToTables, connection))
                     {
                         command.ExecuteNonQuery();
                     }
 
-                    // Criando a tabela que vai conter as referencias as tabelas que forem criadas dinamicamente
-                    using (SQLiteCommand command = new SQLiteCommand(createTableReferencesToTables, connection))
+                    // Criando a tabela que vai conter as referencias as tabelas que forem criadas dinamicamente para as reservas de dinheiro
+                    using (SQLiteCommand command = new SQLiteCommand(createReferencesToTablesReserve, connection))
                     {
                         command.ExecuteNonQuery();
                     }
@@ -199,7 +201,7 @@ namespace SysExpenseControl.Data
                     string createTableProfits =
                         $"Create Table If Not Exists \"{profitsTableName}\"("
                         + "id Integer Primary Key,"
-                        + "name Varchar (50) Unique,"
+                        + "name Varchar (50) ,"//Unique
                         + "value Real Not Null,"
                         + "date Date,"
                         + "description Text, "

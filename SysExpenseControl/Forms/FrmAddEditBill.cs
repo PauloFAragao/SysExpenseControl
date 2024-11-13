@@ -14,6 +14,7 @@ namespace SysExpenseControl.Forms
         private DateTime _date;
         private string _name;
         private double _value;
+        private double _originalValue;
         private string _description;
         private int _dueDay;
         private int _numberOfInstallments;
@@ -34,6 +35,7 @@ namespace SysExpenseControl.Forms
             _idFixedExpenses = idFixedExpenses;
             _name = name;
             _value = value;
+            _originalValue = _value;
             _description = description;
             _dueDay = dueDay;
             _date = date;
@@ -141,7 +143,6 @@ namespace SysExpenseControl.Forms
                         idFixedExpenses = DataConsultant.InsertFixedExpense( _name, _value, 
                             Convert.ToInt32(_dueDay), _numberOfInstallments,"Contas", 
                             this.RtbDescription.Text, _numberOfInstallments != 0 );
-
                     }
 
                     if (idFixedExpenses == null) return; //erro
@@ -158,6 +159,11 @@ namespace SysExpenseControl.Forms
                         this.RtbDescription.Text, DateTime.Now.Year, DateTime.Now.Month, _paid);
 
                     if (id == null) return; // deu erro
+
+                    // inserido o gasto na tabela references_to_tables 
+                    DataConsultant.InsertExpense(_value, 
+                        Convert.ToDateTime(DateTimePicker.Value).Year,
+                        Convert.ToDateTime(DateTimePicker.Value).Month);
                 }
                 else// para editar
                 {
@@ -173,10 +179,16 @@ namespace SysExpenseControl.Forms
                             if (!result) return; // deu erro
 
                             // editar todas as tabelas de gastos de mês com referencia a aquele gasto fixo
-                            bool resultEditAllMonthExpense = DataConsultant.EditAllMonthExpense(_id, _name, _value, "Contas", 
-                                this.RtbDescription.Text);
+                            bool resultEditAllMonthExpense = DataConsultant.EditAllMonthExpense(_id, 
+                                _name, /*_value,*/"Contas", this.RtbDescription.Text);
 
                             if(!resultEditAllMonthExpense) return;// deu erro
+
+                            // editar a conta na tabela do mês
+                            bool resultEditMonthExpense = DataConsultant.EditMonthExpense(_id, _name, 
+                                _value, _date, "Contas", this.RtbDescription.Text, _tableName, _paid);
+
+                            if (!resultEditMonthExpense) return;
                         }
                         else// mudou de conta fixa para conta não fixa
                         {
@@ -184,10 +196,16 @@ namespace SysExpenseControl.Forms
                             DataConsultant.DeleteFixedExpense(_idFixedExpenses);
 
                             // Editar as contas não fixas
-                            bool result = DataConsultant.EditAllMonthExpense(_id, _name, _value, "Contas", 
-                                this.RtbDescription.Text, true);
+                            bool result = DataConsultant.EditAllMonthExpense(_id, _name, 
+                                /*_value,*/ "Contas", this.RtbDescription.Text, true);
 
                             if (!result) return; // deu erro
+
+                            // editar a conta na tabela do mês
+                            bool resultEditMonthExpense = DataConsultant.EditMonthExpense(_id, _name,
+                                _value, _date, "Contas", this.RtbDescription.Text, _tableName, _paid);
+
+                            if (!resultEditMonthExpense) return;
                         }
                     }
                     else// não é uma conta fixa
@@ -200,20 +218,27 @@ namespace SysExpenseControl.Forms
                             this.RtbDescription.Text, _numberOfInstallments != 0);
 
                             // fazer edições
-                            bool result = DataConsultant.EditMonthExpense(_id, _name, _value, _date, "Contas", 
-                                this.RtbDescription.Text,_tableName, _paid, idFixedExpenses);
+                            bool result = DataConsultant.EditMonthExpense(_id, _name, _value, _date, 
+                                "Contas",  this.RtbDescription.Text,_tableName, _paid, 
+                                idFixedExpenses);
 
                             if (!result) return;// deu erro
                         }
                         else// não mudou para conta fixa
                         {
                             // fazer edições
-                            bool result = DataConsultant.EditMonthExpense(_id, _name, _value, _date, "Contas",
-                                this.RtbDescription.Text, _tableName, _paid);
+                            bool result = DataConsultant.EditMonthExpense(_id, _name, _value, _date, 
+                                "Contas", this.RtbDescription.Text, _tableName, _paid);
 
                             if (!result) return;// deu erro
                         }
                     }
+
+                    // inserido o gasto na tabela references_to_tables 
+                    DataConsultant.InsertExpense(
+                        -1 * (_originalValue - _value),// envia a diferença
+                        Convert.ToDateTime(DateTimePicker.Value).Year,
+                        Convert.ToDateTime(DateTimePicker.Value).Month);
                 }
             }
 
@@ -244,6 +269,8 @@ namespace SysExpenseControl.Forms
                     allFieldsAreCorrect = false;
                     msg += "\nValor";
                 }
+
+                Debug.WriteLine("Valor-1: "+value);
             }
 
             // Conta fixa

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.TabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.BtnViewFixedProfits = new System.Windows.Forms.Button();
             this.BtnEditFixedProfits = new System.Windows.Forms.Button();
@@ -47,27 +47,32 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LblFixedExpenses = new System.Windows.Forms.Label();
-            this.tabControl1.SuspendLayout();
+            this.LblWait = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.TabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvFixedProfits)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvFixedExpenses)).BeginInit();
             this.panel5.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.LblWait.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // TabControl
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(12, 93);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(902, 467);
-            this.tabControl1.TabIndex = 5;
+            this.TabControl.Controls.Add(this.tabPage1);
+            this.TabControl.Controls.Add(this.tabPage2);
+            this.TabControl.Enabled = false;
+            this.TabControl.Location = new System.Drawing.Point(12, 93);
+            this.TabControl.Name = "TabControl";
+            this.TabControl.SelectedIndex = 0;
+            this.TabControl.Size = new System.Drawing.Size(902, 467);
+            this.TabControl.TabIndex = 5;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.LblWait);
             this.tabPage1.Controls.Add(this.BtnViewFixedProfits);
             this.tabPage1.Controls.Add(this.BtnEditFixedProfits);
             this.tabPage1.Controls.Add(this.BtnDelFixedProfits);
@@ -290,6 +295,24 @@
             this.LblFixedExpenses.Text = "R$ 0000,00";
             this.LblFixedExpenses.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // LblWait
+            // 
+            this.LblWait.Controls.Add(this.label2);
+            this.LblWait.Location = new System.Drawing.Point(347, 209);
+            this.LblWait.Name = "LblWait";
+            this.LblWait.Size = new System.Drawing.Size(205, 52);
+            this.LblWait.TabIndex = 11;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(72, 18);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(53, 20);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Wait...";
+            // 
             // FrmFixedExpensesAndProfits
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -297,10 +320,10 @@
             this.ClientSize = new System.Drawing.Size(926, 572);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel5);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.TabControl);
             this.Name = "FrmFixedExpensesAndProfits";
             this.Text = "FrmFixedExpensesAndProfits";
-            this.tabControl1.ResumeLayout(false);
+            this.TabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DgvFixedProfits)).EndInit();
             this.tabPage2.ResumeLayout(false);
@@ -309,13 +332,15 @@
             this.panel5.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.LblWait.ResumeLayout(false);
+            this.LblWait.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl TabControl;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Panel panel5;
@@ -334,5 +359,7 @@
         private System.Windows.Forms.Button BtnDelFixedExpenses;
         private System.Windows.Forms.Button BtnAddFixedExpenses;
         private System.Windows.Forms.DataGridView DgvFixedExpenses;
+        private System.Windows.Forms.Panel LblWait;
+        private System.Windows.Forms.Label label2;
     }
 }

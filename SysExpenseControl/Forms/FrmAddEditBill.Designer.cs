@@ -58,7 +58,7 @@
             this.BtnNotPaid.Location = new System.Drawing.Point(201, 6);
             this.BtnNotPaid.Name = "BtnNotPaid";
             this.BtnNotPaid.Size = new System.Drawing.Size(75, 23);
-            this.BtnNotPaid.TabIndex = 63;
+            this.BtnNotPaid.TabIndex = 13;
             this.BtnNotPaid.Text = "Paga";
             this.BtnNotPaid.UseVisualStyleBackColor = false;
             this.BtnNotPaid.Visible = false;
@@ -70,7 +70,7 @@
             this.LblDate.Location = new System.Drawing.Point(19, 205);
             this.LblDate.Name = "LblDate";
             this.LblDate.Size = new System.Drawing.Size(30, 13);
-            this.LblDate.TabIndex = 62;
+            this.LblDate.TabIndex = 95;
             this.LblDate.Text = "Data";
             // 
             // DateTimePicker
@@ -79,7 +79,7 @@
             this.DateTimePicker.Location = new System.Drawing.Point(55, 201);
             this.DateTimePicker.Name = "DateTimePicker";
             this.DateTimePicker.Size = new System.Drawing.Size(221, 20);
-            this.DateTimePicker.TabIndex = 61;
+            this.DateTimePicker.TabIndex = 8;
             // 
             // label6
             // 
@@ -87,7 +87,7 @@
             this.label6.Location = new System.Drawing.Point(7, 357);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(270, 13);
-            this.label6.TabIndex = 60;
+            this.label6.TabIndex = 93;
             this.label6.Text = "Os campos marcados com asterisco (*) são obrigatórios.";
             // 
             // BtnEdit
@@ -97,7 +97,7 @@
             this.BtnEdit.Location = new System.Drawing.Point(18, 392);
             this.BtnEdit.Name = "BtnEdit";
             this.BtnEdit.Size = new System.Drawing.Size(75, 23);
-            this.BtnEdit.TabIndex = 57;
+            this.BtnEdit.TabIndex = 12;
             this.BtnEdit.Text = "Editar";
             this.BtnEdit.UseVisualStyleBackColor = false;
             this.BtnEdit.Visible = false;
@@ -110,7 +110,7 @@
             this.BtnCancel.Location = new System.Drawing.Point(202, 392);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(75, 23);
-            this.BtnCancel.TabIndex = 56;
+            this.BtnCancel.TabIndex = 11;
             this.BtnCancel.Text = "Cancelar";
             this.BtnCancel.UseVisualStyleBackColor = false;
             this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
@@ -122,7 +122,7 @@
             this.BtnSave.Location = new System.Drawing.Point(121, 392);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(75, 23);
-            this.BtnSave.TabIndex = 55;
+            this.BtnSave.TabIndex = 10;
             this.BtnSave.Text = "Salvar";
             this.BtnSave.UseVisualStyleBackColor = false;
             this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
@@ -133,7 +133,7 @@
             this.label4.Location = new System.Drawing.Point(15, 233);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(58, 13);
-            this.label4.TabIndex = 54;
+            this.label4.TabIndex = 94;
             this.label4.Text = "Descrição:";
             // 
             // TxtValue
@@ -141,7 +141,7 @@
             this.TxtValue.Location = new System.Drawing.Point(82, 70);
             this.TxtValue.Name = "TxtValue";
             this.TxtValue.Size = new System.Drawing.Size(194, 20);
-            this.TxtValue.TabIndex = 53;
+            this.TxtValue.TabIndex = 2;
             // 
             // label3
             // 
@@ -149,7 +149,7 @@
             this.label3.Location = new System.Drawing.Point(19, 73);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(57, 13);
-            this.label3.TabIndex = 52;
+            this.label3.TabIndex = 98;
             this.label3.Text = "Valor (R$):";
             // 
             // LblTitle
@@ -159,7 +159,7 @@
             this.LblTitle.Location = new System.Drawing.Point(14, 9);
             this.LblTitle.Name = "LblTitle";
             this.LblTitle.Size = new System.Drawing.Size(122, 20);
-            this.LblTitle.TabIndex = 51;
+            this.LblTitle.TabIndex = 100;
             this.LblTitle.Text = "Adicionar Conta";
             // 
             // RtbDescription
@@ -167,7 +167,7 @@
             this.RtbDescription.Location = new System.Drawing.Point(18, 255);
             this.RtbDescription.Name = "RtbDescription";
             this.RtbDescription.Size = new System.Drawing.Size(254, 96);
-            this.RtbDescription.TabIndex = 50;
+            this.RtbDescription.TabIndex = 9;
             this.RtbDescription.Text = "";
             // 
             // TxtName
@@ -175,7 +175,7 @@
             this.TxtName.Location = new System.Drawing.Point(63, 44);
             this.TxtName.Name = "TxtName";
             this.TxtName.Size = new System.Drawing.Size(213, 20);
-            this.TxtName.TabIndex = 49;
+            this.TxtName.TabIndex = 1;
             // 
             // label1
             // 
@@ -183,7 +183,7 @@
             this.label1.Location = new System.Drawing.Point(19, 47);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 13);
-            this.label1.TabIndex = 48;
+            this.label1.TabIndex = 99;
             this.label1.Text = "Nome*:";
             // 
             // RbFixedBill
@@ -192,7 +192,7 @@
             this.RbFixedBill.Location = new System.Drawing.Point(200, 99);
             this.RbFixedBill.Name = "RbFixedBill";
             this.RbFixedBill.Size = new System.Drawing.Size(72, 17);
-            this.RbFixedBill.TabIndex = 64;
+            this.RbFixedBill.TabIndex = 4;
             this.RbFixedBill.TabStop = true;
             this.RbFixedBill.Text = "Conta fixa";
             this.RbFixedBill.UseVisualStyleBackColor = true;
@@ -204,7 +204,7 @@
             this.RbBill.Location = new System.Drawing.Point(21, 99);
             this.RbBill.Name = "RbBill";
             this.RbBill.Size = new System.Drawing.Size(161, 17);
-            this.RbBill.TabIndex = 65;
+            this.RbBill.TabIndex = 3;
             this.RbBill.TabStop = true;
             this.RbBill.Text = "Conta paga apenas uma vez";
             this.RbBill.UseVisualStyleBackColor = true;
@@ -215,7 +215,7 @@
             this.TxtDueDay.Location = new System.Drawing.Point(125, 127);
             this.TxtDueDay.Name = "TxtDueDay";
             this.TxtDueDay.Size = new System.Drawing.Size(151, 20);
-            this.TxtDueDay.TabIndex = 67;
+            this.TxtDueDay.TabIndex = 5;
             // 
             // label2
             // 
@@ -223,7 +223,7 @@
             this.label2.Location = new System.Drawing.Point(19, 130);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(111, 13);
-            this.label2.TabIndex = 66;
+            this.label2.TabIndex = 97;
             this.label2.Text = "Data de Vencimento*:";
             // 
             // TxtNumberOfInstallments
@@ -232,7 +232,7 @@
             this.TxtNumberOfInstallments.Location = new System.Drawing.Point(125, 153);
             this.TxtNumberOfInstallments.Name = "TxtNumberOfInstallments";
             this.TxtNumberOfInstallments.Size = new System.Drawing.Size(151, 20);
-            this.TxtNumberOfInstallments.TabIndex = 69;
+            this.TxtNumberOfInstallments.TabIndex = 6;
             // 
             // label7
             // 
@@ -240,7 +240,7 @@
             this.label7.Location = new System.Drawing.Point(19, 156);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(102, 13);
-            this.label7.TabIndex = 68;
+            this.label7.TabIndex = 96;
             this.label7.Text = "Parcelas Restantes:";
             // 
             // CbPaid
@@ -249,7 +249,7 @@
             this.CbPaid.Location = new System.Drawing.Point(22, 180);
             this.CbPaid.Name = "CbPaid";
             this.CbPaid.Size = new System.Drawing.Size(74, 17);
-            this.CbPaid.TabIndex = 70;
+            this.CbPaid.TabIndex = 7;
             this.CbPaid.Text = "Está paga";
             this.CbPaid.UseVisualStyleBackColor = true;
             this.CbPaid.CheckedChanged += new System.EventHandler(this.CbPaid_CheckedChanged);

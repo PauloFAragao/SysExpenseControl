@@ -61,36 +61,7 @@ namespace SysExpenseControl.Data
         {
             string query = "Select name From categories Order by id";
 
-            List<string> result = new List<string>();
-
-            try
-            {
-                using (SQLiteConnection connection = new SQLiteConnection(Connection.Cn))
-                {
-                    // Abre a conexão
-                    connection.Open();
-
-                    // Executando a Query
-                    using (SQLiteCommand command = new SQLiteCommand(query, connection))
-                    {
-                        // Executa a consulta e captura o resultado
-                        using (SQLiteDataReader reader = command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                // Adiciona o nome da categoria à lista
-                                result.Add(reader.GetString(0));
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine("Exception in DataConsultant.GetCategorys: " + e.Message);
-            }
-
-            return result;
+            return GetList(query); 
         }
 
         // Método para inserir uma categoria
@@ -108,15 +79,15 @@ namespace SysExpenseControl.Data
             string editQuery = $"Update categories Set name = '{name}', description = '{description}' Where id = {id} ";
 
             //SimpleQuery(editQuery);
-            return EditQuery(editQuery);
+            return SimpleQuery(editQuery);
         }
 
         // Deleta uma categoria
-        public static void DeleteCategory(int id)
+        public static bool DeleteCategory(int id)
         {
             string deleteQuery = $"Delete From categories where id = {id} ";
 
-            SimpleQuery(deleteQuery);
+            return SimpleQuery(deleteQuery);
         }
 
         // ---------------------------------- Lucros fixos
@@ -151,7 +122,7 @@ namespace SysExpenseControl.Data
                 + $"Where id = {id}";
 
             //SimpleQuery(editQuery);
-            return EditQuery(editQuery);
+            return SimpleQuery(editQuery);
         }
 
         // Método que vai deletar um lucro fixo
@@ -234,7 +205,7 @@ namespace SysExpenseControl.Data
                 + $"Where id = {id}";
 
             //SimpleQuery(editQuery);
-            return EditQuery(editQuery);
+            return SimpleQuery(editQuery);
         }
 
         // Método para subtrair ou somar 1 na quantidade de parcelas de uma conta
@@ -255,7 +226,7 @@ namespace SysExpenseControl.Data
             editQuery += $"Where id = {id}";
 
             //SimpleQuery(editQuery);
-            return EditQuery(editQuery);
+            return SimpleQuery(editQuery);
         }
 
         // Método para deletar um gasto fixo
@@ -340,7 +311,7 @@ namespace SysExpenseControl.Data
                 + $"Where id = {id}";
 
             //SimpleQuery(editQuery);
-            return EditQuery(editQuery);
+            return SimpleQuery(editQuery);
         }
 
         // Método para editar um lucro do mês a partir da referencia de um lucro fixo
@@ -355,20 +326,20 @@ namespace SysExpenseControl.Data
 
             Debug.WriteLine(">>Query: "+editQuery);
 
-            return EditQuery(editQuery);
+            return SimpleQuery(editQuery);
         }
 
         // Método para deletar lucro no mês
-        public static void DeleteMonthProfits(int id, int year, int month)
+        public static bool DeleteMonthProfits(int id, int year, int month)
         {
             string profitsTableName = "profits_" + year + "_" + month;
             string deleteQuery = $"Delete From {profitsTableName} where id = {id} ";
 
-            SimpleQuery(deleteQuery);
+            return SimpleQuery(deleteQuery);
         }
 
         // ---------------------------------- Gastos do mês
-        // Método para visualizar todos os lucros de um mês
+        // Método para visualizar todos os gastos de um mês
         public static DataTable ViewMonthExpenses(int year, int month)
         {
             string expensesTableName = "expenses_" + year + "_" + month;
@@ -461,11 +432,11 @@ namespace SysExpenseControl.Data
                 + $"Where id = {id}";
 
             //SimpleQuery(editQuery);
-            return EditQuery(editQuery);
+            return SimpleQuery(editQuery);
         }
 
         // Método para editar todas as tabelas que tenham referencia a um gasto fixo
-        public static bool EditAllMonthExpense(int idFixedExpenses, string name, double value,
+        public static bool EditAllMonthExpense(int idFixedExpenses, string name,
             string category, string description, bool removeReference = false)
         {
             // nomes das tabelas de gastos
@@ -476,7 +447,6 @@ namespace SysExpenseControl.Data
             {
                 string editQuery = $"Update {tablename} Set "
                     + $"name = '{name}', "
-                    + $"value = {value.ToString(CultureInfo.InvariantCulture)}, "
                     + $"category = (Select id From categories Where name = '{category}'), ";
                     
                 if (removeReference)
@@ -488,7 +458,7 @@ namespace SysExpenseControl.Data
                     + $"Where idFixedExpenses = {idFixedExpenses}";
 
                 //SimpleQuery(editQuery);
-                if(!EditQuery(editQuery))
+                if(!SimpleQuery(editQuery))
                 {
                     return false;
                 }
@@ -498,16 +468,15 @@ namespace SysExpenseControl.Data
         }
 
         // Método para Deletar um gasto no mês
-        public static void DeleteMonthExpense(int id, int year, int month)
+        public static bool DeleteMonthExpense(int id, int year, int month)
         {
             string expensesTableName = "expenses_" + year + "_" + month;
             string deleteQuery = $"Delete From {expensesTableName} where id = {id} ";
 
-            SimpleQuery(deleteQuery);
+            return SimpleQuery(deleteQuery);
         }
 
         // ---------------------------------- Tabela de referencias
-
         // Método que vai retornar a quantidade de referencias na tabela references_to_tables
         public static int GetReferences_to_tablesQuantity()
         {
@@ -540,41 +509,62 @@ namespace SysExpenseControl.Data
             return quantity;
         }
 
+        // Método que vai retornar uma lista com os nomes das tables de Lucros do mês
+        public static List<string> GetExpenseProfit()
+        {
+            string query = "Select nameTableProfits From references_to_tables";
+
+            return GetList(query);
+        }
+
         // Método que vai retornar uma lista com os nomes das tables de gastos do mês
         public static List<string> GetExpenseTables()
         {
             string query = "Select nameTableExpenses From references_to_tables";
 
-            List<string> result = new List<string>();
+            return GetList(query);
+        }
 
-            try
-            {
-                using (SQLiteConnection connection = new SQLiteConnection(Connection.Cn))
-                {
-                    // Abre a conexão
-                    connection.Open();
+        // Método que vai somar a quantidade de lucros do mês na tabela references_to_tables 
+        public static bool InsertProfit(double value, int year, int month)
+        {
+            string editQuery = 
+                "Update references_to_tables "
+                + "Set totalProfits = "
+                + $"(totalProfits + {value.ToString(CultureInfo.InvariantCulture)}) "
+                + $"Where year = {year} And month = {month}";
 
-                    // Executando a Query
-                    using (SQLiteCommand command = new SQLiteCommand(query, connection))
-                    {
-                        // Executa a consulta e captura o resultado
-                        using (SQLiteDataReader reader = command.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                // Adiciona o nome da categoria à lista
-                                result.Add(reader.GetString(0));
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine("Exception in DataConsultant.GetCategorys: " + e.Message);
-            }
+            return SimpleQuery(editQuery);
+        }
 
-            return result;
+        // Método que vai somar a quantidade de gastos do mês na tabela references_to_tables 
+        public static bool InsertExpense(double value, int year, int month)
+        {
+            string editQuery =
+                "Update references_to_tables "
+                + "Set totalExpenses = "
+                + $"(totalExpenses + {value.ToString(CultureInfo.InvariantCulture)}) "
+                + $"Where year = {year} And month = {month}";
+
+            return SimpleQuery(editQuery);
+        }
+
+        // Método que vai retornar o lucro total do mês
+        public static double GetMonthProfit(int year, int month)
+        {
+            string query = "Select totalProfits From references_to_tables "
+                + $"Where year = {year} And month = {month}";
+
+            return GetDoubleQuery(query);
+        }
+
+        // Método que vai retornar o gasto total do mês
+        public static double GetMonthExpense(int year, int month)
+        {
+            string query = "Select totalExpenses From references_to_tables "
+                + $"Where year = {year} And month = {month}";
+
+            return GetDoubleQuery(query);
         }
 
         // ---------------------------------- 
@@ -587,30 +577,6 @@ namespace SysExpenseControl.Data
         }
 
         // ---------------------------------- 
-        private static void SimpleQuery(string query)
-        {
-            try
-            {
-                using (SQLiteConnection connection = new SQLiteConnection(Connection.Cn))
-                {
-                    // Abre a conexão
-                    connection.Open();
-
-                    // Executando a Query
-                    using (SQLiteCommand command = new SQLiteCommand(query, connection))
-                    {
-                        // Executa a consulta e captura o resultado
-                        //command.ExecuteScalar();
-                        command.ExecuteNonQuery();
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine("Exception in DataConsultant.SimpleQuery: " + e.Message);
-            }
-        }
-
         private static int? InsertQuery(string query)
         {
             int? id = null;
@@ -650,7 +616,7 @@ namespace SysExpenseControl.Data
             return id;
         }
 
-        private static bool EditQuery(string query)
+        private static bool SimpleQuery(string query)
         {
             bool result = true;
 
@@ -671,13 +637,77 @@ namespace SysExpenseControl.Data
             }
             catch (Exception e)
             {
-                Debug.WriteLine("Exception in DataConsultant.EditQuery: " + e.Message);
+                Debug.WriteLine("Exception in DataConsultant.SimpleQuery: " + e.Message);
 
-                MessageBox.Show("Exception in DataConsultant.EditQuery: " + e.Message,
+                MessageBox.Show("Exception in DataConsultant.SimpleQuery: " + e.Message,
                     "Erro ao Editar dados no banco de dados",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 result = false;
+            }
+
+            return result;
+        }
+
+        private static List<string> GetList(string query)
+        {
+            List<string> result = new List<string>();
+
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(Connection.Cn))
+                {
+                    // Abre a conexão
+                    connection.Open();
+
+                    // Executando a Query
+                    using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                    {
+                        // Executa a consulta e captura o resultado
+                        using (SQLiteDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                // Adiciona o nome da categoria à lista
+                                result.Add(reader.GetString(0));
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Exception in DataConsultant.GetCategorys: " + e.Message);
+            }
+
+            return result;
+        }
+
+        private static double GetDoubleQuery(string query)
+        {
+            double result = 0;
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(Connection.Cn))
+                {
+                    // Abre a conexão
+                    connection.Open();
+
+                    // Executando a Query
+                    using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                    {
+                        // Executa a consulta e captura o resultado
+                        result = Convert.ToDouble(command.ExecuteScalar());
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Exception in DataConsultant.GetStringQuery: " + e.Message);
+
+                MessageBox.Show("Exception in DataConsultant.GetStringQuery: " + e.Message,
+                    "Erro ao inserir dados no banco de dados",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return result;

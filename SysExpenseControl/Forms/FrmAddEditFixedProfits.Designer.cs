@@ -47,7 +47,7 @@
             this.label1.Location = new System.Drawing.Point(17, 50);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 13);
-            this.label1.TabIndex = 0;
+            this.label1.TabIndex = 99;
             this.label1.Text = "Nome*:";
             // 
             // TxtName
@@ -62,7 +62,7 @@
             this.RtbDescription.Location = new System.Drawing.Point(20, 125);
             this.RtbDescription.Name = "RtbDescription";
             this.RtbDescription.Size = new System.Drawing.Size(254, 96);
-            this.RtbDescription.TabIndex = 2;
+            this.RtbDescription.TabIndex = 3;
             this.RtbDescription.Text = "";
             // 
             // LblTitle
@@ -72,7 +72,7 @@
             this.LblTitle.Location = new System.Drawing.Point(12, 12);
             this.LblTitle.Name = "LblTitle";
             this.LblTitle.Size = new System.Drawing.Size(167, 20);
-            this.LblTitle.TabIndex = 3;
+            this.LblTitle.TabIndex = 100;
             this.LblTitle.Text = "Adicionar Receita Fixa";
             // 
             // TxtValue
@@ -80,7 +80,7 @@
             this.TxtValue.Location = new System.Drawing.Point(80, 73);
             this.TxtValue.Name = "TxtValue";
             this.TxtValue.Size = new System.Drawing.Size(194, 20);
-            this.TxtValue.TabIndex = 5;
+            this.TxtValue.TabIndex = 2;
             // 
             // label3
             // 
@@ -88,7 +88,7 @@
             this.label3.Location = new System.Drawing.Point(17, 76);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(61, 13);
-            this.label3.TabIndex = 4;
+            this.label3.TabIndex = 98;
             this.label3.Text = "Valor (R$)*:";
             // 
             // label4
@@ -97,7 +97,7 @@
             this.label4.Location = new System.Drawing.Point(17, 103);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(58, 13);
-            this.label4.TabIndex = 6;
+            this.label4.TabIndex = 97;
             this.label4.Text = "Descrição:";
             // 
             // BtnSave
@@ -107,7 +107,7 @@
             this.BtnSave.Location = new System.Drawing.Point(123, 265);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(75, 23);
-            this.BtnSave.TabIndex = 7;
+            this.BtnSave.TabIndex = 4;
             this.BtnSave.Text = "Salvar";
             this.BtnSave.UseVisualStyleBackColor = false;
             this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
@@ -119,7 +119,7 @@
             this.BtnCancel.Location = new System.Drawing.Point(204, 265);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(75, 23);
-            this.BtnCancel.TabIndex = 8;
+            this.BtnCancel.TabIndex = 5;
             this.BtnCancel.Text = "Cancelar";
             this.BtnCancel.UseVisualStyleBackColor = false;
             this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
@@ -131,7 +131,7 @@
             this.BtnEdit.Location = new System.Drawing.Point(20, 265);
             this.BtnEdit.Name = "BtnEdit";
             this.BtnEdit.Size = new System.Drawing.Size(75, 23);
-            this.BtnEdit.TabIndex = 9;
+            this.BtnEdit.TabIndex = 6;
             this.BtnEdit.Text = "Editar";
             this.BtnEdit.UseVisualStyleBackColor = false;
             this.BtnEdit.Visible = false;
@@ -143,7 +143,7 @@
             this.label2.Location = new System.Drawing.Point(14, 231);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(270, 13);
-            this.label2.TabIndex = 10;
+            this.label2.TabIndex = 96;
             this.label2.Text = "Os campos marcados com asterisco (*) são obrigatórios.";
             // 
             // FrmAddEditFixedProfits

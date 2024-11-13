@@ -16,6 +16,7 @@ namespace SysExpenseControl.Forms
         private int _id;// id no banco de dados - só no caso de editar/visualizar
         private string _name;// nome da despesa
         private double _value;// valor da despesa
+        private double _originalValue;// valor da despesa antes da alteração
         private DateTime _date;// data da despesa
         private string _tableName;// nome da tabela 
         private string _category;// categoria do gasto
@@ -39,6 +40,7 @@ namespace SysExpenseControl.Forms
             _id = id;
             _name = name;
             _value = value;
+            _originalValue = _value;
             _date = date;
             _tableName = tableName;
             _onCloseCallback = onCloseCallback;
@@ -81,23 +83,49 @@ namespace SysExpenseControl.Forms
         {
             if (CaptureAndVerifyData())
             {
+                DateTime date = Convert.ToDateTime(DateTimePicker.Value);
+
                 if (_tipe == 0)// Adicionar
                 {
-                    int? id = DataConsultant.InsertMonthExpense(_name, _value, Convert.ToDateTime(DateTimePicker.Value),
-                        null, this.CbxCategories.Text, this.RtbDescription.Text, DateTime.Now.Year,
-                        DateTime.Now.Month, true);
+                    int? id = DataConsultant.InsertMonthExpense(_name, _value,
+                        date, -1, this.CbxCategories.Text, 
+                        this.RtbDescription.Text, date.Year, date.Month, true);
 
                     if (id == null) return; // deu erro
+
+                    // inserido o gasto na tabela references_to_tables 
+                    DataConsultant.InsertExpense(_value, date.Year, date.Month);
                 }
                 else// Editar
                 {
-                    bool resultEditMonthExpense = DataConsultant.EditMonthExpense(_id, _name, _value, Convert.ToDateTime(DateTimePicker.Value),
-                        this.CbxCategories.Text, this.RtbDescription.Text, _tableName, _statusPaid);
+                    bool resultEditMonthExpense = DataConsultant.EditMonthExpense(_id, _name, _value,
+                        date, this.CbxCategories.Text, this.RtbDescription.Text, 
+                        _tableName, _statusPaid);
 
                     if (!resultEditMonthExpense) return;
 
+                    if(!_paid && _statusPaid)
+                    {
+                        // inserido o gasto na tabela references_to_tables 
+                        DataConsultant.InsertExpense(_value, date.Year, date.Month);
+                    }
+                    else if(_paid && !_statusPaid)
+                    {
+                        // inserido o gasto na tabela references_to_tables 
+                        DataConsultant.InsertExpense(
+                            -1 * _originalValue,// envia o valor 
+                            date.Year, date.Month);
+                    }
+                    else
+                    {
+                        // inserido o gasto na tabela references_to_tables 
+                        DataConsultant.InsertExpense(
+                            -1 * (_originalValue - _value),// envia a diferença
+                            date.Year, date.Month);
+                    }
+
                     // para cuidar das contas que tem uma quantidade de parcelas para acabar
-                    if(_category == "Contas" && _definedNumberOfInstallments && 
+                    if (_category == "Contas" && _definedNumberOfInstallments && 
                         !_paid && // se não está marcada como paga
                         _statusPaid)// se está marcada para ser paga
                     {

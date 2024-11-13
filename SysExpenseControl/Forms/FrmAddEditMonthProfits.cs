@@ -1,5 +1,6 @@
 ﻿using SysExpenseControl.Data;
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Windows.Forms;
 
@@ -11,13 +12,17 @@ namespace SysExpenseControl.Forms
         private int _id;
         private string _name;
         private double _value;
+        private double _originalValue;
         private DateTime _date;
         private Action _onCloseCallback;
 
+        bool _confirm;// essa variavel indica na edição se o valor está sendo marcado como "pago"
+
         private string _tableName;
 
-        public FrmAddEditMonthProfits(int tipe, Action onCloseCallback, DateTime date, string tableName, int id = 0,
-                string name = "", double value = 0, string desciption = "")
+        public FrmAddEditMonthProfits(int tipe, Action onCloseCallback, DateTime date,
+            string tableName, int id = 0, string name = "", double value = 0,
+            string desciption = "", bool confirm = false)
         {
             InitializeComponent();
 
@@ -25,9 +30,12 @@ namespace SysExpenseControl.Forms
             _id = id;
             _name = name;
             _value = value;
+            _originalValue = value;
             _date = date;
             _onCloseCallback = onCloseCallback;
             _tableName = tableName;
+
+            _confirm = confirm;
 
             FillFields(desciption);
         }
@@ -57,19 +65,35 @@ namespace SysExpenseControl.Forms
         {
             if (CaptureAndVerifyData())
             {
+                DateTime date = Convert.ToDateTime(DateTimePicker.Value);
                 if (_tipe == 0)// Adicionar
                 {
-                    int? id = DataConsultant.InsertMonthProfits(_name, _value, Convert.ToDateTime(DateTimePicker.Value),
-                         this.RtbDescription.Text, DateTime.Now.Year, DateTime.Now.Month);
+                    int? id = DataConsultant.InsertMonthProfits(_name, _value,
+                        date, this.RtbDescription.Text,
+                        date.Year, date.Month);
 
                     if (id == null) return; // deu erro
+
+                    DataConsultant.InsertProfit(_value, date.Year, date.Month);
                 }
                 else// Editar
                 {
-                    bool result = DataConsultant.EditMonthProfits(_id, _name, _value, Convert.ToDateTime(DateTimePicker.Value),
-                        this.RtbDescription.Text, _tableName);
+                    bool result = DataConsultant.EditMonthProfits(_id, _name, _value,
+                        date, this.RtbDescription.Text,
+                        _tableName);
 
-                    if (!result) return;
+                    if (!result) return; // deu erro
+
+                    if (_confirm)
+                    {
+                        DataConsultant.InsertProfit(_value, date.Year, date.Month);
+                    }
+                    else
+                    {
+                        DataConsultant.InsertProfit(
+                        -1 * (_originalValue - _value),// envia a diferença
+                        DateTime.Now.Year, DateTime.Now.Month);
+                    }
                 }
 
                 this.Close();

@@ -30,8 +30,10 @@ namespace SysExpenseControl.Forms
 
         private void SelectedFilterChanged()
         {
-            if(DgvData.Rows.Count > 0)
-            {
+            if (_data.Rows.Count < 0 || _data == null) return;
+
+            //if(DgvData.Rows.Count > 0)
+            //{
                 if (this.CbxFilter.SelectedIndex == 0)// sem filtros
                 {
                     DgvData.DataSource = _data;
@@ -42,10 +44,14 @@ namespace SysExpenseControl.Forms
 
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
-                        var paymentDate = dt.Rows[i][6];
+                        //var paymentDate = dt.Rows[i][6];
 
-                        if (paymentDate.ToString() == string.Empty)
-                            dt.Rows[i].Delete();// marcando para deletar
+                        //if (paymentDate.ToString() == string.Empty)
+                        //    dt.Rows[i].Delete();// marcando para deletar
+
+                        bool paid = Convert.ToBoolean(dt.Rows[i][8]);
+
+                        if (!paid) dt.Rows[i].Delete();// marcando para deletar
                     }
                     dt.AcceptChanges();// confirmando a deleção
 
@@ -57,10 +63,14 @@ namespace SysExpenseControl.Forms
 
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
-                        var paymentDate = dt.Rows[i][6];
+                        //var paymentDate = dt.Rows[i][6];
 
-                        if (paymentDate.ToString() != string.Empty)
-                            dt.Rows[i].Delete();// marcando para deletar
+                        //if (paymentDate.ToString() != string.Empty)
+                        //    dt.Rows[i].Delete();// marcando para deletar
+
+                        bool paid = Convert.ToBoolean(dt.Rows[i][8]);
+
+                        if (paid) dt.Rows[i].Delete();// marcando para deletar
                     }
                     dt.AcceptChanges();// confirmando a deleção
 
@@ -72,17 +82,22 @@ namespace SysExpenseControl.Forms
 
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
-                        var paymentDate = dt.Rows[i][6];
+                        //var paymentDate = dt.Rows[i][6];
 
-                        if (paymentDate.ToString() != string.Empty ||
-                                !(Convert.ToInt32(dt.Rows[i][3]) < DateTime.Now.Day))
+                        //if (paymentDate.ToString() != string.Empty ||
+                        //        !(Convert.ToInt32(dt.Rows[i][3]) < DateTime.Now.Day))
+                        //    dt.Rows[i].Delete();// marcando para deletar
+
+                        bool paid = Convert.ToBoolean(dt.Rows[i][8]);
+                        
+                        if (paid || !(Convert.ToInt32(dt.Rows[i][4]) < DateTime.Now.Day))
                             dt.Rows[i].Delete();// marcando para deletar
                     }
                     dt.AcceptChanges();// confirmando a deleção
 
                     DgvData.DataSource = dt;
                 }
-            }
+            //}
         }
 
         private void Add()
@@ -169,8 +184,9 @@ namespace SysExpenseControl.Forms
 
                 ThreadHelper.SelectFirstRow(this.DgvData);// para fazer a primeira linha ficar selecionada
 
-                ThreadHelper.SetPropertyValue(LblWait, "Visible", false);
-                ThreadHelper.SetPropertyValue(CbxFilter, "Enabled", true);
+                ThreadHelper.SetPropertyValue(LblWait, "Visible", false);// retirando o label wait da tela
+                ThreadHelper.SetPropertyValue(CbxFilter, "Enabled", true);//habilitando o comboBox
+                ThreadHelper.SetDefaultCellStyle(DgvData, "value");// para a coluna dos valores ter ,00
             }
         }
 

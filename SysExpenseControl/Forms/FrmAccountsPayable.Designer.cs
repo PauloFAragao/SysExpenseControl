@@ -51,7 +51,7 @@
             this.BtnAdd = new System.Windows.Forms.Button();
             this.BtnEdit = new System.Windows.Forms.Button();
             this.BtnView = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.BtnChangeMonth = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.CbxFilter = new System.Windows.Forms.ComboBox();
             this.LblAmount = new System.Windows.Forms.Label();
@@ -293,7 +293,7 @@
             this.panel5.Controls.Add(this.BtnAdd);
             this.panel5.Controls.Add(this.BtnEdit);
             this.panel5.Controls.Add(this.BtnView);
-            this.panel5.Controls.Add(this.button1);
+            this.panel5.Controls.Add(this.BtnChangeMonth);
             this.panel5.Controls.Add(this.label5);
             this.panel5.Controls.Add(this.CbxFilter);
             this.panel5.Controls.Add(this.LblAmount);
@@ -309,6 +309,7 @@
             // BtnAdd
             // 
             this.BtnAdd.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtnAdd.Enabled = false;
             this.BtnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnAdd.Location = new System.Drawing.Point(357, 42);
             this.BtnAdd.Name = "BtnAdd";
@@ -321,6 +322,7 @@
             // BtnEdit
             // 
             this.BtnEdit.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtnEdit.Enabled = false;
             this.BtnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnEdit.Location = new System.Drawing.Point(438, 42);
             this.BtnEdit.Name = "BtnEdit";
@@ -333,6 +335,7 @@
             // BtnView
             // 
             this.BtnView.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtnView.Enabled = false;
             this.BtnView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnView.Location = new System.Drawing.Point(519, 42);
             this.BtnView.Name = "BtnView";
@@ -342,16 +345,16 @@
             this.BtnView.UseVisualStyleBackColor = false;
             this.BtnView.Click += new System.EventHandler(this.BtnView_Click);
             // 
-            // button1
+            // BtnChangeMonth
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(303, 10);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Trocar Mês";
-            this.button1.UseVisualStyleBackColor = false;
+            this.BtnChangeMonth.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtnChangeMonth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnChangeMonth.Location = new System.Drawing.Point(303, 10);
+            this.BtnChangeMonth.Name = "BtnChangeMonth";
+            this.BtnChangeMonth.Size = new System.Drawing.Size(75, 23);
+            this.BtnChangeMonth.TabIndex = 6;
+            this.BtnChangeMonth.Text = "Trocar Mês";
+            this.BtnChangeMonth.UseVisualStyleBackColor = false;
             // 
             // label5
             // 
@@ -464,7 +467,7 @@
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.DataGridView DgvData;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button BtnChangeMonth;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox CbxFilter;
         private System.Windows.Forms.Label LblAmount;

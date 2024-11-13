@@ -86,6 +86,31 @@ o id de onde foi inserido
 de erro com uma mensagem mostrando a exceção.
 -Agora ao Editar um lucro fixo o lucro do mês corrente tambem é editado
 
+-Correção na tela de contas - como as coluna tinham mudado os filtros para contas pagas, não pagas e 
+atrasadas não estavam funcionando, e agora a coluna paid está sendo usada para verificar se a conta
+está paga ou não.
+-Corrigido um erro na hora de inserir uma despesa.
+-Criei um método auxiliar na classe DataConsultant que retorna uma list de strings.
+-A tabela references_to_tables agora vai ter uma coluna com o total de lucros do mês e outra com o 
+Total de gastos do mês
+-Agora ao adiconar, editar e deletar um lucro do mês o programa tambem faz alterações na tabela 
+references_to_tables na coluna de ganhos totais do mês
+-Agora na tela de ganhos do mês o programa lé o total de ganhos na tabela references_to_tables.
+-Agora ao adionar, editar e deletar um gasto do mês o programa tambem faz alterações na tabela
+references_to_tables na coluna de gastos totais do mês
+-Agora na tela de ganhos do mês o programa lé o total de gastos na tabela references_to_tables.
+-Corrigido um problema que ao editar uma conta na tela de contas a conta não era editada
+-Os tabIndex das janelas para adicionar/editar/visualizar estão corretos agora
+
+
+
+
+
+
+
+
+
+
 
 
 

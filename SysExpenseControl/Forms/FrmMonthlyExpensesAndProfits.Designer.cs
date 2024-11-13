@@ -48,19 +48,22 @@
             this.LblProftsMonth = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.button1 = new System.Windows.Forms.Button();
+            this.TabControl = new System.Windows.Forms.TabControl();
+            this.BtnChangeMonth = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.LblMonth = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.LblWait = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DgvExpenses)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DgvProfits)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.tabControl1.SuspendLayout();
+            this.TabControl.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.LblWait.SuspendLayout();
             this.SuspendLayout();
             // 
             // BtnViewExpenses
@@ -282,6 +285,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.LblWait);
             this.tabPage1.Controls.Add(this.BtnViewProfits);
             this.tabPage1.Controls.Add(this.BtnEditProfits);
             this.tabPage1.Controls.Add(this.BtnDelProfits);
@@ -310,27 +314,29 @@
             this.tabPage2.Text = "Despesas";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // tabControl1
+            // TabControl
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(12, 93);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(902, 467);
-            this.tabControl1.TabIndex = 8;
+            this.TabControl.Controls.Add(this.tabPage1);
+            this.TabControl.Controls.Add(this.tabPage2);
+            this.TabControl.Enabled = false;
+            this.TabControl.Location = new System.Drawing.Point(12, 93);
+            this.TabControl.Name = "TabControl";
+            this.TabControl.SelectedIndex = 0;
+            this.TabControl.Size = new System.Drawing.Size(902, 467);
+            this.TabControl.TabIndex = 8;
             // 
-            // button1
+            // BtnChangeMonth
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(140, 23);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 27);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Mudar Mês";
-            this.button1.UseVisualStyleBackColor = false;
+            this.BtnChangeMonth.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtnChangeMonth.Enabled = false;
+            this.BtnChangeMonth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnChangeMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnChangeMonth.Location = new System.Drawing.Point(140, 23);
+            this.BtnChangeMonth.Name = "BtnChangeMonth";
+            this.BtnChangeMonth.Size = new System.Drawing.Size(100, 27);
+            this.BtnChangeMonth.TabIndex = 11;
+            this.BtnChangeMonth.Text = "Mudar Mês";
+            this.BtnChangeMonth.UseVisualStyleBackColor = false;
             // 
             // label2
             // 
@@ -358,11 +364,29 @@
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.LblMonth);
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.button1);
+            this.panel2.Controls.Add(this.BtnChangeMonth);
             this.panel2.Location = new System.Drawing.Point(573, 3);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(261, 72);
             this.panel2.TabIndex = 14;
+            // 
+            // LblWait
+            // 
+            this.LblWait.Controls.Add(this.label3);
+            this.LblWait.Location = new System.Drawing.Point(347, 209);
+            this.LblWait.Name = "LblWait";
+            this.LblWait.Size = new System.Drawing.Size(205, 52);
+            this.LblWait.TabIndex = 15;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(72, 18);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 20);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Wait...";
             // 
             // FrmMonthlyExpensesAndProfits
             // 
@@ -370,7 +394,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(926, 572);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.TabControl);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel5);
             this.Name = "FrmMonthlyExpensesAndProfits";
@@ -383,9 +407,11 @@
             this.panel5.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
+            this.TabControl.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.LblWait.ResumeLayout(false);
+            this.LblWait.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -412,10 +438,12 @@
         private System.Windows.Forms.Label LblProftsMonth;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TabControl TabControl;
+        private System.Windows.Forms.Button BtnChangeMonth;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label LblMonth;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel LblWait;
+        private System.Windows.Forms.Label label3;
     }
 }

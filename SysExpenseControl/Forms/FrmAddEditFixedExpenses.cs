@@ -107,7 +107,7 @@ namespace SysExpenseControl.Forms
                     if (!result) return;// deu erro
 
                     // Editar gasto dos Mêses referente ao gasto fixo
-                    bool resultEditAllMonthExpense = DataConsultant.EditAllMonthExpense(_id, _name, _value, this.CbxCategories.Text,
+                    bool resultEditAllMonthExpense = DataConsultant.EditAllMonthExpense(_id, _name, /*_value,*/ this.CbxCategories.Text,
                         this.RtbDescription.Text );
 
                     if (!resultEditAllMonthExpense) return;// deu erro

@@ -131,20 +131,32 @@ namespace SysExpenseControl.Forms
         // ------------------------- Thread
         private void Initialize()
         {
+            bool allDone = true;
+
             if (LoadFixedProfitsData())
             {
                 HideColumnsFixedProfits();
                 ChangeColumnsFixedProfits();
 
-                ThreadHelper.SetDefaultCellStyle(DgvFixedProfits, "value");
+                ThreadHelper.SetDefaultCellStyle(DgvFixedProfits, "value");// para a coluna dos valores ter ,00
             }
+            else allDone = false;
 
             if (LoadFixedExpensesData())
             {
                 HideColumnsFixedExpenses();
                 ChangeColumnsFixedExpenses();
-            }
 
+                ThreadHelper.SetDefaultCellStyle(DgvFixedExpenses, "value");// para a coluna dos valores ter ,00
+            }
+            else allDone = false;
+
+            if(allDone)
+            {
+                ThreadHelper.SetPropertyValue(LblWait, "Visible", false);// retirando o label wait da tela
+
+                ThreadHelper.SetPropertyValue(TabControl, "Enabled", true);// habilitando tudo
+            }
         }
 
         // ------ Lucros fixos
