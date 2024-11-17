@@ -157,8 +157,7 @@ namespace SysExpenseControl.Forms
                     value,
                     Convert.ToString(this.DgvData.CurrentRow.Cells["description"].Value),
                     dueDay, numberOfInstallments,
-                    Convert.ToBoolean(this.DgvData.CurrentRow.Cells["paid"].Value),
-                    $"expenses_{_date.Year}_{_date.Month}" );
+                    Convert.ToBoolean(this.DgvData.CurrentRow.Cells["paid"].Value));
 
                 frmAddEditBill.ShowDialog();
             }

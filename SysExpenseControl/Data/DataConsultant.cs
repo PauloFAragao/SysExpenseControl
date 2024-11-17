@@ -47,6 +47,7 @@ namespace SysExpenseControl.Data
             return result;
         }
 
+        
         // ---------------------------------- Categoria
         // Método para visualizar todas as categorias
         public static DataTable ViewCategory()
@@ -274,6 +275,8 @@ namespace SysExpenseControl.Data
         public static int? InsertMonthProfits(string name, double value, DateTime? date, 
             string description, int year, int month, int idFixedProfits = 0)
         {
+            VerifyTableExists(year, month);// verfica e cria uma tabela se ela não existir
+
             string profitsTableName = "profits_" + year + "_" + month;
 
             string insertQuery = $"Insert Into {profitsTableName} (name, value, ";
@@ -300,8 +303,11 @@ namespace SysExpenseControl.Data
 
         // Método para Editar um lucro do mês
         public static bool EditMonthProfits(int id, string name, double value, DateTime date,
-            string description, string tableName)
+            string description, int year, int month)
         {
+            VerifyTableExists(year, month);// verfica e cria uma tabela se ela não existir
+
+            string tableName = "profits_" + year + "_" + month;
             string editQuery =
                 $"Update {tableName} "
                 + $"Set name = '{name}', "
@@ -316,8 +322,11 @@ namespace SysExpenseControl.Data
 
         // Método para editar um lucro do mês a partir da referencia de um lucro fixo
         public static bool EditProfit(int idFixedProfits, string name, double value, 
-            string description, string tableName)
+            string description, int year, int month)
         {
+            VerifyTableExists(year, month);// verfica e cria uma tabela se ela não existir
+
+            string tableName = "profits_" + year + "_" + month;
             string editQuery = $"Update {tableName} "
                 + $"Set name = '{name}', "
                 + $"value = {value.ToString(CultureInfo.InvariantCulture)}, "
@@ -374,6 +383,8 @@ namespace SysExpenseControl.Data
             int? idFixedExpenses, string category, string description, int year, int month, bool paid,
             string fixedExpense = "")
         {
+            VerifyTableExists(year, month);// verfica e cria uma tabela se ela não existir
+
             string expensesTableName = "expenses_" + year + "_" + month;
 
             string insertQuery = $"Insert Into {expensesTableName} (name, value, category, paid, ";
@@ -410,8 +421,11 @@ namespace SysExpenseControl.Data
 
         // Método para Editar um gasto do mês
         public static bool EditMonthExpense(int id, string name, double value, DateTime dateOfExpenditure,
-            string category, string description, string tableName, bool paid, int? idReference = 0)
+            string category, string description, int year, int month, bool paid, int? idReference = 0)
         {
+            VerifyTableExists(year, month);// verfica e cria uma tabela se ela não existir
+
+            string tableName = "expenses_" + year + "_" + month;
             string editQuery =
                 $"Update {tableName} "
                 + $"Set name = '{name}', "
@@ -565,6 +579,44 @@ namespace SysExpenseControl.Data
                 + $"Where year = {year} And month = {month}";
 
             return GetDoubleQuery(query);
+        }
+
+        // Método que vai verificar se uma tabela existe e mandar criar se não exitir
+        private static void VerifyTableExists(int year, int month)
+        {
+            bool result = true;
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(Connection.Cn))
+                {
+                    // Abre a conexão
+                    connection.Open();
+
+                    // Query para verificar o nome
+                    //string query =
+                    //$"Select Exists (Select 1 From {tableName} "
+                    //+ "Where tableName = @tableName)";
+
+                    string query =
+                    "Select 1 From references_to_tables "
+                    + $"Where year = {year} And month = {month}";
+
+                    // Executando a query
+                    using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                    {
+                        result = Convert.ToBoolean(command.ExecuteScalar());
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Exception in DatabaseManager.GenerateRandonTableName: " + e.Message);
+            }
+
+            if (!result)// não tem a tabela
+            {
+                DatabaseManager.CreateDynamicTables(year, month);
+            }
         }
 
         // ---------------------------------- 

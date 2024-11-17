@@ -99,8 +99,8 @@ namespace SysExpenseControl.Forms
                 else// Editar
                 {
                     bool resultEditMonthExpense = DataConsultant.EditMonthExpense(_id, _name, _value,
-                        date, this.CbxCategories.Text, this.RtbDescription.Text, 
-                        _tableName, _statusPaid);
+                        date, this.CbxCategories.Text, this.RtbDescription.Text,
+                        _date.Year, _date.Month, _statusPaid);
 
                     if (!resultEditMonthExpense) return;
 

@@ -30,7 +30,7 @@ namespace SysExpenseControl.Forms
         private void AddProfit()
         {
             FrmAddEditMonthProfits frmAddEditMonthProfits = new FrmAddEditMonthProfits(0,
-                CallLoadProfitsData, DateTime.Now, "profits_" + _date.Year + "_" + _date.Month);
+                CallLoadProfitsData, DateTime.Now);
             frmAddEditMonthProfits.ShowDialog();
         }
 
@@ -88,7 +88,6 @@ namespace SysExpenseControl.Forms
 
                 FrmAddEditMonthProfits frmAddEditMonthProfits = new FrmAddEditMonthProfits(tipe,
                     CallLoadProfitsData, date,
-                    "profits_" + _date.Year + "_" + _date.Month,// nome da tabela
                     Convert.ToInt32(this.DgvProfits.CurrentRow.Cells["id"].Value),
                     Convert.ToString(this.DgvProfits.CurrentRow.Cells["name"].Value),
                     Convert.ToDouble(this.DgvProfits.CurrentRow.Cells["value"].Value),
@@ -145,7 +144,6 @@ namespace SysExpenseControl.Forms
             if (DgvExpenses.Rows.Count > 0)
             {
                 DateTime date;
-                bool confirm;
 
                 // Verificando se o campo data está vazio e capturando o valor
                 if (DateTime.TryParse(this.DgvExpenses.CurrentRow.Cells["date"].Value.ToString(),
@@ -154,7 +152,6 @@ namespace SysExpenseControl.Forms
                 else
                     date = DateTime.Now;
                 
-
                 // capturando se é uma conta que tem uma quantidade de parcelas para terminar
                 bool definedNumberOfInstallments;
                 if(bool.TryParse(this.DgvExpenses.CurrentRow.Cells["definedNumberOfInstallments"].Value.ToString(),

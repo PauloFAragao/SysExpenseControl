@@ -18,10 +18,9 @@ namespace SysExpenseControl.Forms
 
         bool _confirm;// essa variavel indica na edição se o valor está sendo marcado como "pago"
 
-        private string _tableName;
 
         public FrmAddEditMonthProfits(int tipe, Action onCloseCallback, DateTime date,
-            string tableName, int id = 0, string name = "", double value = 0,
+            int id = 0, string name = "", double value = 0,
             string desciption = "", bool confirm = false)
         {
             InitializeComponent();
@@ -33,7 +32,6 @@ namespace SysExpenseControl.Forms
             _originalValue = value;
             _date = date;
             _onCloseCallback = onCloseCallback;
-            _tableName = tableName;
 
             _confirm = confirm;
 
@@ -79,8 +77,7 @@ namespace SysExpenseControl.Forms
                 else// Editar
                 {
                     bool result = DataConsultant.EditMonthProfits(_id, _name, _value,
-                        date, this.RtbDescription.Text,
-                        _tableName);
+                        date, this.RtbDescription.Text, date.Year, date.Month);
 
                     if (!result) return; // deu erro
 

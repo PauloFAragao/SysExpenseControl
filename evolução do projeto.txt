@@ -102,8 +102,10 @@ references_to_tables na coluna de gastos totais do mês
 -Corrigido um problema que ao editar uma conta na tela de contas a conta não era editada
 -Os tabIndex das janelas para adicionar/editar/visualizar estão corretos agora
 
-
-
+-Resolvido um problema que se o usuario adicionasse uma despesa com a data de uma tabela que não foi 
+criada, agora o programa verifica se a tabela existe e cria se não existir
+-Resolvido um problema que quando uma tabela de outro mês era criada ele recopiava todos os gastos e
+lucros do fixos de novo.
 
 
 

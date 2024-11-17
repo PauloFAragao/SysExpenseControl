@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.SQLite;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 
 namespace SysExpenseControl.Data
@@ -19,7 +20,7 @@ namespace SysExpenseControl.Data
                 CreateTables();
                 InsertDemoCategories();// cria as categorias de demonstração
                 CreateDynamicTable_Reserve("Reserva Geral", "Uma reserva de dinheiro para fins gerais");// cria uma reserva de dinheiro basica
-                
+
             }
             else
             {
@@ -62,7 +63,7 @@ namespace SysExpenseControl.Data
                         + "dueDay Integer,"// data para o vencimento
                         + "numberOfInstallments Integer, "// parcelas restantes
                         + "definedNumberOfInstallments Bit, "// se tem uma quantidade de parcelas
-                        //References categories (id) - indica foreign key //On Delete Set Default - quando a categoria for deletada muda para o default que é 0
+                                                             //References categories (id) - indica foreign key //On Delete Set Default - quando a categoria for deletada muda para o default que é 0
                         + "category Integer References categories (id) On Delete Set Default Default '0',"// 0 Para sem categoria
                         + "description Text)";
 
@@ -181,8 +182,16 @@ namespace SysExpenseControl.Data
                 CreateDynamicTables();// cria a tabela desse mês
         }
 
-        // Criador de tabelas dinamico
+        // Sobrecarga do método sem argumentos
         private static void CreateDynamicTables()
+        {
+            CreateDynamicTables(DateTime.Now.Year, DateTime.Now.Month);
+
+            CreateProfitsAndExpenses();
+        }
+
+        // Criador de tabelas dinamico
+        public static void CreateDynamicTables(int year, int month)
         {
             try
             {
@@ -190,10 +199,6 @@ namespace SysExpenseControl.Data
                 {
                     // Abre a conexão
                     connection.Open();
-
-                    //pegando o ano e o mês
-                    int year = DateTime.Now.Date.Year;
-                    int month = DateTime.Now.Date.Month;
 
                     //------------------------------------ string das querys para criar as tabelas
                     // Lucros do mês
@@ -257,7 +262,7 @@ namespace SysExpenseControl.Data
                 Debug.WriteLine("Exception in DatabaseManager.CreateDynamicTables: " + e.Message);
             }
 
-            CreateProfitsAndExpenses();
+            
         }
 
         // Adiciona os gastos e os lucros fixos aos gastos e lucros mensais

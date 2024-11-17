@@ -20,13 +20,12 @@ namespace SysExpenseControl.Forms
         private int _numberOfInstallments;
         private bool _paid;
         private bool _statusPaid = false;
-        private string _tableName;
 
         private Action _onCloseCallback;// evento para atualizar a outra janela
 
         public FrmAddEditBill(int tipe, Action onCloseCallback, DateTime date, int id = 0, 
             int idFixedExpenses = 0, string name = "", double value = 0, string description = "", 
-            int dueDay = 0, int numberOfInstallments = 0, bool paid = false, string tableName = "")
+            int dueDay = 0, int numberOfInstallments = 0, bool paid = false)
         {
             InitializeComponent();
 
@@ -41,7 +40,6 @@ namespace SysExpenseControl.Forms
             _date = date;
             _numberOfInstallments = numberOfInstallments;
             _paid = paid;
-            _tableName = tableName;
 
             _statusPaid = _paid;// ao editar deve marcar como pago
 
@@ -186,7 +184,8 @@ namespace SysExpenseControl.Forms
 
                             // editar a conta na tabela do mês
                             bool resultEditMonthExpense = DataConsultant.EditMonthExpense(_id, _name, 
-                                _value, _date, "Contas", this.RtbDescription.Text, _tableName, _paid);
+                                _value, _date, "Contas", this.RtbDescription.Text, _date.Year, 
+                                _date.Month, _paid);
 
                             if (!resultEditMonthExpense) return;
                         }
@@ -203,7 +202,8 @@ namespace SysExpenseControl.Forms
 
                             // editar a conta na tabela do mês
                             bool resultEditMonthExpense = DataConsultant.EditMonthExpense(_id, _name,
-                                _value, _date, "Contas", this.RtbDescription.Text, _tableName, _paid);
+                                _value, _date, "Contas", this.RtbDescription.Text, _date.Year,
+                                _date.Month, _paid);
 
                             if (!resultEditMonthExpense) return;
                         }
@@ -219,8 +219,8 @@ namespace SysExpenseControl.Forms
 
                             // fazer edições
                             bool result = DataConsultant.EditMonthExpense(_id, _name, _value, _date, 
-                                "Contas",  this.RtbDescription.Text,_tableName, _paid, 
-                                idFixedExpenses);
+                                "Contas",  this.RtbDescription.Text, _date.Year,
+                                _date.Month, _paid, idFixedExpenses);
 
                             if (!result) return;// deu erro
                         }
@@ -228,7 +228,7 @@ namespace SysExpenseControl.Forms
                         {
                             // fazer edições
                             bool result = DataConsultant.EditMonthExpense(_id, _name, _value, _date, 
-                                "Contas", this.RtbDescription.Text, _tableName, _paid);
+                                "Contas", this.RtbDescription.Text, _date.Year, _date.Month, _paid);
 
                             if (!result) return;// deu erro
                         }
