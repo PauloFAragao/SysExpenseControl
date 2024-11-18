@@ -28,11 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.BtnNotPaid = new System.Windows.Forms.Button();
             this.LblDate = new System.Windows.Forms.Label();
             this.DateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
-            this.BtnEdit = new System.Windows.Forms.Button();
             this.BtnCancel = new System.Windows.Forms.Button();
             this.BtnSave = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -50,19 +48,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.CbPaid = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
-            // 
-            // BtnNotPaid
-            // 
-            this.BtnNotPaid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.BtnNotPaid.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnNotPaid.Location = new System.Drawing.Point(201, 6);
-            this.BtnNotPaid.Name = "BtnNotPaid";
-            this.BtnNotPaid.Size = new System.Drawing.Size(75, 23);
-            this.BtnNotPaid.TabIndex = 13;
-            this.BtnNotPaid.Text = "Paga";
-            this.BtnNotPaid.UseVisualStyleBackColor = false;
-            this.BtnNotPaid.Visible = false;
-            this.BtnNotPaid.Click += new System.EventHandler(this.BtnNotPaid_Click);
             // 
             // LblDate
             // 
@@ -89,19 +74,6 @@
             this.label6.Size = new System.Drawing.Size(270, 13);
             this.label6.TabIndex = 93;
             this.label6.Text = "Os campos marcados com asterisco (*) são obrigatórios.";
-            // 
-            // BtnEdit
-            // 
-            this.BtnEdit.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.BtnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnEdit.Location = new System.Drawing.Point(18, 392);
-            this.BtnEdit.Name = "BtnEdit";
-            this.BtnEdit.Size = new System.Drawing.Size(75, 23);
-            this.BtnEdit.TabIndex = 12;
-            this.BtnEdit.Text = "Editar";
-            this.BtnEdit.UseVisualStyleBackColor = false;
-            this.BtnEdit.Visible = false;
-            this.BtnEdit.Click += new System.EventHandler(this.BtnEdit_Click);
             // 
             // BtnCancel
             // 
@@ -266,11 +238,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.RbBill);
             this.Controls.Add(this.RbFixedBill);
-            this.Controls.Add(this.BtnNotPaid);
             this.Controls.Add(this.LblDate);
             this.Controls.Add(this.DateTimePicker);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.BtnEdit);
             this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.BtnSave);
             this.Controls.Add(this.label4);
@@ -293,12 +263,9 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button BtnNotPaid;
         private System.Windows.Forms.Label LblDate;
         private System.Windows.Forms.DateTimePicker DateTimePicker;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button BtnEdit;
         private System.Windows.Forms.Button BtnCancel;
         private System.Windows.Forms.Button BtnSave;
         private System.Windows.Forms.Label label4;

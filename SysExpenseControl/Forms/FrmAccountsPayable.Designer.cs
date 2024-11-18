@@ -49,7 +49,6 @@
             this.DgvData = new System.Windows.Forms.DataGridView();
             this.panel5 = new System.Windows.Forms.Panel();
             this.BtnAdd = new System.Windows.Forms.Button();
-            this.BtnEdit = new System.Windows.Forms.Button();
             this.BtnView = new System.Windows.Forms.Button();
             this.BtnChangeMonth = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
@@ -291,7 +290,6 @@
             this.panel5.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel5.Controls.Add(this.BtnAdd);
-            this.panel5.Controls.Add(this.BtnEdit);
             this.panel5.Controls.Add(this.BtnView);
             this.panel5.Controls.Add(this.BtnChangeMonth);
             this.panel5.Controls.Add(this.label5);
@@ -311,26 +309,13 @@
             this.BtnAdd.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.BtnAdd.Enabled = false;
             this.BtnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnAdd.Location = new System.Drawing.Point(357, 42);
+            this.BtnAdd.Location = new System.Drawing.Point(438, 42);
             this.BtnAdd.Name = "BtnAdd";
             this.BtnAdd.Size = new System.Drawing.Size(75, 23);
             this.BtnAdd.TabIndex = 9;
             this.BtnAdd.Text = "Adicionar";
             this.BtnAdd.UseVisualStyleBackColor = false;
             this.BtnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
-            // 
-            // BtnEdit
-            // 
-            this.BtnEdit.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.BtnEdit.Enabled = false;
-            this.BtnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnEdit.Location = new System.Drawing.Point(438, 42);
-            this.BtnEdit.Name = "BtnEdit";
-            this.BtnEdit.Size = new System.Drawing.Size(75, 23);
-            this.BtnEdit.TabIndex = 8;
-            this.BtnEdit.Text = "Editar";
-            this.BtnEdit.UseVisualStyleBackColor = false;
-            this.BtnEdit.Click += new System.EventHandler(this.BtnEdit_Click);
             // 
             // BtnView
             // 
@@ -476,7 +461,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Button BtnAdd;
-        private System.Windows.Forms.Button BtnEdit;
         private System.Windows.Forms.Button BtnView;
         private System.Windows.Forms.Panel LblWait;
         private System.Windows.Forms.Label label4;

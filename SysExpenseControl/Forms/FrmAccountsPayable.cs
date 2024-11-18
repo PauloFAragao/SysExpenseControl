@@ -102,21 +102,27 @@ namespace SysExpenseControl.Forms
 
         private void Add()
         {
-            FrmAddEditBill frmAddEditBill = new FrmAddEditBill(0, CallLoadData, DateTime.Now);
+            FrmAddEditBill frmAddEditBill = new FrmAddEditBill(CallLoadData);
             frmAddEditBill.ShowDialog();
         }
 
-        private void ViewEditBill(int tipe)
+        private void ViewBill()
         {
-            if(DgvData.Rows.Count > 0)
+            if(DgvData.Rows.Count > 0 || this.DgvData.CurrentRow != null)
             {
-                // capturando a data que foi pago, se for null pega a data corrente
-                DateTime date;
-                if(DateTime.TryParse(this.DgvData.CurrentRow.Cells["date"].Value.ToString(), out DateTime dt))
+                // capturando a data que foi pago
+                var cellValue = this.DgvData.CurrentRow.Cells["date"].Value;
+                DateTime? date;
+                if(cellValue != null &&
+                    DateTime.TryParse(cellValue.ToString(), out DateTime dt))
                 {
                     date = dt;
                 }
-                else date = DateTime.Now;
+                else
+                {
+                    //date = DateTime.Now;
+                    date = null;
+                }
 
                 // capturando o id referencia a tabela de gastos fixos, se não tiver manda 0 
                 int idFixedExpenses;
@@ -127,20 +133,20 @@ namespace SysExpenseControl.Forms
                 else idFixedExpenses = 0;
 
                 // capturando o valor
-                double value;
-                if (double.TryParse(this.DgvData.CurrentRow.Cells["value"].Value.ToString(), out double amount))
-                {
-                    value = amount;
-                }
-                else value = 0;
+                //string value;
+                //if (string.TryParse(this.DgvData.CurrentRow.Cells["value"].Value.ToString(), out string amount))
+                //{
+                //    value = amount;
+                //}
+                //else value = 0;
 
                 // capturando a data de pagamento
-                int dueDay;
-                if (int.TryParse(this.DgvData.CurrentRow.Cells["dueDay"].Value.ToString(), out int dueD))
-                {
-                    dueDay = dueD;
-                }
-                else dueDay = 0;
+                //int dueDay;
+                //if (int.TryParse(this.DgvData.CurrentRow.Cells["dueDay"].Value.ToString(), out int dueD))
+                //{
+                //    dueDay = dueD;
+                //}
+                //else dueDay = 0;
 
                 // capturando a data de pagamento
                 int numberOfInstallments;
@@ -150,6 +156,22 @@ namespace SysExpenseControl.Forms
                 }
                 else numberOfInstallments = 0;
 
+                FrmViewBill frmViewBill = new FrmViewBill(
+                    Convert.ToString(this.DgvData.CurrentRow.Cells["name"].Value),
+                    this.DgvData.CurrentRow.Cells["value"].Value.ToString(),
+                    this.DgvData.CurrentRow.Cells["dueDay"].Value.ToString(), 
+                    idFixedExpenses,
+                    this.DgvData.CurrentRow.Cells["numberOfInstallments"].Value.ToString(),
+                    Convert.ToBoolean(this.DgvData.CurrentRow.Cells["paid"].Value),
+                    date,
+                    Convert.ToString(this.DgvData.CurrentRow.Cells["description"].Value));
+
+                frmViewBill.ShowDialog();
+
+                //(string name, string value, string dueDay, int idFixedExpenses,
+                //string numberOfInstallments, bool paid, DateTime? date, string description)
+
+                /*
                 FrmAddEditBill frmAddEditBill = new FrmAddEditBill(tipe, CallLoadData, date,
                     Convert.ToInt32(this.DgvData.CurrentRow.Cells["id"].Value),
                     idFixedExpenses,
@@ -160,6 +182,7 @@ namespace SysExpenseControl.Forms
                     Convert.ToBoolean(this.DgvData.CurrentRow.Cells["paid"].Value));
 
                 frmAddEditBill.ShowDialog();
+                */
             }
             else
             {
@@ -184,8 +207,12 @@ namespace SysExpenseControl.Forms
                 ThreadHelper.SelectFirstRow(this.DgvData);// para fazer a primeira linha ficar selecionada
 
                 ThreadHelper.SetPropertyValue(LblWait, "Visible", false);// retirando o label wait da tela
-                ThreadHelper.SetPropertyValue(CbxFilter, "Enabled", true);//habilitando o comboBox
+                
                 ThreadHelper.SetDefaultCellStyle(DgvData, "value");// para a coluna dos valores ter ,00
+
+                ThreadHelper.SetPropertyValue(BtnAdd, "Enabled", true);//habilitando o botão adiconar
+                ThreadHelper.SetPropertyValue(BtnView, "Enabled", true);//habilitando o botão visualizar
+                ThreadHelper.SetPropertyValue(CbxFilter, "Enabled", true);//habilitando o comboBox
             }
         }
 
@@ -285,14 +312,10 @@ namespace SysExpenseControl.Forms
             Add();
         }
 
-        private void BtnEdit_Click(object sender, EventArgs e)
-        {
-            ViewEditBill(1);
-        }
-
         private void BtnView_Click(object sender, EventArgs e)
         {
-            ViewEditBill(2);
+            ViewBill();
         }
+
     }
 }

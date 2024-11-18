@@ -107,7 +107,8 @@ criada, agora o programa verifica se a tabela existe e cria se não existir
 -Resolvido um problema que quando uma tabela de outro mês era criada ele recopiava todos os gastos e
 lucros do fixos de novo.
 
-
+-Feitas algumas alterações na tela de contas: não é mais possivel editar na tela de contas, e foi criada
+uma nova janela para visualizar. (ainda está dando NullReferenceException as vezes)
 
 
 
