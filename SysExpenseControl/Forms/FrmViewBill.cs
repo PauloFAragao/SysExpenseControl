@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -54,6 +55,8 @@ namespace SysExpenseControl.Forms
                 //_date.ToString("d 'de' MMMM 'de' yyyy") 
                 _date.Value.ToString("d 'de' MMMM 'de' yyyy", new System.Globalization.CultureInfo("pt-BR"))
                 : "";
+
+            Debug.WriteLine("Data: " + _date);
 
             this.LblDescription.Text = _description;
         }

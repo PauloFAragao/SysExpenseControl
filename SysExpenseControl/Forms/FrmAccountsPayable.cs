@@ -32,72 +32,54 @@ namespace SysExpenseControl.Forms
         {
             if (_data.Rows.Count < 0 || _data == null) return;
 
-            //if(DgvData.Rows.Count > 0)
-            //{
-                if (this.CbxFilter.SelectedIndex == 0)// sem filtros
+            if (this.CbxFilter.SelectedIndex == 0)// sem filtros
+            {
+                DgvData.DataSource = _data;
+            }
+            else if (this.CbxFilter.SelectedIndex == 1)// contas pagas
+            {
+                DataTable dt = _data.Copy();
+
+                for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    DgvData.DataSource = _data;
+                    bool paid = Convert.ToBoolean(dt.Rows[i][8]);
+
+                    if (!paid) dt.Rows[i].Delete();// marcando para deletar
                 }
-                else if (this.CbxFilter.SelectedIndex == 1)// contas pagas
+                dt.AcceptChanges();// confirmando a deleção
+
+                DgvData.DataSource = dt;
+            }
+            else if (this.CbxFilter.SelectedIndex == 2)// contas a pagar
+            {
+                DataTable dt = _data.Copy();
+
+                for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    DataTable dt = _data.Copy();
+                    bool paid = Convert.ToBoolean(dt.Rows[i][8]);
 
-                    for (int i = 0; i < dt.Rows.Count; i++)
-                    {
-                        //var paymentDate = dt.Rows[i][6];
-
-                        //if (paymentDate.ToString() == string.Empty)
-                        //    dt.Rows[i].Delete();// marcando para deletar
-
-                        bool paid = Convert.ToBoolean(dt.Rows[i][8]);
-
-                        if (!paid) dt.Rows[i].Delete();// marcando para deletar
-                    }
-                    dt.AcceptChanges();// confirmando a deleção
-
-                    DgvData.DataSource = dt;
+                    if (paid) dt.Rows[i].Delete();// marcando para deletar
                 }
-                else if (this.CbxFilter.SelectedIndex == 2)// contas a pagar
+                dt.AcceptChanges();// confirmando a deleção
+
+                DgvData.DataSource = dt;
+            }
+            else// contas vencidas
+            {
+                DataTable dt = _data.Copy();
+
+                for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    DataTable dt = _data.Copy();
+                    bool paid = Convert.ToBoolean(dt.Rows[i][8]);
 
-                    for (int i = 0; i < dt.Rows.Count; i++)
-                    {
-                        //var paymentDate = dt.Rows[i][6];
-
-                        //if (paymentDate.ToString() != string.Empty)
-                        //    dt.Rows[i].Delete();// marcando para deletar
-
-                        bool paid = Convert.ToBoolean(dt.Rows[i][8]);
-
-                        if (paid) dt.Rows[i].Delete();// marcando para deletar
-                    }
-                    dt.AcceptChanges();// confirmando a deleção
-
-                    DgvData.DataSource = dt;
+                    // Se estiver marcada como paga ou se não estiver atrasada
+                    if (paid || !(Convert.ToInt32(dt.Rows[i][4]) < DateTime.Now.Day))
+                        dt.Rows[i].Delete();// marcando para deletar
                 }
-                else// contas vencidas
-                {
-                    DataTable dt = _data.Copy();
+                dt.AcceptChanges();// confirmando a deleção
 
-                    for (int i = 0; i < dt.Rows.Count; i++)
-                    {
-                        //var paymentDate = dt.Rows[i][6];
-
-                        //if (paymentDate.ToString() != string.Empty ||
-                        //        !(Convert.ToInt32(dt.Rows[i][3]) < DateTime.Now.Day))
-                        //    dt.Rows[i].Delete();// marcando para deletar
-
-                        bool paid = Convert.ToBoolean(dt.Rows[i][8]);
-                        
-                        if (paid || !(Convert.ToInt32(dt.Rows[i][4]) < DateTime.Now.Day))
-                            dt.Rows[i].Delete();// marcando para deletar
-                    }
-                    dt.AcceptChanges();// confirmando a deleção
-
-                    DgvData.DataSource = dt;
-                }
-            //}
+                DgvData.DataSource = dt;
+            }
         }
 
         private void Add()
@@ -108,58 +90,30 @@ namespace SysExpenseControl.Forms
 
         private void ViewBill()
         {
-            if(DgvData.Rows.Count > 0 || this.DgvData.CurrentRow != null)
+            //dataGridView.CurrentCell != null
+            if (
+                this.DgvData.Rows.Count > 0 && 
+                this.DgvData.CurrentCell != null)
             {
                 // capturando a data que foi pago
                 var cellValue = this.DgvData.CurrentRow.Cells["date"].Value;
                 DateTime? date;
-                if(cellValue != null &&
+                if (cellValue != null &&
                     DateTime.TryParse(cellValue.ToString(), out DateTime dt))
                 {
                     date = dt;
                 }
-                else
-                {
-                    //date = DateTime.Now;
-                    date = null;
-                }
+                else date = null;
 
-                // capturando o id referencia a tabela de gastos fixos, se não tiver manda 0 
-                int idFixedExpenses;
-                if(int.TryParse(this.DgvData.CurrentRow.Cells["idFixedExpenses"].Value.ToString(), out int ife))
-                {
-                    idFixedExpenses = ife;
-                }
-                else idFixedExpenses = 0;
-
-                // capturando o valor
-                //string value;
-                //if (string.TryParse(this.DgvData.CurrentRow.Cells["value"].Value.ToString(), out string amount))
-                //{
-                //    value = amount;
-                //}
-                //else value = 0;
-
-                // capturando a data de pagamento
-                //int dueDay;
-                //if (int.TryParse(this.DgvData.CurrentRow.Cells["dueDay"].Value.ToString(), out int dueD))
-                //{
-                //    dueDay = dueD;
-                //}
-                //else dueDay = 0;
-
-                // capturando a data de pagamento
-                int numberOfInstallments;
-                if (int.TryParse(this.DgvData.CurrentRow.Cells["numberOfInstallments"].Value.ToString(), out int nInstallments))
-                {
-                    numberOfInstallments = nInstallments;
-                }
-                else numberOfInstallments = 0;
+                // capturando o id referencia a tabela de gastos fixos
+                var idFixedExpensesRow = this.DgvData.CurrentRow.Cells["idFixedExpenses"].Value;
+                if (int.TryParse(idFixedExpensesRow.ToString(), out int idFixedExpenses))
+                {}
 
                 FrmViewBill frmViewBill = new FrmViewBill(
                     Convert.ToString(this.DgvData.CurrentRow.Cells["name"].Value),
                     this.DgvData.CurrentRow.Cells["value"].Value.ToString(),
-                    this.DgvData.CurrentRow.Cells["dueDay"].Value.ToString(), 
+                    this.DgvData.CurrentRow.Cells["dueDay"].Value.ToString(),
                     idFixedExpenses,
                     this.DgvData.CurrentRow.Cells["numberOfInstallments"].Value.ToString(),
                     Convert.ToBoolean(this.DgvData.CurrentRow.Cells["paid"].Value),
@@ -167,25 +121,12 @@ namespace SysExpenseControl.Forms
                     Convert.ToString(this.DgvData.CurrentRow.Cells["description"].Value));
 
                 frmViewBill.ShowDialog();
-
-                //(string name, string value, string dueDay, int idFixedExpenses,
-                //string numberOfInstallments, bool paid, DateTime? date, string description)
-
-                /*
-                FrmAddEditBill frmAddEditBill = new FrmAddEditBill(tipe, CallLoadData, date,
-                    Convert.ToInt32(this.DgvData.CurrentRow.Cells["id"].Value),
-                    idFixedExpenses,
-                    Convert.ToString(this.DgvData.CurrentRow.Cells["name"].Value),
-                    value,
-                    Convert.ToString(this.DgvData.CurrentRow.Cells["description"].Value),
-                    dueDay, numberOfInstallments,
-                    Convert.ToBoolean(this.DgvData.CurrentRow.Cells["paid"].Value));
-
-                frmAddEditBill.ShowDialog();
-                */
             }
             else
             {
+                MessageBox.Show("A tabela não tem dados ou não tem nenhuma linha selecionada!", 
+                    "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 Debug.WriteLine("não tem dados");
             }
         }
@@ -204,15 +145,15 @@ namespace SysExpenseControl.Forms
                 HideColumns();
                 ChangeColumns();
 
-                ThreadHelper.SelectFirstRow(this.DgvData);// para fazer a primeira linha ficar selecionada
-
                 ThreadHelper.SetPropertyValue(LblWait, "Visible", false);// retirando o label wait da tela
-                
+
                 ThreadHelper.SetDefaultCellStyle(DgvData, "value");// para a coluna dos valores ter ,00
 
                 ThreadHelper.SetPropertyValue(BtnAdd, "Enabled", true);//habilitando o botão adiconar
                 ThreadHelper.SetPropertyValue(BtnView, "Enabled", true);//habilitando o botão visualizar
                 ThreadHelper.SetPropertyValue(CbxFilter, "Enabled", true);//habilitando o comboBox
+
+                //ThreadHelper.SelectFirstRow(this.DgvData);// para fazer a primeira linha ficar selecionada
             }
         }
 
@@ -222,6 +163,7 @@ namespace SysExpenseControl.Forms
 
             if (dataTable != null)
             {
+                // Guardando a referencia
                 ThreadHelper.SetFieldValue(this, "_data", dataTable);
 
                 TakeDataFromDataTable(dataTable);
@@ -277,7 +219,7 @@ namespace SysExpenseControl.Forms
                 if (row.IsNull("date") || string.IsNullOrEmpty(row["date"].ToString()))
                 {
                     //está vencida
-                    if(int.TryParse(row["dueDay"].ToString(), out int dueDay) && dueDay < DateTime.Now.Day)
+                    if (int.TryParse(row["dueDay"].ToString(), out int dueDay) && dueDay < DateTime.Now.Day)
                     {
                         overdueAccounts += amaunt;//somando valor atrasado
                     }
@@ -317,5 +259,9 @@ namespace SysExpenseControl.Forms
             ViewBill();
         }
 
+        private void DgvData_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            Debug.WriteLine("Resultado: " + e.ListChangedType );
+        }
     }
 }

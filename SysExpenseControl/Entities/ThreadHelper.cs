@@ -139,30 +139,30 @@ namespace SysExpenseControl.Entities
             }
         }
 
-        public static void SelectFirstRow(DataGridView dataGridView)
-        {
-            try
-            {
-                if (!dataGridView.IsDisposed)
-                {
-                    if (dataGridView.InvokeRequired)
-                    {
-                        // Chama o método no thread da interface do usuário
-                        dataGridView.BeginInvoke(new Action(() => SelectFirstRow(dataGridView)));
-                    }
-                    else
-                    {
-                        // Verifica se há pelo menos uma linha
-                        if (dataGridView.Rows.Count > 0)
-                            dataGridView.Rows[0].Selected = true; // Seleciona a linha 0
-                    }
-                }
-            }
-            catch (ObjectDisposedException ex)
-            {
-                Debug.WriteLine($"O controle foi descartado: {ex.Message}");
-            }
-        }
+        //public static void SelectFirstRow(DataGridView dataGridView)
+        //{
+        //    try
+        //    {
+        //        if (!dataGridView.IsDisposed)
+        //        {
+        //            if (dataGridView.InvokeRequired)
+        //            {
+        //                // Chama o método no thread da interface do usuário
+        //                dataGridView.BeginInvoke(new Action(() => SelectFirstRow(dataGridView)));
+        //            }
+        //            else
+        //            {
+        //                // Verifica se há pelo menos uma linha
+        //                if (dataGridView.Rows.Count > 0)
+        //                    dataGridView.Rows[0].Selected = true; // Seleciona a linha 0
+        //            }
+        //        }
+        //    }
+        //    catch (ObjectDisposedException ex)
+        //    {
+        //        Debug.WriteLine($"O controle foi descartado: {ex.Message}");
+        //    }
+        //}
 
         public static void SetDefaultCellStyle(DataGridView dataGridView, string colum)
         {

@@ -211,7 +211,11 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.LblTitle);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FrmViewBill";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FrmViewBill";
             this.ResumeLayout(false);
             this.PerformLayout();
