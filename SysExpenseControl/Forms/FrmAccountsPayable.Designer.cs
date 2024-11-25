@@ -284,7 +284,6 @@
             this.DgvData.ReadOnly = true;
             this.DgvData.Size = new System.Drawing.Size(604, 454);
             this.DgvData.TabIndex = 8;
-            this.DgvData.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DgvData_DataBindingComplete);
             // 
             // panel5
             // 

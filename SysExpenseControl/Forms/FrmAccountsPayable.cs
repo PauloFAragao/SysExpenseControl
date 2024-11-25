@@ -258,10 +258,5 @@ namespace SysExpenseControl.Forms
         {
             ViewBill();
         }
-
-        private void DgvData_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            Debug.WriteLine("Resultado: " + e.ListChangedType );
-        }
     }
 }

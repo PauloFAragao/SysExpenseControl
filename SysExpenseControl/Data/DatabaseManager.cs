@@ -3,6 +3,8 @@ using System.Data.SQLite;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Security.Cryptography;
+using System.Windows.Forms;
 
 namespace SysExpenseControl.Data
 {
@@ -187,6 +189,10 @@ namespace SysExpenseControl.Data
         {
             CreateDynamicTables(DateTime.Now.Year, DateTime.Now.Month);
 
+            // Deletando gastos que tem uma quantidade de parcelas definidas e já foram completados
+            DeleteFullyPaidAccounts();
+
+            // Copia das tabelas de gastos e lucros fixos para a tabela do mês corrente
             CreateProfitsAndExpenses();
         }
 
@@ -308,6 +314,34 @@ namespace SysExpenseControl.Data
             catch (Exception e)
             {
                 Debug.WriteLine("Exception in DatabaseManager.CreateProfitsAndExpenses: " + e.Message);
+            }
+        }
+
+        // esse método vai deletar do banco de dados todas as contas que já tiveram todas as parcelas pagas
+        private static void DeleteFullyPaidAccounts()
+        {
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(Connection.Cn))
+                {
+                    // Abre a conexão
+                    connection.Open();
+
+                    string query = "Delete From fixed_Expenses "
+                        + "Where definedNumberOfInstallments = 1 "
+                        + "And numberOfInstallments = 0";
+
+                    // Executando a Query
+                    using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                    {
+                        // Executa a consulta e captura o resultado
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Exception in DataConsultant.SimpleQuery: " + e.Message);
             }
         }
 

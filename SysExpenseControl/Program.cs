@@ -14,7 +14,9 @@ namespace SysExpenseControl
         [STAThread]
         static void Main()
         {
+            // Verifica se já tem o arquivo do banco de dados
             DatabaseManager.CheckIfDatabaseExists();
+            // Verifica se já tem as tabelas do mês
             DatabaseManager.CheckIfThereAreAlreadyTablesForThisMonth();
 
             Application.EnableVisualStyles();

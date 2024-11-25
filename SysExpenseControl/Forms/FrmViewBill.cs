@@ -56,8 +56,6 @@ namespace SysExpenseControl.Forms
                 _date.Value.ToString("d 'de' MMMM 'de' yyyy", new System.Globalization.CultureInfo("pt-BR"))
                 : "";
 
-            Debug.WriteLine("Data: " + _date);
-
             this.LblDescription.Text = _description;
         }
     }

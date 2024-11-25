@@ -112,7 +112,8 @@ uma nova janela para visualizar. (ainda está dando NullReferenceException as ve
 
 -Corrigido o erro na tela de contas que gerava NullReferenceException
 
-
+-Criei um método que deleta do banco de dados todos os gastos fixos marcados como tendo uma quantidade de
+parcelas e que já teve todas as parcelas pagas
 
 
 
