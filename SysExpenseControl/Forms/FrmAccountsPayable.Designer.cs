@@ -340,6 +340,7 @@
             this.BtnChangeMonth.TabIndex = 6;
             this.BtnChangeMonth.Text = "Trocar Mês";
             this.BtnChangeMonth.UseVisualStyleBackColor = false;
+            this.BtnChangeMonth.Click += new System.EventHandler(this.BtnChangeMonth_Click);
             // 
             // label5
             // 

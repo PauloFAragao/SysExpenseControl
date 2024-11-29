@@ -47,23 +47,23 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.LblProftsMonth = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.LblWait = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.BtnChangeMonth = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.LblMonth = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.LblWait = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DgvExpenses)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DgvProfits)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.LblWait.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.TabControl.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.LblWait.SuspendLayout();
             this.SuspendLayout();
             // 
             // BtnViewExpenses
@@ -299,6 +299,24 @@
             this.tabPage1.Text = "Recetias";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // LblWait
+            // 
+            this.LblWait.Controls.Add(this.label3);
+            this.LblWait.Location = new System.Drawing.Point(347, 209);
+            this.LblWait.Name = "LblWait";
+            this.LblWait.Size = new System.Drawing.Size(205, 52);
+            this.LblWait.TabIndex = 15;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(72, 18);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 20);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Wait...";
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.BtnViewExpenses);
@@ -337,6 +355,7 @@
             this.BtnChangeMonth.TabIndex = 11;
             this.BtnChangeMonth.Text = "Mudar Mês";
             this.BtnChangeMonth.UseVisualStyleBackColor = false;
+            this.BtnChangeMonth.Click += new System.EventHandler(this.BtnChangeMonth_Click);
             // 
             // label2
             // 
@@ -370,24 +389,6 @@
             this.panel2.Size = new System.Drawing.Size(261, 72);
             this.panel2.TabIndex = 14;
             // 
-            // LblWait
-            // 
-            this.LblWait.Controls.Add(this.label3);
-            this.LblWait.Location = new System.Drawing.Point(347, 209);
-            this.LblWait.Name = "LblWait";
-            this.LblWait.Size = new System.Drawing.Size(205, 52);
-            this.LblWait.TabIndex = 15;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(72, 18);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 20);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Wait...";
-            // 
             // FrmMonthlyExpensesAndProfits
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -406,12 +407,12 @@
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.tabPage1.ResumeLayout(false);
+            this.LblWait.ResumeLayout(false);
+            this.LblWait.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.TabControl.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.LblWait.ResumeLayout(false);
-            this.LblWait.PerformLayout();
             this.ResumeLayout(false);
 
         }

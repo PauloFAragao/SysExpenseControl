@@ -33,6 +33,7 @@ namespace SysExpenseControl.Entities
             }
         }
 
+        // Esse método é usado para mudar valores de variaveis
         public static void SetFieldValue(Control control, string fieldName, object value)
         {
             if (control.InvokeRequired)

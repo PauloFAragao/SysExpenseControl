@@ -368,6 +368,8 @@ namespace SysExpenseControl.Data
         // Novo método para visualizar as contas
         public static DataTable ViewBills(DateTime date)
         {
+            Debug.WriteLine("Data Recebida: " + date);
+
             string expensesTableName = "expenses_" + date.Year + "_" + date.Month;
             string viewQuery = "Select e.id, e.idFixedExpenses, e.name, e.value, f.dueDay, "
                 + "e.date, f.numberOfInstallments, e.description, e.paid "
@@ -619,6 +621,25 @@ namespace SysExpenseControl.Data
             }
         }
 
+        // Método que vai pesquisar quais são os anos guardados no banco de dados
+        public static List<string> GetYears()
+        {
+            string query = "Select Distinct year From references_to_tables Order By year";
+
+            return GetList(query);
+        }
+
+        // Método que vai pesquisar quais são os meses guardados no banco de dados
+        public static List<string> GetMonths(int year)
+        {
+            string query = 
+                "Select month From references_to_tables "
+                + $"where year = {year} "
+                + "Order By month";
+
+            return GetList(query);
+        }
+
         // ---------------------------------- 
         // Método que vai visualizar as reservas
         public static DataTable ViewReserves()
@@ -656,9 +677,9 @@ namespace SysExpenseControl.Data
             }
             catch (Exception e)
             {
-                Debug.WriteLine("Exception in DataConsultant.SimpleQuery: " + e.Message);
+                Debug.WriteLine("Exception in DataConsultant.InsertQuery: " + e.Message);
 
-                MessageBox.Show("Exception in DataConsultant.SimpleQuery: " + e.Message, 
+                MessageBox.Show("Exception in DataConsultant.InsertQuery: " + e.Message, 
                     "Erro ao inserir dados no banco de dados", 
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -721,7 +742,8 @@ namespace SysExpenseControl.Data
                             while (reader.Read())
                             {
                                 // Adiciona o nome da categoria à lista
-                                result.Add(reader.GetString(0));
+                                //result.Add(reader.GetString(0));
+                                result.Add(reader.GetValue(0).ToString());
                             }
                         }
                     }
@@ -729,7 +751,7 @@ namespace SysExpenseControl.Data
             }
             catch (Exception e)
             {
-                Debug.WriteLine("Exception in DataConsultant.GetCategorys: " + e.Message);
+                Debug.WriteLine("Exception in DataConsultant.GetList: " + e.Message);
             }
 
             return result;
@@ -755,9 +777,9 @@ namespace SysExpenseControl.Data
             }
             catch (Exception e)
             {
-                Debug.WriteLine("Exception in DataConsultant.GetStringQuery: " + e.Message);
+                Debug.WriteLine("Exception in DataConsultant.GetDoubleQuery: " + e.Message);
 
-                MessageBox.Show("Exception in DataConsultant.GetStringQuery: " + e.Message,
+                MessageBox.Show("Exception in DataConsultant.GetDoubleQuery: " + e.Message,
                     "Erro ao inserir dados no banco de dados",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

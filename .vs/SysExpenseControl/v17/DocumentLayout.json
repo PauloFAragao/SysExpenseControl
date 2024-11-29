@@ -3,12 +3,32 @@
   "WorkspaceRootPath": "C:\\Sistemas\\SysExpenseControl\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|c:\\sistemas\\sysexpensecontrol\\sysexpensecontrol\\forms\\frmaddeditmonthexpenses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|solutionrelative:sysexpensecontrol\\forms\\frmaddeditmonthexpenses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|c:\\sistemas\\sysexpensecontrol\\sysexpensecontrol\\forms\\frmmonthlyexpensesandprofits.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|solutionrelative:sysexpensecontrol\\forms\\frmmonthlyexpensesandprofits.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|c:\\sistemas\\sysexpensecontrol\\sysexpensecontrol\\forms\\frmaddeditmonthexpenses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|solutionrelative:sysexpensecontrol\\forms\\frmaddeditmonthexpenses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|c:\\sistemas\\sysexpensecontrol\\sysexpensecontrol\\forms\\frmaccountspayable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|solutionrelative:sysexpensecontrol\\forms\\frmaccountspayable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|C:\\Sistemas\\SysExpenseControl\\sysexpensecontrol\\data\\dataconsultant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|solutionrelative:sysexpensecontrol\\data\\dataconsultant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|c:\\sistemas\\sysexpensecontrol\\sysexpensecontrol\\forms\\frmmonthlyexpensesandprofits.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|solutionrelative:sysexpensecontrol\\forms\\frmmonthlyexpensesandprofits.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|C:\\Sistemas\\SysExpenseControl\\sysexpensecontrol\\forms\\frmaccountspayable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|solutionrelative:sysexpensecontrol\\forms\\frmaccountspayable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|C:\\Sistemas\\SysExpenseControl\\sysexpensecontrol\\forms\\frmselectdate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|solutionrelative:sysexpensecontrol\\forms\\frmselectdate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|C:\\Sistemas\\SysExpenseControl\\sysexpensecontrol\\forms\\frmselectdate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|solutionrelative:sysexpensecontrol\\forms\\frmselectdate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -23,26 +43,89 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "FrmAddEditMonthExpenses.cs",
-              "DocumentMoniker": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmAddEditMonthExpenses.cs",
-              "RelativeDocumentMoniker": "SysExpenseControl\\Forms\\FrmAddEditMonthExpenses.cs",
-              "ToolTip": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmAddEditMonthExpenses.cs",
-              "RelativeToolTip": "SysExpenseControl\\Forms\\FrmAddEditMonthExpenses.cs",
-              "ViewState": "AgIAAFEAAAAAAAAAAAAywLcAAAAbAAAAAAAAAA==",
+              "Title": "FrmMonthlyExpensesAndProfits.cs",
+              "DocumentMoniker": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmMonthlyExpensesAndProfits.cs",
+              "RelativeDocumentMoniker": "SysExpenseControl\\Forms\\FrmMonthlyExpensesAndProfits.cs",
+              "ToolTip": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmMonthlyExpensesAndProfits.cs",
+              "RelativeToolTip": "SysExpenseControl\\Forms\\FrmMonthlyExpensesAndProfits.cs",
+              "ViewState": "AgIAAIsBAAAAAAAAAAAuwJoBAABFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-29T10:11:10.637Z",
+              "WhenOpened": "2024-11-29T13:17:38.983Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FrmMonthlyExpensesAndProfits.cs [Design]",
+              "DocumentMoniker": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmMonthlyExpensesAndProfits.cs",
+              "RelativeDocumentMoniker": "SysExpenseControl\\Forms\\FrmMonthlyExpensesAndProfits.cs",
+              "ToolTip": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmMonthlyExpensesAndProfits.cs [Design]",
+              "RelativeToolTip": "SysExpenseControl\\Forms\\FrmMonthlyExpensesAndProfits.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-29T13:17:34.407Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DataConsultant.cs",
+              "DocumentMoniker": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Data\\DataConsultant.cs",
+              "RelativeDocumentMoniker": "SysExpenseControl\\Data\\DataConsultant.cs",
+              "ToolTip": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Data\\DataConsultant.cs",
+              "RelativeToolTip": "SysExpenseControl\\Data\\DataConsultant.cs",
+              "ViewState": "AgIAAAkBAAAAAAAAAAA/wHIBAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-29T13:02:08.395Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "FrmAddEditMonthExpenses.cs [Design]",
-              "DocumentMoniker": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmAddEditMonthExpenses.cs",
-              "RelativeDocumentMoniker": "SysExpenseControl\\Forms\\FrmAddEditMonthExpenses.cs",
-              "ToolTip": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmAddEditMonthExpenses.cs [Design]",
-              "RelativeToolTip": "SysExpenseControl\\Forms\\FrmAddEditMonthExpenses.cs [Design]",
+              "Title": "FrmAccountsPayable.cs",
+              "DocumentMoniker": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmAccountsPayable.cs",
+              "RelativeDocumentMoniker": "SysExpenseControl\\Forms\\FrmAccountsPayable.cs",
+              "ToolTip": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmAccountsPayable.cs",
+              "RelativeToolTip": "SysExpenseControl\\Forms\\FrmAccountsPayable.cs",
+              "ViewState": "AgIAAIYAAAAAAAAAAAAAwJEAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-29T10:07:25.222Z",
+              "WhenOpened": "2024-11-29T12:40:13.359Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "FrmAccountsPayable.cs [Design]",
+              "DocumentMoniker": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmAccountsPayable.cs",
+              "RelativeDocumentMoniker": "SysExpenseControl\\Forms\\FrmAccountsPayable.cs",
+              "ToolTip": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmAccountsPayable.cs [Design]",
+              "RelativeToolTip": "SysExpenseControl\\Forms\\FrmAccountsPayable.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-29T12:40:11.827Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "FrmSelectDate.cs",
+              "DocumentMoniker": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmSelectDate.cs",
+              "RelativeDocumentMoniker": "SysExpenseControl\\Forms\\FrmSelectDate.cs",
+              "ToolTip": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmSelectDate.cs",
+              "RelativeToolTip": "SysExpenseControl\\Forms\\FrmSelectDate.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-29T11:11:05.494Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "FrmSelectDate.cs [Design]",
+              "DocumentMoniker": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmSelectDate.cs",
+              "RelativeDocumentMoniker": "SysExpenseControl\\Forms\\FrmSelectDate.cs",
+              "ToolTip": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmSelectDate.cs [Design]",
+              "RelativeToolTip": "SysExpenseControl\\Forms\\FrmSelectDate.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-29T11:07:31.842Z",
               "EditorCaption": " [Design]"
             }
           ]

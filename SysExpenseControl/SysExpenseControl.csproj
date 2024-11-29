@@ -71,6 +71,7 @@
     <Compile Include="Data\Connection.cs" />
     <Compile Include="Data\DatabaseManager.cs" />
     <Compile Include="Data\DataConsultant.cs" />
+    <Compile Include="Entities\SelectedDateData.cs" />
     <Compile Include="Entities\ThreadHelper.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -144,6 +145,12 @@
     <Compile Include="Forms\FrmReserves.Designer.cs">
       <DependentUpon>FrmReserves.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FrmSelectDate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmSelectDate.Designer.cs">
+      <DependentUpon>FrmSelectDate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FrmSettings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -193,6 +200,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmReserves.resx">
       <DependentUpon>FrmReserves.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmSelectDate.resx">
+      <DependentUpon>FrmSelectDate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmSettings.resx">
       <DependentUpon>FrmSettings.cs</DependentUpon>

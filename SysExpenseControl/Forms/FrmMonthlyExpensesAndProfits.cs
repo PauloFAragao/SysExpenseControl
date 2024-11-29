@@ -18,13 +18,22 @@ namespace SysExpenseControl.Forms
 
             //Mês corrente
             _date = DateTime.Now;
-            this.LblProftsMonth.Text = _date.ToString("MMMM");
-            this.LblExepencesMonth.Text = _date.ToString("MMMM");
-            this.LblMonth.Text = _date.ToString("MM/yyyy");
-            //this.LblDisplayMonth.Text = DateTime.Now.ToString("MM/yyyy");// para exibir o mês atual
 
+            SetInterfaceDate();
+            
             //carregando os dados
             Task.Run(() => Initialize());
+        }
+
+        private void SetInterfaceDate()
+        {
+            this.LblProftsMonth.Text = _date.ToString("MMMM");
+            this.LblExepencesMonth.Text = _date.ToString("MMMM");
+
+            this.LblMonth.Text = _date.ToString("MM/yyyy");
+
+            //this.LblDisplayMonth.Text = DateTime.Now.ToString("MM/yyyy");// para exibir o mês atual
+
         }
 
         private void AddProfit()
@@ -195,6 +204,12 @@ namespace SysExpenseControl.Forms
             this.BtnChangeMonth.Enabled = false;
         }
 
+        private void ChangeDate()
+        {
+            FrmSelectDate frmSelectDate = new FrmSelectDate(CallBackChangeDate);
+            frmSelectDate.ShowDialog();
+        }
+
         // ------------------------- Thread
         private void Initialize()
         {
@@ -230,7 +245,7 @@ namespace SysExpenseControl.Forms
         // ------ Lucros do mês
         private bool LoadProfitsData()
         {
-            DataTable dataTable = DataConsultant.ViewMonthProfits(DateTime.Now.Year, DateTime.Now.Month);
+            DataTable dataTable = DataConsultant.ViewMonthProfits(_date.Year, _date.Month);
 
             if (dataTable != null)
             {
@@ -282,7 +297,7 @@ namespace SysExpenseControl.Forms
         // ------ Gastos do mês
         private bool LoadExpensesData()
         {
-            DataTable dataTable = DataConsultant.ViewMonthExpenses(DateTime.Now.Year, DateTime.Now.Month);
+            DataTable dataTable = DataConsultant.ViewMonthExpenses(_date.Year, _date.Month);
 
             if (dataTable != null)
             {
@@ -341,22 +356,6 @@ namespace SysExpenseControl.Forms
             }
         }
 
-        // Método que soma os valores dos gastos e lucros e imprime os valores
-        private void TakeDataFromDataTable(DataTable dataTable, Label label)
-        {
-            decimal value = 0;
-
-            foreach (DataRow row in dataTable.Rows)
-            {
-                if (row["date"].ToString() != "")
-                {
-                    value += Convert.ToDecimal(row["value"]);// capturando o valor
-                }
-            }
-
-            ThreadHelper.SetPropertyValue(label, "Text", "R$: " + value.ToString("F2"));
-        }
-
         // ------------------------- Eventos
         private void CallLoadProfitsData()
         {
@@ -368,6 +367,19 @@ namespace SysExpenseControl.Forms
         {
             SetInLoad();
             Task.Run(() => ReloadExpensesData());
+        }
+
+        private void CallBackChangeDate()
+        {
+            DateTime newDate = new DateTime(SelectedDateData.Year, SelectedDateData.Month, 1);
+
+            _date = newDate;
+
+            SetInterfaceDate();
+
+            SetInLoad();
+            Task.Run(() => ReloadExpensesData());
+            Task.Run(() => ReloadProfitsData());
         }
 
         // ------------------------- Métodos criados pelo visual studo
@@ -409,6 +421,11 @@ namespace SysExpenseControl.Forms
         private void BtnViewExpenses_Click(object sender, EventArgs e)
         {
             ViewEditExepense(2);
+        }
+
+        private void BtnChangeMonth_Click(object sender, EventArgs e)
+        {
+            ChangeDate();
         }
     }
 }

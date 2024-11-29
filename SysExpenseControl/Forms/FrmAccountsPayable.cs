@@ -131,9 +131,24 @@ namespace SysExpenseControl.Forms
             }
         }
 
+        private void ChangeDate()
+        {
+            FrmSelectDate frmSelectDate = new FrmSelectDate(CallBackChangeDate);
+            frmSelectDate.ShowDialog();
+        }
+
         // ------------------------- Eventos
         private void CallLoadData()
         {
+            Task.Run(() => LoadData());
+        }
+
+        private void CallBackChangeDate()
+        {
+            DateTime newDate = new DateTime(SelectedDateData.Year, SelectedDateData.Month, 1);
+
+            _date = newDate;
+
             Task.Run(() => LoadData());
         }
 
@@ -257,6 +272,11 @@ namespace SysExpenseControl.Forms
         private void BtnView_Click(object sender, EventArgs e)
         {
             ViewBill();
+        }
+
+        private void BtnChangeMonth_Click(object sender, EventArgs e)
+        {
+            ChangeDate();
         }
     }
 }
