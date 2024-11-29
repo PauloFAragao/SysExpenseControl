@@ -31,7 +31,7 @@ namespace SysExpenseControl.Forms
 
         public FrmAddEditMonthExpenses(int tipe, Action onCloseCallback, DateTime date, string tableName,
             int id = 0, string name = "", double value = 0, string category = "",
-            string desciption = "", int idFixedExpenses = 0, bool paid = false, 
+            string desciption = "", int idFixedExpenses = 0, bool paid = false,
             bool definedNumberOfInstallments = false)
         {
             InitializeComponent();
@@ -52,6 +52,8 @@ namespace SysExpenseControl.Forms
 
             FillFields(desciption);
 
+            this.RbPaid.Checked = true;
+
             // Carregando os dados
             Task.Run(() => Initialize(category));
         }
@@ -60,8 +62,6 @@ namespace SysExpenseControl.Forms
         {
             if (_tipe != 0)
             {
-                ShowBtnNotPaid();
-
                 this.LblTitle.Text = "Editar Gasto Fixo";
                 this.TxtName.Text = _name;
                 this.TxtValue.Text = _value.ToString("F2", CultureInfo.InstalledUICulture);
@@ -88,7 +88,7 @@ namespace SysExpenseControl.Forms
                 if (_tipe == 0)// Adicionar
                 {
                     int? id = DataConsultant.InsertMonthExpense(_name, _value,
-                        date, -1, this.CbxCategories.Text, 
+                        date, -1, this.CbxCategories.Text,
                         this.RtbDescription.Text, date.Year, date.Month, true);
 
                     if (id == null) return; // deu erro
@@ -104,12 +104,12 @@ namespace SysExpenseControl.Forms
 
                     if (!resultEditMonthExpense) return;
 
-                    if(!_paid && _statusPaid)
+                    if (!_paid && _statusPaid)
                     {
                         // inserido o gasto na tabela references_to_tables 
                         DataConsultant.InsertExpense(_value, date.Year, date.Month);
                     }
-                    else if(_paid && !_statusPaid)
+                    else if (_paid && !_statusPaid)
                     {
                         // inserido o gasto na tabela references_to_tables 
                         DataConsultant.InsertExpense(
@@ -125,7 +125,7 @@ namespace SysExpenseControl.Forms
                     }
 
                     // para cuidar das contas que tem uma quantidade de parcelas para acabar
-                    if (_category == "Contas" && _definedNumberOfInstallments && 
+                    if (_category == "Contas" && _definedNumberOfInstallments &&
                         !_paid && // se não está marcada como paga
                         _statusPaid)// se está marcada para ser paga
                     {
@@ -133,7 +133,7 @@ namespace SysExpenseControl.Forms
 
                         if (!result) return;
                     }
-                    else if(_category == "Contas" && _definedNumberOfInstallments && 
+                    else if (_category == "Contas" && _definedNumberOfInstallments &&
                         _paid &&// se está marcada como paga
                         !_statusPaid)// se está marcada para não paga
                     {
@@ -175,6 +175,9 @@ namespace SysExpenseControl.Forms
                 MessageBox.Show(msg, "Preenchimento incorreto ou não preencimento", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+            //capturando se está pagou ou não
+            _statusPaid = this.RbPaid.Checked;
+            
             return allFieldsAreCorrect;
         }
 
@@ -185,33 +188,20 @@ namespace SysExpenseControl.Forms
             this.BtnEdit.Visible = false;
             this.BtnSave.Visible = true;
             this.BtnCancel.Visible = true;
-            ShowBtnNotPaid();
         }
 
-        private void ShowBtnNotPaid()
+        private void SelectedIndexChanged()
         {
-            if(_paid && _category == "Contas")
+            if (this.CbxCategories.SelectedIndex == 1)//categoria contas
             {
-                this.BtnNotPaid.Visible = true;
-            }
-        }
-
-        private void SetNotPaid()
-        {
-            _statusPaid = !_statusPaid;
-
-            if (!_statusPaid)
-            {
-                BtnNotPaid.BackColor = Color.FromArgb(255, 128, 128);
-                BtnNotPaid.Text = "Não paga";
+                this.RbPaid.Enabled = true;
+                this.RbNotPaid.Enabled = true;
             }
             else
             {
-                BtnNotPaid.BackColor = Color.FromArgb(128, 255, 128);
-                BtnNotPaid.Text = "Paga";
+                this.RbPaid.Enabled = false;
+                this.RbNotPaid.Enabled = false;
             }
-
-            Debug.WriteLine("Status: " + _statusPaid);
         }
 
         // ------------------------- Thread
@@ -250,9 +240,9 @@ namespace SysExpenseControl.Forms
             _onCloseCallback?.Invoke();
         }
 
-        private void BtnNotPaid_Click(object sender, EventArgs e)
+        private void CbxCategories_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SetNotPaid();
+            SelectedIndexChanged();
         }
     }
 }

@@ -43,13 +43,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.LblDate = new System.Windows.Forms.Label();
             this.DateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.BtnNotPaid = new System.Windows.Forms.Button();
+            this.RbPaid = new System.Windows.Forms.RadioButton();
+            this.RbNotPaid = new System.Windows.Forms.RadioButton();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(9, 278);
+            this.label6.Location = new System.Drawing.Point(9, 307);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(270, 13);
             this.label6.TabIndex = 94;
@@ -64,6 +66,7 @@
             this.CbxCategories.Name = "CbxCategories";
             this.CbxCategories.Size = new System.Drawing.Size(194, 21);
             this.CbxCategories.TabIndex = 4;
+            this.CbxCategories.SelectedIndexChanged += new System.EventHandler(this.CbxCategories_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -78,7 +81,7 @@
             // 
             this.BtnEdit.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.BtnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnEdit.Location = new System.Drawing.Point(20, 313);
+            this.BtnEdit.Location = new System.Drawing.Point(20, 342);
             this.BtnEdit.Name = "BtnEdit";
             this.BtnEdit.Size = new System.Drawing.Size(75, 23);
             this.BtnEdit.TabIndex = 8;
@@ -91,7 +94,7 @@
             // 
             this.BtnCancel.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.BtnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnCancel.Location = new System.Drawing.Point(204, 313);
+            this.BtnCancel.Location = new System.Drawing.Point(204, 342);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(75, 23);
             this.BtnCancel.TabIndex = 7;
@@ -103,7 +106,7 @@
             // 
             this.BtnSave.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.BtnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnSave.Location = new System.Drawing.Point(123, 313);
+            this.BtnSave.Location = new System.Drawing.Point(123, 342);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(75, 23);
             this.BtnSave.TabIndex = 6;
@@ -114,7 +117,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(17, 154);
+            this.label4.Location = new System.Drawing.Point(17, 183);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(58, 13);
             this.label4.TabIndex = 95;
@@ -148,7 +151,7 @@
             // 
             // RtbDescription
             // 
-            this.RtbDescription.Location = new System.Drawing.Point(20, 176);
+            this.RtbDescription.Location = new System.Drawing.Point(20, 205);
             this.RtbDescription.Name = "RtbDescription";
             this.RtbDescription.Size = new System.Drawing.Size(254, 96);
             this.RtbDescription.TabIndex = 5;
@@ -186,25 +189,47 @@
             this.DateTimePicker.Size = new System.Drawing.Size(218, 20);
             this.DateTimePicker.TabIndex = 3;
             // 
-            // BtnNotPaid
+            // RbPaid
             // 
-            this.BtnNotPaid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.BtnNotPaid.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnNotPaid.Location = new System.Drawing.Point(199, 6);
-            this.BtnNotPaid.Name = "BtnNotPaid";
-            this.BtnNotPaid.Size = new System.Drawing.Size(75, 23);
-            this.BtnNotPaid.TabIndex = 9;
-            this.BtnNotPaid.Text = "Paga";
-            this.BtnNotPaid.UseVisualStyleBackColor = false;
-            this.BtnNotPaid.Visible = false;
-            this.BtnNotPaid.Click += new System.EventHandler(this.BtnNotPaid_Click);
+            this.RbPaid.AutoSize = true;
+            this.RbPaid.Enabled = false;
+            this.RbPaid.Location = new System.Drawing.Point(85, 156);
+            this.RbPaid.Name = "RbPaid";
+            this.RbPaid.Size = new System.Drawing.Size(73, 17);
+            this.RbPaid.TabIndex = 101;
+            this.RbPaid.TabStop = true;
+            this.RbPaid.Text = "Está paga";
+            this.RbPaid.UseVisualStyleBackColor = true;
+            // 
+            // RbNotPaid
+            // 
+            this.RbNotPaid.AutoSize = true;
+            this.RbNotPaid.Enabled = false;
+            this.RbNotPaid.Location = new System.Drawing.Point(174, 156);
+            this.RbNotPaid.Name = "RbNotPaid";
+            this.RbNotPaid.Size = new System.Drawing.Size(95, 17);
+            this.RbNotPaid.TabIndex = 102;
+            this.RbNotPaid.TabStop = true;
+            this.RbNotPaid.Text = "Não está paga";
+            this.RbNotPaid.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(19, 156);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(55, 13);
+            this.label2.TabIndex = 103;
+            this.label2.Text = "Condição:";
             // 
             // FrmAddEditMonthExpenses
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(294, 351);
-            this.Controls.Add(this.BtnNotPaid);
+            this.ClientSize = new System.Drawing.Size(294, 384);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.RbNotPaid);
+            this.Controls.Add(this.RbPaid);
             this.Controls.Add(this.LblDate);
             this.Controls.Add(this.DateTimePicker);
             this.Controls.Add(this.label6);
@@ -248,6 +273,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label LblDate;
         private System.Windows.Forms.DateTimePicker DateTimePicker;
-        private System.Windows.Forms.Button BtnNotPaid;
+        private System.Windows.Forms.RadioButton RbPaid;
+        private System.Windows.Forms.RadioButton RbNotPaid;
+        private System.Windows.Forms.Label label2;
     }
 }

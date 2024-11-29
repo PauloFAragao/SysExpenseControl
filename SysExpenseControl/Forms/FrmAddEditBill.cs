@@ -21,6 +21,8 @@ namespace SysExpenseControl.Forms
             InitializeComponent();
 
             _onCloseCallback = onCloseCallback;
+
+            this.RbBill.Checked = true;
         }
 
         private void Save()

@@ -115,7 +115,8 @@ uma nova janela para visualizar. (ainda está dando NullReferenceException as ve
 -Criei um método que deleta do banco de dados todos os gastos fixos marcados como tendo uma quantidade de
 parcelas e que já teve todas as parcelas pagas
 
-
+-Na janena de adicionar/editar gastos do mês foi retirado o botão para marcar uma conta como não paga
+caso ela estivesse marcada como paga, no lugar coloquei um radio button com 2 opções, paga e não paga.
 
 
 
