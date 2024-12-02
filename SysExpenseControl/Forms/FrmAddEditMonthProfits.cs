@@ -32,8 +32,10 @@ namespace SysExpenseControl.Forms
             _originalValue = value;
             _date = date;
             _onCloseCallback = onCloseCallback;
-
             _confirm = confirm;
+
+            // para o radio button iniciar marcado
+            this.RbRecived.Checked = true;
 
             FillFields(desciption);
         }
@@ -64,11 +66,12 @@ namespace SysExpenseControl.Forms
             if (CaptureAndVerifyData())
             {
                 DateTime date = Convert.ToDateTime(DateTimePicker.Value);
+
                 if (_tipe == 0)// Adicionar
                 {
                     int? id = DataConsultant.InsertMonthProfits(_name, _value,
-                        date, this.RtbDescription.Text,
-                        date.Year, date.Month);
+                        GetDate(date, this.RbRecived.Checked),
+                        this.RtbDescription.Text, date.Year, date.Month);
 
                     if (id == null) return; // deu erro
 
@@ -77,7 +80,8 @@ namespace SysExpenseControl.Forms
                 else// Editar
                 {
                     bool result = DataConsultant.EditMonthProfits(_id, _name, _value,
-                        date, this.RtbDescription.Text, date.Year, date.Month);
+                        GetDate(date, this.RbRecived.Checked),
+                        this.RtbDescription.Text, date.Year, date.Month);
 
                     if (!result) return; // deu erro
 
@@ -95,6 +99,14 @@ namespace SysExpenseControl.Forms
 
                 this.Close();
             }
+        }
+
+        private DateTime? GetDate(DateTime date, bool paid)
+        {
+            if (paid) 
+                return date;
+            else 
+                return null;
         }
 
         private bool CaptureAndVerifyData()

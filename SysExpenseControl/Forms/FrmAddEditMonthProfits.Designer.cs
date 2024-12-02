@@ -41,12 +41,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.DateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.LblDate = new System.Windows.Forms.Label();
+            this.RbNotRecived = new System.Windows.Forms.RadioButton();
+            this.RbRecived = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 258);
+            this.label2.Location = new System.Drawing.Point(14, 279);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(270, 13);
             this.label2.TabIndex = 95;
@@ -56,7 +58,7 @@
             // 
             this.BtnEdit.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.BtnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnEdit.Location = new System.Drawing.Point(20, 292);
+            this.BtnEdit.Location = new System.Drawing.Point(20, 313);
             this.BtnEdit.Name = "BtnEdit";
             this.BtnEdit.Size = new System.Drawing.Size(75, 23);
             this.BtnEdit.TabIndex = 7;
@@ -69,7 +71,7 @@
             // 
             this.BtnCancel.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.BtnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnCancel.Location = new System.Drawing.Point(204, 292);
+            this.BtnCancel.Location = new System.Drawing.Point(204, 313);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(75, 23);
             this.BtnCancel.TabIndex = 6;
@@ -81,7 +83,7 @@
             // 
             this.BtnSave.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.BtnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnSave.Location = new System.Drawing.Point(123, 292);
+            this.BtnSave.Location = new System.Drawing.Point(123, 313);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(75, 23);
             this.BtnSave.TabIndex = 5;
@@ -92,7 +94,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(17, 130);
+            this.label4.Location = new System.Drawing.Point(17, 151);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(58, 13);
             this.label4.TabIndex = 96;
@@ -126,7 +128,7 @@
             // 
             // RtbDescription
             // 
-            this.RtbDescription.Location = new System.Drawing.Point(20, 152);
+            this.RtbDescription.Location = new System.Drawing.Point(20, 173);
             this.RtbDescription.Name = "RtbDescription";
             this.RtbDescription.Size = new System.Drawing.Size(254, 96);
             this.RtbDescription.TabIndex = 4;
@@ -164,11 +166,35 @@
             this.LblDate.TabIndex = 97;
             this.LblDate.Text = "Data:";
             // 
+            // RbNotRecived
+            // 
+            this.RbNotRecived.AutoSize = true;
+            this.RbNotRecived.Location = new System.Drawing.Point(123, 128);
+            this.RbNotRecived.Name = "RbNotRecived";
+            this.RbNotRecived.Size = new System.Drawing.Size(114, 17);
+            this.RbNotRecived.TabIndex = 101;
+            this.RbNotRecived.TabStop = true;
+            this.RbNotRecived.Text = "Valor não recebido";
+            this.RbNotRecived.UseVisualStyleBackColor = true;
+            // 
+            // RbRecived
+            // 
+            this.RbRecived.AutoSize = true;
+            this.RbRecived.Location = new System.Drawing.Point(20, 128);
+            this.RbRecived.Name = "RbRecived";
+            this.RbRecived.Size = new System.Drawing.Size(93, 17);
+            this.RbRecived.TabIndex = 102;
+            this.RbRecived.TabStop = true;
+            this.RbRecived.Text = "Valor recebido";
+            this.RbRecived.UseVisualStyleBackColor = true;
+            // 
             // FrmAddEditMonthProfits
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(294, 328);
+            this.ClientSize = new System.Drawing.Size(294, 357);
+            this.Controls.Add(this.RbNotRecived);
+            this.Controls.Add(this.RbRecived);
             this.Controls.Add(this.LblDate);
             this.Controls.Add(this.DateTimePicker);
             this.Controls.Add(this.label2);
@@ -209,5 +235,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker DateTimePicker;
         private System.Windows.Forms.Label LblDate;
+        private System.Windows.Forms.RadioButton RbNotRecived;
+        private System.Windows.Forms.RadioButton RbRecived;
     }
 }

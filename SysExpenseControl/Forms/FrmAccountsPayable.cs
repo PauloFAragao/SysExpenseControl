@@ -91,8 +91,7 @@ namespace SysExpenseControl.Forms
         private void ViewBill()
         {
             //dataGridView.CurrentCell != null
-            if (
-                this.DgvData.Rows.Count > 0 && 
+            if ( this.DgvData.Rows.Count > 0 && 
                 this.DgvData.CurrentCell != null)
             {
                 // capturando a data que foi pago

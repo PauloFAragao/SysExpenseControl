@@ -17,8 +17,6 @@ namespace SysExpenseControl.Entities
             Year = Convert.ToInt32(year);
 
             Month = GetMonth(month);
-
-            Debug.WriteLine("Mês: " + Month + " Ano: " + Year);
         }
 
         private static int GetMonth(string value)

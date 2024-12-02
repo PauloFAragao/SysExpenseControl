@@ -120,8 +120,11 @@ caso ela estivesse marcada como paga, no lugar coloquei um radio button com 2 op
 
 -Agora é possivel alterar o mês que está sendo exibido pelo programa nas telas de contas e de gastos do mês.
 
-
-
+-Resolvido um problema que ao editar um gasto fixo, agora a adição tambem vai alterar todas as referencias
+a esse gasto nas tabelas de gasto dos meses
+-Resolvido um problema que gerava uma exceção nas telas de gastos e lucros fixos e de gastos e lucros do mês
+se por acaso nenhuma linha estiver selecionada ao clicar nos botões de deletar/editar/visualizar
+-Agora ao adicionar ou editar uma receita no mês é possivel marcar que ela não foi recebida ainda
 
 
 

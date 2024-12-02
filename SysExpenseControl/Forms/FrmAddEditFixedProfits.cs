@@ -74,8 +74,12 @@ namespace SysExpenseControl.Forms
                     if(!result) return;// deu erro
 
                     // Editar o lucro do mês corrente
-                    bool resultEditProfit = DataConsultant.EditProfit(_id, _name, _value, 
-                        this.RtbDescription.Text, DateTime.Now.Year, DateTime.Now.Month);
+                    /*bool resultEditProfit = DataConsultant.EditProfit(_id, _name, _value, 
+                        this.RtbDescription.Text, DateTime.Now.Year, DateTime.Now.Month);*/
+
+                    // Editar o todas as entradas de lucro com referencia
+                    bool resultEditProfit = DataConsultant.EditAllMonthProft(_id , _name, 
+                        this.RtbDescription.Text);
 
                     if (!resultEditProfit) return;// deu erro
                 }

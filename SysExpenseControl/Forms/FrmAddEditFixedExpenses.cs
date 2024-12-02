@@ -86,29 +86,31 @@ namespace SysExpenseControl.Forms
                 if (_tipe == 0)// Adicionar
                 {
                     // Adicionando na tabela de gastos fixos
-                    int? idFixedExpense = DataConsultant.InsertFixedExpense(_name, _value, _dueDay, _numberOfInstallments,
-                        this.CbxCategories.Text, this.RtbDescription.Text, definedNumberOfInstallments);
+                    int? idFixedExpense = DataConsultant.InsertFixedExpense(_name, _value, _dueDay, 
+                        _numberOfInstallments, this.CbxCategories.Text, this.RtbDescription.Text, 
+                        definedNumberOfInstallments);
 
                     if (idFixedExpense == null) return; //erro
 
                     // Adicionando na tabela de gastos do Mês corrente
-                    int? idMonthExpense =  DataConsultant.InsertMonthExpense(_name, _value, null, idFixedExpense,
-                        this.CbxCategories.Text, this.RtbDescription.Text, DateTime.Now.Year,
-                        DateTime.Now.Month, false);
+                    int? idMonthExpense = DataConsultant.InsertMonthExpense(_name, _value, null, 
+                        idFixedExpense, this.CbxCategories.Text, this.RtbDescription.Text, 
+                        DateTime.Now.Year,  DateTime.Now.Month, false);
 
-                    if (idMonthExpense == null) return; //erro
+                    if (idMonthExpense == null) return; // deu erro
                 }
                 else// Editar
                 {
                     // Editar gasto fixo
-                    bool result = DataConsultant.EditFixedExpense(_id, _name, _value, _dueDay, _numberOfInstallments,
-                        this.CbxCategories.Text, this.RtbDescription.Text, definedNumberOfInstallments);
+                    bool result = DataConsultant.EditFixedExpense(_id, _name, _value, _dueDay, 
+                        _numberOfInstallments, this.CbxCategories.Text, this.RtbDescription.Text, 
+                        definedNumberOfInstallments);
 
                     if (!result) return;// deu erro
 
                     // Editar gasto dos Mêses referente ao gasto fixo
-                    bool resultEditAllMonthExpense = DataConsultant.EditAllMonthExpense(_id, _name, /*_value,*/ this.CbxCategories.Text,
-                        this.RtbDescription.Text );
+                    bool resultEditAllMonthExpense = DataConsultant.EditAllMonthExpense(_id, _name,
+                        this.CbxCategories.Text, this.RtbDescription.Text );
 
                     if (!resultEditAllMonthExpense) return;// deu erro
                 }

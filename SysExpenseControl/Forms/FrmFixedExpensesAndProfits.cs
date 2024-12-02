@@ -26,7 +26,8 @@ namespace SysExpenseControl.Forms
 
         private void DelFixedProfits()
         {
-            if (DgvFixedProfits.Rows.Count > 0)
+            if (this.DgvFixedProfits.Rows.Count > 0 &&
+                this.DgvFixedProfits.CurrentCell != null)
             {
                 if (MessageBox.Show(
                     "Confirme para deletar: " + this.DgvFixedProfits.CurrentRow.Cells["name"].Value,
@@ -43,13 +44,17 @@ namespace SysExpenseControl.Forms
             }
             else
             {
+                MessageBox.Show("A tabela não tem dados ou não tem nenhuma linha selecionada!",
+                    "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 Debug.WriteLine("não tem dados");
             }
         }
 
         private void ViewEditFixedProfits(int tipe)
         {
-            if (DgvFixedProfits.Rows.Count > 0)
+            if (this.DgvFixedProfits.Rows.Count > 0 &&
+                this.DgvFixedProfits.CurrentCell != null)
             {
                 FrmAddEditFixedProfits frmAddEditFixedProfits = new FrmAddEditFixedProfits(tipe, CallLoadFixedProfitsData,
                     Convert.ToInt32(this.DgvFixedProfits.CurrentRow.Cells["id"].Value),
@@ -61,6 +66,9 @@ namespace SysExpenseControl.Forms
             }
             else
             {
+                MessageBox.Show("A tabela não tem dados ou não tem nenhuma linha selecionada!",
+                    "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 Debug.WriteLine("não tem dados");
             }
         }
@@ -73,7 +81,8 @@ namespace SysExpenseControl.Forms
 
         private void DelFixedExpenses()
         {
-            if (DgvFixedExpenses.Rows.Count > 0)
+            if (this.DgvFixedExpenses.Rows.Count > 0 &&
+                this.DgvFixedExpenses.CurrentCell != null)
             {
                 if (MessageBox.Show(
                     "Confirme para deletar: " + this.DgvFixedExpenses.CurrentRow.Cells["name"].Value,
@@ -84,21 +93,23 @@ namespace SysExpenseControl.Forms
                     DataConsultant.DeleteFixedExpense(
                         Convert.ToInt32(this.DgvFixedExpenses.CurrentRow.Cells["id"].Value));
 
-
-
                     //carregando os dados
                     Task.Run(() => LoadFixedExpensesData());
                 }
             }
             else
             {
+                MessageBox.Show("A tabela não tem dados ou não tem nenhuma linha selecionada!",
+                    "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 Debug.WriteLine("não tem dados");
             }
         }
 
         private void ViewEditFixedExpenses(int tipe)
         {
-            if (DgvFixedExpenses.Rows.Count > 0)
+            if (this.DgvFixedExpenses.Rows.Count > 0 &&
+                this.DgvFixedExpenses.CurrentCell != null)
             {
                 FrmAddEditFixedExpenses frmAddEditFixedExpenses = new FrmAddEditFixedExpenses(tipe, CallLoadFixedExpensesData,
                     Convert.ToInt32(this.DgvFixedExpenses.CurrentRow.Cells["id"].Value),
@@ -113,6 +124,9 @@ namespace SysExpenseControl.Forms
             }
             else
             {
+                MessageBox.Show("A tabela não tem dados ou não tem nenhuma linha selecionada!",
+                    "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 Debug.WriteLine("não tem dados");
             }
         }
@@ -151,7 +165,7 @@ namespace SysExpenseControl.Forms
             }
             else allDone = false;
 
-            if(allDone)
+            if (allDone)
             {
                 ThreadHelper.SetPropertyValue(LblWait, "Visible", false);// retirando o label wait da tela
 

@@ -47,7 +47,7 @@ namespace SysExpenseControl.Data
             return result;
         }
 
-        
+
         // ---------------------------------- Categoria
         // Método para visualizar todas as categorias
         public static DataTable ViewCategory()
@@ -62,7 +62,7 @@ namespace SysExpenseControl.Data
         {
             string query = "Select name From categories Order by id";
 
-            return GetList(query); 
+            return GetList(query);
         }
 
         // Método para inserir uma categoria
@@ -272,7 +272,7 @@ namespace SysExpenseControl.Data
         }
 
         // Método para inserir um lucro no mês
-        public static int? InsertMonthProfits(string name, double value, DateTime? date, 
+        public static int? InsertMonthProfits(string name, double value, DateTime? date,
             string description, int year, int month, int idFixedProfits = 0)
         {
             VerifyTableExists(year, month);// verfica e cria uma tabela se ela não existir
@@ -288,7 +288,7 @@ namespace SysExpenseControl.Data
                 values += $"'{date:yyyy-MM-dd}', ";
             }
 
-            if(idFixedProfits != 0)
+            if (idFixedProfits != 0)
             {
                 insertQuery += "idFixedProfits, ";
                 values += $"{idFixedProfits}, ";
@@ -302,7 +302,7 @@ namespace SysExpenseControl.Data
         }
 
         // Método para Editar um lucro do mês
-        public static bool EditMonthProfits(int id, string name, double value, DateTime date,
+        public static bool EditMonthProfits(int id, string name, double value, DateTime? date,
             string description, int year, int month)
         {
             VerifyTableExists(year, month);// verfica e cria uma tabela se ela não existir
@@ -311,32 +311,36 @@ namespace SysExpenseControl.Data
             string editQuery =
                 $"Update {tableName} "
                 + $"Set name = '{name}', "
-                + $"value = {value.ToString(CultureInfo.InvariantCulture)}, "
-                + $"date = '{date:yyyy-MM-dd}', "
-                + $"description = '{description}' "
+                + $"value = {value.ToString(CultureInfo.InvariantCulture)}, ";
+
+            if (date != null)
+                editQuery += $"date = '{date:yyyy-MM-dd}', ";
+            else
+                editQuery += $"date = null, ";
+
+            editQuery += $"description = '{description}' "
                 + $"Where id = {id}";
 
-            //SimpleQuery(editQuery);
             return SimpleQuery(editQuery);
         }
 
         // Método para editar um lucro do mês a partir da referencia de um lucro fixo
-        public static bool EditProfit(int idFixedProfits, string name, double value, 
-            string description, int year, int month)
-        {
-            VerifyTableExists(year, month);// verfica e cria uma tabela se ela não existir
+        //public static bool EditProfit(int idFixedProfits, string name, double value, 
+        //    string description, int year, int month)
+        //{
+        //    VerifyTableExists(year, month);// verfica e cria uma tabela se ela não existir
 
-            string tableName = "profits_" + year + "_" + month;
-            string editQuery = $"Update {tableName} "
-                + $"Set name = '{name}', "
-                + $"value = {value.ToString(CultureInfo.InvariantCulture)}, "
-                + $"description = '{description}' "
-                + $"Where idFixedProfits = {idFixedProfits}";
+        //    string tableName = "profits_" + year + "_" + month;
+        //    string editQuery = $"Update {tableName} "
+        //        + $"Set name = '{name}', "
+        //        + $"value = {value.ToString(CultureInfo.InvariantCulture)}, "
+        //        + $"description = '{description}' "
+        //        + $"Where idFixedProfits = {idFixedProfits}";
 
-            Debug.WriteLine(">>Query: "+editQuery);
+        //    Debug.WriteLine(">>Query: "+editQuery);
 
-            return SimpleQuery(editQuery);
-        }
+        //    return SimpleQuery(editQuery);
+        //}
 
         // Método para deletar lucro no mês
         public static bool DeleteMonthProfits(int id, int year, int month)
@@ -440,7 +444,7 @@ namespace SysExpenseControl.Data
             else editQuery += "date = NULL, ";
 
             // adicionando referencia a uma conta fixa
-            if(idReference != 0 && idReference != null)
+            if (idReference != 0 && idReference != null)
                 editQuery += $"idFixedExpenses = {idReference}, ";
 
             editQuery +=
@@ -453,28 +457,46 @@ namespace SysExpenseControl.Data
 
         // Método para editar todas as tabelas que tenham referencia a um gasto fixo
         public static bool EditAllMonthExpense(int idFixedExpenses, string name,
-            string category, string description, bool removeReference = false)
+            string category, string description)
         {
             // nomes das tabelas de gastos
-            List<string> tableNames= GetExpenseTables();
+            List<string> tableNames = GetExpenseTables();
 
             // loop para editar todas as tables
-            foreach(string tablename in tableNames)
+            foreach (string tablename in tableNames)
             {
                 string editQuery = $"Update {tablename} Set "
                     + $"name = '{name}', "
-                    + $"category = (Select id From categories Where name = '{category}'), ";
-                    
-                if (removeReference)
-                {
-                    editQuery += "idFixedExpenses = null, ";
-                }
-
-                editQuery += $"description = '{description}' "
+                    + $"category = (Select id From categories Where name = '{category}'), "
+                    + $"description = '{description}' "
                     + $"Where idFixedExpenses = {idFixedExpenses}";
 
                 //SimpleQuery(editQuery);
-                if(!SimpleQuery(editQuery))
+                if (!SimpleQuery(editQuery))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        // Método para editar todas as tabelas que tenha uma referencia a um lucro fixo
+        public static bool EditAllMonthProft(int idfixedProfts, string name, string description)
+        {
+            // nomes das tabelas de gastos
+            List<string> tableNames = GetProfitTables();
+
+            // loop para editar todas as tables
+            foreach (string tablename in tableNames)
+            {
+                string editQuery = $"Update {tablename} Set "
+                    + $"name = '{name}', "
+                    + $"description = '{description}' "
+                    + $"Where idFixedProfits = {idfixedProfts}";
+
+                //SimpleQuery(editQuery);
+                if (!SimpleQuery(editQuery))
                 {
                     return false;
                 }
@@ -526,7 +548,7 @@ namespace SysExpenseControl.Data
         }
 
         // Método que vai retornar uma lista com os nomes das tables de Lucros do mês
-        public static List<string> GetExpenseProfit()
+        public static List<string> GetProfitTables()
         {
             string query = "Select nameTableProfits From references_to_tables";
 
@@ -544,7 +566,7 @@ namespace SysExpenseControl.Data
         // Método que vai somar a quantidade de lucros do mês na tabela references_to_tables 
         public static bool InsertProfit(double value, int year, int month)
         {
-            string editQuery = 
+            string editQuery =
                 "Update references_to_tables "
                 + "Set totalProfits = "
                 + $"(totalProfits + {value.ToString(CultureInfo.InvariantCulture)}) "
@@ -632,7 +654,7 @@ namespace SysExpenseControl.Data
         // Método que vai pesquisar quais são os meses guardados no banco de dados
         public static List<string> GetMonths(int year)
         {
-            string query = 
+            string query =
                 "Select month From references_to_tables "
                 + $"where year = {year} "
                 + "Order By month";
@@ -679,8 +701,8 @@ namespace SysExpenseControl.Data
             {
                 Debug.WriteLine("Exception in DataConsultant.InsertQuery: " + e.Message);
 
-                MessageBox.Show("Exception in DataConsultant.InsertQuery: " + e.Message, 
-                    "Erro ao inserir dados no banco de dados", 
+                MessageBox.Show("Exception in DataConsultant.InsertQuery: " + e.Message,
+                    "Erro ao inserir dados no banco de dados",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 id = null;

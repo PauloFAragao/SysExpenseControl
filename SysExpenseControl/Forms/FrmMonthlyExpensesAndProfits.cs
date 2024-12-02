@@ -20,7 +20,7 @@ namespace SysExpenseControl.Forms
             _date = DateTime.Now;
 
             SetInterfaceDate();
-            
+
             //carregando os dados
             Task.Run(() => Initialize());
         }
@@ -45,7 +45,8 @@ namespace SysExpenseControl.Forms
 
         private void DelProfit()
         {
-            if (DgvProfits.Rows.Count > 0)
+            if (this.DgvProfits.Rows.Count > 0 &&
+                this.DgvProfits.CurrentCell != null)
             {
                 if (MessageBox.Show(
                     "Confirme para deletar: " + this.DgvProfits.CurrentRow.Cells["name"].Value,
@@ -71,13 +72,17 @@ namespace SysExpenseControl.Forms
             }
             else
             {
+                MessageBox.Show("A tabela não tem dados ou não tem nenhuma linha selecionada!",
+                    "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 Debug.WriteLine("não tem dados");
             }
         }
 
         private void ViewEditProfit(int tipe)
         {
-            if (DgvProfits.Rows.Count > 0)
+            if (this.DgvProfits.Rows.Count > 0 &&
+                this.DgvProfits.CurrentCell != null)
             {
                 DateTime date;
                 bool confirm;
@@ -100,13 +105,16 @@ namespace SysExpenseControl.Forms
                     Convert.ToInt32(this.DgvProfits.CurrentRow.Cells["id"].Value),
                     Convert.ToString(this.DgvProfits.CurrentRow.Cells["name"].Value),
                     Convert.ToDouble(this.DgvProfits.CurrentRow.Cells["value"].Value),
-                    Convert.ToString(this.DgvProfits.CurrentRow.Cells["description"].Value), 
+                    Convert.ToString(this.DgvProfits.CurrentRow.Cells["description"].Value),
                     confirm);
 
                 frmAddEditMonthProfits.ShowDialog();
             }
             else
             {
+                MessageBox.Show("A tabela não tem dados ou não tem nenhuma linha selecionada!",
+                    "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 Debug.WriteLine("não tem dados");
             }
         }
@@ -120,7 +128,8 @@ namespace SysExpenseControl.Forms
 
         private void DelExpense()
         {
-            if (DgvExpenses.Rows.Count > 0)
+            if (this.DgvExpenses.Rows.Count > 0 &&
+                this.DgvExpenses.CurrentCell != null)
             {
                 if (MessageBox.Show(
                     "Confirme para deletar: " + this.DgvExpenses.CurrentRow.Cells["name"].Value,
@@ -144,13 +153,17 @@ namespace SysExpenseControl.Forms
             }
             else
             {
+                MessageBox.Show("A tabela não tem dados ou não tem nenhuma linha selecionada!",
+                    "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 Debug.WriteLine("não tem dados");
             }
         }
 
         private void ViewEditExepense(int tipe)
         {
-            if (DgvExpenses.Rows.Count > 0)
+            if (this.DgvExpenses.Rows.Count > 0 &&
+                this.DgvExpenses.CurrentCell != null)
             {
                 DateTime date;
 
@@ -160,10 +173,10 @@ namespace SysExpenseControl.Forms
                     date = dateValue;
                 else
                     date = DateTime.Now;
-                
+
                 // capturando se é uma conta que tem uma quantidade de parcelas para terminar
                 bool definedNumberOfInstallments;
-                if(bool.TryParse(this.DgvExpenses.CurrentRow.Cells["definedNumberOfInstallments"].Value.ToString(),
+                if (bool.TryParse(this.DgvExpenses.CurrentRow.Cells["definedNumberOfInstallments"].Value.ToString(),
                      out bool value))
                 {
                     definedNumberOfInstallments = value;
@@ -172,7 +185,7 @@ namespace SysExpenseControl.Forms
 
                 // capturando a refencia a tabela de gastos fixos
                 int idFixedExpenses;
-                if(int.TryParse(this.DgvExpenses.CurrentRow.Cells["idFixedExpenses"].Value.ToString(), out int id))
+                if (int.TryParse(this.DgvExpenses.CurrentRow.Cells["idFixedExpenses"].Value.ToString(), out int id))
                 {
                     idFixedExpenses = id;
                 }
@@ -193,6 +206,9 @@ namespace SysExpenseControl.Forms
             }
             else
             {
+                MessageBox.Show("A tabela não tem dados ou não tem nenhuma linha selecionada!",
+                    "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 Debug.WriteLine("não tem dados");
             }
         }
@@ -285,7 +301,7 @@ namespace SysExpenseControl.Forms
 
         private void ReloadProfitsData()
         {
-            if(LoadProfitsData())
+            if (LoadProfitsData())
             {
                 ThreadHelper.SetPropertyValue(LblWait, "Visible", false);// retirando o label wait da tela
 
@@ -347,7 +363,7 @@ namespace SysExpenseControl.Forms
 
         private void ReloadExpensesData()
         {
-            if(LoadExpensesData())
+            if (LoadExpensesData())
             {
                 ThreadHelper.SetPropertyValue(LblWait, "Visible", false);// retirando o label wait da tela
 
