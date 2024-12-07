@@ -369,6 +369,18 @@ namespace SysExpenseControl.Data
             return ViewQuery(viewQuery);
         }
 
+        // Método para visualizar os gastos de um mês filtrando por categoria
+        public static DataTable GetMonthlyExpensesByCategory(string category, int year, int month)
+        {
+            string expensesTableName = "expenses_" + year + "_" + month;
+
+            string viewQuery = "Select name, value, date, description "
+                + $"From {expensesTableName} "
+                + $"Where category = (Select id From categories where name = '{category}')";
+            
+            return ViewQuery(viewQuery);
+        }
+
         // Novo método para visualizar as contas
         public static DataTable ViewBills(DateTime date)
         {

@@ -28,16 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea10 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             this.DgvSpent = new System.Windows.Forms.DataGridView();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.DgvData = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.CbxCategories = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.DgvReserves = new System.Windows.Forms.DataGridView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -49,15 +45,19 @@
             this.panel6 = new System.Windows.Forms.Panel();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.panel7 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
-            this.groupBox1.SuspendLayout();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.LblMonth = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.BtnChangeMonth = new System.Windows.Forms.Button();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.DgvData = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.DgvSpent)).BeginInit();
-            this.groupBox2.SuspendLayout();
-            this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DgvData)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvReserves)).BeginInit();
@@ -68,24 +68,16 @@
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ChartComparison)).BeginInit();
             this.panel6.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.panel7.SuspendLayout();
             this.panel8.SuspendLayout();
+            this.panel9.SuspendLayout();
+            this.panel10.SuspendLayout();
+            this.tabControl2.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DgvData)).BeginInit();
             this.SuspendLayout();
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.groupBox1.Controls.Add(this.DgvSpent);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(10, 10);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox1.Size = new System.Drawing.Size(430, 274);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Resumo dos gastos";
             // 
             // DgvSpent
             // 
@@ -96,60 +88,21 @@
             this.DgvSpent.AllowUserToResizeRows = false;
             this.DgvSpent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgvSpent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DgvSpent.Location = new System.Drawing.Point(10, 23);
+            this.DgvSpent.Location = new System.Drawing.Point(3, 3);
             this.DgvSpent.MultiSelect = false;
             this.DgvSpent.Name = "DgvSpent";
             this.DgvSpent.ReadOnly = true;
-            this.DgvSpent.Size = new System.Drawing.Size(410, 241);
+            this.DgvSpent.Size = new System.Drawing.Size(437, 427);
             this.DgvSpent.TabIndex = 3;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.groupBox2.Controls.Add(this.panel4);
-            this.groupBox2.Controls.Add(this.panel1);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(10, 10);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox2.Size = new System.Drawing.Size(430, 255);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Gastos por categoria";
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.DgvData);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(10, 61);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(410, 184);
-            this.panel4.TabIndex = 6;
-            // 
-            // DgvData
-            // 
-            this.DgvData.AllowUserToAddRows = false;
-            this.DgvData.AllowUserToDeleteRows = false;
-            this.DgvData.AllowUserToOrderColumns = true;
-            this.DgvData.AllowUserToResizeColumns = false;
-            this.DgvData.AllowUserToResizeRows = false;
-            this.DgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DgvData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DgvData.Location = new System.Drawing.Point(0, 0);
-            this.DgvData.MultiSelect = false;
-            this.DgvData.Name = "DgvData";
-            this.DgvData.ReadOnly = true;
-            this.DgvData.Size = new System.Drawing.Size(410, 184);
-            this.DgvData.TabIndex = 4;
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.comboBox1);
+            this.panel1.Controls.Add(this.CbxCategories);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(10, 23);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(410, 38);
+            this.panel1.Size = new System.Drawing.Size(443, 38);
             this.panel1.TabIndex = 5;
             // 
             // label1
@@ -161,23 +114,25 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Categoria:";
             // 
-            // comboBox1
+            // CbxCategories
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(60, 8);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 0;
+            this.CbxCategories.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CbxCategories.FormattingEnabled = true;
+            this.CbxCategories.Location = new System.Drawing.Point(60, 8);
+            this.CbxCategories.Name = "CbxCategories";
+            this.CbxCategories.Size = new System.Drawing.Size(121, 21);
+            this.CbxCategories.TabIndex = 0;
+            this.CbxCategories.SelectedIndexChanged += new System.EventHandler(this.CbxCategories_SelectedIndexChanged);
             // 
             // groupBox3
             // 
             this.groupBox3.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.groupBox3.Controls.Add(this.DgvReserves);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Location = new System.Drawing.Point(10, 10);
+            this.groupBox3.Location = new System.Drawing.Point(3, 3);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox3.Size = new System.Drawing.Size(430, 255);
+            this.groupBox3.Size = new System.Drawing.Size(461, 266);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Reservas";
@@ -195,7 +150,7 @@
             this.DgvReserves.MultiSelect = false;
             this.DgvReserves.Name = "DgvReserves";
             this.DgvReserves.ReadOnly = true;
-            this.DgvReserves.Size = new System.Drawing.Size(410, 222);
+            this.DgvReserves.Size = new System.Drawing.Size(441, 233);
             this.DgvReserves.TabIndex = 5;
             // 
             // tabControl1
@@ -206,7 +161,7 @@
             this.tabControl1.Location = new System.Drawing.Point(10, 10);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(430, 274);
+            this.tabControl1.Size = new System.Drawing.Size(447, 273);
             this.tabControl1.TabIndex = 4;
             // 
             // tabPage1
@@ -215,15 +170,15 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(10);
-            this.tabPage1.Size = new System.Drawing.Size(422, 248);
+            this.tabPage1.Size = new System.Drawing.Size(439, 247);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Gastos do mês";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // ChartSpent
             // 
-            chartArea1.Name = "ChartArea1";
-            this.ChartSpent.ChartAreas.Add(chartArea1);
+            chartArea9.Name = "ChartArea1";
+            this.ChartSpent.ChartAreas.Add(chartArea9);
             this.ChartSpent.Location = new System.Drawing.Point(0, 0);
             this.ChartSpent.Name = "ChartSpent";
             this.ChartSpent.Size = new System.Drawing.Size(423, 230);
@@ -253,8 +208,8 @@
             // 
             // ChartComparison
             // 
-            chartArea2.Name = "ChartArea1";
-            this.ChartComparison.ChartAreas.Add(chartArea2);
+            chartArea10.Name = "ChartArea1";
+            this.ChartComparison.ChartAreas.Add(chartArea10);
             this.ChartComparison.Location = new System.Drawing.Point(-3, 0);
             this.ChartComparison.Name = "ChartComparison";
             this.ChartComparison.Size = new System.Drawing.Size(422, 204);
@@ -293,58 +248,148 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Período:";
             // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.groupBox1);
-            this.panel3.Location = new System.Drawing.Point(3, 3);
-            this.panel3.Name = "panel3";
-            this.panel3.Padding = new System.Windows.Forms.Padding(10);
-            this.panel3.Size = new System.Drawing.Size(450, 294);
-            this.panel3.TabIndex = 7;
-            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.tabControl1);
-            this.panel2.Location = new System.Drawing.Point(452, 3);
+            this.panel2.Location = new System.Drawing.Point(459, 0);
             this.panel2.Name = "panel2";
             this.panel2.Padding = new System.Windows.Forms.Padding(10);
-            this.panel2.Size = new System.Drawing.Size(450, 294);
+            this.panel2.Size = new System.Drawing.Size(467, 293);
             this.panel2.TabIndex = 6;
-            // 
-            // panel7
-            // 
-            this.panel7.Controls.Add(this.groupBox2);
-            this.panel7.Location = new System.Drawing.Point(452, 293);
-            this.panel7.Name = "panel7";
-            this.panel7.Padding = new System.Windows.Forms.Padding(10);
-            this.panel7.Size = new System.Drawing.Size(450, 275);
-            this.panel7.TabIndex = 9;
             // 
             // panel8
             // 
             this.panel8.Controls.Add(this.groupBox3);
-            this.panel8.Location = new System.Drawing.Point(3, 293);
+            this.panel8.Location = new System.Drawing.Point(459, 299);
             this.panel8.Name = "panel8";
-            this.panel8.Padding = new System.Windows.Forms.Padding(10);
-            this.panel8.Size = new System.Drawing.Size(450, 275);
+            this.panel8.Padding = new System.Windows.Forms.Padding(3);
+            this.panel8.Size = new System.Drawing.Size(467, 272);
             this.panel8.TabIndex = 10;
+            // 
+            // panel9
+            // 
+            this.panel9.Controls.Add(this.panel10);
+            this.panel9.Location = new System.Drawing.Point(60, 3);
+            this.panel9.Name = "panel9";
+            this.panel9.Padding = new System.Windows.Forms.Padding(10);
+            this.panel9.Size = new System.Drawing.Size(326, 100);
+            this.panel9.TabIndex = 11;
+            // 
+            // panel10
+            // 
+            this.panel10.BackColor = System.Drawing.Color.White;
+            this.panel10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel10.Controls.Add(this.LblMonth);
+            this.panel10.Controls.Add(this.label3);
+            this.panel10.Controls.Add(this.BtnChangeMonth);
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel10.Location = new System.Drawing.Point(10, 10);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(306, 80);
+            this.panel10.TabIndex = 15;
+            // 
+            // LblMonth
+            // 
+            this.LblMonth.AutoSize = true;
+            this.LblMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblMonth.Location = new System.Drawing.Point(39, 36);
+            this.LblMonth.Name = "LblMonth";
+            this.LblMonth.Size = new System.Drawing.Size(75, 24);
+            this.LblMonth.TabIndex = 13;
+            this.LblMonth.Text = "01/2000";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(21, 14);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(117, 16);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Referente ao Mês:";
+            // 
+            // BtnChangeMonth
+            // 
+            this.BtnChangeMonth.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtnChangeMonth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnChangeMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnChangeMonth.Location = new System.Drawing.Point(181, 28);
+            this.BtnChangeMonth.Name = "BtnChangeMonth";
+            this.BtnChangeMonth.Size = new System.Drawing.Size(100, 27);
+            this.BtnChangeMonth.TabIndex = 11;
+            this.BtnChangeMonth.Text = "Mudar Mês";
+            this.BtnChangeMonth.UseVisualStyleBackColor = false;
+            this.BtnChangeMonth.Click += new System.EventHandler(this.BtnChangeMonth_Click);
+            // 
+            // tabControl2
+            // 
+            this.tabControl2.Controls.Add(this.tabPage4);
+            this.tabControl2.Controls.Add(this.tabPage3);
+            this.tabControl2.Location = new System.Drawing.Point(2, 109);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(451, 459);
+            this.tabControl2.TabIndex = 12;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.DgvSpent);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(443, 433);
+            this.tabPage4.TabIndex = 1;
+            this.tabPage4.Text = "Resumo dos Gastos";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.panel4);
+            this.tabPage3.Controls.Add(this.panel1);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(443, 433);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Gastos por categoria";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.DgvData);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel4.Location = new System.Drawing.Point(0, 38);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(443, 395);
+            this.panel4.TabIndex = 7;
+            // 
+            // DgvData
+            // 
+            this.DgvData.AllowUserToAddRows = false;
+            this.DgvData.AllowUserToDeleteRows = false;
+            this.DgvData.AllowUserToOrderColumns = true;
+            this.DgvData.AllowUserToResizeColumns = false;
+            this.DgvData.AllowUserToResizeRows = false;
+            this.DgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DgvData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DgvData.Location = new System.Drawing.Point(0, 0);
+            this.DgvData.MultiSelect = false;
+            this.DgvData.Name = "DgvData";
+            this.DgvData.ReadOnly = true;
+            this.DgvData.Size = new System.Drawing.Size(443, 395);
+            this.DgvData.TabIndex = 4;
             // 
             // FrmHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(926, 572);
-            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.tabControl2);
+            this.Controls.Add(this.panel9);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel7);
             this.Controls.Add(this.panel8);
             this.Name = "FrmHome";
             this.Text = "FrmHome";
-            this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DgvSpent)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.DgvData)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -357,21 +402,24 @@
             ((System.ComponentModel.ISupportInitialize)(this.ChartComparison)).EndInit();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
-            this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
-            this.panel7.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
+            this.panel9.ResumeLayout(false);
+            this.panel10.ResumeLayout(false);
+            this.panel10.PerformLayout();
+            this.tabControl2.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DgvData)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView DgvSpent;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridView DgvData;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox CbxCategories;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.DataGridView DgvReserves;
         private System.Windows.Forms.TabControl tabControl1;
@@ -379,15 +427,22 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataVisualization.Charting.Chart ChartSpent;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.DataVisualization.Charting.Chart ChartComparison;
         private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.Label LblMonth;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button BtnChangeMonth;
+        private System.Windows.Forms.TabControl tabControl2;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.DataGridView DgvData;
     }
 }

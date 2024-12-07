@@ -3,6 +3,7 @@ using SysExpenseControl.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,6 +13,8 @@ namespace SysExpenseControl.Forms
 {
     public partial class FrmHome : Form
     {
+        DateTime _date;
+
         public FrmHome()
         {
             InitializeComponent();
@@ -22,8 +25,24 @@ namespace SysExpenseControl.Forms
 
             TEMPORARIO();
 
-            // Carregando os dados
+            _date = DateTime.Now;
+            //_date = new DateTime(2024,11,7);
+            // exibir o mês selecionado
+            SetInterfaceDate();
+
+            // Carregando as categorias
+            Task.Run(() => InitializeCategories("Sem categoria"));
+
+            // Carregando os dados do DataGridView gastos por categoria
+            Task.Run(() => InitializeSpendingByCategory("Sem categoria"));
+            
+            // Carregando os dados do DataGridView Resumo dos gastos
             Task.Run(() => InitializeSpent());
+        }
+
+        private void SetInterfaceDate()
+        {
+            this.LblMonth.Text = _date.ToString("MM/yyyy");
         }
 
         private void InitializeChartSpent()
@@ -128,7 +147,97 @@ namespace SysExpenseControl.Forms
             //this.ChartComparison.Palette = ChartColorPalette.SemiTransparent;
         }
 
+        private void SelectedIndexChanged()
+        {
+            string category = this.CbxCategories.Text;
+
+            // Carregando os dados do DataGridView gastos por categoria
+            Task.Run(() => InitializeSpendingByCategory(category));
+        }
+
+        private void ChangeDate()
+        {
+            FrmSelectDate frmSelectDate = new FrmSelectDate(CallBackChangeDate);
+            frmSelectDate.ShowDialog();
+        }
+
+
+        // ------------------------- Eventos
+        private void CallBackChangeDate()
+        {
+            DateTime newDate = new DateTime(SelectedDateData.Year, SelectedDateData.Month, 1);
+
+            _date = newDate;
+
+            // exibir o mês selecionado
+            SetInterfaceDate();
+
+            // ---- Recarregar todos os dados
+
+            // Carregando os dados do DataGridView gastos por categoria
+            Task.Run(() => InitializeSpendingByCategory("Sem categoria"));
+
+            // Carregando os dados do DataGridView Resumo dos gastos
+            Task.Run(() => InitializeSpent());
+        }
+
         // ------------------------- Thread
+        // ------------ Categorias
+        private void InitializeCategories(string category)
+        {
+            List<string> data = DataConsultant.GetCategorys();
+
+            // Carregando os dados no comboBox
+            ThreadHelper.SetComboBoxData(CbxCategories, data);
+
+            if (category != "")
+                ThreadHelper.SetPropertyValue(CbxCategories, "Text", category);
+
+            else
+                ThreadHelper.SetPropertyValue(CbxCategories, "SelectedIndex", 0);
+        }
+
+        // ------------ Gastos por categoria
+        private void InitializeSpendingByCategory(string category)
+        {
+            if(LoadDataSpendingByCategory(category))
+            {
+                ChangeColumnsSpendingByCategory();
+            }
+        }
+
+        private bool LoadDataSpendingByCategory(string category)
+        {
+            DataTable dataTable = DataConsultant.GetMonthlyExpensesByCategory(category, 
+                _date.Year, _date.Month);
+
+            if (dataTable != null)
+            {
+                // carregando os dados no DataGridView
+                ThreadHelper.SetPropertyValue(DgvData, "DataSource", dataTable);
+
+                return true;
+            }
+            else
+                return false;
+        }
+
+        private void ChangeColumnsSpendingByCategory()
+        {
+            ThreadHelper.SetColumnHeaderText(this.DgvData, 0, "Nome");
+            //ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 0, DataGridViewAutoSizeColumnMode.Fill);
+
+            ThreadHelper.SetColumnHeaderText(this.DgvData, 1, "Valor R$");
+            //ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 1, DataGridViewAutoSizeColumnMode.DisplayedCells);
+
+            ThreadHelper.SetColumnHeaderText(this.DgvData, 2, "Data");
+            //ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 2, DataGridViewAutoSizeColumnMode.DisplayedCells);
+
+            ThreadHelper.SetColumnHeaderText(this.DgvData, 3, "Descrição");
+            //ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 3, DataGridViewAutoSizeColumnMode.DisplayedCells);
+        }
+
+        // ------------ Resumo dos gastos
         private void InitializeSpent()
         {
             if (LoadDataSpent())
@@ -140,7 +249,7 @@ namespace SysExpenseControl.Forms
 
         private bool LoadDataSpent()
         {
-            DataTable dataTable = DataConsultant.ViewMonthExpenses(DateTime.Now.Year, DateTime.Now.Month);
+            DataTable dataTable = DataConsultant.ViewMonthExpenses(_date.Year, _date.Month);
 
             if (dataTable != null)
             {
@@ -215,6 +324,17 @@ namespace SysExpenseControl.Forms
         {
             ThreadHelper.SetColumnVisibility(this.DgvSpent, 0, false);//mudando a visibilidade da coluna id
             ThreadHelper.SetColumnVisibility(this.DgvSpent, 5, false);//mudando a visibilidade da coluna descrição
+        }
+
+        // ------------------------- Métodos criados pelo visual studio
+        private void CbxCategories_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SelectedIndexChanged();
+        }
+
+        private void BtnChangeMonth_Click(object sender, EventArgs e)
+        {
+            ChangeDate();
         }
     }
 }

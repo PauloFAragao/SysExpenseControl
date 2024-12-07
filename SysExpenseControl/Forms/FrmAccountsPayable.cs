@@ -18,6 +18,7 @@ namespace SysExpenseControl.Forms
             InitializeComponent();
 
             _data = new DataTable();
+            SetInterfaceDate();
 
             this.CbxFilter.SelectedIndex = 0;// para iniciar sem filtros
 
@@ -26,6 +27,11 @@ namespace SysExpenseControl.Forms
 
             //carregando os dados
             Task.Run(() => Initialize());
+        }
+
+        private void SetInterfaceDate()
+        {
+            this.LblDisplayMonth.Text = _date.ToString("MM/yyyy");
         }
 
         private void SelectedFilterChanged()
@@ -145,8 +151,8 @@ namespace SysExpenseControl.Forms
         private void CallBackChangeDate()
         {
             DateTime newDate = new DateTime(SelectedDateData.Year, SelectedDateData.Month, 1);
-
             _date = newDate;
+            SetInterfaceDate();
 
             Task.Run(() => LoadData());
         }

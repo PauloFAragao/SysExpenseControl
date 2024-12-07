@@ -126,6 +126,21 @@ a esse gasto nas tabelas de gasto dos meses
 se por acaso nenhuma linha estiver selecionada ao clicar nos botões de deletar/editar/visualizar
 -Agora ao adicionar ou editar uma receita no mês é possivel marcar que ela não foi recebida ainda
 
+-Agora na pagina inicial é possivel trocar o mês e o ano que vai ser exibido.
+-Agora na pagina inicial o DataGridView que exibe os gastos do mês selecionado filtrando por categoria está
+funcional
+-implementado na tela de contas: quando a data de exibição é alterada o label exibe o mês e o ano 
+corretamente
+
+
+
+
+
+
+
+
+
+
 
 
 
