@@ -54,7 +54,7 @@ namespace SysExpenseControl.Data
         {
             string viewQuery = "Select * From categories";
 
-            return ViewQuery(viewQuery);
+            return ViewQuery(viewQuery, "ViewCategory");
         }
 
         // Método que vai pegar os nomes das categorias
@@ -97,7 +97,7 @@ namespace SysExpenseControl.Data
         {
             string viewQuery = $"Select * From fixed_profits";
 
-            return ViewQuery(viewQuery);
+            return ViewQuery(viewQuery, "ViewFixedProfits");
         }
 
         // Método para Inserir uma fonte de lucro fixa
@@ -172,7 +172,7 @@ namespace SysExpenseControl.Data
             + "From fixed_expenses f "
             + "Join categories c On f.category = c.id ";
 
-            return ViewQuery(viewQuery);
+            return ViewQuery(viewQuery, "ViewFixedExpenses");
         }
 
         // Método para Inserir um gasto fixo
@@ -268,7 +268,7 @@ namespace SysExpenseControl.Data
             string profitsTableName = "profits_" + year + "_" + month;
             string viewQuery = $"Select * From {profitsTableName}";
 
-            return ViewQuery(viewQuery);
+            return ViewQuery(viewQuery, "ViewMonthProfits");
         }
 
         // Método para inserir um lucro no mês
@@ -366,7 +366,7 @@ namespace SysExpenseControl.Data
                 + "Left Join fixed_expenses e On f.idFixedExpenses = e.id "
                 + $"Order by f.date Asc";
 
-            return ViewQuery(viewQuery);
+            return ViewQuery(viewQuery, "ViewMonthExpenses");
         }
 
         // Método para visualizar os gastos de um mês filtrando por categoria
@@ -378,22 +378,23 @@ namespace SysExpenseControl.Data
                 + $"From {expensesTableName} "
                 + $"Where category = (Select id From categories where name = '{category}')";
             
-            return ViewQuery(viewQuery);
+            return ViewQuery(viewQuery, "GetMonthlyExpensesByCategory");
         }
 
         // Novo método para visualizar as contas
         public static DataTable ViewBills(DateTime date)
         {
-            Debug.WriteLine("Data Recebida: " + date);
+            //Debug.WriteLine("Data Recebida: " + date);
 
             string expensesTableName = "expenses_" + date.Year + "_" + date.Month;
             string viewQuery = "Select e.id, e.idFixedExpenses, e.name, e.value, f.dueDay, "
-                + "e.date, f.numberOfInstallments, e.description, e.paid "
+                + "e.date, f.numberOfInstallments, e.description, e.paid, "
+                + "f.definedNumberOfInstallments as dni "
                 + $"From {expensesTableName} e "
                 + "Left Join fixed_expenses f on e.idFixedExpenses = f.id "
                 + "Where e.category = 1 Order by e.date Desc";
 
-            return ViewQuery(viewQuery);
+            return ViewQuery(viewQuery, "ViewBills");
         }
 
         // Método para inserir um gasto no mês
@@ -515,6 +516,26 @@ namespace SysExpenseControl.Data
             }
 
             return true;
+        }
+
+        public static bool EditBillPaid(int id, bool status, double? value, DateTime? date, 
+            int year, int month)
+        {
+            string tableName = "expenses_" + year + "_" + month;
+            string query = $"Update {tableName} ";
+
+            if (date == null)
+                query += "Set date = null, ";
+            else
+                query += $"Set date = '{date:yyyy-MM-dd}', ";
+
+            if (value != null)
+                query += $"value = {value?.ToString(CultureInfo.InvariantCulture)}, ";
+
+            query += $"paid = '{status}' "
+                + $"Where id = {id}";
+
+            return SimpleQuery(query);
         }
 
         // Método para Deletar um gasto no mês
@@ -680,7 +701,7 @@ namespace SysExpenseControl.Data
         {
             string viewQuery = "Select * From references_to_reserves";
 
-            return ViewQuery(viewQuery);
+            return ViewQuery(viewQuery, "ViewReserves");
         }
 
         // ---------------------------------- 
@@ -821,8 +842,11 @@ namespace SysExpenseControl.Data
             return result;
         }
 
-        private static DataTable ViewQuery(string query)
+        private static DataTable ViewQuery(string query, string method)
         {
+            //Debug.WriteLine("Chamante: " + method);
+            //Debug.WriteLine("Query: " + query);
+
             DataTable dtResult = new DataTable("data");
             try
             {
@@ -840,7 +864,7 @@ namespace SysExpenseControl.Data
             }
             catch (Exception e)
             {
-                Debug.WriteLine("Exception in DataConsultant.ViewQuery: " + e.Message);
+                Debug.WriteLine($"Exception in DataConsultant.ViewQuery ({method}): " + e.Message);
                 dtResult = null;
             }
 

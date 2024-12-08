@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea10 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             this.DgvSpent = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -177,11 +177,12 @@
             // 
             // ChartSpent
             // 
-            chartArea9.Name = "ChartArea1";
-            this.ChartSpent.ChartAreas.Add(chartArea9);
-            this.ChartSpent.Location = new System.Drawing.Point(0, 0);
+            chartArea1.Name = "ChartArea1";
+            this.ChartSpent.ChartAreas.Add(chartArea1);
+            this.ChartSpent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ChartSpent.Location = new System.Drawing.Point(10, 10);
             this.ChartSpent.Name = "ChartSpent";
-            this.ChartSpent.Size = new System.Drawing.Size(423, 230);
+            this.ChartSpent.Size = new System.Drawing.Size(419, 227);
             this.ChartSpent.TabIndex = 1;
             this.ChartSpent.Text = "chart1";
             // 
@@ -208,8 +209,8 @@
             // 
             // ChartComparison
             // 
-            chartArea10.Name = "ChartArea1";
-            this.ChartComparison.ChartAreas.Add(chartArea10);
+            chartArea2.Name = "ChartArea1";
+            this.ChartComparison.ChartAreas.Add(chartArea2);
             this.ChartComparison.Location = new System.Drawing.Point(-3, 0);
             this.ChartComparison.Name = "ChartComparison";
             this.ChartComparison.Size = new System.Drawing.Size(422, 204);

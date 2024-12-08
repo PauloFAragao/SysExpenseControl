@@ -48,6 +48,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.DgvData = new System.Windows.Forms.DataGridView();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.BtnMark = new System.Windows.Forms.Button();
             this.BtnAdd = new System.Windows.Forms.Button();
             this.BtnView = new System.Windows.Forms.Button();
             this.BtnChangeMonth = new System.Windows.Forms.Button();
@@ -278,17 +279,20 @@
             this.DgvData.AllowUserToResizeRows = false;
             this.DgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgvData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DgvData.Enabled = false;
             this.DgvData.Location = new System.Drawing.Point(0, 5);
             this.DgvData.MultiSelect = false;
             this.DgvData.Name = "DgvData";
             this.DgvData.ReadOnly = true;
             this.DgvData.Size = new System.Drawing.Size(604, 454);
             this.DgvData.TabIndex = 8;
+            this.DgvData.SelectionChanged += new System.EventHandler(this.DgvData_SelectionChanged);
             // 
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel5.Controls.Add(this.BtnMark);
             this.panel5.Controls.Add(this.BtnAdd);
             this.panel5.Controls.Add(this.BtnView);
             this.panel5.Controls.Add(this.BtnChangeMonth);
@@ -303,6 +307,18 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(604, 75);
             this.panel5.TabIndex = 7;
+            // 
+            // BtnMark
+            // 
+            this.BtnMark.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtnMark.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnMark.Location = new System.Drawing.Point(303, 42);
+            this.BtnMark.Name = "BtnMark";
+            this.BtnMark.Size = new System.Drawing.Size(129, 23);
+            this.BtnMark.TabIndex = 10;
+            this.BtnMark.Text = "Marcar como não pago";
+            this.BtnMark.UseVisualStyleBackColor = false;
+            this.BtnMark.Click += new System.EventHandler(this.BtnMark_Click);
             // 
             // BtnAdd
             // 
@@ -465,5 +481,6 @@
         private System.Windows.Forms.Button BtnView;
         private System.Windows.Forms.Panel LblWait;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button BtnMark;
     }
 }

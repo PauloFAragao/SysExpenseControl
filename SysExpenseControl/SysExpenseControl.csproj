@@ -133,6 +133,12 @@
     <Compile Include="Forms\FrmInvestments.Designer.cs">
       <DependentUpon>FrmInvestments.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FrmMarkBillPaid.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmMarkBillPaid.Designer.cs">
+      <DependentUpon>FrmMarkBillPaid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FrmMonthlyExpensesAndProfits.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -194,6 +200,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmInvestments.resx">
       <DependentUpon>FrmInvestments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmMarkBillPaid.resx">
+      <DependentUpon>FrmMarkBillPaid.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmMonthlyExpensesAndProfits.resx">
       <DependentUpon>FrmMonthlyExpensesAndProfits.cs</DependentUpon>

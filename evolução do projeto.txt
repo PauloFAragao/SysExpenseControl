@@ -132,8 +132,12 @@ funcional
 -implementado na tela de contas: quando a data de exibição é alterada o label exibe o mês e o ano 
 corretamente
 
-
-
+-Implementado um botão na tela de contas para marcar a conta como paga ou não paga.
+	-Implementada uma nova consulta no banco de dados para marcar a conta como paga ou não paga
+	-Implementada uma nova form para capturar a data do pagamento e o valor
+	-Implementado no caso da conta ter uma quantidade de parcelas o programa calcular a quantidade de
+	parcelas restante.
+	-Implementado a soma e a subtração dependendo do caso nos gastos totais do mês
 
 
 

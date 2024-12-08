@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using SysExpenseControl.Data;
 using SysExpenseControl.Entities;
 using System.Diagnostics;
+using System.Data.Entity.Core.Mapping;
 
 namespace SysExpenseControl.Forms
 {
@@ -97,7 +98,7 @@ namespace SysExpenseControl.Forms
         private void ViewBill()
         {
             //dataGridView.CurrentCell != null
-            if ( this.DgvData.Rows.Count > 0 && 
+            if (this.DgvData.Rows.Count > 0 &&
                 this.DgvData.CurrentCell != null)
             {
                 // capturando a data que foi pago
@@ -113,7 +114,7 @@ namespace SysExpenseControl.Forms
                 // capturando o id referencia a tabela de gastos fixos
                 var idFixedExpensesRow = this.DgvData.CurrentRow.Cells["idFixedExpenses"].Value;
                 if (int.TryParse(idFixedExpensesRow.ToString(), out int idFixedExpenses))
-                {}
+                { }
 
                 FrmViewBill frmViewBill = new FrmViewBill(
                     Convert.ToString(this.DgvData.CurrentRow.Cells["name"].Value),
@@ -129,7 +130,7 @@ namespace SysExpenseControl.Forms
             }
             else
             {
-                MessageBox.Show("A tabela não tem dados ou não tem nenhuma linha selecionada!", 
+                MessageBox.Show("A tabela não tem dados ou não tem nenhuma linha selecionada!",
                     "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 Debug.WriteLine("não tem dados");
@@ -140,6 +141,84 @@ namespace SysExpenseControl.Forms
         {
             FrmSelectDate frmSelectDate = new FrmSelectDate(CallBackChangeDate);
             frmSelectDate.ShowDialog();
+        }
+
+        private void SelectedRowChanged()
+        {
+            if (this.DgvData.Rows.Count > 0 &&
+                this.DgvData.CurrentCell != null)
+            {
+                bool paid = Convert.ToBoolean(this.DgvData.CurrentRow.Cells["paid"].Value);
+
+                if (paid)
+                    this.BtnMark.Text = "Marcar como não pago";
+                else
+                    this.BtnMark.Text = "Marcar como pago";
+            }
+        }
+
+        private void ChangePaid()
+        {
+            if (this.DgvData.Rows.Count > 0 &&
+                this.DgvData.CurrentCell != null)
+            {
+                // Se está paga ou não
+                bool paid = Convert.ToBoolean(this.DgvData.CurrentRow.Cells["paid"].Value);
+                // Se tem quantidade de parcelas limitada
+                bool definedNumberOfInstallments = Convert.ToBoolean(
+                            this.DgvData.CurrentRow.Cells["dni"].Value);
+                // o id do gasto fixo
+                int idFixedExpenses = Convert.ToInt32(
+                    this.DgvData.CurrentRow.Cells["idFixedExpenses"].Value);
+
+                if (!paid)// agora vai marcar como pago
+                {
+                    // chamar janela
+                    FrmMarkBillPaid frmMarkBillPaid = new FrmMarkBillPaid(
+                        Convert.ToString(this.DgvData.CurrentRow.Cells["name"].Value),
+                        Convert.ToInt32(this.DgvData.CurrentRow.Cells["id"].Value),
+                        Convert.ToInt32(this.DgvData.CurrentRow.Cells["idFixedExpenses"].Value),
+                        Convert.ToDouble(this.DgvData.CurrentRow.Cells["value"].Value),
+                        _date.Year, _date.Month, definedNumberOfInstallments, CallLoadData);
+
+                    frmMarkBillPaid.ShowDialog();
+                }
+                else// agora vai marcar como não pago
+                {
+                    if (MessageBox.Show(
+                    "Confime para marcar a conta como não paga",
+                    "Marcar como não paga",
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Question) == DialogResult.OK)
+                    {
+                        // marcardo como não paga
+                        bool result = DataConsultant.EditBillPaid(
+                        Convert.ToInt32(this.DgvData.CurrentRow.Cells["id"].Value),
+                        false, null, null, _date.Year, _date.Month);
+
+                        if (result)
+                        {
+                            // para somar uma parcela na conta se aplicavel
+                            if (definedNumberOfInstallments)
+                                DataConsultant.EditInstallment(idFixedExpenses, false);
+
+                            // para somar na contagem de gastos
+                            DataConsultant.InsertExpense(
+                                Convert.ToDouble(this.DgvData.CurrentRow.Cells["value"].Value) *-1 ,
+                                _date.Year, _date.Month);
+
+                            Task.Run(() => LoadData());
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("A tabela não tem dados ou não tem nenhuma linha selecionada!",
+                    "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                Debug.WriteLine("não tem dados");
+            }
         }
 
         // ------------------------- Eventos
@@ -173,6 +252,8 @@ namespace SysExpenseControl.Forms
                 ThreadHelper.SetPropertyValue(BtnView, "Enabled", true);//habilitando o botão visualizar
                 ThreadHelper.SetPropertyValue(CbxFilter, "Enabled", true);//habilitando o comboBox
 
+                ThreadHelper.SetPropertyValue(DgvData, "Enabled", true);// habilitando o DataGridView
+
                 //ThreadHelper.SelectFirstRow(this.DgvData);// para fazer a primeira linha ficar selecionada
             }
         }
@@ -202,6 +283,7 @@ namespace SysExpenseControl.Forms
             ThreadHelper.SetColumnVisibility(this.DgvData, 1, false);//coluna idFixedExpenses
             ThreadHelper.SetColumnVisibility(this.DgvData, 7, false);//descrição
             ThreadHelper.SetColumnVisibility(this.DgvData, 8, false);//pago
+            ThreadHelper.SetColumnVisibility(this.DgvData, 9, false);//dni se tem uma quantidade de parcelas a serem pagas
         }
 
         private void ChangeColumns()
@@ -282,6 +364,16 @@ namespace SysExpenseControl.Forms
         private void BtnChangeMonth_Click(object sender, EventArgs e)
         {
             ChangeDate();
+        }
+
+        private void DgvData_SelectionChanged(object sender, EventArgs e)
+        {
+            SelectedRowChanged();
+        }
+
+        private void BtnMark_Click(object sender, EventArgs e)
+        {
+            ChangePaid();
         }
     }
 }

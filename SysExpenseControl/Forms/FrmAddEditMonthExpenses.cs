@@ -83,7 +83,7 @@ namespace SysExpenseControl.Forms
         {
             if (CaptureAndVerifyData())
             {
-                DateTime date = Convert.ToDateTime(DateTimePicker.Value);
+                DateTime date = Convert.ToDateTime(this.DateTimePicker.Value);
 
                 if (_tipe == 0)// Adicionar
                 {
