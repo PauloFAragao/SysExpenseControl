@@ -359,15 +359,16 @@ namespace SysExpenseControl.Data
                     string TableName = GenerateRandonTableName(name, "references_to_reserves");
 
                     // Query para criar a tabela
-                    string createTableProfits =
+                    string createTableReserve =
                         $"Create Table If Not Exists \"{TableName}\"("
                         + "id Integer Primary Key, "
-                        + "operation Bit Not Null, "// 0 para subtração, 1 para adição
+                        + "operation Varchar (10) Not Null, "// retirada / inserção
                         + "value Real Not Null, "
+                        + "date Date Not Null, "
                         + "description Text)";
 
                     // criar tabela
-                    using (SQLiteCommand command = new SQLiteCommand(createTableProfits, connection))
+                    using (SQLiteCommand command = new SQLiteCommand(createTableReserve, connection))
                     {
                         command.ExecuteNonQuery();
                     }
@@ -500,6 +501,8 @@ namespace SysExpenseControl.Data
                 else
                     result += '_';
             }
+            
+            result = char.ToLower(result[0]) + result.Substring(1);
 
             return result;
         }

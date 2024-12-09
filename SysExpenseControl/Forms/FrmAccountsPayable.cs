@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using SysExpenseControl.Data;
 using SysExpenseControl.Entities;
 using System.Diagnostics;
-using System.Data.Entity.Core.Mapping;
 
 namespace SysExpenseControl.Forms
 {

@@ -139,12 +139,13 @@ corretamente
 	parcelas restante.
 	-Implementado a soma e a subtração dependendo do caso nos gastos totais do mês
 
+-Resolvido um problema na janela de adicionar/editar lucros do mês em que quando era salvo um lucro marcado
+como não recebido mesmo assim somava no total de ganhos do mês
+-Começei a Imeplentar a funcionalidade das reservas de dinheiro
 
 
 
 
 
-
-
-
+ 
 

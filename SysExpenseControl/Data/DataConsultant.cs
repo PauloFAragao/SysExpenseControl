@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace SysExpenseControl.Data
 {
@@ -377,7 +378,7 @@ namespace SysExpenseControl.Data
             string viewQuery = "Select name, value, date, description "
                 + $"From {expensesTableName} "
                 + $"Where category = (Select id From categories where name = '{category}')";
-            
+
             return ViewQuery(viewQuery, "GetMonthlyExpensesByCategory");
         }
 
@@ -518,7 +519,7 @@ namespace SysExpenseControl.Data
             return true;
         }
 
-        public static bool EditBillPaid(int id, bool status, double? value, DateTime? date, 
+        public static bool EditBillPaid(int id, bool status, double? value, DateTime? date,
             int year, int month)
         {
             string tableName = "expenses_" + year + "_" + month;
@@ -695,13 +696,95 @@ namespace SysExpenseControl.Data
             return GetList(query);
         }
 
-        // ---------------------------------- 
-        // Método que vai visualizar as reservas
+        // ----------------------------------  Tabela de referencia as reservas
+        // Método que vai visualizar todas as reservas
         public static DataTable ViewReserves()
         {
             string viewQuery = "Select * From references_to_reserves";
 
             return ViewQuery(viewQuery, "ViewReserves");
+        }
+
+        // Método que vai fazer edições no nome e na desccrição de uma reserva
+        public static bool EditReserve(int id, string name, string description)
+        {
+            string editQuery = "Update references_to_reserves Set "
+                + $"name = '{name}', description = '{description}' "
+                + $"Where id = {id}";
+
+            return SimpleQuery(editQuery);
+        }
+
+        // Método que vai adicionar e remover do valor de uma reserva
+        public static bool EditReservationAmount(int id, double value)
+        {
+            string editQuery = "Update references_to_reserves Set "
+                + $"reservationAmount = reservationAmount + {value.ToString(CultureInfo.InvariantCulture)}"
+                + $"Where id = {id}";
+
+            return SimpleQuery(editQuery);
+        }
+
+        // Método que vai Deletar uma reserva
+        public static bool DeleteReserve(string tableName)
+        {
+            string dropTable = $"Drop Table If Exists {tableName}";
+
+            if(SimpleQuery(dropTable))
+            {
+                string deleteQuery = "Delete From references_to_reserves "
+                    + $"Where tablename = {tableName}";
+
+                return SimpleQuery(deleteQuery);
+            }
+
+            return false;
+        }
+
+        // ---------------------------------- Tabela de reservas
+
+        // Método que vai visualizar todas operações de uma reserva
+        public static DataTable ViewReserve(string tablename, int offset)
+        {
+            string viewQuery = $"Select "
+                + "operation, value, date, description "
+                + $"From {tablename} Order By date Asc "
+                + $"Limit 18 Offset {offset}";
+
+            return ViewQuery(viewQuery, "ViewReserves");
+        }
+
+        // Método para fazer uma operação de inserção em uma reserva
+        public static int? InsertInReserve(string tableName, string operation, double value,
+            DateTime date, string description)
+        {
+            string insertQuery = $"Insert Into {tableName} "
+                + "(operation, value, date, description) "
+                + $"Values ('{operation}', {value}, '{date}', '{description}')";
+
+            return InsertQuery(insertQuery);
+        }
+
+        // Método para Editar uma operação de reserva
+        public static bool EditReserve(int id, string tableName, string operation, 
+            double value, DateTime date, string description)
+        {
+            string editQuery = $"Update {tableName} Set "
+                + $"operation = {operation}, "
+                + $"value = {value.ToString(CultureInfo.InvariantCulture)}, "
+                + $"date = {date:yyyy-MM-dd}, "
+                + $"description = {description} "
+                + $"Where id = {id}";
+
+            return SimpleQuery(editQuery);
+        }
+
+        // Método para deletar uma operação de reserva
+        public static bool DeleteReserve(int id, string tableName) 
+        {
+            string deleteQuery = $"Delete From {tableName} Where id = {id}";
+
+            return SimpleQuery(deleteQuery);
         }
 
         // ---------------------------------- 
@@ -871,5 +954,30 @@ namespace SysExpenseControl.Data
             return dtResult;
         }
 
+        // Método para o usuario escrever uma query
+        public static void UserQuery(string query)
+        {
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(Connection.Cn))
+                {
+                    // Abre a conexão
+                    connection.Open();
+
+                    // Executando a Query
+                    using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                    {
+                        // Executa a consulta e captura o resultado
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Exception in DataConsultant.UserQuery: " + e.Message,
+                    "A query inserida não é valida",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
