@@ -28,61 +28,72 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
+            this.BtnView = new System.Windows.Forms.Button();
+            this.BtnEdit = new System.Windows.Forms.Button();
+            this.BtnDelete = new System.Windows.Forms.Button();
+            this.BtnAdd = new System.Windows.Forms.Button();
             this.DgvData = new System.Windows.Forms.DataGridView();
             this.LblValue = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.LblWait = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DgvData)).BeginInit();
             this.panel5.SuspendLayout();
+            this.LblWait.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button5
+            // BtnView
             // 
-            this.button5.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(361, 96);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(109, 23);
-            this.button5.TabIndex = 15;
-            this.button5.Text = "Visualizar";
-            this.button5.UseVisualStyleBackColor = false;
+            this.BtnView.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtnView.Enabled = false;
+            this.BtnView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnView.Location = new System.Drawing.Point(361, 96);
+            this.BtnView.Name = "BtnView";
+            this.BtnView.Size = new System.Drawing.Size(109, 23);
+            this.BtnView.TabIndex = 15;
+            this.BtnView.Text = "Visualizar";
+            this.BtnView.UseVisualStyleBackColor = false;
+            this.BtnView.Click += new System.EventHandler(this.BtnView_Click);
             // 
-            // button6
+            // BtnEdit
             // 
-            this.button6.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Location = new System.Drawing.Point(246, 96);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(109, 23);
-            this.button6.TabIndex = 14;
-            this.button6.Text = "Editar";
-            this.button6.UseVisualStyleBackColor = false;
+            this.BtnEdit.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtnEdit.Enabled = false;
+            this.BtnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnEdit.Location = new System.Drawing.Point(246, 96);
+            this.BtnEdit.Name = "BtnEdit";
+            this.BtnEdit.Size = new System.Drawing.Size(109, 23);
+            this.BtnEdit.TabIndex = 14;
+            this.BtnEdit.Text = "Editar";
+            this.BtnEdit.UseVisualStyleBackColor = false;
+            this.BtnEdit.Click += new System.EventHandler(this.BtnEdit_Click);
             // 
-            // button7
+            // BtnDelete
             // 
-            this.button7.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Location = new System.Drawing.Point(131, 96);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(109, 23);
-            this.button7.TabIndex = 13;
-            this.button7.Text = "Remover";
-            this.button7.UseVisualStyleBackColor = false;
+            this.BtnDelete.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtnDelete.Enabled = false;
+            this.BtnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnDelete.Location = new System.Drawing.Point(131, 96);
+            this.BtnDelete.Name = "BtnDelete";
+            this.BtnDelete.Size = new System.Drawing.Size(109, 23);
+            this.BtnDelete.TabIndex = 13;
+            this.BtnDelete.Text = "Remover";
+            this.BtnDelete.UseVisualStyleBackColor = false;
+            this.BtnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
-            // button8
+            // BtnAdd
             // 
-            this.button8.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Location = new System.Drawing.Point(16, 96);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(109, 23);
-            this.button8.TabIndex = 12;
-            this.button8.Text = "Adicionar";
-            this.button8.UseVisualStyleBackColor = false;
+            this.BtnAdd.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.BtnAdd.Enabled = false;
+            this.BtnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnAdd.Location = new System.Drawing.Point(16, 96);
+            this.BtnAdd.Name = "BtnAdd";
+            this.BtnAdd.Size = new System.Drawing.Size(109, 23);
+            this.BtnAdd.TabIndex = 12;
+            this.BtnAdd.Text = "Adicionar";
+            this.BtnAdd.UseVisualStyleBackColor = false;
+            this.BtnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
             // 
             // DgvData
             // 
@@ -106,9 +117,9 @@
             this.LblValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LblValue.Location = new System.Drawing.Point(134, 41);
             this.LblValue.Name = "LblValue";
-            this.LblValue.Size = new System.Drawing.Size(103, 24);
+            this.LblValue.Size = new System.Drawing.Size(108, 24);
             this.LblValue.TabIndex = 3;
-            this.LblValue.Text = "R$ 0000,00";
+            this.LblValue.Text = "R$: 0000,00";
             this.LblValue.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label4
@@ -132,35 +143,58 @@
             this.panel5.Size = new System.Drawing.Size(241, 72);
             this.panel5.TabIndex = 12;
             // 
+            // LblWait
+            // 
+            this.LblWait.Controls.Add(this.label1);
+            this.LblWait.Location = new System.Drawing.Point(361, 260);
+            this.LblWait.Name = "LblWait";
+            this.LblWait.Size = new System.Drawing.Size(205, 52);
+            this.LblWait.TabIndex = 16;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(72, 18);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 20);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Wait...";
+            // 
             // FrmReserves
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(926, 572);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button6);
+            this.Controls.Add(this.LblWait);
+            this.Controls.Add(this.BtnView);
+            this.Controls.Add(this.BtnEdit);
             this.Controls.Add(this.panel5);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button8);
+            this.Controls.Add(this.BtnDelete);
+            this.Controls.Add(this.BtnAdd);
             this.Controls.Add(this.DgvData);
             this.Name = "FrmReserves";
             this.Text = "FrmReserves";
             ((System.ComponentModel.ISupportInitialize)(this.DgvData)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            this.LblWait.ResumeLayout(false);
+            this.LblWait.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button BtnView;
+        private System.Windows.Forms.Button BtnEdit;
+        private System.Windows.Forms.Button BtnDelete;
+        private System.Windows.Forms.Button BtnAdd;
         private System.Windows.Forms.DataGridView DgvData;
         private System.Windows.Forms.Label LblValue;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel LblWait;
+        private System.Windows.Forms.Label label1;
     }
 }

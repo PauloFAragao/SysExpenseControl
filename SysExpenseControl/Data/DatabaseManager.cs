@@ -86,6 +86,7 @@ namespace SysExpenseControl.Data
                         + "name Varchar (50) Not Null, "
                         + "tableName Varchar (20) Not Null, "
                         + "reservationAmount Real Not Null, "
+                        + "operationsQuantity Integer Default '0', "
                         + "description Text)";
 
                     // Tabela para as referencias das tabelas dos investimentos

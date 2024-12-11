@@ -169,6 +169,12 @@
     <Compile Include="Forms\FrmViewBill.Designer.cs">
       <DependentUpon>FrmViewBill.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FrmViewReserve.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmViewReserve.Designer.cs">
+      <DependentUpon>FrmViewReserve.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -218,6 +224,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmViewBill.resx">
       <DependentUpon>FrmViewBill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmViewReserve.resx">
+      <DependentUpon>FrmViewReserve.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

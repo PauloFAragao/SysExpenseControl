@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace SysExpenseControl.Data
 {
@@ -47,7 +46,6 @@ namespace SysExpenseControl.Data
 
             return result;
         }
-
 
         // ---------------------------------- Categoria
         // Método para visualizar todas as categorias
@@ -114,7 +112,8 @@ namespace SysExpenseControl.Data
         }
 
         // Método para editar uma fonte de lucro fixa
-        public static bool EditFixedProfit(int id, string name, double value, string description)
+        public static bool EditFixedProfit(int id, string name, double value, 
+            string description)
         {
             string editQuery =
                 "Update fixed_profits "
@@ -177,8 +176,9 @@ namespace SysExpenseControl.Data
         }
 
         // Método para Inserir um gasto fixo
-        public static int? InsertFixedExpense(string name, double value, int dueDay, int numberOfInstallments,
-            string category, string description, bool definedNumberOfInstallments)
+        public static int? InsertFixedExpense(string name, double value, int dueDay, 
+            int numberOfInstallments, string category, string description, 
+            bool definedNumberOfInstallments)
         {
             string insertQuery =
                 $"Insert Into fixed_expenses "
@@ -192,8 +192,9 @@ namespace SysExpenseControl.Data
         }
 
         // Método para Editar um gasto fixo
-        public static bool EditFixedExpense(int id, string name, double value, int dueDay, int numberOfInstallments,
-            string category, string description, bool definedNumberOfInstallments)
+        public static bool EditFixedExpense(int id, string name, double value, int dueDay, 
+            int numberOfInstallments, string category, string description, 
+            bool definedNumberOfInstallments)
         {
             string editQuery =
                 "Update fixed_expenses "
@@ -303,8 +304,8 @@ namespace SysExpenseControl.Data
         }
 
         // Método para Editar um lucro do mês
-        public static bool EditMonthProfits(int id, string name, double value, DateTime? date,
-            string description, int year, int month)
+        public static bool EditMonthProfits(int id, string name, double value, 
+            DateTime? date, string description, int year, int month)
         {
             VerifyTableExists(year, month);// verfica e cria uma tabela se ela não existir
 
@@ -371,7 +372,8 @@ namespace SysExpenseControl.Data
         }
 
         // Método para visualizar os gastos de um mês filtrando por categoria
-        public static DataTable GetMonthlyExpensesByCategory(string category, int year, int month)
+        public static DataTable GetMonthlyExpensesByCategory(string category, int year, 
+            int month)
         {
             string expensesTableName = "expenses_" + year + "_" + month;
 
@@ -399,9 +401,9 @@ namespace SysExpenseControl.Data
         }
 
         // Método para inserir um gasto no mês
-        public static int? InsertMonthExpense(string name, double value, DateTime? dateOfExpenditure,
-            int? idFixedExpenses, string category, string description, int year, int month, bool paid,
-            string fixedExpense = "")
+        public static int? InsertMonthExpense(string name, double value, 
+            DateTime? dateOfExpenditure, int? idFixedExpenses, string category, 
+            string description, int year, int month, bool paid, string fixedExpense = "")
         {
             VerifyTableExists(year, month);// verfica e cria uma tabela se ela não existir
 
@@ -440,8 +442,9 @@ namespace SysExpenseControl.Data
         }
 
         // Método para Editar um gasto do mês
-        public static bool EditMonthExpense(int id, string name, double value, DateTime dateOfExpenditure,
-            string category, string description, int year, int month, bool paid, int? idReference = 0)
+        public static bool EditMonthExpense(int id, string name, double value, 
+            DateTime dateOfExpenditure, string category, string description, int year, 
+            int month, bool paid, int? idReference = 0)
         {
             VerifyTableExists(year, month);// verfica e cria uma tabela se ela não existir
 
@@ -496,7 +499,8 @@ namespace SysExpenseControl.Data
         }
 
         // Método para editar todas as tabelas que tenha uma referencia a um lucro fixo
-        public static bool EditAllMonthProft(int idfixedProfts, string name, string description)
+        public static bool EditAllMonthProft(int idfixedProfts, string name, 
+            string description)
         {
             // nomes das tabelas de gastos
             List<string> tableNames = GetProfitTables();
@@ -741,6 +745,52 @@ namespace SysExpenseControl.Data
             return false;
         }
 
+        // Método que vai pegar a quantidade de
+        public static int GetOperationsQuantity(int id)
+        {
+            string query = "Select operationsQuantity From references_to_reserves "
+                + $"Where id = {id}";
+
+            int qtd = 0;
+
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(Connection.Cn))
+                {
+                    // Abre a conexão
+                    connection.Open();
+
+                    // Executando a Query
+                    using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                    {
+                        // Executa a consulta e captura o resultado
+                        qtd = Convert.ToInt32(command.ExecuteScalar());
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Exception in DataConsultant.InsertQuery: " + e.Message);
+
+                MessageBox.Show("Exception in DataConsultant.InsertQuery: " + e.Message,
+                    "Erro ao inserir dados no banco de dados",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                qtd = 0;
+            }
+
+            return qtd;
+        }
+
+        // Método para pesquisar o a quantidade de dinheiro de uma reserva
+        public static double GetReserveAmount(int id)
+        {
+            string query = "Select reservationAmount From references_to_reserves "
+                + $"Where id = {id}";
+            
+            return GetDoubleQuery(query);
+        }
+
         // ---------------------------------- Tabela de reservas
 
         // Método que vai visualizar todas operações de uma reserva
@@ -748,21 +798,29 @@ namespace SysExpenseControl.Data
         {
             string viewQuery = $"Select "
                 + "operation, value, date, description "
-                + $"From {tablename} Order By date Asc "
-                + $"Limit 18 Offset {offset}";
+                + $"From {tablename} Order By date Desc "
+                + $"Limit 17 Offset {offset}";
 
             return ViewQuery(viewQuery, "ViewReserves");
         }
 
         // Método para fazer uma operação de inserção em uma reserva
-        public static int? InsertInReserve(string tableName, string operation, double value,
-            DateTime date, string description)
+        public static int? InsertInReserve(string tableName, string operation, 
+            double value, DateTime date, string description)
         {
             string insertQuery = $"Insert Into {tableName} "
                 + "(operation, value, date, description) "
                 + $"Values ('{operation}', {value}, '{date}', '{description}')";
 
-            return InsertQuery(insertQuery);
+            int? result = InsertQuery(insertQuery);
+
+            // somando 1 no contador de quantidade de operações
+            if (result != null && ChangeQuantityOfOperations(tableName, 1))
+            {
+                return result;// não deu errado
+            }
+
+            return null;// aldo deu errado
         }
 
         // Método para Editar uma operação de reserva
@@ -783,8 +841,23 @@ namespace SysExpenseControl.Data
         public static bool DeleteReserve(int id, string tableName) 
         {
             string deleteQuery = $"Delete From {tableName} Where id = {id}";
+            
+            if (SimpleQuery(deleteQuery) && 
+                ChangeQuantityOfOperations(tableName, -1))// sutraindo 1 no contador de quantidade de operaçõe
+            {
+                return true;
+            }
 
-            return SimpleQuery(deleteQuery);
+            return false;
+        }
+
+        private static bool ChangeQuantityOfOperations(string tableName, int value)
+        {
+            string updateQuery = "Update references_to_reserves "
+                + $"Set operationsQuantity = operationsQuantity + {value} "
+                + $"Where tableName = '{tableName}'";
+
+            return SimpleQuery(updateQuery);
         }
 
         // ---------------------------------- 
@@ -954,30 +1027,6 @@ namespace SysExpenseControl.Data
             return dtResult;
         }
 
-        // Método para o usuario escrever uma query
-        public static void UserQuery(string query)
-        {
-            try
-            {
-                using (SQLiteConnection connection = new SQLiteConnection(Connection.Cn))
-                {
-                    // Abre a conexão
-                    connection.Open();
-
-                    // Executando a Query
-                    using (SQLiteCommand command = new SQLiteCommand(query, connection))
-                    {
-                        // Executa a consulta e captura o resultado
-                        command.ExecuteNonQuery();
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Exception in DataConsultant.UserQuery: " + e.Message,
-                    "A query inserida não é valida",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+        
     }
 }

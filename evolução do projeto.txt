@@ -143,8 +143,13 @@ corretamente
 como não recebido mesmo assim somava no total de ganhos do mês
 -Começei a Imeplentar a funcionalidade das reservas de dinheiro
 
-
-
+-Implemetada uma form para visualizar uma reserva de dinheiro, essa form apresenta todas as operações salvas
+no banco de dados relativas a essa reserva de dinheiro (apresentando:o tipo da operação retirada ou 
+inserção, o valor inserido ou retirado, quando a operação ocorreu, e a descição que o usuario inseriu ao
+fazer a operação).
+	-Implementada a navegação entre paginas por que cada pagina só exibe 17 operações
+-Agora na tela de reservas os botões começam desabilitados e a tela inicia com uma mensagem de espere até os
+dados serem carregados.
 
 
  

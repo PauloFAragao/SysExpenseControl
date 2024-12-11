@@ -13,8 +13,7 @@ namespace SysExpenseControl
         /// Ponto de entrada principal para o aplicativo.
         /// </summary>
         [STAThread]
-        static void Main()
-        {
+        static void Main(){
             SelectedDateData.Month = DateTime.Now.Month;
             SelectedDateData.Year = DateTime.Now.Year;
 
