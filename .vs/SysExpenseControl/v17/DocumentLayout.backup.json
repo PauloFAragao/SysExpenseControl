@@ -3,20 +3,28 @@
   "WorkspaceRootPath": "C:\\Sistemas\\SysExpenseControl\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|c:\\sistemas\\sysexpensecontrol\\sysexpensecontrol\\forms\\frmviewreserve.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|solutionrelative:sysexpensecontrol\\forms\\frmviewreserve.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|c:\\sistemas\\sysexpensecontrol\\sysexpensecontrol\\forms\\frmviewreserve.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|solutionrelative:sysexpensecontrol\\forms\\frmviewreserve.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|c:\\sistemas\\sysexpensecontrol\\sysexpensecontrol\\forms\\frmreserves.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|solutionrelative:sysexpensecontrol\\forms\\frmreserves.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|c:\\sistemas\\sysexpensecontrol\\sysexpensecontrol\\data\\dataconsultant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|solutionrelative:sysexpensecontrol\\data\\dataconsultant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|c:\\sistemas\\sysexpensecontrol\\sysexpensecontrol\\forms\\frmreserves.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|solutionrelative:sysexpensecontrol\\forms\\frmreserves.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|c:\\sistemas\\sysexpensecontrol\\sysexpensecontrol\\forms\\frmviewreserve.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|solutionrelative:sysexpensecontrol\\forms\\frmviewreserve.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|c:\\sistemas\\sysexpensecontrol\\sysexpensecontrol\\forms\\frmfixedexpensesandprofits.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|solutionrelative:sysexpensecontrol\\forms\\frmfixedexpensesandprofits.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|c:\\sistemas\\sysexpensecontrol\\sysexpensecontrol\\forms\\frmaddeditreserveoperation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|solutionrelative:sysexpensecontrol\\forms\\frmaddeditreserveoperation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|c:\\sistemas\\sysexpensecontrol\\sysexpensecontrol\\forms\\frmfixedexpensesandprofits.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0D03BA4E-6AAA-459C-B044-FBCF68C3A9EA}|SysExpenseControl\\SysExpenseControl.csproj|solutionrelative:sysexpensecontrol\\forms\\frmfixedexpensesandprofits.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,56 +34,82 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "FrmViewReserve.cs",
-              "DocumentMoniker": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmViewReserve.cs",
-              "RelativeDocumentMoniker": "SysExpenseControl\\Forms\\FrmViewReserve.cs",
-              "ToolTip": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmViewReserve.cs",
-              "RelativeToolTip": "SysExpenseControl\\Forms\\FrmViewReserve.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "FrmFixedExpensesAndProfits.cs",
+              "DocumentMoniker": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmFixedExpensesAndProfits.cs",
+              "RelativeDocumentMoniker": "SysExpenseControl\\Forms\\FrmFixedExpensesAndProfits.cs",
+              "ToolTip": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmFixedExpensesAndProfits.cs",
+              "RelativeToolTip": "SysExpenseControl\\Forms\\FrmFixedExpensesAndProfits.cs",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAuwFMAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-11T16:14:16.906Z",
+              "WhenOpened": "2024-12-13T18:14:17.523Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FrmFixedExpensesAndProfits.cs [Design]",
+              "DocumentMoniker": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmFixedExpensesAndProfits.cs",
+              "RelativeDocumentMoniker": "SysExpenseControl\\Forms\\FrmFixedExpensesAndProfits.cs",
+              "ToolTip": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmFixedExpensesAndProfits.cs [Design]",
+              "RelativeToolTip": "SysExpenseControl\\Forms\\FrmFixedExpensesAndProfits.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-13T18:14:14.976Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "FrmAddEditReserveOperation.cs",
+              "DocumentMoniker": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmAddEditReserveOperation.cs",
+              "RelativeDocumentMoniker": "SysExpenseControl\\Forms\\FrmAddEditReserveOperation.cs",
+              "ToolTip": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmAddEditReserveOperation.cs",
+              "RelativeToolTip": "SysExpenseControl\\Forms\\FrmAddEditReserveOperation.cs",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAswCUAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-13T15:07:07.273Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DataConsultant.cs",
+              "DocumentMoniker": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Data\\DataConsultant.cs",
+              "RelativeDocumentMoniker": "SysExpenseControl\\Data\\DataConsultant.cs",
+              "ToolTip": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Data\\DataConsultant.cs",
+              "RelativeToolTip": "SysExpenseControl\\Data\\DataConsultant.cs",
+              "ViewState": "AgIAAEsDAAAAAAAAAAAQwFMDAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-13T14:07:59.842Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "FrmViewReserve.cs",
+              "DocumentMoniker": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmViewReserve.cs",
+              "RelativeDocumentMoniker": "SysExpenseControl\\Forms\\FrmViewReserve.cs",
+              "ToolTip": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmViewReserve.cs",
+              "RelativeToolTip": "SysExpenseControl\\Forms\\FrmViewReserve.cs",
+              "ViewState": "AgIAANgBAAAAAAAAAAAgwOABAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-13T13:56:08.501Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "FrmViewReserve.cs [Design]",
               "DocumentMoniker": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmViewReserve.cs",
               "RelativeDocumentMoniker": "SysExpenseControl\\Forms\\FrmViewReserve.cs",
               "ToolTip": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmViewReserve.cs [Design]",
               "RelativeToolTip": "SysExpenseControl\\Forms\\FrmViewReserve.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-11T16:14:15.078Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "FrmReserves.cs",
-              "DocumentMoniker": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmReserves.cs",
-              "RelativeDocumentMoniker": "SysExpenseControl\\Forms\\FrmReserves.cs",
-              "ToolTip": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmReserves.cs",
-              "RelativeToolTip": "SysExpenseControl\\Forms\\FrmReserves.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAA7wCkAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-11T16:13:15.136Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "FrmReserves.cs [Design]",
-              "DocumentMoniker": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmReserves.cs",
-              "RelativeDocumentMoniker": "SysExpenseControl\\Forms\\FrmReserves.cs",
-              "ToolTip": "C:\\Sistemas\\SysExpenseControl\\SysExpenseControl\\Forms\\FrmReserves.cs [Design]",
-              "RelativeToolTip": "SysExpenseControl\\Forms\\FrmReserves.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-11T16:13:14.105Z",
+              "WhenOpened": "2024-12-13T13:56:06.219Z",
               "EditorCaption": " [Design]"
             }
           ]

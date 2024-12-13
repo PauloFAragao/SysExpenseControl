@@ -151,6 +151,7 @@ fazer a operação).
 -Agora na tela de reservas os botões começam desabilitados e a tela inicia com uma mensagem de espere até os
 dados serem carregados.
 
-
- 
+-Resolvido um erro no controlde de paginas da tela de visualizar uma reserva, quando os botões de avançar e
+voltar eram usados a tabela não atualizava
+-Implementados os botões de adionar/editar/visualizar/Deletar operação na tela de visualizar uma reserva.
 

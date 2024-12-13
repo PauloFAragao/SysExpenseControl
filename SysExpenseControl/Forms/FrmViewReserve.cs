@@ -12,6 +12,7 @@ namespace SysExpenseControl.Forms
 {
     public partial class FrmViewReserve : Form
     {
+        string _name;
         string _tableName;
         int _id;
         int _operationsQuantity;// para o controle de paginas
@@ -31,6 +32,7 @@ namespace SysExpenseControl.Forms
 
             this.LblName.Text = name;
 
+            _name = name;
             _tableName = tableName;
             _id = id;
             _operationsQuantity = operationsQuantity;
@@ -230,6 +232,7 @@ namespace SysExpenseControl.Forms
             }
 
             ChangeSelectedButton(this.Btn01);
+            _page = GetButtonNumber(1);
 
             ReloadPage();
         }
@@ -246,6 +249,8 @@ namespace SysExpenseControl.Forms
                 }
 
                 ChangeSelectedButton(this.Btn05);
+                _page = GetButtonNumber(5);
+
             }
             else// se for menor do que 5
             {
@@ -253,14 +258,17 @@ namespace SysExpenseControl.Forms
                 {
                     case 2:
                         ChangeSelectedButton(this.Btn02);
+                        _page = GetButtonNumber(2);
                         break;
 
                     case 3:
                         ChangeSelectedButton(this.Btn03);
+                        _page = GetButtonNumber(3);
                         break;
 
                     case 4:
                         ChangeSelectedButton(this.Btn04);
+                        _page = GetButtonNumber(4);
                         break;
                 }
             }
@@ -277,23 +285,35 @@ namespace SysExpenseControl.Forms
             {
                 // se o botão selecionado é o botão da pagina 2
                 if (buttonNumber == 2)
+                {
                     ChangeSelectedButton(this.Btn01);
-
+                    _page = GetButtonNumber(1);
+                }
                 // se o botão selecionado é o botão 2 e o botão 1 não é a primeira pagina
                 else if (_selectedButton == this.Btn02 && this.Btn01.Text != "1")
+                {
                     ChangeButtonsName(buttonNumber - 2);
+                    _page = GetButtonNumber(2);
+                }
 
                 // se o botão selecionado é o botão 5, 4 ou 3
                 else
                 {
                     if (_selectedButton == this.Btn05)
+                    {
                         ChangeSelectedButton(this.Btn04);
-
+                        _page = GetButtonNumber(4);
+                    }
                     else if (_selectedButton == this.Btn04)
+                    {
                         ChangeSelectedButton(this.Btn03);
-
+                        _page = GetButtonNumber(3);
+                    }
                     else if (_selectedButton == this.Btn03)
+                    {
                         ChangeSelectedButton(this.Btn02);
+                        _page = GetButtonNumber(2);
+                    }
                 }
             }
 
@@ -311,23 +331,34 @@ namespace SysExpenseControl.Forms
                 {
                     // o botão selecionado é a penultima pagina
                     if (buttonNumber == _pagesQuantity - 1)
+                    {
                         ChangeSelectedButton(this.Btn05);
-
+                        _page = GetButtonNumber(5);
+                    }
                     // se o botão selecionado é o botão 4 e não é a penultima pagina
                     if (_selectedButton == this.Btn04 && buttonNumber != _pagesQuantity - 1)
+                    {
                         ChangeButtonsName(buttonNumber - 2);
-
+                        _page = GetButtonNumber(4);
+                    }
                     // se o botão selecionado é o botão 1, 2 ou 3
                     else
                     {
                         if (_selectedButton == this.Btn01)
+                        {
                             ChangeSelectedButton(this.Btn02);
-
+                            _page = GetButtonNumber(2);
+                        }
                         else if (_selectedButton == this.Btn02)
+                        {
                             ChangeSelectedButton(this.Btn03);
-
+                            _page = GetButtonNumber(3);
+                        }
                         else if (_selectedButton == this.Btn03)
+                        {
                             ChangeSelectedButton(this.Btn04);
+                            _page = GetButtonNumber(4);
+                        }
                     }
                 }
                 else// tem menos do que 5 paginas
@@ -338,13 +369,20 @@ namespace SysExpenseControl.Forms
                             if (_selectedButton != this.Btn04)
                             {
                                 if (_selectedButton == this.Btn01)
+                                {
                                     ChangeSelectedButton(this.Btn02);
-
+                                    _page = GetButtonNumber(2);
+                                }
                                 else if (_selectedButton == this.Btn02)
+                                {
                                     ChangeSelectedButton(this.Btn03);
-
+                                    _page = GetButtonNumber(3);
+                                }
                                 else if (_selectedButton == this.Btn03)
+                                {
                                     ChangeSelectedButton(this.Btn04);
+                                    _page = GetButtonNumber(4);
+                                }
                             }
 
                             break;
@@ -353,17 +391,26 @@ namespace SysExpenseControl.Forms
                             if (_selectedButton != this.Btn03)
                             {
                                 if (_selectedButton == this.Btn01)
+                                {
                                     ChangeSelectedButton(this.Btn02);
-
+                                    _page = GetButtonNumber(2);
+                                }
                                 else if (_selectedButton == this.Btn02)
+                                {
                                     ChangeSelectedButton(this.Btn03);
+                                    _page = GetButtonNumber(3);
+                                }
                             }
 
                             break;
 
                         case 2:
                             if (_selectedButton != this.Btn02)
+                            {
                                 ChangeSelectedButton(this.Btn02);
+                                _page = GetButtonNumber(2);
+                            }
+
                             break;
                     }
                 }
@@ -372,6 +419,78 @@ namespace SysExpenseControl.Forms
             ReloadPage();
         }
 
+        private void Add()
+        {
+            FrmAddEditReserveOperation frmAddEditReserveOperation =
+                new FrmAddEditReserveOperation(_tableName, 0, _name, DateTime.Now,
+                ReloadPage);
+
+            frmAddEditReserveOperation.ShowDialog();
+        }
+
+        private void ViewEditFixedExpenses(int tipe)
+        {
+            if (this.DgvData.Rows.Count > 0 &&
+                this.DgvData.CurrentCell != null)
+            {
+                bool operation;
+                if(this.DgvData.CurrentRow.Cells["Operation"].Value.ToString() == "Inserção")
+                    operation = true;
+
+                else 
+                    operation = false;
+
+                FrmAddEditReserveOperation frmAddEditReserveOperation =
+                new FrmAddEditReserveOperation(_tableName, tipe, _name,
+                Convert.ToDateTime(this.DgvData.CurrentRow.Cells["date"].Value),
+                ReloadPage,
+                Convert.ToInt32(this.DgvData.CurrentRow.Cells["id"].Value), 
+                Convert.ToDouble(this.DgvData.CurrentRow.Cells["value"].Value),
+                operation,
+                this.DgvData.CurrentRow.Cells["description"].Value.ToString() );
+
+                frmAddEditReserveOperation.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("A tabela não tem dados ou não tem nenhuma linha selecionada!",
+                    "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                Debug.WriteLine("não tem dados");
+            }
+        }
+
+        private void DeleteOperation()
+        {
+            if (this.DgvData.Rows.Count > 0 &&
+                this.DgvData.CurrentCell != null)
+            {
+                if (MessageBox.Show("Deletar operação: " +
+                    this.DgvData.CurrentRow.Cells["Operation"].Value +
+                    "(" + this.DgvData.CurrentRow.Cells["value"].Value + ") na data: " +
+                    this.DgvData.CurrentRow.Cells["date"].Value.ToString().Substring(0,10),
+                    "Deletar operação",
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Question) == DialogResult.OK)
+                {
+                    DataConsultant.DeleteReserveOperation(
+                        Convert.ToInt32(this.DgvData.CurrentRow.Cells["id"].Value),
+                        _tableName);
+
+                    //recarregando os dados
+                    ReloadPage();
+                }
+            }
+            else
+            {
+                MessageBox.Show("A tabela não tem dados ou não tem nenhuma linha selecionada!",
+                    "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                Debug.WriteLine("não tem dados");
+            }
+        }
+
+        // ------------------------- Eventos
         private void ReloadPage()
         {
             // panel com mensagem
@@ -394,12 +513,14 @@ namespace SysExpenseControl.Forms
         {
             if (LoadData())
             {
-                //HideColumns();
-                //ChangeColumns();
+                HideColumns();
+                ChangeColumns();
 
                 string reserveAmount = "R$: " + DataConsultant.GetReserveAmount(_id).ToString("N2");
 
                 ThreadHelper.SetPropertyValue(LblValue, "Text", reserveAmount);
+
+                ThreadHelper.SetDefaultCellStyle(DgvData, "value");// para a coluna dos valores ter ,00
 
                 // panel com mensagem
                 ThreadHelper.SetPropertyValue(LblWait, "Visible", false);
@@ -419,6 +540,9 @@ namespace SysExpenseControl.Forms
         {
             if (LoadData())
             {
+                string reserveAmount = "R$: " + DataConsultant.GetReserveAmount(_id).ToString("N2");
+                ThreadHelper.SetPropertyValue(LblValue, "Text", reserveAmount);
+
                 // panel com mensagem
                 ThreadHelper.SetPropertyValue(LblWait, "Visible", false);
 
@@ -450,18 +574,22 @@ namespace SysExpenseControl.Forms
 
         private void HideColumns()
         {
-
+            ThreadHelper.SetColumnVisibility(this.DgvData, 4, false);//coluna id
         }
 
         private void ChangeColumns()
         {
-
+            ThreadHelper.SetColumnHeaderText(this.DgvData, 0, "Operação");
+            ThreadHelper.SetColumnHeaderText(this.DgvData, 1, "Valor");
+            ThreadHelper.SetColumnHeaderText(this.DgvData, 2, "Data");
+            ThreadHelper.SetColumnHeaderText(this.DgvData, 3, "Descrição");
+            ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 3, DataGridViewAutoSizeColumnMode.DisplayedCells);
         }
 
         // ------------------------- Métodos criados pelo visual studio
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-
+            Add();
         }
 
         private void Btn_Click(object sender, EventArgs e)
@@ -471,17 +599,17 @@ namespace SysExpenseControl.Forms
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-
+            DeleteOperation();
         }
 
         private void BtnEdit_Click(object sender, EventArgs e)
         {
-
+            ViewEditFixedExpenses(1);
         }
 
         private void BtnView_Click(object sender, EventArgs e)
         {
-
+            ViewEditFixedExpenses(2);
         }
 
         // ------------------------- botões do controle de paginas

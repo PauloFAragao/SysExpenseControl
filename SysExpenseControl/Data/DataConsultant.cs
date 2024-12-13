@@ -720,11 +720,11 @@ namespace SysExpenseControl.Data
         }
 
         // Método que vai adicionar e remover do valor de uma reserva
-        public static bool EditReservationAmount(int id, double value)
+        public static bool EditReservationAmount(double value, string tableName)
         {
             string editQuery = "Update references_to_reserves Set "
-                + $"reservationAmount = reservationAmount + {value.ToString(CultureInfo.InvariantCulture)}"
-                + $"Where id = {id}";
+                + $"reservationAmount = reservationAmount + {value.ToString(CultureInfo.InvariantCulture)} "
+                + $"Where tableName = '{tableName}'";
 
             return SimpleQuery(editQuery);
         }
@@ -791,13 +791,22 @@ namespace SysExpenseControl.Data
             return GetDoubleQuery(query);
         }
 
-        // ---------------------------------- Tabela de reservas
+        // Método para mudar a quantidade de operações em uma reserva
+        private static bool ChangeQuantityOfOperations(string tableName, int value)
+        {
+            string updateQuery = "Update references_to_reserves "
+                + $"Set operationsQuantity = operationsQuantity + {value} "
+                + $"Where tableName = '{tableName}'";
 
+            return SimpleQuery(updateQuery);
+        }
+
+        // ---------------------------------- Tabela de reservas
         // Método que vai visualizar todas operações de uma reserva
         public static DataTable ViewReserve(string tablename, int offset)
         {
             string viewQuery = $"Select "
-                + "operation, value, date, description "
+                + "operation, value, date, description, id "
                 + $"From {tablename} Order By date Desc "
                 + $"Limit 17 Offset {offset}";
 
@@ -810,7 +819,9 @@ namespace SysExpenseControl.Data
         {
             string insertQuery = $"Insert Into {tableName} "
                 + "(operation, value, date, description) "
-                + $"Values ('{operation}', {value}, '{date}', '{description}')";
+                + $"Values ('{operation}', "
+                + $"{value.ToString(CultureInfo.InvariantCulture)}, "
+                + $"'{date:yyyy-MM-dd}', '{description}')";
 
             int? result = InsertQuery(insertQuery);
 
@@ -824,21 +835,21 @@ namespace SysExpenseControl.Data
         }
 
         // Método para Editar uma operação de reserva
-        public static bool EditReserve(int id, string tableName, string operation, 
+        public static bool EditReserveOperation(int id, string tableName, string operation, 
             double value, DateTime date, string description)
         {
             string editQuery = $"Update {tableName} Set "
-                + $"operation = {operation}, "
+                + $"operation = '{operation}', "
                 + $"value = {value.ToString(CultureInfo.InvariantCulture)}, "
-                + $"date = {date:yyyy-MM-dd}, "
-                + $"description = {description} "
+                + $"date = '{date:yyyy-MM-dd}', "
+                + $"description = '{description}' "
                 + $"Where id = {id}";
 
             return SimpleQuery(editQuery);
         }
 
         // Método para deletar uma operação de reserva
-        public static bool DeleteReserve(int id, string tableName) 
+        public static bool DeleteReserveOperation(int id, string tableName) 
         {
             string deleteQuery = $"Delete From {tableName} Where id = {id}";
             
@@ -849,15 +860,6 @@ namespace SysExpenseControl.Data
             }
 
             return false;
-        }
-
-        private static bool ChangeQuantityOfOperations(string tableName, int value)
-        {
-            string updateQuery = "Update references_to_reserves "
-                + $"Set operationsQuantity = operationsQuantity + {value} "
-                + $"Where tableName = '{tableName}'";
-
-            return SimpleQuery(updateQuery);
         }
 
         // ---------------------------------- 
@@ -1027,6 +1029,5 @@ namespace SysExpenseControl.Data
             return dtResult;
         }
 
-        
     }
 }

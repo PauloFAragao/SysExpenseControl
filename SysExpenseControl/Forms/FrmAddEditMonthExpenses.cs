@@ -12,7 +12,7 @@ namespace SysExpenseControl.Forms
 {
     public partial class FrmAddEditMonthExpenses : Form
     {
-        private int _tipe;// 0 - adicionar/1 - editar/2 - visualizar
+        private int _type;// 0 - adicionar/1 - editar/2 - visualizar
         private int _id;// id no banco de dados - só no caso de editar/visualizar
         private string _name;// nome da despesa
         private double _value;// valor da despesa
@@ -29,14 +29,14 @@ namespace SysExpenseControl.Forms
 
         private Action _onCloseCallback;// evento para atualizar a outra janela
 
-        public FrmAddEditMonthExpenses(int tipe, Action onCloseCallback, DateTime date, string tableName,
+        public FrmAddEditMonthExpenses(int type, Action onCloseCallback, DateTime date, string tableName,
             int id = 0, string name = "", double value = 0, string category = "",
             string desciption = "", int idFixedExpenses = 0, bool paid = false,
             bool definedNumberOfInstallments = false)
         {
             InitializeComponent();
 
-            _tipe = tipe;
+            _type = type;
             _id = id;
             _name = name;
             _value = value;
@@ -60,7 +60,7 @@ namespace SysExpenseControl.Forms
 
         private void FillFields(string desciption)
         {
-            if (_tipe != 0)
+            if (_type != 0)
             {
                 this.LblTitle.Text = "Editar Gasto Fixo";
                 this.TxtName.Text = _name;
@@ -68,7 +68,7 @@ namespace SysExpenseControl.Forms
                 this.DateTimePicker.Text = _date.ToString();
                 this.RtbDescription.Text = desciption;
 
-                if (_tipe == 2)
+                if (_type == 2)
                 {
                     this.LblTitle.Text = _name;
 
@@ -85,7 +85,7 @@ namespace SysExpenseControl.Forms
             {
                 DateTime date = Convert.ToDateTime(this.DateTimePicker.Value);
 
-                if (_tipe == 0)// Adicionar
+                if (_type == 0)// Adicionar
                 {
                     int? id = DataConsultant.InsertMonthExpense(_name, _value,
                         date, -1, this.CbxCategories.Text,
