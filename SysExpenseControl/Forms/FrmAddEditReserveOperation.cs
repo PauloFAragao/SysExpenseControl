@@ -1,15 +1,8 @@
 ﻿using SysExpenseControl.Data;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace SysExpenseControl.Forms
 {
@@ -98,7 +91,8 @@ namespace SysExpenseControl.Forms
                     // Alterar caso haja diferença no valor
                     if(result && _value != _orinalValue)
                     {
-
+                        DataConsultant.MakeChangesInReservation(_tableName, 
+                            (_value - _orinalValue) );
                     }
                 }
 

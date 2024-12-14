@@ -155,3 +155,26 @@ dados serem carregados.
 voltar eram usados a tabela não atualizava
 -Implementados os botões de adionar/editar/visualizar/Deletar operação na tela de visualizar uma reserva.
 
+-Resolvido um problema ao deletar uma operação de uma reserva, agora ela soma/subtrai valor do total da
+reserva de acordo com o valor da operação.
+-Resolvido um problema ao editar uma operação de uma reserva, agora ela soma/subtrai valor do total da
+reserva de acordo com o valor da diferença caso haja diferença.
+-Resolvido um pequeno erro no controle de paginas na tela de visualizar operações de uma reserva, agora o 
+controle não é reativado caso tenha apenas uma pagina
+-Implementado para exibir o valor total das reservas de dinheiro na tela de reservas
+-Alterações na tela de reservas: agora a quantidade de reservas é exibida em um label, agora a tabela não 
+exibe as colunas não necessarioas e os nomes das colunas agora está em portugues.
+-Agora na tela inicial o DataGridView das reservas exibe os dados das reservas.
+
+
+
+
+
+
+
+
+
+
+
+
+

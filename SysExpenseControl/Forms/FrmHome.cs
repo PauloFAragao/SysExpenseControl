@@ -38,6 +38,10 @@ namespace SysExpenseControl.Forms
             
             // Carregando os dados do DataGridView Resumo dos gastos
             Task.Run(() => InitializeSpent());
+
+            // Carregando os dados do DataGridView reservas
+            Task.Run(() => InitializeReserves());
+
         }
 
         private void SetInterfaceDate()
@@ -324,6 +328,51 @@ namespace SysExpenseControl.Forms
         {
             ThreadHelper.SetColumnVisibility(this.DgvSpent, 0, false);//mudando a visibilidade da coluna id
             ThreadHelper.SetColumnVisibility(this.DgvSpent, 5, false);//mudando a visibilidade da coluna descrição
+        }
+
+        // ------------ Reservas
+        private void InitializeReserves()
+        {
+            if (LoadDataReserves())
+            {
+                HideColumnsReserves();
+                ChangeColumnsReserves();
+
+                ThreadHelper.SetDefaultCellStyle(DgvReserves, "reservationAmount");// para a coluna dos valores ter ,00
+
+            }
+        }
+
+        private bool LoadDataReserves()
+        {
+            DataTable dataTable = DataConsultant.ViewReserves();
+
+            if (dataTable != null)
+            {
+                // carregando os dados no DataGridView
+                ThreadHelper.SetPropertyValue(this.DgvReserves, "DataSource", dataTable);
+                return true;
+            }
+            else
+                return false;
+        }
+
+        private void HideColumnsReserves()
+        {
+            ThreadHelper.SetColumnVisibility(this.DgvReserves, 0, false);//coluna id
+            ThreadHelper.SetColumnVisibility(this.DgvReserves, 2, false);//coluna tableName
+        }
+
+        private void ChangeColumnsReserves()
+        {
+            ThreadHelper.SetColumnHeaderText(this.DgvReserves, 1, "Nome");
+
+            ThreadHelper.SetColumnHeaderText(this.DgvReserves, 3, "Valor na reserva");
+
+            ThreadHelper.SetColumnHeaderText(this.DgvReserves, 4, "Quantidade de operações");
+
+            ThreadHelper.SetColumnHeaderText(this.DgvReserves, 5, "Descrição");
+            ThreadHelper.SetColumnAutoSizeMode(this.DgvReserves, 5, DataGridViewAutoSizeColumnMode.DisplayedCells);
         }
 
         // ------------------------- Métodos criados pelo visual studio

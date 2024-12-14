@@ -307,14 +307,14 @@ namespace SysExpenseControl.Forms
 
         private void TakeDataFromDataTable(DataTable dataTable)
         {
-            decimal amountpaid = 0;
-            decimal amountPayable = 0;
-            decimal overdueAccounts = 0;
-            decimal total = 0;
+            double amountpaid = 0;
+            double amountPayable = 0;
+            double overdueAccounts = 0;
+            double total = 0;
 
             foreach (DataRow row in dataTable.Rows)
             {
-                decimal amaunt = Convert.ToDecimal(row["value"]);// capturando o valor
+                double amaunt = Convert.ToDouble(row["value"]);// capturando o valor
 
                 // ainda não foi pago
                 if (row.IsNull("date") || string.IsNullOrEmpty(row["date"].ToString()))

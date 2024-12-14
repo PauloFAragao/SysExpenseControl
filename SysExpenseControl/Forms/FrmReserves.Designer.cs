@@ -38,9 +38,15 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.LblWait = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.LblQtd = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.DgvData)).BeginInit();
             this.panel5.SuspendLayout();
             this.LblWait.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // BtnView
@@ -48,7 +54,7 @@
             this.BtnView.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.BtnView.Enabled = false;
             this.BtnView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnView.Location = new System.Drawing.Point(361, 96);
+            this.BtnView.Location = new System.Drawing.Point(360, 26);
             this.BtnView.Name = "BtnView";
             this.BtnView.Size = new System.Drawing.Size(109, 23);
             this.BtnView.TabIndex = 15;
@@ -61,7 +67,7 @@
             this.BtnEdit.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.BtnEdit.Enabled = false;
             this.BtnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnEdit.Location = new System.Drawing.Point(246, 96);
+            this.BtnEdit.Location = new System.Drawing.Point(245, 26);
             this.BtnEdit.Name = "BtnEdit";
             this.BtnEdit.Size = new System.Drawing.Size(109, 23);
             this.BtnEdit.TabIndex = 14;
@@ -74,7 +80,7 @@
             this.BtnDelete.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.BtnDelete.Enabled = false;
             this.BtnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnDelete.Location = new System.Drawing.Point(131, 96);
+            this.BtnDelete.Location = new System.Drawing.Point(130, 26);
             this.BtnDelete.Name = "BtnDelete";
             this.BtnDelete.Size = new System.Drawing.Size(109, 23);
             this.BtnDelete.TabIndex = 13;
@@ -87,7 +93,7 @@
             this.BtnAdd.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.BtnAdd.Enabled = false;
             this.BtnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnAdd.Location = new System.Drawing.Point(16, 96);
+            this.BtnAdd.Location = new System.Drawing.Point(15, 26);
             this.BtnAdd.Name = "BtnAdd";
             this.BtnAdd.Size = new System.Drawing.Size(109, 23);
             this.BtnAdd.TabIndex = 12;
@@ -103,11 +109,11 @@
             this.DgvData.AllowUserToResizeColumns = false;
             this.DgvData.AllowUserToResizeRows = false;
             this.DgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DgvData.Location = new System.Drawing.Point(12, 130);
+            this.DgvData.Location = new System.Drawing.Point(13, 66);
             this.DgvData.MultiSelect = false;
             this.DgvData.Name = "DgvData";
             this.DgvData.ReadOnly = true;
-            this.DgvData.Size = new System.Drawing.Size(910, 430);
+            this.DgvData.Size = new System.Drawing.Size(890, 400);
             this.DgvData.TabIndex = 11;
             // 
             // LblValue
@@ -146,7 +152,7 @@
             // LblWait
             // 
             this.LblWait.Controls.Add(this.label1);
-            this.LblWait.Location = new System.Drawing.Point(361, 260);
+            this.LblWait.Location = new System.Drawing.Point(360, 244);
             this.LblWait.Name = "LblWait";
             this.LblWait.Size = new System.Drawing.Size(205, 52);
             this.LblWait.TabIndex = 16;
@@ -161,18 +167,63 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Wait...";
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Lime;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.LblQtd);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Location = new System.Drawing.Point(296, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(241, 72);
+            this.panel1.TabIndex = 13;
+            // 
+            // LblQtd
+            // 
+            this.LblQtd.AutoSize = true;
+            this.LblQtd.Cursor = System.Windows.Forms.Cursors.Default;
+            this.LblQtd.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblQtd.Location = new System.Drawing.Point(206, 35);
+            this.LblQtd.Name = "LblQtd";
+            this.LblQtd.Size = new System.Drawing.Size(29, 31);
+            this.LblQtd.TabIndex = 3;
+            this.LblQtd.Text = "0";
+            this.LblQtd.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(4, 4);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(182, 20);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Quantidade de reservas:";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.groupBox1.Controls.Add(this.BtnAdd);
+            this.groupBox1.Controls.Add(this.BtnDelete);
+            this.groupBox1.Controls.Add(this.LblWait);
+            this.groupBox1.Controls.Add(this.BtnEdit);
+            this.groupBox1.Controls.Add(this.BtnView);
+            this.groupBox1.Controls.Add(this.DgvData);
+            this.groupBox1.Location = new System.Drawing.Point(12, 93);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(915, 481);
+            this.groupBox1.TabIndex = 17;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Reservas";
+            // 
             // FrmReserves
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(926, 572);
-            this.Controls.Add(this.LblWait);
-            this.Controls.Add(this.BtnView);
-            this.Controls.Add(this.BtnEdit);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel5);
-            this.Controls.Add(this.BtnDelete);
-            this.Controls.Add(this.BtnAdd);
-            this.Controls.Add(this.DgvData);
             this.Name = "FrmReserves";
             this.Text = "FrmReserves";
             ((System.ComponentModel.ISupportInitialize)(this.DgvData)).EndInit();
@@ -180,6 +231,9 @@
             this.panel5.PerformLayout();
             this.LblWait.ResumeLayout(false);
             this.LblWait.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -196,5 +250,9 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel LblWait;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label LblQtd;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

@@ -791,6 +791,18 @@ namespace SysExpenseControl.Data
             return GetDoubleQuery(query);
         }
 
+        // Método para fazer alteração no valor da reserva
+        public static bool MakeChangesInReservation(string tableName, double difference)
+        {
+            Debug.WriteLine("Diferença: " + difference);
+
+            string query = "Update references_to_reserves Set "
+                + $"reservationAmount = reservationAmount + {difference.ToString(CultureInfo.InvariantCulture)} "
+                + $"Where tableName = '{tableName}'";
+
+            return SimpleQuery(query);
+        }
+
         // Método para mudar a quantidade de operações em uma reserva
         private static bool ChangeQuantityOfOperations(string tableName, int value)
         {

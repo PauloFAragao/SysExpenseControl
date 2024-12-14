@@ -48,10 +48,10 @@ namespace SysExpenseControl.Forms
                 ThreadHelper.SetPropertyValue(BtnDelete, "Enabled", true);
                 ThreadHelper.SetPropertyValue(BtnEdit, "Enabled", true);
                 ThreadHelper.SetPropertyValue(BtnView, "Enabled", true);
+
+                ThreadHelper.SetDefaultCellStyle(DgvData, "reservationAmount");// para a coluna dos valores ter ,00
+
             }
-
-            // pesquisando as quantidades no banco de dados
-
         }
 
         private bool LoadData()
@@ -60,7 +60,8 @@ namespace SysExpenseControl.Forms
 
             if (dataTable != null)
             {
-                
+                TakeDataFromDataTable(dataTable);
+
                 // carregando os dados no DataGridView
                 ThreadHelper.SetPropertyValue(this.DgvData, "DataSource", dataTable);
                 return true;
@@ -71,11 +72,37 @@ namespace SysExpenseControl.Forms
 
         private void HideColumns()
         {
-
+            ThreadHelper.SetColumnVisibility(this.DgvData, 0, false);//coluna id
+            ThreadHelper.SetColumnVisibility(this.DgvData, 2, false);//coluna tableName
         }
 
         private void ChangeColumns()
         {
+            ThreadHelper.SetColumnHeaderText(this.DgvData, 1, "Nome");
+
+            ThreadHelper.SetColumnHeaderText(this.DgvData, 3, "Valor na reserva");
+
+            ThreadHelper.SetColumnHeaderText(this.DgvData, 4, "Quantidade de operações");
+
+            ThreadHelper.SetColumnHeaderText(this.DgvData, 5, "Descrição");
+            ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 5, DataGridViewAutoSizeColumnMode.DisplayedCells);
+        }
+
+        private void TakeDataFromDataTable(DataTable dataTable)
+        {
+            double totalValue = 0;
+            int qtd = 0;
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                double amaunt = Convert.ToDouble(row["reservationAmount"]);// capturando o valor
+
+                totalValue += amaunt;
+                qtd++;
+            }
+
+            ThreadHelper.SetPropertyValue(this.LblValue, "Text", "R$: " + totalValue.ToString("F2"));
+            ThreadHelper.SetPropertyValue(this.LblQtd, "Text", qtd.ToString());
 
         }
 

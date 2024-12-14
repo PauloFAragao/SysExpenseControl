@@ -36,8 +36,12 @@ namespace SysExpenseControl.Forms
             _tableName = tableName;
             _id = id;
             _operationsQuantity = operationsQuantity;
-            _pagesQuantity = (_operationsQuantity / 17) + 1;
-            //_pagesQuantity = 8;
+
+            if (_operationsQuantity == 0 ) 
+                _pagesQuantity = 1;
+            else
+                _pagesQuantity = (_operationsQuantity / 17) + 1;
+            
 
             // Organizar os botões na tela
             OrganizeButtons();
@@ -473,9 +477,16 @@ namespace SysExpenseControl.Forms
                     MessageBoxButtons.OKCancel,
                     MessageBoxIcon.Question) == DialogResult.OK)
                 {
-                    DataConsultant.DeleteReserveOperation(
+                    Double value = Convert.ToDouble(
+                        this.DgvData.CurrentRow.Cells["value"].Value);
+
+                    if(DataConsultant.DeleteReserveOperation(
                         Convert.ToInt32(this.DgvData.CurrentRow.Cells["id"].Value),
-                        _tableName);
+                        _tableName))
+                    {
+                        value = value * -1;// trocando o sinal para tirar o valor do montante total
+                        DataConsultant.EditReservationAmount(value, _tableName);
+                    }
 
                     //recarregando os dados
                     ReloadPage();
@@ -532,7 +543,8 @@ namespace SysExpenseControl.Forms
                 ThreadHelper.SetPropertyValue(BtnView, "Enabled", true);
 
                 // botões das paginas
-                ThreadHelper.SetPropertyValue(PnButtons, "Enabled", true);
+                if(_pagesQuantity != 1)
+                    ThreadHelper.SetPropertyValue(PnButtons, "Enabled", true);
             }
         }
 
@@ -553,7 +565,8 @@ namespace SysExpenseControl.Forms
                 ThreadHelper.SetPropertyValue(BtnView, "Enabled", true);
 
                 // botões das paginas
-                ThreadHelper.SetPropertyValue(PnButtons, "Enabled", true);
+                if (_pagesQuantity != 1)
+                    ThreadHelper.SetPropertyValue(PnButtons, "Enabled", true);
             }
         }
 
