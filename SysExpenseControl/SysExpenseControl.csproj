@@ -115,6 +115,12 @@
     <Compile Include="Forms\FrmAddEditMonthProfits.Designer.cs">
       <DependentUpon>FrmAddEditMonthProfits.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FrmAddEditReserve.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmAddEditReserve.Designer.cs">
+      <DependentUpon>FrmAddEditReserve.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FrmAddEditReserveOperation.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -203,6 +209,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmAddEditMonthProfits.resx">
       <DependentUpon>FrmAddEditMonthProfits.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmAddEditReserve.resx">
+      <DependentUpon>FrmAddEditReserve.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmAddEditReserveOperation.resx">
       <DependentUpon>FrmAddEditReserveOperation.cs</DependentUpon>

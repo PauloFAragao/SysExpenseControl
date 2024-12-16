@@ -166,9 +166,9 @@ controle não é reativado caso tenha apenas uma pagina
 exibe as colunas não necessarioas e os nomes das colunas agora está em portugues.
 -Agora na tela inicial o DataGridView das reservas exibe os dados das reservas.
 
-
-
-
+-Implementado o botão de adicionar nova reserva de dinheiro na tela de reservas
+-Implementado o botão de editar uma reserva de dinheiro na tela de reservas
+-Implementado o botão de deleter uma reserva de dinheiro da tela de reservas
 
 
 

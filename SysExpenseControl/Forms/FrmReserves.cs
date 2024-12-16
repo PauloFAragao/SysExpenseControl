@@ -32,6 +32,56 @@ namespace SysExpenseControl.Forms
             }
         }
 
+        private void Add()
+        {
+            FrmAddEditReserve frmAddEditReserve = new FrmAddEditReserve(0, ReloadData );
+
+            frmAddEditReserve.ShowDialog();
+        }
+
+        private void Delete()
+        {
+            if (this.DgvData.Rows.Count > 0 &&
+                this.DgvData.CurrentCell != null)
+            {
+                if (MessageBox.Show("Deletar reserva: " +
+                    Convert.ToString(this.DgvData.CurrentRow.Cells["name"].Value),
+                    "Deletar Reserva",
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Question) == DialogResult.OK)
+                {
+                    DataConsultant.DeleteReserve(
+                        Convert.ToString(this.DgvData.CurrentRow.Cells["tableName"].Value) );
+
+                    //recarregando os dados
+                    ReloadData();
+                }
+            }
+            else
+            {
+                MessageBox.Show("A tabela não tem dados ou não tem nenhuma linha selecionada!",
+                    "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                Debug.WriteLine("não tem dados");
+            }
+        }
+
+        private void Edit()
+        {
+            FrmAddEditReserve frmAddEditReserve = new FrmAddEditReserve(1, ReloadData,
+                Convert.ToInt32(this.DgvData.CurrentRow.Cells["id"].Value),
+                Convert.ToString(this.DgvData.CurrentRow.Cells["name"].Value),
+                Convert.ToString(this.DgvData.CurrentRow.Cells["description"].Value));
+
+            frmAddEditReserve.ShowDialog();
+        }
+
+        // -------------------------
+        private void ReloadData()
+        {
+            Task.Run(() => LoadData());
+        }
+
         // ------------------------- Thread
         private void Initialize()
         {
@@ -79,6 +129,7 @@ namespace SysExpenseControl.Forms
         private void ChangeColumns()
         {
             ThreadHelper.SetColumnHeaderText(this.DgvData, 1, "Nome");
+            ThreadHelper.SetColumnAutoSizeMode(this.DgvData, 1, DataGridViewAutoSizeColumnMode.DisplayedCells);
 
             ThreadHelper.SetColumnHeaderText(this.DgvData, 3, "Valor na reserva");
 
@@ -114,17 +165,17 @@ namespace SysExpenseControl.Forms
 
         private void BtnAdd_Click(object sender, EventArgs e)
         {
-
+            Add();
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-
+            Delete();
         }
 
         private void BtnEdit_Click(object sender, EventArgs e)
         {
-
+            Edit();
         }
     }
 }

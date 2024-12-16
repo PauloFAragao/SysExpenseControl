@@ -553,37 +553,38 @@ namespace SysExpenseControl.Data
         }
 
         // ---------------------------------- Tabela de referencias
+        
         // Método que vai retornar a quantidade de referencias na tabela references_to_tables
-        public static int GetReferences_to_tablesQuantity()
-        {
-            int quantity = 0;
+        //public static int GetReferences_to_tablesQuantity()
+        //{
+        //    int quantity = 0;
 
-            string query = "Select Count(*) From references_to_tables";
+        //    string query = "Select Count(*) From references_to_tables";
 
-            try
-            {
-                using (SQLiteConnection connection = new SQLiteConnection(Connection.Cn))
-                {
-                    // Abre a conexão
-                    connection.Open();
+        //    try
+        //    {
+        //        using (SQLiteConnection connection = new SQLiteConnection(Connection.Cn))
+        //        {
+        //            // Abre a conexão
+        //            connection.Open();
 
-                    // Executando a Query
-                    using (SQLiteCommand command = new SQLiteCommand(query, connection))
-                    {
-                        // Executa a consulta e captura o resultado
-                        quantity = Convert.ToInt32(command.ExecuteScalar());
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine("Exception in DataConsultant.SimpleQuery: " + e.Message);
+        //            // Executando a Query
+        //            using (SQLiteCommand command = new SQLiteCommand(query, connection))
+        //            {
+        //                // Executa a consulta e captura o resultado
+        //                quantity = Convert.ToInt32(command.ExecuteScalar());
+        //            }
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Debug.WriteLine("Exception in DataConsultant.SimpleQuery: " + e.Message);
 
-                quantity = 0;
-            }
+        //        quantity = 0;
+        //    }
 
-            return quantity;
-        }
+        //    return quantity;
+        //}
 
         // Método que vai retornar uma lista com os nomes das tables de Lucros do mês
         public static List<string> GetProfitTables()
@@ -737,49 +738,12 @@ namespace SysExpenseControl.Data
             if(SimpleQuery(dropTable))
             {
                 string deleteQuery = "Delete From references_to_reserves "
-                    + $"Where tablename = {tableName}";
+                    + $"Where tablename = '{tableName}'";
 
                 return SimpleQuery(deleteQuery);
             }
 
             return false;
-        }
-
-        // Método que vai pegar a quantidade de
-        public static int GetOperationsQuantity(int id)
-        {
-            string query = "Select operationsQuantity From references_to_reserves "
-                + $"Where id = {id}";
-
-            int qtd = 0;
-
-            try
-            {
-                using (SQLiteConnection connection = new SQLiteConnection(Connection.Cn))
-                {
-                    // Abre a conexão
-                    connection.Open();
-
-                    // Executando a Query
-                    using (SQLiteCommand command = new SQLiteCommand(query, connection))
-                    {
-                        // Executa a consulta e captura o resultado
-                        qtd = Convert.ToInt32(command.ExecuteScalar());
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine("Exception in DataConsultant.InsertQuery: " + e.Message);
-
-                MessageBox.Show("Exception in DataConsultant.InsertQuery: " + e.Message,
-                    "Erro ao inserir dados no banco de dados",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                qtd = 0;
-            }
-
-            return qtd;
         }
 
         // Método para pesquisar o a quantidade de dinheiro de uma reserva

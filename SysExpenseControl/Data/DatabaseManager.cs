@@ -347,8 +347,9 @@ namespace SysExpenseControl.Data
         }
 
         // Método que vai criar uma tabela de reserva de dinheiro dinamicamente 
-        public static void CreateDynamicTable_Reserve(string name, string description)
+        public static string CreateDynamicTable_Reserve(string name, string description)
         {
+            string TableName = "fail";
             try
             {
                 using (SQLiteConnection connection = new SQLiteConnection(Connection.Cn))
@@ -357,7 +358,7 @@ namespace SysExpenseControl.Data
                     connection.Open();
 
                     // Gerando nome
-                    string TableName = GenerateRandonTableName(name, "references_to_reserves");
+                    TableName = GenerateRandonTableName(name, "references_to_reserves");
 
                     // Query para criar a tabela
                     string createTableReserve =
@@ -393,6 +394,8 @@ namespace SysExpenseControl.Data
             {
                 Debug.WriteLine("Exception in DatabaseManager.CreateDynamicTable_Reserve: " + e.Message);
             }
+
+            return TableName;
         }
 
         // Método que vai criar uma tabela para um investimento
