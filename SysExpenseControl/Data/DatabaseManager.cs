@@ -157,12 +157,12 @@ namespace SysExpenseControl.Data
                         $"Insert Into categories"
                         + "(id, name, description)"
                         + "Values"
-                        + "('0', 'Sem categoria', ''),"
+                        + "('0', 'Sem categoria', 'Gastos gerais não categorizados'),"
                         + "('1', 'Contas', 'Contas de luz, água, internet, cartão e afins'),"
                         + "('2', 'Alimentação', 'Gastos com comida, lanches, petiscos e afins'),"
                         + "('3', 'Transpote', 'Gastos com combustivel, passagens e afins'),"
                         + "('4', 'Vestuario', 'Gastos com peças de vestuario, sapatos e afins'),"
-                        + "('5', 'Remédios', 'Gastos com remédios ded uso contidiano ou por necessidades potuais')";
+                        + "('5', 'Remédios', 'Gastos com remédios de uso contidiano ou por necessidades potuais')";
 
                     // Executando a Query
                     using (SQLiteCommand command = new SQLiteCommand(insertCategories, connection))

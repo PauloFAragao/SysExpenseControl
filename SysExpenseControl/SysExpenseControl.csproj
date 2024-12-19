@@ -91,6 +91,12 @@
     <Compile Include="Forms\FrmAddEditBill.Designer.cs">
       <DependentUpon>FrmAddEditBill.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FrmAddEditCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmAddEditCategory.Designer.cs">
+      <DependentUpon>FrmAddEditCategory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FrmAddEditFixedExpenses.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,6 +132,12 @@
     </Compile>
     <Compile Include="Forms\FrmAddEditReserveOperation.Designer.cs">
       <DependentUpon>FrmAddEditReserveOperation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmConfigureCategories.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmConfigureCategories.Designer.cs">
+      <DependentUpon>FrmConfigureCategories.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FrmFixedExpensesAndProfits.cs">
       <SubType>Form</SubType>
@@ -169,12 +181,6 @@
     <Compile Include="Forms\FrmSelectDate.Designer.cs">
       <DependentUpon>FrmSelectDate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FrmSettings.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FrmSettings.Designer.cs">
-      <DependentUpon>FrmSettings.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FrmViewBill.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -198,6 +204,9 @@
     <EmbeddedResource Include="Forms\FrmAddEditBill.resx">
       <DependentUpon>FrmAddEditBill.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmAddEditCategory.resx">
+      <DependentUpon>FrmAddEditCategory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmAddEditFixedExpenses.resx">
       <DependentUpon>FrmAddEditFixedExpenses.cs</DependentUpon>
     </EmbeddedResource>
@@ -215,6 +224,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmAddEditReserveOperation.resx">
       <DependentUpon>FrmAddEditReserveOperation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmConfigureCategories.resx">
+      <DependentUpon>FrmConfigureCategories.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmFixedExpensesAndProfits.resx">
       <DependentUpon>FrmFixedExpensesAndProfits.cs</DependentUpon>
@@ -236,9 +248,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmSelectDate.resx">
       <DependentUpon>FrmSelectDate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FrmSettings.resx">
-      <DependentUpon>FrmSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmViewBill.resx">
       <DependentUpon>FrmViewBill.cs</DependentUpon>

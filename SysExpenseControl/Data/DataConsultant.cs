@@ -67,7 +67,8 @@ namespace SysExpenseControl.Data
         // Método para inserir uma categoria
         public static int? InsertCategory(string name, string description)
         {
-            string insertQuery = $"Insert Into categories Values ('{name}', '{description}')";
+            string insertQuery = "Insert Into categories (name, description) "
+                + $"Values ('{name}', '{description}')";
 
             //SimpleQuery(insertQuery);
             return InsertQuery(insertQuery);
@@ -76,7 +77,8 @@ namespace SysExpenseControl.Data
         // Método para editar uma categoria
         public static bool EditCategory(int id, string name, string description)
         {
-            string editQuery = $"Update categories Set name = '{name}', description = '{description}' Where id = {id} ";
+            string editQuery = $"Update categories Set name = '{name}', description = '{description}' "
+                + $"Where id = {id} ";
 
             //SimpleQuery(editQuery);
             return SimpleQuery(editQuery);
@@ -85,9 +87,35 @@ namespace SysExpenseControl.Data
         // Deleta uma categoria
         public static bool DeleteCategory(int id)
         {
-            string deleteQuery = $"Delete From categories where id = {id} ";
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(Connection.Cn))
+                {
+                    // Abre a conexão
+                    connection.Open();
 
-            return SimpleQuery(deleteQuery);
+                    // Ativa as restrições de chaves estrangeiras
+                    using (SQLiteCommand command = new SQLiteCommand("PRAGMA foreign_keys = ON", connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+
+                    // Deleta o registro da tabela fixed_expenses com id = {id}
+                    using (SQLiteCommand command = new SQLiteCommand(
+                        $"Delete From categories where id = {id} ", connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Exception in DataConsultant.SimpleQuery: " + e.Message);
+
+                return false;
+            }
+
+            return true;
         }
 
         // ---------------------------------- Lucros fixos
@@ -139,14 +167,12 @@ namespace SysExpenseControl.Data
                     // Ativa as restrições de chaves estrangeiras
                     using (SQLiteCommand command = new SQLiteCommand("PRAGMA foreign_keys = ON", connection))
                     {
-                        // Executa a consulta e captura o resultado
                         command.ExecuteNonQuery();
                     }
 
                     // Deleta o registro da tabela fixed_expenses com id = {id}
                     using (SQLiteCommand command = new SQLiteCommand($"Delete From fixed_profits where id = {id}", connection))
                     {
-                        // Executa a consulta e captura o resultado
                         command.ExecuteNonQuery();
                     }
                 }

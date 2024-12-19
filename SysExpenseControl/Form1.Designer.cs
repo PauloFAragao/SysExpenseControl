@@ -40,10 +40,10 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.BtnAccountsPayable = new System.Windows.Forms.Button();
             this.panel8 = new System.Windows.Forms.Panel();
-            this.BtnSettings = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.BtnHome = new System.Windows.Forms.Button();
             this.PanelBody = new System.Windows.Forms.Panel();
+            this.BtnSettings = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel9.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -196,19 +196,6 @@
             this.panel8.Size = new System.Drawing.Size(242, 45);
             this.panel8.TabIndex = 19;
             // 
-            // BtnSettings
-            // 
-            this.BtnSettings.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BtnSettings.FlatAppearance.BorderSize = 2;
-            this.BtnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnSettings.Location = new System.Drawing.Point(10, 5);
-            this.BtnSettings.Name = "BtnSettings";
-            this.BtnSettings.Size = new System.Drawing.Size(222, 35);
-            this.BtnSettings.TabIndex = 1;
-            this.BtnSettings.Text = "Configurações";
-            this.BtnSettings.UseVisualStyleBackColor = true;
-            this.BtnSettings.Click += new System.EventHandler(this.BtnSettings_Click);
-            // 
             // panel4
             // 
             this.panel4.Controls.Add(this.BtnHome);
@@ -243,6 +230,19 @@
             this.PanelBody.Size = new System.Drawing.Size(942, 611);
             this.PanelBody.TabIndex = 1;
             // 
+            // BtnSettings
+            // 
+            this.BtnSettings.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnSettings.FlatAppearance.BorderSize = 2;
+            this.BtnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnSettings.Location = new System.Drawing.Point(10, 5);
+            this.BtnSettings.Name = "BtnSettings";
+            this.BtnSettings.Size = new System.Drawing.Size(222, 35);
+            this.BtnSettings.TabIndex = 1;
+            this.BtnSettings.Text = "Configurar Categorias";
+            this.BtnSettings.UseVisualStyleBackColor = true;
+            this.BtnSettings.Click += new System.EventHandler(this.BtnSettings_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -270,7 +270,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel PanelBody;
         private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.Button BtnSettings;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button BtnHome;
         private System.Windows.Forms.Panel panel3;
@@ -283,6 +282,7 @@
         private System.Windows.Forms.Button BtnInvestments;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Button BtnReserves;
+        private System.Windows.Forms.Button BtnSettings;
     }
 }
 

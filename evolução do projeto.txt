@@ -170,8 +170,11 @@ exibe as colunas não necessarioas e os nomes das colunas agora está em portugu
 -Implementado o botão de editar uma reserva de dinheiro na tela de reservas
 -Implementado o botão de deleter uma reserva de dinheiro da tela de reservas
 
-
-
+-A tela de configurações foi alterada para: configurar categorias
+-Implementados os botões de adiconar, editar, visualizar e deletar na tela de categorias, as categirias: "Sem categoria" e
+"Contas" são protegidas contra deleção e edição
+-Resolvido um bug que, ao deletar uma categoria os gastos marcados com aquela categiria não mudavam para a categoria: "Sem
+Categoria".
 
 
 

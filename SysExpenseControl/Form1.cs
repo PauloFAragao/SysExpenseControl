@@ -59,7 +59,7 @@ namespace SysExpenseControl
         private void Settings()
         {
             ButtonsController.SetBtnSettingsSelected();
-            FormLoader.OpenChildForm(new FrmSettings());
+            FormLoader.OpenChildForm(new FrmConfigureCategories());
         }
 
         // ---------------------------- Métodos criados pelo Visual Studio
